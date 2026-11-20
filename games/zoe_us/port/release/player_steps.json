@@ -1,0 +1,4 @@
+[
+  ["tools/m3/zoe_dat.py", "{ISO}", "extract-bins", "{GAME}/extracted/stage_bin"],
+  ["tools/m3/make_disc_overlays.py", "{GAME}", "--no-lift"]
+]

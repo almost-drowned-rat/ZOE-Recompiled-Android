@@ -1,0 +1,23 @@
+address,name,status,source,notes
+0x01C00000,lifted::F_01C00000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C01000,lifted::F_01C01000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C02000,lifted::F_01C02000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C03000,lifted::F_01C03000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C04000,lifted::F_01C04000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C05000,lifted::F_01C05000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C06000,lifted::F_01C06000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C07000,lifted::F_01C07000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C08000,lifted::F_01C08000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C09000,lifted::F_01C09000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C0A000,lifted::F_01C0A000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C0B000,lifted::F_01C0B000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C0C000,lifted::F_01C0C000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C0D000,lifted::F_01C0D000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C0E000,lifted::F_01C0E000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C0F000,lifted::F_01C0F000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C10000,lifted::F_01C10000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C11000,lifted::F_01C11000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C12000,lifted::F_01C12000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C13000,lifted::F_01C13000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C14000,lifted::F_01C14000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original
+0x01C15000,lifted::F_01C15000,lifted,src/lifted/,lifted instruction by instruction; registers and memory differential-tested against the original

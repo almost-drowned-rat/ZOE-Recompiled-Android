@@ -1,0 +1,3 @@
+[submodule "engine"]
+	path = engine
+	url = https://github.com/almost-drowned-rat/ps2recomp-option-p.git

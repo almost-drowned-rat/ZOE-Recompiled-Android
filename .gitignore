@@ -1,0 +1,8 @@
+# never commit game data or generated output
+*.iso
+*.bin
+*.cue
+build/
+extracted/
+src/lifted/
+*.log

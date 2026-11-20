@@ -1,0 +1,1 @@
+--virtual-time --until-frame 33600 --memcard {memcard} --press start@2000 --press start@3200 --press circle@3800 --press circle@4400 --press circle@5000 --press circle@5600
