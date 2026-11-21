@@ -48,7 +48,8 @@ and will change, and these are numbers from one machine and one scene set.
 
 ## What you need
 
-- Windows 10 or 11, 64-bit, a processor with AVX2, a graphics card with a **Vulkan 1.3** driver
+- **Windows** 10 or 11, 64-bit - or **Linux** (x86-64, glibc 2.35 or newer: Ubuntu 22.04, Debian 12, Fedora 36,
+  SteamOS 3.5, Arch and newer) - a processor with AVX2, a graphics card with a **Vulkan 1.3** driver
 - A disc image of **Zone of the Enders (USA, SLUS-20148)** that you made from your own disc (ISO or CHD)
 - Optional, for the **Japanese voices**: a disc image of the Japanese release (**SLPM-65019**) **and** the subtitle
   pack `ZOE-subtitles.pak` (a download of its own, see *Languages*) - the Japanese voices need both
@@ -57,9 +58,10 @@ and will change, and these are numbers from one machine and one scene set.
 
 ## Getting started
 
-1. Download `ZOE.exe` from the [Releases](../../releases) page and put it in a folder you can write to (not
-   *Program Files*) - the game keeps its saves and settings beside it. Optional: `ZOE-subtitles.pak` from the same
-   page, my own subtitle translations (see *Languages*).
+1. Download `ZOE.exe` (Windows) or `ZOE-x86_64.AppImage` (Linux) from the [Releases](../../releases) page and put it
+   in a folder you can write to (not *Program Files*) - the game keeps its saves and settings beside it. On Linux,
+   make it executable (`chmod +x ZOE-x86_64.AppImage`, or the file's properties). Optional: `ZOE-subtitles.pak` from
+   the same page, my own subtitle translations (see *Languages*).
 2. Start it. A small window asks for your disc image (and, if you like, the Japanese one and the subtitle pack) and
    the folder the game is set up in.
 3. Press **Go**. The first start translates and compiles the game and **unpacks your discs into its `game`
@@ -117,7 +119,7 @@ Put a texture pack in a folder inside `textures` beside the game; TEXTURES in RE
 
 | File | What it is |
 |---|---|
-| `game\` | your discs, unpacked (`disc`, `disc_ja`) and the subtitle pack - keep it as your backup |
+| `game\` (`game/` on Linux) | your discs, unpacked (`disc`, `disc_ja`) and the subtitle pack - keep it as your backup |
 | `pc_settings.ini` | your settings |
 | `memcard\` | your memory card: the game's saves |
 | `*.log` | what the last run did - please attach it to a bug report |
@@ -134,7 +136,9 @@ This repository holds the port's own code (`games/zoe_us/port`: the game's hooks
 Japanese voices), its configuration and the subtitle translations (`games/zoe_us/translation`, built into the pack by
 `tools/m10/subs_translation.py`); the toolkit is
 [ps2recomp-option-p](https://github.com/almost-drowned-rat/ps2recomp-option-p) (the `engine` submodule). The release
-is built with the toolkit's `tools/player_release.py`; the translation itself runs from your disc image.
+is built with the toolkit's `tools/player_release.py`; the translation itself runs from your disc image. The Linux
+AppImage is the same release, made with the toolkit's `tools/linux/release_linux.sh` (its compiler bundle:
+`tools/linux/make_toolchain_bundle.sh` - LLVM, glibc 2.35, Python - so the player's first start downloads nothing).
 
 ## Credits and licences
 
