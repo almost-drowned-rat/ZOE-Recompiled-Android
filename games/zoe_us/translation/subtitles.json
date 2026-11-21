@@ -601,11 +601,11 @@
  },
  "annab005#0": {
   "hash": "76c859660f97705c",
-  "en": "Guess I was wrong about you...",
-  "fr": "Je me suis trompée, alors...",
-  "de": "Da hab ich mich wohl geirrt...",
-  "it": "Mi sono sbagliata, allora...",
-  "es": "Me había equivocado contigo..."
+  "en": "Hmph... guess I was wrong about you...",
+  "fr": "Hmph... je me suis trompée, alors...",
+  "de": "Pah... da hab ich mich wohl geirrt...",
+  "it": "Hmph... mi sono sbagliata, allora...",
+  "es": "Bah... me había equivocado contigo..."
  },
  "annab021#0": {
   "hash": "da3e85dbedbd34eb",
@@ -1153,11 +1153,11 @@
  },
  "bs1a7a28#0": {
   "hash": "ecffd7fdfe1c9404",
-  "en": "",
-  "fr": "",
-  "de": "",
-  "it": "",
-  "es": ""
+  "en": "Hmph!",
+  "fr": "Hmph !",
+  "de": "Pah!",
+  "it": "Hmph!",
+  "es": "¡Hmph!"
  },
  "bs1a7a29#0": {
   "hash": "962861c5e51bede3",
@@ -2473,11 +2473,11 @@
  },
  "cb1a5a61#0": {
   "hash": "89e7fabb712a6e9a",
-  "en": "Quick to run, that one...",
-  "fr": "Il détale vite, celui-là...",
-  "de": "Der kann gut weglaufen...",
-  "it": "Quello sì che scappa veloce...",
-  "es": "Qué rápido sale corriendo..."
+  "en": "Tch... quick to run, that one...",
+  "fr": "Tss... il détale vite, celui-là...",
+  "de": "Tsk... der kann gut weglaufen...",
+  "it": "Tsk... quello sì che scappa veloce...",
+  "es": "Tsk... qué rápido sale corriendo..."
  },
  "cb1a9a01#0": {
   "hash": "cc7d3e8f39359f4f",
@@ -3153,11 +3153,11 @@
  },
  "fa1r1020#17": {
   "hash": "ecff6dfdfe1bdfe6",
-  "en": "",
-  "fr": "",
-  "de": "",
-  "it": "",
-  "es": ""
+  "en": "Hmph...",
+  "fr": "Hmph...",
+  "de": "Pah...",
+  "it": "Hmph...",
+  "es": "Bah..."
  },
  "fa1r1020#18": {
   "hash": "f779e8fb06871489",
@@ -4665,11 +4665,11 @@
  },
  "fa2g1201#5": {
   "hash": "60ece51f7e7e28ca",
-  "en": "You made a fool of me.\nLook forward to next time.",
-  "fr": "Tu m'as humiliée.\nJ'ai hâte de te revoir.",
-  "de": "Du hast mich blamiert.\nFreu dich aufs nächste Mal.",
-  "it": "Mi hai fatto fare una figuraccia.\nVedrai la prossima volta.",
-  "es": "Me has dejado en ridículo.\nYa verás la próxima vez que nos veamos."
+  "en": "...Tch. You made a fool of me.\nLook forward to next time.",
+  "fr": "...Tss. Tu m'as humiliée.\nJ'ai hâte de te revoir.",
+  "de": "...Tsk. Du hast mich blamiert.\nFreu dich aufs nächste Mal.",
+  "it": "...Tsk. Mi hai fatto fare una figuraccia.\nVedrai la prossima volta.",
+  "es": "...Tsk. Me has dejado en ridículo.\nYa verás la próxima vez que nos veamos."
  },
  "fa2g1201#6": {
   "hash": "77dda358fff8179e",
@@ -4713,11 +4713,11 @@
  },
  "fa2g1261#4": {
   "hash": "6f4e3aea5841fcb5",
-  "en": "You know already, don't you?",
-  "fr": "Tu le sais bien, non ?",
-  "de": "Das weißt du doch.",
-  "it": "Lo sai già, no?",
-  "es": "Ya lo sabes, ¿no?"
+  "en": "...Hmph. You know already, don't you?",
+  "fr": "...Hmph. Tu le sais bien, non ?",
+  "de": "...Pah. Das weißt du doch.",
+  "it": "...Hmph. Lo sai già, no?",
+  "es": "...Bah. Ya lo sabes, ¿no?"
  },
  "fa2g1261#5": {
   "hash": "52aba37068d7adbe",
@@ -4729,11 +4729,11 @@
  },
  "fa2g1261#6": {
   "hash": "add9a72deb1dfab2",
-  "en": "",
-  "fr": "",
-  "de": "",
-  "it": "",
-  "es": ""
+  "en": "...Hmph.",
+  "fr": "...Hmph.",
+  "de": "...Pah.",
+  "it": "...Hmph.",
+  "es": "...Bah."
  },
  "fa2g1461#0": {
   "hash": "4625acd2c9650185",
@@ -8401,11 +8401,11 @@
  },
  "st1g6321#10": {
   "hash": "f6cf42cb1f1bb53c",
-  "en": "You like your new toy so much\nyou'd give away your beloved frame?",
-  "fr": "Ton nouveau jouet te plaît au point\nde céder ta machine fétiche ?",
-  "de": "Dein neues Spielzeug gefällt dir so,\ndass du deine eigene Maschine verschenkst?",
-  "it": "Il nuovo giocattolo ti piace tanto\nda cedere il tuo amato Frame?",
-  "es": "Tanto te gusta tu juguete nuevo\nque hasta regalas tu máquina favorita."
+  "en": "Hmph, you like your new toy so much\nyou'd give away your beloved frame?",
+  "fr": "Hmph, ton nouveau jouet te plaît au point\nde céder ta machine fétiche ?",
+  "de": "Pah, dein neues Spielzeug gefällt dir so,\ndass du deine eigene Maschine verschenkst?",
+  "it": "Hmph, il nuovo giocattolo ti piace tanto\nda cedere il tuo amato Frame?",
+  "es": "Bah, tanto te gusta tu juguete nuevo\nque hasta regalas tu máquina favorita."
  },
  "st1g6321#11": {
   "hash": "81cd7086b0d49609",
@@ -8577,11 +8577,11 @@
  },
  "st1g6421#1": {
   "hash": "89fc5ff3ca76d0e2",
-  "en": "You're stubborn.",
-  "fr": "Tu es coriace.",
-  "de": "Zäh bist du.",
-  "it": "Sei un osso duro.",
-  "es": "Qué duro de pelar."
+  "en": "Hmph... you're stubborn.",
+  "fr": "Hmph... tu es coriace.",
+  "de": "Pah... zäh bist du.",
+  "it": "Hmph... sei un osso duro.",
+  "es": "Bah... qué duro de pelar."
  },
  "st1p6461#0": {
   "hash": "dadd5c3f2e2dd701",
@@ -9529,11 +9529,11 @@
  },
  "ta1g2161#5": {
   "hash": "9fc771259030edfd",
-  "en": "I thought a woman would be enough\nto deal with a child.",
-  "fr": "Je pensais qu'une femme suffirait\npour s'occuper d'un enfant.",
-  "de": "Ich dachte, für ein Kind\nreicht eine Frau.",
-  "it": "Pensavo che per un bambino\nbastasse una donna.",
-  "es": "Creía que para un niño\nbastaba con una mujer."
+  "en": "Hmph. I thought a woman would be enough\nto deal with a child.",
+  "fr": "Hmph. Je pensais qu'une femme suffirait\npour s'occuper d'un enfant.",
+  "de": "Pah. Ich dachte, für ein Kind\nreicht eine Frau.",
+  "it": "Hmph. Pensavo che per un bambino\nbastasse una donna.",
+  "es": "Bah. Creía que para un niño\nbastaba con una mujer."
  },
  "ta1g2161#6": {
   "hash": "e52613b9c1e63c48",
