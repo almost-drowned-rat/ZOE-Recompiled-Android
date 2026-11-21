@@ -42,6 +42,10 @@ public class ZoeActivity extends SDLActivity {
             Os.setenv("XR_NATIVE_DIR", getApplicationInfo().nativeLibraryDir, true);
             Os.setenv("XR_HOST_ROOT", getFilesDir().getAbsolutePath(), true);
             Os.setenv("SDL_VULKAN_LIBRARY", "libvulkan_zoe.so", true);
+            // Turnip draws straight into memory, not in tiles (the system driver does not read it): the GS's many
+            // small draws and render passes cost the tiling more than they save - ZOE's boss fight on an Odin 2
+            // 36.5 -> 55.3 PS2 frames a second, the hangar ~+10 %. dev_env.txt may set another (TU_DEBUG=).
+            Os.setenv("TU_DEBUG", "sysmem", false);
         } catch (ErrnoException e) {
             android.util.Log.w("ZOE", "setenv: " + e);
         }
