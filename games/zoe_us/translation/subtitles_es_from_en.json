@@ -1,0 +1,5582 @@
+{
+ "anna2a41#0": {
+  "hash": "61d2080065f15147",
+  "es": "Escape de esta zona."
+ },
+ "anna2a42#0": {
+  "hash": "1bab13de8863e9de",
+  "es": "Es una pérdida de tiempo.\nDeberíamos irnos."
+ },
+ "anna2a43#0": {
+  "hash": "be65c9068787f298",
+  "es": "Deberíamos irnos."
+ },
+ "anna6a41#0": {
+  "hash": "eedc2dc5bac036b0",
+  "es": "¡Toma esto!"
+ },
+ "anna6a42#0": {
+  "hash": "7e4ae4bca5442121",
+  "es": "¡Maldita sea!"
+ },
+ "anna6a44#0": {
+  "hash": "76c001e071aa6249",
+  "es": "¿Qué te parece este?"
+ },
+ "anna6a45#0": {
+  "hash": "a9308c3f91e2bbc4",
+  "es": "Ahí va otro."
+ },
+ "anna6a46#0": {
+  "hash": "e44a9631080c3788",
+  "es": "¿Tienes problemas...?"
+ },
+ "anna6a47#0": {
+  "hash": "9486ba98dfe361ba",
+  "es": "¿Eso es todo?"
+ },
+ "anna6a48#0": {
+  "hash": "9bb269409b1f9a8f",
+  "es": "¡Eres débil!"
+ },
+ "anna6a4a#0": {
+  "hash": "57c37f02416ed4b8",
+  "es": "No funciona."
+ },
+ "anna6a4b#0": {
+  "hash": "21c7fef559988702",
+  "es": "¡Vamos!\n¿Eso es lo mejor que sabes hacer?"
+ },
+ "anna6a4c#0": {
+  "hash": "d1845ab79e341c71",
+  "es": "¿Eso es todo lo que puede hacer\ntu flamante Orbital Frame?"
+ },
+ "anna6a4d#0": {
+  "hash": "68351c3c467b3f0a",
+  "es": "Vaya... Bien hecho."
+ },
+ "anna6a4e#0": {
+  "hash": "ba6495605992523d",
+  "es": "Debería tomarte\nmás en serio."
+ },
+ "anna6a4f#0": {
+  "hash": "5225582b9e131a81",
+  "es": "¡Muere!"
+ },
+ "anna7a01#0": {
+  "hash": "8ddc11bec308f9ed",
+  "es": "Detecto una bomba.\nAñadiré un marcador."
+ },
+ "anna7a02#0": {
+  "hash": "1379853c0c797412",
+  "es": "Detecto una bomba."
+ },
+ "anna7a03#0": {
+  "hash": "e82a4e151d9c22c0",
+  "es": "La bomba se ha\ndetonado correctamente."
+ },
+ "anna7a04#0": {
+  "hash": "b34d24317f33819b",
+  "es": "La bomba se ha\ndetonado incorrectamente."
+ },
+ "anna7a05#0": {
+  "hash": "e0020104ae5b44b8",
+  "es": "La colonia ha sufrido daños leves."
+ },
+ "anna7a06#0": {
+  "hash": "a83bf81643f7d7bf",
+  "es": "La colonia ha sufrido daños.\nConfirmo que hay más daños."
+ },
+ "anna7a07#0": {
+  "hash": "03bc2ba604ee187d",
+  "es": "La colonia ha sufrido daños graves."
+ },
+ "anna7a07#1": {
+  "hash": "24c1b7ecb67417e7",
+  "es": "Tal como está, será\nextremadamente peligroso."
+ },
+ "anna7a08#0": {
+  "hash": "514560d1bf293243",
+  "es": "Los daños en la colonia\nson extensos."
+ },
+ "anna7a08#1": {
+  "hash": "489bbb17339916f1",
+  "es": "Cualquier daño más\nserá fatal."
+ },
+ "anna9a21#0": {
+  "hash": "4a716287ffc200a2",
+  "es": "El pozo de la colonia tiene daños leves.\nIntente evitar más daños."
+ },
+ "anna9a22#0": {
+  "hash": "589f23afdfb58f45",
+  "es": "El pozo de la colonia tiene daños.\nConfirmo que hay más daños."
+ },
+ "anna9a23#0": {
+  "hash": "95ee82e5df1e1871",
+  "es": "El pozo de la colonia\ntiene daños graves."
+ },
+ "anna9a24#0": {
+  "hash": "7a68852f594a7260",
+  "es": "Los daños en el pozo de la colonia son graves."
+ },
+ "anna9a24#1": {
+  "hash": "270e8d9eb9adc483",
+  "es": "Con más daños será\nextremadamente peligroso."
+ },
+ "anna9a64#0": {
+  "hash": "45ae2facc5695f13",
+  "es": "Si puede ser, no volvamos\na la ciudad, Leo."
+ },
+ "anna9a65#0": {
+  "hash": "f8cbcabb1d7a20bb",
+  "es": "Paremos ya, Leo."
+ },
+ "anna9a66#0": {
+  "hash": "3f79f22aec9966db",
+  "es": "¿Estás de broma, Leo?"
+ },
+ "anna9a67#0": {
+  "hash": "958031cdb5c58f04",
+  "es": "Leo, por favor.\nPor favor, para."
+ },
+ "anna9a68#0": {
+  "hash": "8805c47c0710dc71",
+  "es": "Por favor, Leo. Déjame aquí.\nNo soporto ver lo que estás haciendo."
+ },
+ "annaa001#0": {
+  "hash": "83e41e029b0e9e7d",
+  "es": "Mantendremos la posición de combate."
+ },
+ "annaa002#0": {
+  "hash": "ecabac678f9251ed",
+  "es": "Abandonaremos la posición de combate."
+ },
+ "annaa003#0": {
+  "hash": "b96dae21ecb6f15b",
+  "es": "Los refuerzos enemigos\nestán en posición de combate."
+ },
+ "annaa004#0": {
+  "hash": "5d7af58a1d4f58c6",
+  "es": "Hemos obtenido el código de acceso."
+ },
+ "annaa005#0": {
+  "hash": "57becb423596885a",
+  "es": "Hemos obtenido\nel mineral de Metatron."
+ },
+ "annaa006#0": {
+  "hash": "fdb6460ba46d281f",
+  "es": "Hemos obtenido el objeto."
+ },
+ "annaa007#0": {
+  "hash": "2151a43387c5d36a",
+  "es": "Hemos obtenido el programa."
+ },
+ "annaa008#0": {
+  "hash": "ba3ac3b9c071427e",
+  "es": "Necesitamos el código de acceso."
+ },
+ "annaa009#0": {
+  "hash": "91d3e25bf20bf4f9",
+  "es": "Nos dirigimos al exterior\nde la zona de combate."
+ },
+ "annaa00a#0": {
+  "hash": "ce9f75a5bb2a347f",
+  "es": "Salga al exterior."
+ },
+ "annaa00b#0": {
+  "hash": "2e7aa602bc22957a",
+  "es": "Índice de daños superior al 50%."
+ },
+ "annaa00c#0": {
+  "hash": "35255eb0bb0ec811",
+  "es": "Índice de daños superior al 75%,\nlo que indica daños graves."
+ },
+ "annaa00d#0": {
+  "hash": "e43e33c0fb48f25f",
+  "es": "Daños graves. Le recomiendo\nque huya de este combate."
+ },
+ "annaa021#0": {
+  "hash": "6bede461e1f232c7",
+  "es": "Hemos destruido un Porter."
+ },
+ "annaa022#0": {
+  "hash": "c6635ec0a5681ccd",
+  "es": "Trampa vectorial liberada.\nObtenga el objeto."
+ },
+ "annaa023#0": {
+  "hash": "0a20fc5cee3d4c62",
+  "es": "Trampa vectorial liberada."
+ },
+ "annaa041#0": {
+  "hash": "4d9cbc4e72b1719d",
+  "es": "Ha fijado al enemigo.\nEntramos en modo de combate."
+ },
+ "annaa042#0": {
+  "hash": "7b6be559834b1393",
+  "es": "El enemigo ha fijado a Jehuty.\nEntramos en modo de combate."
+ },
+ "annaa043#0": {
+  "hash": "19632753b60f3ad4",
+  "es": "Entramos en modo de combate."
+ },
+ "annaa044#0": {
+  "hash": "c00d78030cd1118b",
+  "es": "Estamos rodeados de enemigos."
+ },
+ "annaa045#0": {
+  "hash": "cf8a4da18c81eb25",
+  "es": "Le recomiendo mantener cierta distancia\ny atacar a los enemigos uno a uno."
+ },
+ "annaa046#0": {
+  "hash": "8fbe48b4393c88c5",
+  "es": "Le recomiendo iniciar un combate\nuno contra uno a distancia."
+ },
+ "annaa061#0": {
+  "hash": "dc186da0b3cef0ab",
+  "es": "Refuerzos enemigos\nse acercan a nuestra posición."
+ },
+ "annaa063#0": {
+  "hash": "499fdc1af671ece5",
+  "es": "Los refuerzos enemigos\nestán en posición de combate."
+ },
+ "annaa065#0": {
+  "hash": "9e2e78456296ac00",
+  "es": "Estamos escapando\nde la zona de combate."
+ },
+ "annaa066#0": {
+  "hash": "39372c0fcf388ea4",
+  "es": "Hemos derribado al enemigo."
+ },
+ "annaa067#0": {
+  "hash": "8d409311f11ada2c",
+  "es": "Confirmado: todos los frames\nenemigos han sido destruidos."
+ },
+ "annaa068#0": {
+  "hash": "ec3b90e1f11eb42a",
+  "es": "Enemigo destruido.\nConfirmado."
+ },
+ "annaa081#0": {
+  "hash": "1e2948285f913390",
+  "es": "Los daños en la colonia aumentan\ndebido al combate."
+ },
+ "annaa082#0": {
+  "hash": "2e580ff8e950f449",
+  "es": "Los daños en los alrededores\naumentan debido al combate."
+ },
+ "annaa083#0": {
+  "hash": "5afaae5441e3da4a",
+  "es": "Las víctimas civiles aumentan\ndebido al combate."
+ },
+ "annaa101#0": {
+  "hash": "59bfa0afdb64e08c",
+  "es": "Destruya el Orbital Frame\nno tripulado cercano."
+ },
+ "annaa121#0": {
+  "hash": "ecd9450549894565",
+  "es": "Necesitará un código de acceso\npara entrar en un servidor local bloqueado."
+ },
+ "annaa122#0": {
+  "hash": "feff7af85edaab1a",
+  "es": "Puede obtener el código destruyendo\na un enemigo que lo tenga."
+ },
+ "annaa141#0": {
+  "hash": "b4bec8182ab1c5b3",
+  "es": "En esta zona hay un enemigo\ncon un programa reforzado."
+ },
+ "annaa141#1": {
+  "hash": "29a59fd230c2029e",
+  "es": "Tenga cuidado."
+ },
+ "annab002#0": {
+  "hash": "1c48ecaa2d0f464f",
+  "es": "Confirmada la destrucción\ndel objetivo Bravo."
+ },
+ "annab002#1": {
+  "hash": "e197ab7304e70a62",
+  "es": "Misión cumplida.\nRegreso ahora."
+ },
+ "annab002#2": {
+  "hash": "f45ae931d8b782c6",
+  "es": "Buen trabajo, Viola."
+ },
+ "annab003#0": {
+  "hash": "6bebef13c29ff831",
+  "es": "...No vale nada."
+ },
+ "annab004#0": {
+  "hash": "4e13ecede537489e",
+  "es": "...Creía que\nlo harías mejor."
+ },
+ "annab005#0": {
+  "hash": "4a827cd01fb83013",
+  "es": "Te he sobrestimado..."
+ },
+ "annab021#0": {
+  "hash": "c75ff41556e34b55",
+  "es": "Celvice.\nNo he podido protegerte..."
+ },
+ "annab022#0": {
+  "hash": "68d3149ec84ac9c8",
+  "es": "Celvice..."
+ },
+ "annab051#0": {
+  "hash": "2913dab9a77707d4",
+  "es": "¡Maldición!"
+ },
+ "annab061#0": {
+  "hash": "d43a5ea524585a23",
+  "es": "He completado la misión.\nSí. He destruido la colonia como se ordenó."
+ },
+ "annab081#0": {
+  "hash": "55f62cb63d370685",
+  "es": "Niño estúpido.\n¿Por qué tienes tantas ganas de morir?"
+ },
+ "annab082#0": {
+  "hash": "c9504a490f79a6fa",
+  "es": "¿De verdad creías que\npodrías derrotar a Tempest?"
+ },
+ "annab083#0": {
+  "hash": "7e2e3b9b316c2459",
+  "es": "Me he tomado demasiado en serio\na un rival muy inferior a mí."
+ },
+ "annab084#0": {
+  "hash": "e5f5b598e6287141",
+  "es": "Ha sido un buen combate, chico."
+ },
+ "annab101#0": {
+  "hash": "4b0f68b7c8eaabeb",
+  "es": "Bien hecho, chico."
+ },
+ "annab102#0": {
+  "hash": "dfaa77fef9407b78",
+  "es": "Por poco no te conviertes\nen un héroe, ¿eh, chaval?"
+ },
+ "annab121#0": {
+  "hash": "017852912ab50340",
+  "es": "Niño tonto."
+ },
+ "annab122#0": {
+  "hash": "06a16c0e4bbf7d33",
+  "es": "Una mosca insignificante como tú\nnunca llegará a nada."
+ },
+ "annab123#0": {
+  "hash": "d4bbcd6a9f2c69bc",
+  "es": "Qué tonto. ¿De verdad\ncreías que podías vencerme?"
+ },
+ "annab124#0": {
+  "hash": "b111678862ec244f",
+  "es": "Uf. Ha estado cerca.\n"
+ },
+ "annab141#0": {
+  "hash": "b7c16ae8212a510e",
+  "es": "He heredado tus pecados."
+ },
+ "annab142#0": {
+  "hash": "e2d8b9cf24ecd36a",
+  "es": "¡Casi!"
+ },
+ "annab143#0": {
+  "hash": "70d2fa3f77d9e8ad",
+  "es": "No puedo morir. ¡Todavía\nno me puedo permitir morir!"
+ },
+ "annab161#0": {
+  "hash": "f45b22539fe118cc",
+  "es": "Me alegro por ti, chico.\nTus pecados han sido perdonados."
+ },
+ "annab162#0": {
+  "hash": "fdb5dd380896fdaa",
+  "es": "Te dije que te era imposible\nmatarme, ¿verdad?"
+ },
+ "annab162#1": {
+  "hash": "30af009ba31aee51",
+  "es": "Al final nadie vino a ayudarte.\nTienes lo que pediste."
+ },
+ "annc5141#0": {
+  "hash": "5fb44ae3d1e6df2e",
+  "es": "¡Maldición! No funciona.\nNo podemos repararlo."
+ },
+ "annc5141#1": {
+  "hash": "3df05e1bb5828cbc",
+  "es": "¿Esto también es\nun efecto del virus?"
+ },
+ "annc5141#2": {
+  "hash": "e683713c09ff7527",
+  "es": "Busquemos ya el\nprograma vacuna."
+ },
+ "annc9221#0": {
+  "hash": "c5f62e6721561e66",
+  "es": "Le indicaré con un marcador los\nedificios que tienen signos vitales."
+ },
+ "annc9221#1": {
+  "hash": "98b3358b4b96920c",
+  "es": "En esos edificios aún quedan civiles\nindefensos que no han podido huir."
+ },
+ "annc9221#2": {
+  "hash": "720fb0e36c2eeb9b",
+  "es": "Aún hay mucha gente en los\nedificios, Leo. Ten cuidado."
+ },
+ "annc9221#3": {
+  "hash": "2db31fb0953f0927",
+  "es": "Lo sé, pero al menos tengo que acabar\ncon el enemigo de esta zona."
+ },
+ "annc9241#0": {
+  "hash": "4ed8b834946216c0",
+  "es": "Le indicaré con un marcador los\nedificios que tienen signos vitales."
+ },
+ "annc9241#1": {
+  "hash": "c9784d2b531ea1c1",
+  "es": "Intente no combatir cerca de\nla gente que no ha escapado."
+ },
+ "annc9261#0": {
+  "hash": "e8c896aa7ae60d63",
+  "es": "Aún hay mucha gente ahí dentro,\nLeo. Ten cuidado."
+ },
+ "annc9a41#0": {
+  "hash": "05ac0d7740aa62b7",
+  "es": "Confirmado: todos los frames\nenemigos han sido destruidos."
+ },
+ "annc9a41#1": {
+  "hash": "14f6788ca783c352",
+  "es": "Informaré de los daños causados\nen las zonas vecinas por el combate."
+ },
+ "annc9a42#0": {
+  "hash": "e2354aee927c4d75",
+  "es": "Misión cumplida."
+ },
+ "annc9a44#0": {
+  "hash": "ab360e03c2eeee9a",
+  "es": "Ningún edificio dañado."
+ },
+ "annc9a45#0": {
+  "hash": "ccbf98c537b74bd2",
+  "es": "Hay algunos edificios dañados."
+ },
+ "annc9a46#0": {
+  "hash": "1e7007bb2dff071b",
+  "es": "Muchos edificios han sufrido daños."
+ },
+ "annc9a47#0": {
+  "hash": "a6b67fcad87f6c31",
+  "es": "Daños graves en los edificios."
+ },
+ "annc9a48#0": {
+  "hash": "4ebf4332beb4615b",
+  "es": "Todos los edificios están dañados."
+ },
+ "annc9a49#0": {
+  "hash": "b2c5add1c1c865b6",
+  "es": "Ninguna víctima."
+ },
+ "annc9a4a#0": {
+  "hash": "1efed26c31e86101",
+  "es": "Tampoco hay víctimas."
+ },
+ "annc9a4b#0": {
+  "hash": "a75665129251132e",
+  "es": "Algunos heridos o muertos."
+ },
+ "annc9a4c#0": {
+  "hash": "fa44d394310ef60c",
+  "es": "Muchos heridos y muchos muertos."
+ },
+ "annc9a4d#0": {
+  "hash": "ede7b32f8ae77f2d",
+  "es": "Un gran número de heridos\no muertos."
+ },
+ "annc9a4e#0": {
+  "hash": "37ff1884552409c5",
+  "es": "No hay supervivientes."
+ },
+ "annc9a4f#0": {
+  "hash": "e721ea4dbbfed356",
+  "es": "Tampoco hay supervivientes."
+ },
+ "annc9a61#0": {
+  "hash": "477fa3c0eab03951",
+  "es": "¡Lo has conseguido!"
+ },
+ "annc9a62#0": {
+  "hash": "abac72288a47e227",
+  "es": "¡Lo has conseguido!\nLeo, eres increíble."
+ },
+ "annc9a63#0": {
+  "hash": "5aea4d21336162bc",
+  "es": "Sé que has hecho lo que has podido, Leo."
+ },
+ "annc9a68#0": {
+  "hash": "dc292cae8a515953",
+  "es": "Por favor, Leo.\nDéjame aquí."
+ },
+ "annc9a68#1": {
+  "hash": "1cbb9b819b1a9e0b",
+  "es": "No soporto ver\nlo que estás haciendo."
+ },
+ "annc9a69#0": {
+  "hash": "e380f03efe34441e",
+  "es": "Leo. Tenemos que ir\na ayudarlos."
+ },
+ "annc9a81#0": {
+  "hash": "0f527d17b9b695fb",
+  "es": "Bien hecho."
+ },
+ "annc9a82#0": {
+  "hash": "e579c4ac9d63bebb",
+  "es": "Valoro su capacidad\ncomo Frame Runner."
+ },
+ "annc9a83#0": {
+  "hash": "a10005d6b0527096",
+  "es": "Sus actos y sus palabras\nse contradicen."
+ },
+ "annc9a84#0": {
+  "hash": "c75182d4f195a060",
+  "es": "¿Necesitamos más destrucción que no\nafecte directamente a nuestro combate?"
+ },
+ "annc9a85#0": {
+  "hash": "50333ce7fb175e79",
+  "es": "No está capacitado\ncomo Frame Runner."
+ },
+ "annc9a86#0": {
+  "hash": "2e7a864a42ab6fbf",
+  "es": "Era previsible dada su\ncapacidad como Frame Runner."
+ },
+ "annc9a87#0": {
+  "hash": "0bd2fd66093783b7",
+  "es": "No tiene sentido matar a civiles\nindefensos. ¿Le resulta divertido?"
+ },
+ "annc9a88#0": {
+  "hash": "88e6c48634c7fddb",
+  "es": "No soy sentimental, pero no tiene sentido\nmasacrar a civiles indefensos."
+ },
+ "annc9a89#0": {
+  "hash": "c0c4a0c5a0bbeae3",
+  "es": "Le he sobrestimado.\n"
+ },
+ "bs1a7a21#0": {
+  "hash": "3c96651bd3004555",
+  "es": "No eres rival para mí."
+ },
+ "bs1a7a22#0": {
+  "hash": "dd0c09138c42df45",
+  "es": "Je, je, je, je..."
+ },
+ "bs1a7a23#0": {
+  "hash": "21f00004b3b4ffd8",
+  "es": "Ja, ja, ja..."
+ },
+ "bs1a7a24#0": {
+  "hash": "71ffd3e09b08ad80",
+  "es": "Magnífico... Este rendimiento\ny este diseño..."
+ },
+ "bs1a7a24#1": {
+  "hash": "bd253ad85a571461",
+  "es": "Es justo lo que quería.\nEl Orbital Frame definitivo..."
+ },
+ "bs1a7a24#2": {
+  "hash": "0e6e2ecae3a40a1e",
+  "es": "El símbolo del Metatron."
+ },
+ "bs1a7a25#0": {
+  "hash": "5191a52d1988dcd1",
+  "es": "¿Qué pasa?\n¿Ya has terminado?"
+ },
+ "bs1a7a26#0": {
+  "hash": "7b7471132eafbf35",
+  "es": "Ya veo. Al menos se te da\nbien huir."
+ },
+ "bs1a7a27#0": {
+  "hash": "9dce6e815bff9fdb",
+  "es": "Ya veo por qué mis hombres\nno pudieron vencerte."
+ },
+ "bs1a7a27#1": {
+  "hash": "aebc8b6abb8c3721",
+  "es": "Pero aquí estoy yo..."
+ },
+ "bs1a7a28#0": {
+  "hash": "d4f6dd3d6b9ec21d",
+  "es": "¡Hmpf!"
+ },
+ "bs1a7a29#0": {
+  "hash": "e8041f93cae00cc2",
+  "es": "Se acabó..."
+ },
+ "bs1a7a2a#0": {
+  "hash": "e83fa533e42e4a02",
+  "es": "Te es imposible\nmatarme."
+ },
+ "bs1c7111#0": {
+  "hash": "0318779ebfcbf369",
+  "es": "Buscaré las bombas de relojería\ncolocadas en el núcleo central."
+ },
+ "bs1c7111#1": {
+  "hash": "00bbbe4fd128a979",
+  "es": "Le avisaré cada vez\nque encuentre una,"
+ },
+ "bs1c7111#2": {
+  "hash": "0e8d5f2f7687e87d",
+  "es": "así que dé prioridad a detonarlas bien\nantes que a destruir al enemigo."
+ },
+ "bs1c7111#3": {
+  "hash": "403d78165291500d",
+  "es": "Detonar bombas correctamente...\n¿Cómo lo hago?"
+ },
+ "bs1c7111#4": {
+  "hash": "0e920a047fa76064",
+  "es": "Es lo mismo que\nagarrar y lanzar."
+ },
+ "bs1c7111#5": {
+  "hash": "f2950f23ba1d1ca3",
+  "es": "Mantenga sujeta la bomba\nhasta que explote."
+ },
+ "bs1c7111#6": {
+  "hash": "cd8e4ea3f9281ae8",
+  "es": "Dirigiremos la explosión\nhacia una trampa vectorial."
+ },
+ "bs1c7111#7": {
+  "hash": "b0b79eac1ab798d6",
+  "es": "¡Entendido!"
+ },
+ "bs1c7111#8": {
+  "hash": "3e74266b2e6bfaac",
+  "es": "Asegúrese de no lanzarla."
+ },
+ "bs1c7111#9": {
+  "hash": "8bbf3946d554f9a6",
+  "es": "Lo intentaré."
+ },
+ "bs1c7161#0": {
+  "hash": "5a8e7531c5eb8d68",
+  "es": "¿Quiere que cambie el monitor\na la cámara exterior?"
+ },
+ "bs1c7161#1": {
+  "hash": "a721b85578dad23a",
+  "es": "Sí."
+ },
+ "bs1c7181#0": {
+  "hash": "d6b7465614c2beff",
+  "es": "¿Qué es eso?"
+ },
+ "bs1c7181#1": {
+  "hash": "03d855ff0023b964",
+  "es": "¿Qué está pasando? ¡ADA!"
+ },
+ "bs1c7181#2": {
+  "hash": "1af713373af80659",
+  "es": "Detecto una presencia\nenemiga detrás de nosotros."
+ },
+ "bs1c7221#0": {
+  "hash": "59e8ca3e015f40d2",
+  "es": "Jehuty resuena con ese frame."
+ },
+ "bs1c7221#1": {
+  "hash": "1e65a734a07900c5",
+  "es": "ADA, ¿de dónde ha salido?\nEl radar no lo ha detectado."
+ },
+ "bs1c7221#2": {
+  "hash": "30c860ea7c1054c3",
+  "es": "En nuestro estado actual\nno puede derrotar a Anubis."
+ },
+ "bs1c7221#3": {
+  "hash": "4d7cac57b5f348c8",
+  "es": "Le recomiendo que huya."
+ },
+ "bs1c7221#4": {
+  "hash": "5a824569e2738ce8",
+  "es": "¿Has dicho Anubis?"
+ },
+ "bs1c7221#5": {
+  "hash": "7c54fcb640e0ab45",
+  "es": "¿Lo conoces?"
+ },
+ "bs1c7221#6": {
+  "hash": "5dfb258b86b223ce",
+  "es": "¡ADA!"
+ },
+ "bs1c7222#0": {
+  "hash": "9f98155e8130c9b6",
+  "es": "Detecto una presencia de\nalta energía delante."
+ },
+ "bs1c7222#1": {
+  "hash": "e85bd27e1e81f489",
+  "es": "Ese frame es otro Jehuty."
+ },
+ "bs1c7222#2": {
+  "hash": "be60b1409e93bcc1",
+  "es": "Aún no es vuestro destino\nencontraros."
+ },
+ "bs1c7222#3": {
+  "hash": "4ac13e8d442a1111",
+  "es": "¿Qué quieres decir?"
+ },
+ "bs1c7261#0": {
+  "hash": "33484cb123f4f56a",
+  "es": "Sabía que otros podían morir, pero nunca\npensé que le pasaría a Viola."
+ },
+ "bs1c7261#1": {
+  "hash": "4e6c46a13009975d",
+  "es": "Era una oficial competente."
+ },
+ "bs1c7261#2": {
+  "hash": "43f5494f4e727f82",
+  "es": "¡Tú...! Tú ordenaste todo esto."
+ },
+ "bs1c7261#3": {
+  "hash": "e9353bf440004bff",
+  "es": "No, yo no."
+ },
+ "bs1c7261#4": {
+  "hash": "1ecf104be7782680",
+  "es": "Bueno, quizá..."
+ },
+ "bs1c7261#5": {
+  "hash": "ef8aa94ae7f04466",
+  "es": "En cualquier caso, morirás.\nUn regalo de despedida para Viola."
+ },
+ "bs1c7281#2": {
+  "hash": "5b44c4bb86c002e4",
+  "es": "¡Tú...!\nTú ordenaste todo esto."
+ },
+ "bs1c7281#5": {
+  "hash": "38fc4679bcfc3da2",
+  "es": "Chico, he oído que has causado\nuna destrucción masiva en la ciudad."
+ },
+ "bs1c7281#6": {
+  "hash": "dfdf94b74368a484",
+  "es": "¿Con qué fin?\n¿Para unirte a BAHRAM?"
+ },
+ "bs1c7281#7": {
+  "hash": "a89cc6f2f02fa7cd",
+  "es": "¿O solo porque eres\nun asesino despiadado?"
+ },
+ "bs1c7281#8": {
+  "hash": "7d3fea0ad11e6e7f",
+  "es": "Da igual, pagarás tus\npecados con tu vida."
+ },
+ "bs1c7281#9": {
+  "hash": "f9a40a108b22b24f",
+  "es": "No siento ninguna compasión\npor asesinos como tú."
+ },
+ "bs1c7301#0": {
+  "hash": "36647ab350baa9b2",
+  "es": "¡Aaah!"
+ },
+ "bs1c7301#1": {
+  "hash": "04fe580abfc755a5",
+  "es": "El bus de par principal\ndel cuerpo está dañado."
+ },
+ "bs1c7301#2": {
+  "hash": "f93f108d62a6c820",
+  "es": "El índice de superioridad ha\ncaído a menos 99,83."
+ },
+ "bs1c7301#3": {
+  "hash": "453f6696c9632359",
+  "es": "Estaba tan cerca..."
+ },
+ "bs1c7302#0": {
+  "hash": "cc072232e98d4f8f",
+  "es": "¡Leo! ¿Me oyes?\n¡Leo!"
+ },
+ "bs1c7302#1": {
+  "hash": "12a33ff4a7c41df7",
+  "es": "¿Elena?"
+ },
+ "bs1c7302#2": {
+  "hash": "f8069afe3b765c8a",
+  "es": "Abriré un agujero en las paredes laterales\ndel núcleo central dentro de 15 segundos."
+ },
+ "bs1c7302#3": {
+  "hash": "6f662204f9ad8d85",
+  "es": "Sigue la señal de la baliza."
+ },
+ "bs1c7302#4": {
+  "hash": "02344aa9778c75c6",
+  "es": "Te cubriré\ncon mis cañones."
+ },
+ "bs1c7302#5": {
+  "hash": "b6d9db666be6b5ef",
+  "es": "Cuidado: si te desvías lo más mínimo\nde la baliza, te quemarás."
+ },
+ "bs1c7302#7": {
+  "hash": "4f6f2bbb7b039412",
+  "es": "Hasta pronto.\nBuena suerte."
+ },
+ "bs1g7101#0": {
+  "hash": "579330ad8efbfef7",
+  "es": "¿Así que estás aquí?"
+ },
+ "bs1g7101#1": {
+  "hash": "bb24aabb0be7b54b",
+  "es": "Viola. Es una orden.\nSal de ahí inmediatamente."
+ },
+ "bs1g7101#2": {
+  "hash": "a3ae3d542632130e",
+  "es": "Me niego a obedecer. Si intentas\ninterferir, te mataré."
+ },
+ "bs1g7101#3": {
+  "hash": "093ca6b16f5cfe3a",
+  "es": "¿Por qué lo quieres tanto?\nSolo es un crío."
+ },
+ "bs1g7101#4": {
+  "hash": "8ec511c82d1e6c74",
+  "es": "Solo un crío, ¿eh?"
+ },
+ "bs1g7101#5": {
+  "hash": "3eb05bd086254304",
+  "es": "No es solo ese frame\nlo que lo hace tan bueno."
+ },
+ "bs1g7101#6": {
+  "hash": "9b0570f3580a6e69",
+  "es": "Ya lo sé.\nTú sal de ahí."
+ },
+ "bs1g7101#7": {
+  "hash": "b3402d81773a9a3d",
+  "es": "La misión se cumplirá incluso sin ti,\nasí que no tienes por qué morir en vano."
+ },
+ "bs1g7101#8": {
+  "hash": "5fd75cd5ce049c97",
+  "es": "Deberías saberlo.\nNeith es inmortal."
+ },
+ "bs1g7101#9": {
+  "hash": "8d32d292bcb9aa26",
+  "es": "Ya casi está.\nPronto todo habrá terminado."
+ },
+ "bs1g7121#0": {
+  "hash": "dc778674616e37cb",
+  "es": "¡Viola!\n¡Voy a acabar con esto ahora!"
+ },
+ "bs1g7121#1": {
+  "hash": "52d0bd428ab430e4",
+  "es": "Je, je, je..."
+ },
+ "bs1g7171#0": {
+  "hash": "6175849ddda16573",
+  "es": "ADA. ¿Podríamos ir\na salvar ese frame?"
+ },
+ "bs1g7171#1": {
+  "hash": "c11854c8d6da9deb",
+  "es": "Jehuty no está diseñado para resistir la\nentrada en la tormenta magnética de Júpiter."
+ },
+ "bs1g7171#10": {
+  "hash": "7aed5b05bafc14a1",
+  "es": "Primero mataré a la gente que más\nquieres, y luego a ti."
+ },
+ "bs1g7171#11": {
+  "hash": "a65ab34325c794b2",
+  "es": "Y no serás el último."
+ },
+ "bs1g7171#12": {
+  "hash": "56e7899b8677c5ea",
+  "es": "Seguiré matando\nincluso después de eso."
+ },
+ "bs1g7171#13": {
+  "hash": "5f6bd659a5ec68ec",
+  "es": "Pero... tú..."
+ },
+ "bs1g7171#14": {
+  "hash": "f868f6161f9d2921",
+  "es": "Me ha vencido un mocoso\ntan ingenuo..."
+ },
+ "bs1g7171#15": {
+  "hash": "108c47b042340cf8",
+  "es": "Viola."
+ },
+ "bs1g7171#16": {
+  "hash": "ad1f5f4535091064",
+  "es": "...Lo he perdido todo.\nSobreviví a muchas batallas."
+ },
+ "bs1g7171#17": {
+  "hash": "e5fba9fb104b21c2",
+  "es": "Perdí a mis padres y a mi amante."
+ },
+ "bs1g7171#18": {
+  "hash": "14aa053b2461d916",
+  "es": "Ya no tengo las funciones\nde una mujer."
+ },
+ "bs1g7171#19": {
+  "hash": "fcedeac4046f67eb",
+  "es": "Aun así he\nseguido viviendo..."
+ },
+ "bs1g7171#2": {
+  "hash": "399da5b97011084d",
+  "es": "La gravedad ya está atrayendo el\nOrbital Frame cada vez más rápido."
+ },
+ "bs1g7171#20": {
+  "hash": "9dd9e9b0cfc2b471",
+  "es": "Así es."
+ },
+ "bs1g7171#21": {
+  "hash": "5cbaf031d9998853",
+  "es": "Sobrevivir era el único\npropósito de la vida."
+ },
+ "bs1g7171#22": {
+  "hash": "09a407721af38088",
+  "es": "Sobrevivir es mi vida."
+ },
+ "bs1g7171#23": {
+  "hash": "7fdd28b60606e875",
+  "es": "En la batalla hay una delgada línea\nentre la vida y la muerte."
+ },
+ "bs1g7171#24": {
+  "hash": "f921a2669f5aa43b",
+  "es": "Los que mataban estaban muertos\nun instante después."
+ },
+ "bs1g7171#25": {
+  "hash": "f31efb806428c7e7",
+  "es": "Maté a niños inocentes e incluso\na mis camaradas para salvarme."
+ },
+ "bs1g7171#26": {
+  "hash": "cd29c81d7ba11248",
+  "es": "Empapada en su sangre y comiendo su carne,\nlogré vivir todo este tiempo."
+ },
+ "bs1g7171#27": {
+  "hash": "6027224736b33dd7",
+  "es": "No es cuestión de suerte."
+ },
+ "bs1g7171#28": {
+  "hash": "9d9b948419c63fc0",
+  "es": "Solo mi fuerza vital\nme mantuvo con vida."
+ },
+ "bs1g7171#29": {
+  "hash": "f8a5ce31a9d9955c",
+  "es": "Sobreviví gracias a\nmi propia fuerza."
+ },
+ "bs1g7171#3": {
+  "hash": "1dd821aa8283059b",
+  "es": "No es imposible salvar el\nOrbital Frame, pero es muy arriesgado."
+ },
+ "bs1g7171#30": {
+  "hash": "33b6a124bee9fb14",
+  "es": "¡Tú me lo has arruinado!\n¿Quién demonios eres?"
+ },
+ "bs1g7171#31": {
+  "hash": "747264a86f48f50d",
+  "es": "¿En qué soy inferior a ti?\n¿Alguna vez has..."
+ },
+ "bs1g7171#32": {
+  "hash": "1e9ab4ba273333a2",
+  "es": "...has pasado por alguna\npenuria en tu vida?"
+ },
+ "bs1g7171#33": {
+  "hash": "e44c3fb23b4ea1c9",
+  "es": "Tú... tu propia existencia\nniega la mía."
+ },
+ "bs1g7171#34": {
+  "hash": "a0307b12c2fa7c47",
+  "es": "Hora de acabar.\nPor fin he terminado."
+ },
+ "bs1g7171#35": {
+  "hash": "6c14a47db9df94f9",
+  "es": "Mis días aciagos se acabaron para siempre."
+ },
+ "bs1g7171#36": {
+  "hash": "39fbcbfb65988614",
+  "es": "Chico, ¿responderás\na una pregunta estúpida?"
+ },
+ "bs1g7171#37": {
+  "hash": "4822ed234ab1b028",
+  "es": "Sí, ¿cuál es?"
+ },
+ "bs1g7171#38": {
+  "hash": "a59a62a011f34e2d",
+  "es": "¿Era fuerte?"
+ },
+ "bs1g7171#39": {
+  "hash": "b5ad9f03b47732c3",
+  "es": "...Cuesta creer\nque siga vivo."
+ },
+ "bs1g7171#4": {
+  "hash": "e345e27db71f9fbe",
+  "es": "¿Alguna idea?"
+ },
+ "bs1g7171#40": {
+  "hash": "0fc55746a1101b29",
+  "es": "¿De verdad?"
+ },
+ "bs1g7171#41": {
+  "hash": "1b2127d025026962",
+  "es": "Gracias."
+ },
+ "bs1g7171#42": {
+  "hash": "14460c6087f7161d",
+  "es": "El objetivo se está desintegrando."
+ },
+ "bs1g7171#43": {
+  "hash": "d90f5696ca5b5221",
+  "es": "¿Viola...?"
+ },
+ "bs1g7171#44": {
+  "hash": "828659ccb9ce857a",
+  "es": "Qué bonito. Sabías lo bonitas\nque son de verdad las estrellas."
+ },
+ "bs1g7171#45": {
+  "hash": "108c46b042340b45",
+  "es": "¡Viola!"
+ },
+ "bs1g7171#46": {
+  "hash": "c2ee30a9fcd613c0",
+  "es": "Radam... Por fin... Podré estar contigo."
+ },
+ "bs1g7171#47": {
+  "hash": "753bda56d7374a57",
+  "es": "¡¡¡Viola!!!"
+ },
+ "bs1g7171#48": {
+  "hash": "bafc4e769410da4b",
+  "es": "...El objetivo ha dejado de funcionar.\nConfirmado."
+ },
+ "bs1g7171#5": {
+  "hash": "4f6faea030161da4",
+  "es": "Basta."
+ },
+ "bs1g7171#6": {
+  "hash": "d30af8eef0f22370",
+  "es": "¿Qué?"
+ },
+ "bs1g7171#7": {
+  "hash": "e8daae2e38fe437e",
+  "es": "¿Todavía me insultas?"
+ },
+ "bs1g7171#8": {
+  "hash": "dcb6c6682be8aa07",
+  "es": "Ni se te ocurra."
+ },
+ "bs1g7171#9": {
+  "hash": "2aaae9daf31f86bb",
+  "es": "Si me salvas, volveré a luchar\ncontigo y te mataré."
+ },
+ "bs1p7141#0": {
+  "hash": "37644319c3482e81",
+  "es": "¡No!"
+ },
+ "bs1p7201#0": {
+  "hash": "61a79456310ac5a8",
+  "es": "Jehuty resuena\ncon ese frame."
+ },
+ "bs1p7201#3": {
+  "hash": "fc5c13b8db5854e3",
+  "es": "Le recomiendo que huya."
+ },
+ "bs1p7201#4": {
+  "hash": "5d9e43c84218b66e",
+  "es": "¿Has dicho Anubis?\n¿Lo conoces?"
+ },
+ "bs1p7201#5": {
+  "hash": "50b699739d8d8bfd",
+  "es": "......"
+ },
+ "ca1a3a21#0": {
+  "hash": "d08bf853320926b5",
+  "es": "Destruya el bloque de transmisión del EPS en\nla base del pozo con un arma de largo alcance."
+ },
+ "ca1c3041#0": {
+  "hash": "0cfef6f199fb0a2c",
+  "es": "El campo de energía ya\nha llegado a la ciudad..."
+ },
+ "ca1c3041#1": {
+  "hash": "eaeb3f8ec98cb195",
+  "es": "No hay signos vitales en\neste bloque."
+ },
+ "ca1c3041#10": {
+  "hash": "74c33bbaabfb27d4",
+  "es": "¿Dónde podemos encontrar\nun arma así...?"
+ },
+ "ca1c3041#11": {
+  "hash": "dfa8505289e6fd3c",
+  "es": "Hemos confirmado las\ncondiciones del objetivo."
+ },
+ "ca1c3041#12": {
+  "hash": "dbcac9a05e2bf086",
+  "es": "Vámonos ya y busquemos\nun arma adecuada."
+ },
+ "ca1c3041#2": {
+  "hash": "701177f887d05c9e",
+  "es": "Supongo que el campo de energía de\nmicroondas ha eliminado toda forma de vida."
+ },
+ "ca1c3041#3": {
+  "hash": "595d812888501455",
+  "es": "Es horrible."
+ },
+ "ca1c3041#4": {
+  "hash": "bedbcd9c46e59a54",
+  "es": "¿Y qué sugieres?"
+ },
+ "ca1c3041#5": {
+  "hash": "af03c18b327a0d29",
+  "es": "Destruir el bloque de transmisión\ndel EPS en la base del pozo."
+ },
+ "ca1c3041#6": {
+  "hash": "b3ab047bab805408",
+  "es": "¿Quieres decir que dispare desde aquí?"
+ },
+ "ca1c3041#7": {
+  "hash": "c567ae5a0dc60a1f",
+  "es": "Sí, pero está muy lejos,"
+ },
+ "ca1c3041#8": {
+  "hash": "05e2d970cb423632",
+  "es": "y además las armas de energía de\nJehuty no funcionan dentro del campo."
+ },
+ "ca1c3041#9": {
+  "hash": "d301f7cf9a692bb3",
+  "es": "Deberíamos buscar un arma primitiva de largo\nalcance que golpee físicamente el objetivo."
+ },
+ "ca1c3121#0": {
+  "hash": "d90d16964d1520e3",
+  "es": "Destrucción del objetivo\nconfirmada."
+ },
+ "ca1c3121#1": {
+  "hash": "314f1e152af82c79",
+  "es": "¡Lo conseguí!"
+ },
+ "ca1c3122#0": {
+  "hash": "7ce058008e148b94",
+  "es": "El EPS ha pasado su suministro\na un generador de emergencia."
+ },
+ "ca1c3122#1": {
+  "hash": "cd8870bfa7db5e07",
+  "es": "El EPS sigue recibiendo\nenergía"
+ },
+ "ca1c3122#2": {
+  "hash": "df50cf0fcabd3d78",
+  "es": "de un generador de emergencia\nque no hemos podido destruir."
+ },
+ "ca1c3122#3": {
+  "hash": "4afc5f8799e72846",
+  "es": "Pero como el campo se ha reducido,"
+ },
+ "ca1c3122#4": {
+  "hash": "f2ae2f9d16310f98",
+  "es": "ahora podemos acercarnos a las antenas\ndel EPS en lo alto de las montañas."
+ },
+ "ca1c3122#5": {
+  "hash": "e616f33a0e8a4b35",
+  "es": "El siguiente objetivo es\nun par de antenas."
+ },
+ "ca1c9141#0": {
+  "hash": "846982a2f45dd7fa",
+  "es": "Ataque al escuadrón que se acerca\nal pozo de la colonia."
+ },
+ "ca1c9161#0": {
+  "hash": "1da90c880d16dc5b",
+  "es": "El ataque al pozo de la colonia ha cesado.\nPor ahora se ha evitado el peligro."
+ },
+ "ca1c9161#1": {
+  "hash": "114c803ab1082a01",
+  "es": "Bien hecho, Leo."
+ },
+ "ca1c9161#2": {
+  "hash": "0b14d0d51d4b1cff",
+  "es": "Uf... Se ha salvado."
+ },
+ "ca1c9181#0": {
+  "hash": "b2ec07103023dd9b",
+  "es": "El pozo de la colonia se ha derrumbado."
+ },
+ "ca1c9181#2": {
+  "hash": "90a510bb8dbf8c3e",
+  "es": "El eje de la colonia\nse ha desplazado"
+ },
+ "ca1c9181#3": {
+  "hash": "b549b02f941cc7fa",
+  "es": "y es imposible\ncorregirlo."
+ },
+ "ca1c9181#4": {
+  "hash": "9850213099a2dc21",
+  "es": "En menos de 48 meses la colonia\nse estrellará contra Europa."
+ },
+ "ca1c9181#5": {
+  "hash": "518d7addbb012b3b",
+  "es": "Leo..."
+ },
+ "ca1c9181#6": {
+  "hash": "57fc77c1a89b661e",
+  "es": "¡No! ¡Maldita sea, no!"
+ },
+ "ca1c9181#7": {
+  "hash": "0341fcc14938cde0",
+  "es": "Leo, yo también estoy triste. Pero\naún tenemos cosas que hacer."
+ },
+ "ca1c9201#0": {
+  "hash": "6cf22a370a2f99ef",
+  "es": "El eje de la colonia\nse ha descentrado"
+ },
+ "ca1c9201#3": {
+  "hash": "765faebd84763716",
+  "es": "¿En serio...? Debería haber\nido a ayudarlos."
+ },
+ "ca1c9201#4": {
+  "hash": "e7a18f959735a936",
+  "es": "Leo...\nAún tenemos cosas que hacer."
+ },
+ "cb1a5a61#0": {
+  "hash": "aa61b1318f21c605",
+  "es": "¡Maldición! Es rápido."
+ },
+ "cb1a9a01#0": {
+  "hash": "58d39d4bfcd2ac80",
+  "es": "Leo... Los has ayudado a todos"
+ },
+ "cb1a9a01#1": {
+  "hash": "92ae9a76c2f98af1",
+  "es": "aunque estabas en las peores\ncondiciones. Gracias."
+ },
+ "cb1a9a02#0": {
+  "hash": "a8b538d8a757eeb4",
+  "es": "Leo... Sé que lo estás\npasando mal,"
+ },
+ "cb1a9a02#1": {
+  "hash": "2266a8309d00d8d6",
+  "es": "pero no deberías gritarles."
+ },
+ "cb1c5a62#0": {
+  "hash": "c9794c7470eaeb8d",
+  "es": "Detecto un enemigo con un programa\nreforzado. Tenga cuidado."
+ },
+ "cb1c9091#0": {
+  "hash": "0f1721a57449fd41",
+  "es": "Leo... Sé que te he pedido\ndemasiado... Gracias."
+ },
+ "cb1c9091#1": {
+  "hash": "d2e4e24eda479586",
+  "es": "No es nada, de verdad...\nNo es eso."
+ },
+ "cb1c9301#0": {
+  "hash": "134a92b2dd3dc444",
+  "es": "Mira... están atacando\na un helicóptero..."
+ },
+ "cb1c9301#1": {
+  "hash": "a80027f38242b262",
+  "es": "¿Qué hace aquí?"
+ },
+ "cb1c9301#2": {
+  "hash": "18afc8220927bc48",
+  "es": "Salvémoslo, Leo."
+ },
+ "cb1c9a01#0": {
+  "hash": "41fb1cbc365cdd94",
+  "es": "Leo... Los has ayudado a todos aunque\nestabas en las peores condiciones. Gracias."
+ },
+ "edgr7361#0": {
+  "hash": "586622eb6e466c5b",
+  "es": "Intente no desviarse de la mira\nque marca la baliza."
+ },
+ "edgr7361#1": {
+  "hash": "3cdb8e23ec931592",
+  "es": "Recibido."
+ },
+ "edgr7361#10": {
+  "hash": "276648fb3372d330",
+  "es": "¿Sabes?"
+ },
+ "edgr7361#11": {
+  "hash": "9e3b1f915ea8b8da",
+  "es": "Gracias por todo."
+ },
+ "edgr7361#12": {
+  "hash": "a852407bfc579888",
+  "es": "Como estabas conmigo,\nsobreviví."
+ },
+ "edgr7361#13": {
+  "hash": "7f76d6fc5be784d2",
+  "es": "Yo también. Gracias\npor ayudarme."
+ },
+ "edgr7361#14": {
+  "hash": "18aa7f203a8a14a3",
+  "es": "¿Es ese el uso correcto de las palabras\npara mostrar gratitud humana?"
+ },
+ "edgr7361#15": {
+  "hash": "f2718d72088b5ff1",
+  "es": "Más o menos, sí."
+ },
+ "edgr7361#16": {
+  "hash": "807cde0157da6991",
+  "es": "Bueno, ¿y qué\nvas a hacer ahora?"
+ },
+ "edgr7361#18": {
+  "hash": "d42d8afcf3b2ac24",
+  "es": "Cuando llegues a Marte."
+ },
+ "edgr7361#19": {
+  "hash": "096da0a94f96fd37",
+  "es": "Tienes una misión\nimportante, ¿verdad?"
+ },
+ "edgr7361#2": {
+  "hash": "a6841ed33d66ccc2",
+  "es": "¿Es ese?"
+ },
+ "edgr7361#20": {
+  "hash": "f3c2cbf074b6d49b",
+  "es": "Si te parece bien... Quiero decir,\ncuando termines tu misión..."
+ },
+ "edgr7361#21": {
+  "hash": "6f747adf1f8c7036",
+  "es": "La tarea de Jehuty en Marte es penetrar\nen la fortaleza militar Aumaan"
+ },
+ "edgr7361#22": {
+  "hash": "021818e63fa5d4bc",
+  "es": "y destruirla desde dentro\nmediante la autodestrucción de Jehuty."
+ },
+ "edgr7361#23": {
+  "hash": "36b737b299542114",
+  "es": "¿Jehuty se autodestruirá?"
+ },
+ "edgr7361#24": {
+  "hash": "8deeaf07e8deed2d",
+  "es": "Sobrecargando deliberadamente\nel generador,"
+ },
+ "edgr7361#25": {
+  "hash": "500a0ac62c858a74",
+  "es": "Jehuty generará un máximo\nde 22,3 gigatones."
+ },
+ "edgr7361#26": {
+  "hash": "b7a5e3f9d1a78957",
+  "es": "Equivale a la potencia de\n15 bombas de positrones."
+ },
+ "edgr7361#27": {
+  "hash": "905bda3c662aecb1",
+  "es": "Espera un momento."
+ },
+ "edgr7361#28": {
+  "hash": "dbbe3892d5b64e47",
+  "es": "¿Quieres decir que harás estallar\neste frame a propósito?"
+ },
+ "edgr7361#29": {
+  "hash": "10134b272f32a356",
+  "es": "¿Y qué pasa contigo?"
+ },
+ "edgr7361#3": {
+  "hash": "cc61720690151327",
+  "es": "Buen trabajo, chico."
+ },
+ "edgr7361#30": {
+  "hash": "c913d4dda217ba00",
+  "es": "Todas mis funciones a bordo\nde Jehuty cesarán."
+ },
+ "edgr7361#31": {
+  "hash": "4d5a841d72bee6e8",
+  "es": "¿Entonces es una misión suicida?"
+ },
+ "edgr7361#32": {
+  "hash": "a0e54a0349aa5aec",
+  "es": "¡Creía que eras tú quien me decía\nque no desperdiciara mi vida!"
+ },
+ "edgr7361#33": {
+  "hash": "d1dd8eab27a9c973",
+  "es": "Presurización completa.\nAbriendo la escotilla."
+ },
+ "edgr7361#36": {
+  "hash": "85933477bb5fc6b5",
+  "es": "Para esto vivo yo."
+ },
+ "edgr7361#37": {
+  "hash": "b3de0643c0cc028d",
+  "es": "Este es el propósito de vivir\npara quienes no tienen vida."
+ },
+ "edgr7361#38": {
+  "hash": "5e74ccd982b53188",
+  "es": "No..."
+ },
+ "edgr7361#4": {
+  "hash": "05475c71711f7110",
+  "es": "¿Dónde está Celvice?"
+ },
+ "edgr7361#5": {
+  "hash": "8adc4cc719cd5b94",
+  "es": "No te preocupes.\nEstá perfectamente."
+ },
+ "edgr7361#6": {
+  "hash": "4bae01305e208ca2",
+  "es": "Bien."
+ },
+ "edgr7361#7": {
+  "hash": "a6f065786ca79bf6",
+  "es": "Voy a recogerte."
+ },
+ "edgr7361#8": {
+  "hash": "eeff5fdc9e1c751f",
+  "es": "Tardaremos tres minutos en entrar\nen el hangar y presurizar."
+ },
+ "edgr7361#9": {
+  "hash": "cd7da3e68dbfccee",
+  "es": "Espere, por favor."
+ },
+ "fa1a1a01#0": {
+  "hash": "656320dc5bcaccfe",
+  "es": "Recoja el mineral\nde Metatron, por favor"
+ },
+ "fa1a1a21#0": {
+  "hash": "4aa8cc8192e3f705",
+  "es": "Siga la flecha indicada\ny salga del hangar."
+ },
+ "fa1c1081#0": {
+  "hash": "f7d93e17ec4b1219",
+  "es": "..."
+ },
+ "fa1c1081#1": {
+  "hash": "2da313a4a078629c",
+  "es": "¿He ganado?"
+ },
+ "fa1c1081#2": {
+  "hash": "9e5e360bd02cf2b9",
+  "es": "He confirmado que el objetivo\nha cesado todas sus funciones."
+ },
+ "fa1c1081#3": {
+  "hash": "83d0dce3389f21fe",
+  "es": "Está en lo cierto: ha ganado."
+ },
+ "fa1c1081#4": {
+  "hash": "bc4c42f9c5159f8e",
+  "es": "¿¡Quién eres!?"
+ },
+ "fa1c1081#5": {
+  "hash": "97959b18d9c1d104",
+  "es": "Soy ADA, el ordenador de combate\navanzado de este Jehuty."
+ },
+ "fa1c1081#6": {
+  "hash": "5b2dfffaed3c91ce",
+  "es": "Detecto que usted no es el Frame Runner\nprevisto para pilotar el Orbital Frame."
+ },
+ "fa1c1081#7": {
+  "hash": "a669894dd9f7b847",
+  "es": "¡No, no lo soy!"
+ },
+ "fa1c1081#8": {
+  "hash": "626214c8d42e5d14",
+  "es": "Solo me metí aquí\nmientras intentaba escapar."
+ },
+ "fa1c1082#0": {
+  "hash": "9d17f8eed1d46151",
+  "es": "¡Uau!"
+ },
+ "fa1c1082#1": {
+  "hash": "37431ece9f6dfc07",
+  "es": "He detectado varios objetivos\nen el exterior del hangar."
+ },
+ "fa1c1082#2": {
+  "hash": "1d46a40f9210891d",
+  "es": "No puedo confirmar el número\nexacto desde esta posición."
+ },
+ "fa1c1082#3": {
+  "hash": "1a78898ae021f627",
+  "es": "Salga al exterior siguiendo\nla dirección de la flecha."
+ },
+ "fa1c1082#4": {
+  "hash": "80af31e588ffc020",
+  "es": "¿Cómo lo hago?"
+ },
+ "fa1c1082#5": {
+  "hash": "21a2ac7c1e4face7",
+  "es": "¿Quiere que le explique\ncómo manejar el frame?"
+ },
+ "fa1c1082#6": {
+  "hash": "94067146295812a6",
+  "es": "¡Por favor!"
+ },
+ "fa1c1101#0": {
+  "hash": "1fd3d000faba37ed",
+  "es": "Es peligroso salir ahora."
+ },
+ "fa1c1101#1": {
+  "hash": "9a752e1d4c492a98",
+  "es": "Consigamos el mineral de Metatron\nde la caja de objetos más cercana."
+ },
+ "fa1c1101#2": {
+  "hash": "8d933fc34e04ac89",
+  "es": "¿Metatron? ¿Qué es...?"
+ },
+ "fa1c1101#3": {
+  "hash": "1914f81f1ac44dbb",
+  "es": "Es un elemento esencial\nde Jehuty."
+ },
+ "fa1c1101#4": {
+  "hash": "bfb0a775ac686bf3",
+  "es": "Es necesario para reparar\nel cuerpo automáticamente."
+ },
+ "fa1c1101#5": {
+  "hash": "a340e9f4979b6c2b",
+  "es": "Antes de salir, debe conseguir\nprimero el mineral de Metatron."
+ },
+ "fa1c1121#0": {
+  "hash": "9c5045c96794dcb7",
+  "es": "Reparación automática del cuerpo\ncompletada."
+ },
+ "fa1c1121#1": {
+  "hash": "13c6ce8653999d79",
+  "es": "Ahora siga la flecha indicada\ny salga al exterior."
+ },
+ "fa1r1020#0": {
+  "hash": "616785a1868986ed",
+  "es": "A todos los Orbital Frames."
+ },
+ "fa1r1020#1": {
+  "hash": "f67a717a5cb61e6b",
+  "es": "Nuestra misión esta vez es capturar estos\ndos nuevos frames o destruirlos..."
+ },
+ "fa1r1020#10": {
+  "hash": "892dbbb5d1a7ab5c",
+  "es": "...Viola."
+ },
+ "fa1r1020#11": {
+  "hash": "5c217368f6cb420c",
+  "es": "Sí, señor."
+ },
+ "fa1r1020#12": {
+  "hash": "91b13636b42093f7",
+  "es": "No dejes que interfieran\ntus sentimientos personales."
+ },
+ "fa1r1020#13": {
+  "hash": "45a3dc90150a53c0",
+  "es": "Corto y cierro."
+ },
+ "fa1r1020#14": {
+  "hash": "4c9a31b4fb94f278",
+  "es": "Bueno... hora de jugar."
+ },
+ "fa1r1020#2": {
+  "hash": "5ceff0fc2c57a66c",
+  "es": "Para cumplirla, se espera que hagáis\ntodos los sacrificios necesarios."
+ },
+ "fa1r1020#3": {
+  "hash": "f8c552b3056e2922",
+  "es": "Aunque nos cueste la colonia."
+ },
+ "fa1r1020#4": {
+  "hash": "7d087856db63aae4",
+  "es": "Viola..."
+ },
+ "fa1r1020#5": {
+  "hash": "717b8af14530fa39",
+  "es": "Axe y yo capturaremos el objetivo Alpha\ntras entrar por el pozo de la colonia."
+ },
+ "fa1r1020#6": {
+  "hash": "37aa9f106a94a0c8",
+  "es": "Tú entra por el tragaluz\ncon Slash y Nightraid..."
+ },
+ "fa1r1020#7": {
+  "hash": "91fbc7ece4277cf6",
+  "es": "Yo llevaré a cabo\nmaniobras de distracción."
+ },
+ "fa1r1020#8": {
+  "hash": "c4524104a85bd545",
+  "es": "Después, confirmarás que\nel objetivo Bravo está asegurado."
+ },
+ "fa1r1021#0": {
+  "hash": "ad812cce3fd8089a",
+  "es": "¿Rebuscando en la basura?\n¡Sois unos Enders, todos!"
+ },
+ "fa1r1021#1": {
+  "hash": "5282fe3c31ad27a3",
+  "es": "Es culpa de Leo,\nél nos hizo venir aquí."
+ },
+ "fa1r1021#11": {
+  "hash": "c6e484ae61e30287",
+  "es": "¡¡Muévete, Leo!!"
+ },
+ "fa1r1021#12": {
+  "hash": "9ca94aa8f8b87639",
+  "es": "¡Ayúdanos, Leo!"
+ },
+ "fa1r1021#13": {
+  "hash": "c20a60ddfaaf8520",
+  "es": "¡¡¡Leo!!!"
+ },
+ "fa1r1021#14": {
+  "hash": "f8df29b8aec1d501",
+  "es": "He tomado el Sector 03 ahuyentando a las\nmoscas que infestan nuestra tierra."
+ },
+ "fa1r1021#15": {
+  "hash": "e08568ce7808d8a6",
+  "es": "Aún no hay reacción\ndel objetivo Bravo."
+ },
+ "fa1r1021#16": {
+  "hash": "e5eb4b6226dda2c0",
+  "es": "He logrado entrar en el pozo principal.\nNo lo olvides, Viola:"
+ },
+ "fa1r1021#17": {
+  "hash": "9f37daa13ead950d",
+  "es": "si el objetivo sigue vivo,\ndebes retirarte."
+ },
+ "fa1r1021#18": {
+  "hash": "d6fe12a0846ead87",
+  "es": "No, simplemente lo destruiré."
+ },
+ "fa1r1021#19": {
+  "hash": "ae0b4f590ea831e2",
+  "es": "No los subestimes\no acabarás muerta."
+ },
+ "fa1r1021#2": {
+  "hash": "35a9be9919e3622b",
+  "es": "¡No...!"
+ },
+ "fa1r1021#20": {
+  "hash": "12f156f586c6b737",
+  "es": "Eso es lo que estoy esperando."
+ },
+ "fa1r1021#21": {
+  "hash": "66896bac2d6879f5",
+  "es": "Buenos días. Sistema listo\npara operaciones de combate."
+ },
+ "fa1r1021#3": {
+  "hash": "381f0031c0e554a1",
+  "es": "Qué buenos amigos tienes,\n¿verdad, chico de los Enders?"
+ },
+ "fa1r1021#4": {
+  "hash": "ae059ea05f954a08",
+  "es": "¿Y ahora qué vas a hacer?"
+ },
+ "fa1r1021#5": {
+  "hash": "658fb971562354d7",
+  "es": "¿Vas a escapar\ntú solo?"
+ },
+ "fa1r1021#6": {
+  "hash": "b91cf74a27fb48e8",
+  "es": "¿O me vas a dar un puñetazo\npara salvar a tus amigos?"
+ },
+ "fa1r1021#7": {
+  "hash": "0584bd2dc027d447",
+  "es": "Supongo que lo has pasado mal."
+ },
+ "fa1r1021#8": {
+  "hash": "b499dd7eab93e686",
+  "es": "Si desaparecen, al menos ya no\npodrán burlarse de ti."
+ },
+ "fa1r1021#9": {
+  "hash": "644fa5acf31077c1",
+  "es": "¡Socorro!"
+ },
+ "fa2a1a41#0": {
+  "hash": "42807eacfd6fff97",
+  "es": "¡Uaaaa!"
+ },
+ "fa2a1a41#1": {
+  "hash": "1ff386e9c0ab3503",
+  "es": "¿Qué?\n¿El piloto es un niño?"
+ },
+ "fa2a1a61#0": {
+  "hash": "1e247cbc6ebf5d7c",
+  "es": "Hay otro servidor local\nen esta zona."
+ },
+ "fa2a1a61#1": {
+  "hash": "28a417593b0dddd2",
+  "es": "Obtenga de él el módulo\nde modo de vuelo."
+ },
+ "fa2a1a81#0": {
+  "hash": "25ca267f7437a069",
+  "es": "¿No va a salir\nde esta zona?"
+ },
+ "fa2a2a81#0": {
+  "hash": "216d691ed2dc01fe",
+  "es": "Destruya el frame enemigo\nque tiene el código de acceso."
+ },
+ "fa2a2a82#0": {
+  "hash": "2e0ac44daeacf097",
+  "es": "Diríjase al servidor local."
+ },
+ "fa2c1221#0": {
+  "hash": "b38b27716a79bb55",
+  "es": "Ah... ah..."
+ },
+ "fa2c1221#1": {
+  "hash": "a91bd6b2f431bc85",
+  "es": "El objetivo ha desaparecido."
+ },
+ "fa2c1221#2": {
+  "hash": "a6f4917642435caf",
+  "es": "No detecto ningún\nsigno vital."
+ },
+ "fa2c1221#3": {
+  "hash": "e5af647ff29e0220",
+  "es": "¿Quieres decir...\nque todos están muertos?"
+ },
+ "fa2c1221#4": {
+  "hash": "972a7a100edc6ae0",
+  "es": "Correcto.\nBuen trabajo, señor."
+ },
+ "fa2c1301#0": {
+  "hash": "aea33c7e53d498f6",
+  "es": "Su estado mental ha\nalcanzado un nivel de menos 8."
+ },
+ "fa2c1301#1": {
+  "hash": "f1211eb863c3e1b0",
+  "es": "Su capacidad de combate se verá\nmuy afectada en este nivel."
+ },
+ "fa2c1301#2": {
+  "hash": "6c771993e558873e",
+  "es": "Le aconsejo que tome medicación\npara estabilizar su estado."
+ },
+ "fa2c1301#3": {
+  "hash": "f1081f33e1ddb3b7",
+  "es": "Repito."
+ },
+ "fa2c1301#4": {
+  "hash": "e0a1e1563a1fd409",
+  "es": "Su estado mental\nestá empeorando."
+ },
+ "fa2c1302#0": {
+  "hash": "1b9d6092d98fec8b",
+  "es": "Se está recibiendo un mensaje\nde una emisora comercial."
+ },
+ "fa2c1302#1": {
+  "hash": "6026c0bfacdff7ea",
+  "es": "Le paso la comunicación."
+ },
+ "fa2c1303#0": {
+  "hash": "a775035e315db07b",
+  "es": "Escúchame, chico."
+ },
+ "fa2c1303#1": {
+  "hash": "716ad4b4a16e7ff5",
+  "es": "He visto en mi monitor\ntodo lo que has hecho."
+ },
+ "fa2c1303#10": {
+  "hash": "12af8f8cd5b674db",
+  "es": "¿Puedes llevar ese\nOrbital Frame a nuestra base?"
+ },
+ "fa2c1303#11": {
+  "hash": "39e31dcea87b0040",
+  "es": "....¿Qué?"
+ },
+ "fa2c1303#12": {
+  "hash": "91aca6eb45c3e038",
+  "es": "Somos una empresa civil\nde transporte"
+ },
+ "fa2c1303#13": {
+  "hash": "0b2794e7f500723a",
+  "es": "y nos han encargado"
+ },
+ "fa2c1303#14": {
+  "hash": "ba1bd11dd7230d7b",
+  "es": "llevar ese Orbital Frame,\nJehuty, a Marte."
+ },
+ "fa2c1303#15": {
+  "hash": "a892b8b657c045dd",
+  "es": "¿No viste a nadie\nde los nuestros"
+ },
+ "fa2c1303#16": {
+  "hash": "e2bf4920189cdcab",
+  "es": "cerca de Jehuty?"
+ },
+ "fa2c1303#17": {
+  "hash": "59a699bafc8599fd",
+  "es": "No lo sé."
+ },
+ "fa2c1303#18": {
+  "hash": "316bb17fe120be24",
+  "es": "Alan tenía que estar allí."
+ },
+ "fa2c1303#19": {
+  "hash": "b56a7875e6076e38",
+  "es": "Es el Frame Runner\nque enviamos."
+ },
+ "fa2c1303#2": {
+  "hash": "13382e4ed5bb4e86",
+  "es": "También sé que solo eres\nun civil menor de edad"
+ },
+ "fa2c1303#20": {
+  "hash": "b0add6ac3c967b9d",
+  "es": "He dicho que no lo sé,\n¿no?"
+ },
+ "fa2c1303#21": {
+  "hash": "fdb9f4eebc989281",
+  "es": "Cuando llegué,\nya estaban todos muertos."
+ },
+ "fa2c1303#22": {
+  "hash": "bc68140d11da069f",
+  "es": "Ya veo. Él tenía que\npilotar ese frame."
+ },
+ "fa2c1303#23": {
+  "hash": "a7bef94096358295",
+  "es": "Ahora necesitamos tu ayuda."
+ },
+ "fa2c1303#24": {
+  "hash": "322b00ca61fc6883",
+  "es": "Sé que puedes hacerlo.\nAyúdanos, por favor."
+ },
+ "fa2c1303#26": {
+  "hash": "4f6fa4970119cd06",
+  "es": "Claro, te hablo de negocios."
+ },
+ "fa2c1303#27": {
+  "hash": "cb586c54cc5a450f",
+  "es": "Te pagaremos por las molestias,"
+ },
+ "fa2c1303#28": {
+  "hash": "f4073cfcb8afb651",
+  "es": "lo suficiente para que\npuedas vivir donde quieras:"
+ },
+ "fa2c1303#29": {
+  "hash": "33cdb86c6bc554ac",
+  "es": "la Tierra, Marte,\ndonde sea. ¡Por favor!"
+ },
+ "fa2c1303#3": {
+  "hash": "abd95a8cf566bec9",
+  "es": "y que has hecho todo esto."
+ },
+ "fa2c1303#30": {
+  "hash": "16c3178502c42eb6",
+  "es": "No, no quiero."
+ },
+ "fa2c1303#31": {
+  "hash": "74553bf9e172dfe4",
+  "es": "Escucha..."
+ },
+ "fa2c1303#32": {
+  "hash": "de89d860f4b10e60",
+  "es": "¡No, escucha tú!\nPodrían volver a atacarme"
+ },
+ "fa2c1303#33": {
+  "hash": "d9a0d6effc44e626",
+  "es": "¿y quién demonios\neres tú, además?"
+ },
+ "fa2c1303#34": {
+  "hash": "b6368347d054ee0c",
+  "es": "¿Por qué quieres tanto\nesta máquina?"
+ },
+ "fa2c1303#35": {
+  "hash": "e229f6a40d409411",
+  "es": "Luchaste bien."
+ },
+ "fa2c1303#36": {
+  "hash": "7f53ebdf783e66f6",
+  "es": "Solo te pedimos\nun poco más de ayuda."
+ },
+ "fa2c1303#37": {
+  "hash": "94067c4629582557",
+  "es": "Por favor."
+ },
+ "fa2c1303#38": {
+  "hash": "692e9872ee9de0e8",
+  "es": "¿Supongo que quieres\nque vuelva a matar?"
+ },
+ "fa2c1303#39": {
+  "hash": "b4a2ee74f2b262ad",
+  "es": "Bueno..."
+ },
+ "fa2c1303#4": {
+  "hash": "d265bef35fbe9abc",
+  "es": "...Pero... no tenía\notra opción..."
+ },
+ "fa2c1303#40": {
+  "hash": "974d333f29ea0f1e",
+  "es": "No quiero tener nada más\nque ver con vosotros."
+ },
+ "fa2c1303#41": {
+  "hash": "2da22fa27ad37c81",
+  "es": "Id a matar o haced\nlo que queráis,"
+ },
+ "fa2c1303#42": {
+  "hash": "f423b8138ce1fdbe",
+  "es": "pero a mí dejadme fuera."
+ },
+ "fa2c1303#44": {
+  "hash": "a35ebc0bc1984d04",
+  "es": "Tengo que irme."
+ },
+ "fa2c1303#45": {
+  "hash": "b94a71c7cafb03d9",
+  "es": "¡Entonces morirá\nmucha más gente!"
+ },
+ "fa2c1303#47": {
+  "hash": "da2b132d217c0eb1",
+  "es": "¡Morirán todos!"
+ },
+ "fa2c1303#48": {
+  "hash": "84747a9e1af2f0f1",
+  "es": "¡Tus amigos, tu familia,\ntodos y cada uno de ellos!"
+ },
+ "fa2c1303#5": {
+  "hash": "bcd4509043358d4e",
+  "es": "Tenía tanto miedo...\nNo pude evitarlo."
+ },
+ "fa2c1303#50": {
+  "hash": "3efc6f936b6e9b87",
+  "es": "No podemos dejar que\nse hagan con Jehuty."
+ },
+ "fa2c1303#51": {
+  "hash": "7c49bbee72c2d500",
+  "es": "Si lo consiguen, será\nel fin de esta colonia,"
+ },
+ "fa2c1303#52": {
+  "hash": "2090732d8ee5fc60",
+  "es": "no... puede que sea el fin de\nla civilización tal como la conocemos."
+ },
+ "fa2c1303#54": {
+  "hash": "4a09dfa0e7ac96e2",
+  "es": "Por favor, tienes que ayudarnos..."
+ },
+ "fa2c1303#6": {
+  "hash": "7110e11db272e9f6",
+  "es": "No te estoy acusando\nde nada."
+ },
+ "fa2c1303#7": {
+  "hash": "8e8b3c595724b313",
+  "es": "Has demostrado que sabes\nmanejar el sistema."
+ },
+ "fa2c1303#9": {
+  "hash": "aa40ccb340f50e4d",
+  "es": "Escucha, tengo que pedirte\nque hagas algo por nosotros."
+ },
+ "fa2c1304#1": {
+  "hash": "6ccc84b5aa7214eb",
+  "es": "He visto en mi monitor\ntodo lo que has hecho."
+ },
+ "fa2c1304#10": {
+  "hash": "9d514a10e821d90c",
+  "es": "Jehuty, a Marte."
+ },
+ "fa2c1304#11": {
+  "hash": "28f8b0024851d905",
+  "es": "¿No viste a nadie de los nuestros\ncerca de Jehuty?"
+ },
+ "fa2c1304#13": {
+  "hash": "98ab25bf368856e9",
+  "es": "Alan tenía que estar allí.\nEs el Frame Runner que enviamos."
+ },
+ "fa2c1304#14": {
+  "hash": "4c70c3a8c3d65b31",
+  "es": "He dicho que no lo sé, ¿no?\nCuando llegué, ya estaban todos muertos."
+ },
+ "fa2c1304#15": {
+  "hash": "baeaa6f7523c2045",
+  "es": "Ya veo. Él tenía que pilotar ese frame.\nAhora necesitamos tu ayuda."
+ },
+ "fa2c1304#18": {
+  "hash": "1ac123abf51a9ee9",
+  "es": "Te pagaremos por las molestias, lo\nsuficiente para que vivas donde quieras:"
+ },
+ "fa2c1304#19": {
+  "hash": "80aadc798cc3e68e",
+  "es": "la Tierra, Marte, donde sea.\n¡Por favor!"
+ },
+ "fa2c1304#2": {
+  "hash": "5446342630377682",
+  "es": "También sé que solo eres un civil menor\nde edad y que has hecho todo esto."
+ },
+ "fa2c1304#22": {
+  "hash": "3338d002ba7303bf",
+  "es": "¡No, escucha tú!"
+ },
+ "fa2c1304#23": {
+  "hash": "28c6c1b63aed4efb",
+  "es": "Podrían volver a atacarme ¿y quién\ndemonios eres tú, además?"
+ },
+ "fa2c1304#24": {
+  "hash": "dae5b48602c83d0e",
+  "es": "¿Por qué quieres tanto\nesta máquina?"
+ },
+ "fa2c1304#30": {
+  "hash": "ed609aad60f69de8",
+  "es": "No quiero tener nada más que ver con vosotros."
+ },
+ "fa2c1304#31": {
+  "hash": "166444496d84dbaf",
+  "es": "Id a matar o haced lo que queráis,\npero a mí dejadme fuera."
+ },
+ "fa2c1304#35": {
+  "hash": "cc16c6f96d8e724b",
+  "es": "¡Morirán todos! ¡Tus amigos, tu familia,\ntodos y cada uno de ellos!"
+ },
+ "fa2c1304#37": {
+  "hash": "f21b8e78d78cae82",
+  "es": "Si lo consiguen, será\nel fin de esta colonia..."
+ },
+ "fa2c1304#38": {
+  "hash": "519eec9a9fd0327b",
+  "es": "no... puede que sea el fin de\nla civilización tal como la conocemos."
+ },
+ "fa2c1304#40": {
+  "hash": "14e65b21616bcf9f",
+  "es": "\"¡¡Muévete, Leo!!\""
+ },
+ "fa2c1304#41": {
+  "hash": "6179b783eaba6021",
+  "es": "\"¡Ayúdanos, Leo!\""
+ },
+ "fa2c1304#42": {
+  "hash": "7c064116224b0220",
+  "es": "Dices que puedo, pero ¿cómo?"
+ },
+ "fa2c1304#43": {
+  "hash": "92fe84b9bd623573",
+  "es": "No sé pilotar este trasto."
+ },
+ "fa2c1304#44": {
+  "hash": "a0d47a790541b160",
+  "es": "Sí que sabes. Te vi hacerlo\ny sé que puedes volver a hacerlo."
+ },
+ "fa2c1304#45": {
+  "hash": "13ca1c6e0bbe172d",
+  "es": "\"¡¡Leo...!!\""
+ },
+ "fa2c1304#46": {
+  "hash": "ada7a05462432390",
+  "es": "Por favor... Ayúdanos."
+ },
+ "fa2c1304#47": {
+  "hash": "d621389c15c18f81",
+  "es": "Está bien, lo haré,\npero solo esta vez."
+ },
+ "fa2c1304#48": {
+  "hash": "26246a0ac7fa54a5",
+  "es": "Pero es lo único que haré."
+ },
+ "fa2c1304#49": {
+  "hash": "7b5355562391188a",
+  "es": "De acuerdo. Es lo único que pedimos."
+ },
+ "fa2c1304#5": {
+  "hash": "dc3f005302c7cb5a",
+  "es": "No te estoy acusando de nada. Has\ndemostrado que sabes manejar el sistema."
+ },
+ "fa2c1304#50": {
+  "hash": "b98907aea125af89",
+  "es": "Vale, si tú lo dices."
+ },
+ "fa2c1304#51": {
+  "hash": "4015692be35914fe",
+  "es": "Gracias..."
+ },
+ "fa2c1304#52": {
+  "hash": "7eeaa75642d7e659",
+  "es": "¡Pero quiero que recuerdes\nuna cosa!"
+ },
+ "fa2c1304#53": {
+  "hash": "611e8daa49569118",
+  "es": "Nunca os ayudaré\na matar a nadie."
+ },
+ "fa2c1304#54": {
+  "hash": "5e01bba654b1b7bc",
+  "es": "Puede que matar os parezca bien a vosotros,\npero... a mí no."
+ },
+ "fa2c1304#55": {
+  "hash": "1d50d3164ce80770",
+  "es": "Lo entiendo."
+ },
+ "fa2c1304#56": {
+  "hash": "053e02219c73293a",
+  "es": "Entonces tenemos un trato."
+ },
+ "fa2c1304#57": {
+  "hash": "7a7978b5b56ff325",
+  "es": "El responsable va hacia ti\nahora mismo."
+ },
+ "fa2c1304#58": {
+  "hash": "2db08cc60b466b10",
+  "es": "No consigo contactar con él, pero\nte avisaré en cuanto lo haga."
+ },
+ "fa2c1304#59": {
+  "hash": "80331560eb2ea09a",
+  "es": "¡Ah! ¿Cómo te llamas?"
+ },
+ "fa2c1304#60": {
+  "hash": "a5abcdb4bb61f003",
+  "es": "Leo."
+ },
+ "fa2c1304#61": {
+  "hash": "aec245f9376dbe72",
+  "es": "Vale, Leo. Soy Elena Weinberg,\nsegunda al mando del Atlantis."
+ },
+ "fa2c1304#62": {
+  "hash": "a49b1a45871e74ee",
+  "es": "Llámame Elena."
+ },
+ "fa2c1304#63": {
+  "hash": "275353006f844a41",
+  "es": "De verdad puedo confiar en ti,\n¿no?"
+ },
+ "fa2c1304#64": {
+  "hash": "50d48432688b8c27",
+  "es": "Bueno, no matamos indiscriminadamente\ncomo pareces creer."
+ },
+ "fa2c1304#65": {
+  "hash": "6d6c964480647637",
+  "es": "Vale, hasta luego."
+ },
+ "fa2c1304#7": {
+  "hash": "eb55e3dd736b72a7",
+  "es": "¿Puedes llevar ese Orbital Frame\na nuestra base?"
+ },
+ "fa2c1304#8": {
+  "hash": "5adda7ddb246e6f4",
+  "es": "...¿Qué?"
+ },
+ "fa2c1304#9": {
+  "hash": "e53b0e251c44f7f2",
+  "es": "Somos una empresa civil de transporte y nos\nhan encargado llevar ese Orbital Frame,"
+ },
+ "fa2c1341#0": {
+  "hash": "72c56bdd9fef3cf3",
+  "es": "No es... no es mi problema..."
+ },
+ "fa2c1341#1": {
+  "hash": "d0c1bb2b963ad829",
+  "es": "¿No lo entiendes?"
+ },
+ "fa2c1341#2": {
+  "hash": "036c4b24cbeb86c1",
+  "es": "Estás a punto de darle la espalda\na algo"
+ },
+ "fa2c1341#3": {
+  "hash": "0f636ebd6e49e81b",
+  "es": "que sé que puedes hacer."
+ },
+ "fa2c1351#0": {
+  "hash": "d0d85234d6790952",
+  "es": "Dices que puedo, pero ¿cómo?\nNo sé pilotar este trasto."
+ },
+ "fa2c1381#10": {
+  "hash": "7340969a7f2b7941",
+  "es": "Lo entiendo.\nEntonces tenemos un trato."
+ },
+ "fa2c1381#11": {
+  "hash": "a1d24e0fe729bd23",
+  "es": "El responsable\nva hacia ti ahora mismo."
+ },
+ "fa2c1381#12": {
+  "hash": "a41ebc4ec65ccac7",
+  "es": "No consigo contactar con él,"
+ },
+ "fa2c1381#13": {
+  "hash": "e684dba75cb319ee",
+  "es": "pero te avisaré\nen cuanto lo haga."
+ },
+ "fa2c1381#16": {
+  "hash": "dc4cd6f2f61d40d6",
+  "es": "Vale, Leo.\nSoy Elena Weinberg,"
+ },
+ "fa2c1381#17": {
+  "hash": "b7d8339838f15aef",
+  "es": "segunda al mando del Atlantis."
+ },
+ "fa2c1381#20": {
+  "hash": "ee787c62b84e320d",
+  "es": "Bueno, no matamos\nindiscriminadamente"
+ },
+ "fa2c1381#21": {
+  "hash": "24f9402dab61e059",
+  "es": "como pareces creer."
+ },
+ "fa2c1381#6": {
+  "hash": "2ce57cd0192e7f41",
+  "es": "¡Pero quiero que\nrecuerdes una cosa!"
+ },
+ "fa2c1381#8": {
+  "hash": "ae15eb891db5fbcf",
+  "es": "Puede que matar\nos parezca bien a vosotros,"
+ },
+ "fa2c1381#9": {
+  "hash": "c9d9f9180276bbe4",
+  "es": "pero... a mí no."
+ },
+ "fa2c1401#0": {
+  "hash": "263a8bbf983cfbf3",
+  "es": "Le explicaré el\nplan de misión."
+ },
+ "fa2c1401#1": {
+  "hash": "4fe428d0ea11b7ff",
+  "es": "La misión es llevar este Jehuty a Marte\ncomo preparación para una batalla en Marte."
+ },
+ "fa2c1401#10": {
+  "hash": "8a5586d6618eeab7",
+  "es": "Le indicaré el servidor local\ncon un marcador."
+ },
+ "fa2c1401#11": {
+  "hash": "e1cb3205268c8472",
+  "es": "Diríjase\na esa ubicación."
+ },
+ "fa2c1401#2": {
+  "hash": "e7dc832c92b09851",
+  "es": "Primero tenemos que reunirnos con\nel carguero civil Atlantis"
+ },
+ "fa2c1401#3": {
+  "hash": "f6c59ad1d7bce6cf",
+  "es": "y abandonar la colonia Antilia."
+ },
+ "fa2c1401#4": {
+  "hash": "b2b3c4e8e7c3e148",
+  "es": "Sin embargo, Jehuty acaba\nde pasar una revisión completa"
+ },
+ "fa2c1401#5": {
+  "hash": "6b87021f72e43147",
+  "es": "y por eso solo tiene las capacidades\nmínimas del sistema."
+ },
+ "fa2c1401#6": {
+  "hash": "78f9dc615ea4d372",
+  "es": "Las capacidades de Jehuty dependerán"
+ },
+ "fa2c1401#7": {
+  "hash": "9a98b0612d7728e1",
+  "es": "de cuántos módulos funcionales\npodamos instalar."
+ },
+ "fa2c1401#8": {
+  "hash": "f6140b624d98c17c",
+  "es": "Antes que nada, tenemos que trasplantar\nlos módulos necesarios"
+ },
+ "fa2c1401#9": {
+  "hash": "26a5c9976e2591e6",
+  "es": "desde el servidor local\nde esta zona."
+ },
+ "fa2c1411#0": {
+  "hash": "451df78405f87044",
+  "es": "Este servidor local es distinto."
+ },
+ "fa2c1411#1": {
+  "hash": "59650d65ff81e21c",
+  "es": "Hay un servidor local similar en el tejado\ndel hangar gigante donde estaba Jehuty,"
+ },
+ "fa2c1411#2": {
+  "hash": "2b37629b834c36cb",
+  "es": "en el centro de la zona industrial.\nDiríjase allí."
+ },
+ "fa2c1421#0": {
+  "hash": "08cec7b775f5537d",
+  "es": "Hemos obtenido el\nmódulo de modo de exploración."
+ },
+ "fa2c1421#1": {
+  "hash": "72b11b81eef82c35",
+  "es": "Nos permite luchar contra\nvarios enemigos a la vez."
+ },
+ "fa2c1421#2": {
+  "hash": "e5a91421f270f95e",
+  "es": "Se ha añadido una nueva operación\nrelacionada con la fijación."
+ },
+ "fa2c1421#3": {
+  "hash": "4842f06bba5c9c1d",
+  "es": "Abriré una ventana\npara explicar su funcionamiento."
+ },
+ "fa2c1441#0": {
+  "hash": "137288bf2eb109a1",
+  "es": "El módulo que hemos obtenido\nnos permite abrir"
+ },
+ "fa2c1441#1": {
+  "hash": "d30691f72f7f01e5",
+  "es": "el menú de comandos\npulsando el botón START."
+ },
+ "fa2c1441#2": {
+  "hash": "dbf5470a52b9c134",
+  "es": "Puede guardar el estado actual eligiendo\nguardar en el menú de comandos."
+ },
+ "fa2c1481#0": {
+  "hash": "f943fa568aca0d0a",
+  "es": "Evitemos combates\ninnecesarios."
+ },
+ "fa2c1481#3": {
+  "hash": "d51e2da17a77652a",
+  "es": "Pulse el botón START para ver su ubicación\nen el mapa de radar de largo alcance."
+ },
+ "fa2c1481#4": {
+  "hash": "4f9a63bbec883c5e",
+  "es": "La luz verde indica\nel servidor local."
+ },
+ "fa2c1501#0": {
+  "hash": "2fef0b52e62c95d5",
+  "es": "¿Qué pasa?\nNo puedo acceder."
+ },
+ "fa2c1501#1": {
+  "hash": "aaad93cd188a6a28",
+  "es": "Ya lo veo."
+ },
+ "fa2c1501#2": {
+  "hash": "57c4dd2cfbee5306",
+  "es": "Parece que el enemigo\nlo ha bloqueado."
+ },
+ "fa2c1501#3": {
+  "hash": "4698879693a603e8",
+  "es": "Tendremos que obtener el código\nde acceso para desbloquearlo."
+ },
+ "fa2c1501#4": {
+  "hash": "bb04e755aa124614",
+  "es": "¿Dónde podemos conseguirlo?"
+ },
+ "fa2c1501#5": {
+  "hash": "535aeaecdb2356f0",
+  "es": "Supongo que el enemigo que lo\nbloqueó se lo llevó consigo."
+ },
+ "fa2c1501#6": {
+  "hash": "e19f944d9c6fa560",
+  "es": "Tendremos que\nquitárselo a él."
+ },
+ "fa2c1521#0": {
+  "hash": "4570e162e28e2cd6",
+  "es": "Hemos obtenido el\nmódulo de modo de vuelo."
+ },
+ "fa2c1521#1": {
+  "hash": "30d2f3f40c5cbc97",
+  "es": "Nos permite desplazarnos\na otras zonas"
+ },
+ "fa2c1521#2": {
+  "hash": "44d53b687e2acdd4",
+  "es": "eligiendo cambio de zona\nen el menú de comandos."
+ },
+ "fa2c2461#0": {
+  "hash": "60cb09cb3134b753",
+  "es": "Ahora iremos al servidor local para\ntrasplantar la información necesaria."
+ },
+ "fa2c2461#1": {
+  "hash": "874fcdac34c9891d",
+  "es": "Pero primero hay que destruir al enemigo\nque tiene el código del servidor local."
+ },
+ "fa2c2461#2": {
+  "hash": "10e10b110fe93b0b",
+  "es": "Entiendo."
+ },
+ "fa2c2461#3": {
+  "hash": "4c16afceea31c457",
+  "es": "Los frames marcados con una\nestrella son los líderes."
+ },
+ "fa2c2461#4": {
+  "hash": "386cc6995eb51e4a",
+  "es": "Destruir primero al líder bajará\nel nivel de todo el grupo."
+ },
+ "fa2c2481#0": {
+  "hash": "a855716023136e7b",
+  "es": "Le daré las instrucciones\nde la siguiente misión."
+ },
+ "fa2c2481#1": {
+  "hash": "df283a0fc3dd347a",
+  "es": "Abandone la zona industrial."
+ },
+ "fa2g1183#0": {
+  "hash": "895565fec11540fe",
+  "es": "He detectado un Orbital Frame de tipo C\ndelante de nuestra posición."
+ },
+ "fa2g1183#1": {
+  "hash": "5c473e2699cfc445",
+  "es": "Es distinto de los que\nhemos visto hasta ahora."
+ },
+ "fa2g1183#2": {
+  "hash": "80b3d1e38b9f13ea",
+  "es": "Tenga cuidado, por favor."
+ },
+ "fa2g1184#0": {
+  "hash": "f8f0d4bad093dd29",
+  "es": "Te encontré.\n¡Prepárate!"
+ },
+ "fa2g1201#0": {
+  "hash": "51f78402a9f6fc3b",
+  "es": "¡Maldición! ¡He sido muy descuidada!"
+ },
+ "fa2g1201#1": {
+  "hash": "cf146696c7ced677",
+  "es": "¡Viola, retírate ahora mismo!"
+ },
+ "fa2g1201#2": {
+  "hash": "9be4cde65049509f",
+  "es": "¿Qué? ¿Estás loco?\nSolo es un crío."
+ },
+ "fa2g1201#3": {
+  "hash": "19a24091bea85b8d",
+  "es": "¡Puedo encargarme de él\nincluso sin armas!"
+ },
+ "fa2g1201#4": {
+  "hash": "97dac00974b3de46",
+  "es": "Repito. ¡Retírate ahora mismo!"
+ },
+ "fa2g1201#5": {
+  "hash": "f44c400f0685e7df",
+  "es": "Tienes otras cosas que hacer,\n¿no?"
+ },
+ "fa2g1201#6": {
+  "hash": "beb3b0d8c99c69db",
+  "es": "Esta vez me has dejado en ridículo,\nasí que espera a la próxima."
+ },
+ "fa2g1201#7": {
+  "hash": "c8b0206456bf638e",
+  "es": "¡Hasta la vista, chico!"
+ },
+ "fa2g1261#0": {
+  "hash": "204eebe8f52b3769",
+  "es": "Aquí Nohman a todas las unidades.\nInformad de vuestro estado."
+ },
+ "fa2g1261#1": {
+  "hash": "18c98f4fca001315",
+  "es": "Aquí Slash. He llegado al Sector 03.\nEmpiezo a destruir los edificios cercanos."
+ },
+ "fa2g1261#2": {
+  "hash": "954969522267a404",
+  "es": "Aquí Nightraid.\nYo también he llegado al Sector 05."
+ },
+ "fa2g1261#3": {
+  "hash": "872221f64fb4fbb5",
+  "es": "¿Espero aquí sin más?"
+ },
+ "fa2g1261#4": {
+  "hash": "12ec986e15b2b713",
+  "es": "Sí, correcto."
+ },
+ "fa2g1261#5": {
+  "hash": "5aaf31247bf585c4",
+  "es": "Viola,\ninforma de tu estado."
+ },
+ "fa2g1261#6": {
+  "hash": "e6ae3303d27bfd6f",
+  "es": "....No hace falta.\nYa sabes lo que ha pasado."
+ },
+ "fa2g1261#7": {
+  "hash": "05eee972c2ee2734",
+  "es": "No seas tan dura.\nYa te llegará tu turno."
+ },
+ "fa2g1261#8": {
+  "hash": "c6cc61e6418b075d",
+  "es": "Ten paciencia."
+ },
+ "fa2g1461#0": {
+  "hash": "476193cb6785f0b9",
+  "es": "Nuevos enemigos..."
+ },
+ "fa2r1185#0": {
+  "hash": "a6276a0cd6e45fea",
+  "es": "Je, je, je..."
+ },
+ "fa2r1303#0": {
+  "hash": "aa09bb9d9a31c409",
+  "es": "Aquí el Atlantis."
+ },
+ "fa2r1303#1": {
+  "hash": "1fff20faa1128bf7",
+  "es": "Quien esté a bordo de Jehuty,\n¿me recibes?"
+ },
+ "fa2r1303#2": {
+  "hash": "e97069d3c2a4f92c",
+  "es": "Persona no identificada a bordo\nde Jehuty, ¿me recibes?"
+ },
+ "fa2r1303#3": {
+  "hash": "668e66052120e816",
+  "es": "Puedo entender\ncómo te sientes."
+ },
+ "fb1c5201#0": {
+  "hash": "77707831e33acba6",
+  "es": "Así que este es el hogar de ADA..."
+ },
+ "fb1c5201#1": {
+  "hash": "358359cb02a81a64",
+  "es": "Parece que aquí hay un\nservidor local."
+ },
+ "fb1c5201#2": {
+  "hash": "6ecf2acb8f887eae",
+  "es": "Sí.\nOjalá puedan arreglar a ADA."
+ },
+ "fb1c5241#0": {
+  "hash": "d5d2efbdb4b1545a",
+  "es": "Iniciaré la recuperación\ndel sistema ADA."
+ },
+ "fb1c5241#1": {
+  "hash": "99a4a708c04480c9",
+  "es": "¿Puedes hacerlo?"
+ },
+ "fb1c5241#10": {
+  "hash": "01747b95c32b72b4",
+  "es": "Ya estás bien, qué alegría."
+ },
+ "fb1c5241#11": {
+  "hash": "1b77cc511a6218b7",
+  "es": "Ya he eliminado los\nmódulos infectados."
+ },
+ "fb1c5241#12": {
+  "hash": "6817085bd0d2fa22",
+  "es": "Siento las molestias."
+ },
+ "fb1c5241#13": {
+  "hash": "bb9248b97d6c738f",
+  "es": "¿Qué has dicho?"
+ },
+ "fb1c5241#14": {
+  "hash": "447c699c29e0ac94",
+  "es": "Repito.\nSiento las molestias."
+ },
+ "fb1c5241#15": {
+  "hash": "deb0900473494474",
+  "es": "No pasa nada."
+ },
+ "fb1c5241#16": {
+  "hash": "b883098f4d0e56d0",
+  "es": "Continuemos con la misión."
+ },
+ "fb1c5241#2": {
+  "hash": "fef59040710e9a65",
+  "es": "Recuperación completa."
+ },
+ "fb1c5241#3": {
+  "hash": "1a8823a69b7e763b",
+  "es": "Vuelvo a tomar el control\nde Jehuty."
+ },
+ "fb1c5241#4": {
+  "hash": "82782689a2915860",
+  "es": "...¿ADA?"
+ },
+ "fb1c5241#5": {
+  "hash": "a721a95578dab8bd",
+  "es": "¿Sí?"
+ },
+ "fb1c5241#6": {
+  "hash": "618685cd1e67b886",
+  "es": "¿Ya vuelves a ser la de siempre?"
+ },
+ "fb1c5241#7": {
+  "hash": "fab07194ce80df45",
+  "es": "Me resulta difícil\nhacer ese juicio."
+ },
+ "fb1c5241#8": {
+  "hash": "788c27b23a6aae6a",
+  "es": "Si me pregunta si ya no hay\nningún problema con el virus,"
+ },
+ "fb1c5241#9": {
+  "hash": "01f67fdaddbe3c0f",
+  "es": "la respuesta sería sí."
+ },
+ "fb1c5461#0": {
+  "hash": "16641610a9b373a0",
+  "es": "Hemos obtenido un controlador\ndel dispositivo Decoy."
+ },
+ "fb1c5461#1": {
+  "hash": "34d068920dd2a45f",
+  "es": "¿Qué es un Decoy?"
+ },
+ "fb1c5461#2": {
+  "hash": "2efb85c13a530c99",
+  "es": "Es una función que crea una imagen\nelectrónica temporal de Jehuty."
+ },
+ "fb1c5461#3": {
+  "hash": "9ffd224dd6bb0960",
+  "es": "Nos permite escapar de muchos\nenemigos que usan sensores."
+ },
+ "fb1c5461#4": {
+  "hash": "043305405b5156b7",
+  "es": "¿Quieres decir que podemos escapar\nde ese enemigo gigante que vimos?"
+ },
+ "fb1c5461#5": {
+  "hash": "4da5f3a21a5de4b9",
+  "es": "No es seguro, pero quizá\npodamos luchar contra él."
+ },
+ "fb1c5461#6": {
+  "hash": "390e1cf4194ee542",
+  "es": "Vale...\nIntentémoslo..."
+ },
+ "fb1g5221#0": {
+  "hash": "4b545636aff56aa6",
+  "es": "... ¿Qué ha sido eso?"
+ },
+ "gl1a2a01#0": {
+  "hash": "e65a75d60997857d",
+  "es": "¿No va a ir al bloque\nresidencial S02?"
+ },
+ "gl1a2a61#0": {
+  "hash": "080bfa65b630e6bf",
+  "es": "Para eso hay que volver a la zona\ndonde estaba la fábrica."
+ },
+ "gl1a2a61#1": {
+  "hash": "0e92805f38224fb8",
+  "es": "Una vez allí,"
+ },
+ "gl1a2a61#2": {
+  "hash": "af2908bef021b8c8",
+  "es": "podré trasplantar la información\nnecesaria desde el servidor local."
+ },
+ "gl1a3a01#0": {
+  "hash": "5831b526d47894fc",
+  "es": "Diríjase al bloque D07,\ndonde está el pozo."
+ },
+ "gl1a4a01#0": {
+  "hash": "83db940f3b595c7d",
+  "es": "Se ven dos antenas del EPS\nen las montañas."
+ },
+ "gl1a4a01#1": {
+  "hash": "2ff465725dc7453e",
+  "es": "Acérquese y destrúyalas."
+ },
+ "gl1a4aa1#0": {
+  "hash": "28d97104b39bd184",
+  "es": "¿Dónde hay un Raptor que no\nesté bajo control?"
+ },
+ "gl1a5a21#0": {
+  "hash": "dfa1cdbbc5e3846f",
+  "es": "¿Por qué no vamos a las\ninstalaciones donde crearon a ADA?"
+ },
+ "gl1a5a41#0": {
+  "hash": "4eb077d324fddaaf",
+  "es": "Busquemos los módulos\nfuncionales que nos faltan."
+ },
+ "gl1a5a42#0": {
+  "hash": "5374e4637c43551f",
+  "es": "Diríjase hacia la montaña."
+ },
+ "gl1a6022#0": {
+  "hash": "4a5123847bdcfa79",
+  "es": "¿Ya estás contento?"
+ },
+ "gl1a6022#1": {
+  "hash": "e6aefa04c8a38683",
+  "es": "Solo... estaba jugando..."
+ },
+ "gl1c2021#0": {
+  "hash": "19d04ef16b0084c1",
+  "es": "¡No! ¡Eso es...!"
+ },
+ "gl1c2021#1": {
+  "hash": "0e095b01cf8bcb7e",
+  "es": "Es el bloque residencial S02."
+ },
+ "gl1c2021#2": {
+  "hash": "86a561fba06cc5ab",
+  "es": "Supongo que lo están atacando\nOrbital Frames."
+ },
+ "gl1c2021#3": {
+  "hash": "d9b696cfb3477fb0",
+  "es": "¿El bloque residencial S02?\n¡Ahí es donde vivo!"
+ },
+ "gl1c2361#1": {
+  "hash": "d4e34edc822b138a",
+  "es": "Por ahora no tengo ni idea."
+ },
+ "gl1c2362#0": {
+  "hash": "e122b52c9b9b4594",
+  "es": "Mira..."
+ },
+ "gl1c2362#1": {
+  "hash": "0ca403ffa630e489",
+  "es": "Van en serio con lo de destruir\nla colonia..."
+ },
+ "gl1c2362#2": {
+  "hash": "17ede6ff6c9f6494",
+  "es": "Permítame interrumpir."
+ },
+ "gl1c2362#3": {
+  "hash": "bd05d11e48b77b28",
+  "es": "Tengo que mostrarle\nlas órdenes de nuestra misión."
+ },
+ "gl1c2541#0": {
+  "hash": "9c92672452c775fc",
+  "es": "Veo algo que brilla\nen el cielo."
+ },
+ "gl1c2541#1": {
+  "hash": "dd30986d01d53f81",
+  "es": "Parece algún tipo\nde campo de energía,"
+ },
+ "gl1c2541#2": {
+  "hash": "cdf919a38ba849a0",
+  "es": "pero no puedo definirlo."
+ },
+ "gl1c2541#3": {
+  "hash": "f0a6612d95a57fdd",
+  "es": "Este es el resumen\nde nuestra misión hasta ahora."
+ },
+ "gl1c2541#4": {
+  "hash": "c058c64920f2ec43",
+  "es": "Diríjase directamente\na la fábrica, por favor."
+ },
+ "gl1c2541#5": {
+  "hash": "f62d5a989a206894",
+  "es": "Haré lo que dices."
+ },
+ "gl1c2542#0": {
+  "hash": "f2250b94c2850cfa",
+  "es": "Estos son los últimos titulares."
+ },
+ "gl1c2542#1": {
+  "hash": "298f62a834ef5d71",
+  "es": "Las fuerzas de BAHRAM siguen atacando\nAntilia como parte de su invasión."
+ },
+ "gl1c2542#2": {
+  "hash": "86710e8fe0583ba9",
+  "es": "Los equipos de rescate intentan salvar a\nlos pacientes del hospital destruido,"
+ },
+ "gl1c2542#3": {
+  "hash": "5ea58e9702c5da18",
+  "es": "pero un violento incendio sigue activo y\nles cuesta mucho acceder."
+ },
+ "gl1c2542#4": {
+  "hash": "f227ef3c126e2c48",
+  "es": "Esa pobre gente solo puede esperar\na que la muerte los libere."
+ },
+ "gl1c2542#5": {
+  "hash": "9e8b996f9d4c562c",
+  "es": "Eso es todo por ahora."
+ },
+ "gl1c2543#0": {
+  "hash": "ed65cf4caee04050",
+  "es": "Qué horror..."
+ },
+ "gl1c2543#10": {
+  "hash": "7c67610a5255a240",
+  "es": "Este Orbital Frame y todos a bordo"
+ },
+ "gl1c2543#11": {
+  "hash": "607e83d48cabe5ca",
+  "es": "han recibido órdenes de participar\nen las operaciones en Marte."
+ },
+ "gl1c2543#12": {
+  "hash": "095592fc2c764a75",
+  "es": "Para cumplir nuestra misión no debemos\nemprender ninguna otra actividad."
+ },
+ "gl1c2543#13": {
+  "hash": "50af3b7ebe856cfa",
+  "es": "Ah... Entiendo..."
+ },
+ "gl1c2543#14": {
+  "hash": "9b95a646f0565a6c",
+  "es": "Además, a juzgar por la capacidad\ndel Frame Runner,"
+ },
+ "gl1c2543#15": {
+  "hash": "a0090d20ad3217ec",
+  "es": "el índice de riesgo de una acción\ntan ilógica es muy alto."
+ },
+ "gl1c2543#16": {
+  "hash": "b900f95a9656f188",
+  "es": "ADA, ¿dónde está ese hospital?"
+ },
+ "gl1c2543#18": {
+  "hash": "e101893a1cb5df4d",
+  "es": "Señalaré su ubicación\ncon un marcador."
+ },
+ "gl1c2543#19": {
+  "hash": "bbbf7a9995c07d81",
+  "es": "Pero debo repetirle que"
+ },
+ "gl1c2543#2": {
+  "hash": "0b530e64d986026a",
+  "es": "Oye, Leo...\n¿No puedes ayudar a esa gente?"
+ },
+ "gl1c2543#20": {
+  "hash": "3873e5320f63b484",
+  "es": "no debería emprender acciones ilógicas\nque no tienen relación con su misión."
+ },
+ "gl1c2543#21": {
+  "hash": "8685cc31baa4fc2a",
+  "es": "Sí, ya lo sé.\nSolo preguntaba. Yo también tengo miedo."
+ },
+ "gl1c2543#3": {
+  "hash": "6b1342d8802ac7b6",
+  "es": "¿Cómo?"
+ },
+ "gl1c2543#4": {
+  "hash": "74c545f0e8d1b3dd",
+  "es": "Igual que me ayudaste a mí."
+ },
+ "gl1c2543#5": {
+  "hash": "2c629a6cddd781c9",
+  "es": "¿No puedes hacer lo mismo por ellos?"
+ },
+ "gl1c2543#7": {
+  "hash": "db00f0d9506e69cf",
+  "es": "Como ya le he dicho,"
+ },
+ "gl1c2543#8": {
+  "hash": "df918f8b0ac97dc5",
+  "es": "no debería emprender acciones ilógicas\nque no tienen relación con la misión."
+ },
+ "gl1c2543#9": {
+  "hash": "6fe4fd9546a315f1",
+  "es": "Pero... solo un ratito..."
+ },
+ "gl1c3011#0": {
+  "hash": "1b4d6c11549334a4",
+  "es": "Otra vez no..."
+ },
+ "gl1c3011#1": {
+  "hash": "cf6a5e36948ef0bc",
+  "es": "Le sugiero que se limite\na sus obligaciones."
+ },
+ "gl1c3011#2": {
+  "hash": "4bb4a5c6d78d96d0",
+  "es": "Lo sé, pero..."
+ },
+ "gl1c4001#0": {
+  "hash": "4abb9d9434be4327",
+  "es": "Se ven dos antenas del EPS en\nlas montañas que hay delante."
+ },
+ "gl1c4001#1": {
+  "hash": "a60877e8982fca74",
+  "es": "Ahora podemos acercarnos\ny destruirlas."
+ },
+ "gl1c5091#0": {
+  "hash": "e9128ec7a6217b30",
+  "es": "Oye, Leo."
+ },
+ "gl1c5091#2": {
+  "hash": "50a98b186788fa0e",
+  "es": "Moviste el Orbital Frame\ndel enemigo, ¿verdad?"
+ },
+ "gl1c5091#3": {
+  "hash": "19f2ac96922777d8",
+  "es": "¿Eh? ... Ajá."
+ },
+ "gl1c5091#4": {
+  "hash": "c99719ea4429d79c",
+  "es": "Vi un mensaje extraño en el monitor\nmientras combatíamos."
+ },
+ "gl1c5091#5": {
+  "hash": "11cc8633c2079777",
+  "es": "A lo mejor no te diste cuenta."
+ },
+ "gl1c5091#6": {
+  "hash": "3099b4c29599fdfa",
+  "es": "Espera un momento.\nDéjame comprobarlo."
+ },
+ "gl1c5111#0": {
+  "hash": "d3aac80d7e328fd3",
+  "es": "¿Qué vas a hacer?"
+ },
+ "gl1c5111#1": {
+  "hash": "fe59542f7b039cbf",
+  "es": "No lo sé...\n¡Ah, ya sé!"
+ },
+ "gl1c5111#2": {
+  "hash": "5987b7970fe9d480",
+  "es": "El laboratorio donde crearon\na ADA está cerca de aquí."
+ },
+ "gl1c5111#3": {
+  "hash": "1972a1f0dc854a1d",
+  "es": "Si vamos allí, quizá encontremos\nalgo parecido a una vacuna."
+ },
+ "gl1c5111#4": {
+  "hash": "4da9aa1c0b72ac92",
+  "es": "Leo...\n¿Por qué no vamos allí?"
+ },
+ "gl1c5281#0": {
+  "hash": "b4801923cecb87b3",
+  "es": "Mi análisis de un combate previsto contra\nel Orbital Frame gigante es el siguiente."
+ },
+ "gl1c5281#1": {
+  "hash": "1840b783ed5f62ad",
+  "es": "No tenemos defensa eficaz contra\nlas armas de energía del enemigo."
+ },
+ "gl1c5281#2": {
+  "hash": "50398df3719536b6",
+  "es": "Recomiendo no acercarnos al Orbital Frame\nhasta encontrar una solución."
+ },
+ "gl1c5281#3": {
+  "hash": "ddf82fd237b0b8b1",
+  "es": "¿Alguna buena táctica\nen tu base de datos?"
+ },
+ "gl1c5281#4": {
+  "hash": "8a155a934120dd1b",
+  "es": "Actualmente Jehuty no tiene\ninstalado nada"
+ },
+ "gl1c5281#5": {
+  "hash": "267419cc7ba4e63c",
+  "es": "más allá del conjunto mínimo\nde programas del sistema."
+ },
+ "gl1c5281#6": {
+  "hash": "3cc16edda1905489",
+  "es": "Debería haber más\nmódulos funcionales."
+ },
+ "gl1c5382#0": {
+  "hash": "54d21f6636eadee4",
+  "es": "¡Maldición! ¿Qué hago?"
+ },
+ "gl1c5382#1": {
+  "hash": "1cf091b34881b840",
+  "es": "Está claro que ellos tienen\nel código de acceso..."
+ },
+ "gl1c5382#2": {
+  "hash": "e7e592173303b800",
+  "es": "Ya tomamos el control\nde un objetivo enemigo."
+ },
+ "gl1c5382#3": {
+  "hash": "5edadbae5d434c8b",
+  "es": "Ese objetivo tiene un módulo funcional\npara detectar anomalías del sistema."
+ },
+ "gl1c5382#4": {
+  "hash": "76471a7cc7eab219",
+  "es": "En teoría, podemos acceder a\nla misma función a través de él."
+ },
+ "gl1c6001#0": {
+  "hash": "432817eba184ab69",
+  "es": "Se ha recibido un mensaje\ndel Atlantis."
+ },
+ "gl1c6001#1": {
+  "hash": "ab89eb2f8915e470",
+  "es": "Aquí el Atlantis.\n¿Eres tú, Leo?"
+ },
+ "gl1c6001#2": {
+  "hash": "497786dfc7aaf767",
+  "es": "Eh... sí."
+ },
+ "gl1c6001#3": {
+  "hash": "3e878f864a04eacd",
+  "es": "Acabo de contactar con la persona\na la que entregarás ese Orbital Frame."
+ },
+ "gl1c6001#4": {
+  "hash": "69c4d8abc6343c8f",
+  "es": "Se llama Thunderheart,\nes uno de nuestros compañeros."
+ },
+ "gl1c6001#5": {
+  "hash": "2205e8771c20b8f8",
+  "es": "Te paso con él."
+ },
+ "gl1c6002#0": {
+  "hash": "ce84c073232f6d80",
+  "es": "Probando, probando, ¿Leo?\nAquí Thunderheart."
+ },
+ "gl1c6002#1": {
+  "hash": "172352c11d9e6fb5",
+  "es": "¿Me oyes?"
+ },
+ "gl1c6002#10": {
+  "hash": "7a9fa4e7109ffe64",
+  "es": "Las fuerzas de BAHRAM también vigilan,\nasí que será una misión difícil para ti."
+ },
+ "gl1c6002#11": {
+  "hash": "c17a5bc6402484f3",
+  "es": "Así que..."
+ },
+ "gl1c6002#12": {
+  "hash": "f9018b2374656ba1",
+  "es": "Meteremos a Jehuty en el lanzador lineal\nque une el centro del puerto espacial"
+ },
+ "gl1c6002#13": {
+  "hash": "e399765c1fb5a9e3",
+  "es": "con el anillo exterior\nde la colonia."
+ },
+ "gl1c6002#14": {
+  "hash": "d4e2d671cfca25d1",
+  "es": "La entrada está cerca del almacén\nque hay bajo la zona montañosa."
+ },
+ "gl1c6002#15": {
+  "hash": "fa834d0b23001378",
+  "es": "Tendrás que llegar hasta allí\npor tu cuenta."
+ },
+ "gl1c6002#16": {
+  "hash": "9e63a06746f521d7",
+  "es": "Pero ¿cómo?"
+ },
+ "gl1c6002#17": {
+  "hash": "88e91272d84fbebf",
+  "es": "Debería haber una presa al final\ndel bloque donde estás ahora."
+ },
+ "gl1c6002#18": {
+  "hash": "479dce279681080b",
+  "es": "Bajo esa presa debería haber una zona\nde almacenes para sacar el Metatron."
+ },
+ "gl1c6002#19": {
+  "hash": "d2fbdbd29189cf9e",
+  "es": "Nos veremos allí."
+ },
+ "gl1c6002#2": {
+  "hash": "e253f8a682073791",
+  "es": "Sí, te oigo..."
+ },
+ "gl1c6002#20": {
+  "hash": "2030e59ce7572398",
+  "es": "Supongo que habrá algo de lucha por el camino,\npero, que yo sepa,"
+ },
+ "gl1c6002#21": {
+  "hash": "fb5a0b54c97b5cc8",
+  "es": "es la ruta más segura."
+ },
+ "gl1c6002#22": {
+  "hash": "e7252e57e547af12",
+  "es": "¿Más combates?\n¿Quieres decir que tengo que volver a hacerlo?"
+ },
+ "gl1c6002#23": {
+  "hash": "d07ab8a46c11f642",
+  "es": "Claro.\n¿En qué vas montado?"
+ },
+ "gl1c6002#24": {
+  "hash": "5bcb43ce2164f600",
+  "es": "Es un Orbital Frame de combate, ¿no?"
+ },
+ "gl1c6002#25": {
+  "hash": "956ced4a9f5765a8",
+  "es": "¡Yo no soy como vosotros!"
+ },
+ "gl1c6002#26": {
+  "hash": "7f0a73aa75e30ed8",
+  "es": "¡No creáis que soy un\nasesino como vosotros!"
+ },
+ "gl1c6002#28": {
+  "hash": "799c268acd790fe3",
+  "es": "Solo he venido porque me\ndijeron que os diera esto."
+ },
+ "gl1c6002#29": {
+  "hash": "cad630a4a8b320e0",
+  "es": "Así que daos prisa,\nvenid a buscarlo."
+ },
+ "gl1c6002#3": {
+  "hash": "4464af9d364c9d65",
+  "es": "¿Qué?\n¿Solo es un crío?"
+ },
+ "gl1c6002#30": {
+  "hash": "723fe116c396cccf",
+  "es": "¡Ya estoy harto de esto!"
+ },
+ "gl1c6002#32": {
+  "hash": "31c1ce7bae7ccea6",
+  "es": "Elena, a ti tampoco te entiendo."
+ },
+ "gl1c6002#33": {
+  "hash": "4dbd07066af45fa8",
+  "es": "Va a morir gente, ¿lo entiendes?"
+ },
+ "gl1c6002#34": {
+  "hash": "477addd12f100110",
+  "es": "¡Celvice y yo, todos podríamos\nmorir por esto!"
+ },
+ "gl1c6002#35": {
+  "hash": "b851d003c2d3870b",
+  "es": "Ya conocemos esa historia."
+ },
+ "gl1c6002#36": {
+  "hash": "ec1f85ca8ee19c7e",
+  "es": "¡No, no la conocéis!"
+ },
+ "gl1c6002#37": {
+  "hash": "802eb8bdbf8d0c63",
+  "es": "¡Por eso tuvo que morir Alan,\nuno de vuestros compañeros!"
+ },
+ "gl1c6002#38": {
+  "hash": "74720d3706a35ca7",
+  "es": "¡Os importan un bledo\nlos que mueren!"
+ },
+ "gl1c6002#39": {
+  "hash": "dfdd032c19d6d839",
+  "es": "¡Creéis que va con el oficio!"
+ },
+ "gl1c6002#4": {
+  "hash": "54da2c397242e0fc",
+  "es": "¿Qué...?"
+ },
+ "gl1c6002#40": {
+  "hash": "0515226200838da0",
+  "es": "¡Ya basta, renacuajo!"
+ },
+ "gl1c6002#42": {
+  "hash": "ea9a905a5b593a00",
+  "es": "Alan era..."
+ },
+ "gl1c6002#43": {
+  "hash": "fe260763ed85fd44",
+  "es": "Alan era el novio de Elena\ny mi mejor amigo."
+ },
+ "gl1c6002#44": {
+  "hash": "cd1eb6e12385f2eb",
+  "es": "Claro que lo echamos de menos..."
+ },
+ "gl1c6002#46": {
+  "hash": "4f6e5ae6cd621b78",
+  "es": "¡Me da igual que seas un crío\no un completo desconocido!"
+ },
+ "gl1c6002#47": {
+  "hash": "88b86d912e45a299",
+  "es": "No tienes ni idea de lo importante\nque es tu tarea, ¿verdad?"
+ },
+ "gl1c6002#48": {
+  "hash": "0ca04c869eb950e0",
+  "es": "Pero ahora eres el único que puede\npilotar el Orbital Frame."
+ },
+ "gl1c6002#49": {
+  "hash": "86d6a8719f81055f",
+  "es": "Me acerco a la zona de almacenes.\n"
+ },
+ "gl1c6002#5": {
+  "hash": "7d85c09bb18eee1e",
+  "es": "Elena, ¿de verdad estás segura de que\neste chaval puede sustituir a Alan?"
+ },
+ "gl1c6002#50": {
+  "hash": "3446a092afc28983",
+  "es": "Reúnete allí conmigo.\nYa escucharé tus lloros entonces."
+ },
+ "gl1c6002#51": {
+  "hash": "7303f05da1b462ff",
+  "es": "Tú llega allí primero."
+ },
+ "gl1c6002#53": {
+  "hash": "6edbfde31f5acee5",
+  "es": "Entiendo que estés perdido después\nde verte metido en todo esto,"
+ },
+ "gl1c6002#54": {
+  "hash": "5ffa7041374613ed",
+  "es": "pero necesitamos que nos ayudes\nun poco más."
+ },
+ "gl1c6002#56": {
+  "hash": "6386e9ddc577f3a0",
+  "es": "Vale, iré.\nEs lo que queréis, ¿no?"
+ },
+ "gl1c6002#58": {
+  "hash": "5869cc6dcde05fb8",
+  "es": "Iré al almacén."
+ },
+ "gl1c6002#59": {
+  "hash": "c92dfdc12e373e22",
+  "es": "¿Es eso lo que quieres que haga?"
+ },
+ "gl1c6002#6": {
+  "hash": "267a9360ea112069",
+  "es": "¿Y yo qué demonios sé?"
+ },
+ "gl1c6002#60": {
+  "hash": "bc1ccd7cd4934e95",
+  "es": "Sí. Gracias..."
+ },
+ "gl1c6002#61": {
+  "hash": "f73d44d64f9de6d9",
+  "es": "Siento lo que dije antes."
+ },
+ "gl1c6002#62": {
+  "hash": "8f15a7280d0caa7e",
+  "es": "Me refiero a lo que dije de Alan."
+ },
+ "gl1c6002#63": {
+  "hash": "6eba0526d492eb8f",
+  "es": "No importa."
+ },
+ "gl1c6002#64": {
+  "hash": "c424ec724d83339b",
+  "es": "Ya contaba con esto."
+ },
+ "gl1c6002#65": {
+  "hash": "c4b1835e4652c53f",
+  "es": "Hasta luego."
+ },
+ "gl1c6002#7": {
+  "hash": "b742d5bb53f6f470",
+  "es": "Seguro que sí. Y, Thunder,\ninforma de la situación."
+ },
+ "gl1c6002#8": {
+  "hash": "bf1e78fbb8af8e93",
+  "es": "Claro. Escucha, Leo. Tras atacar BAHRAM\nAntilia, declararon el estado de emergencia"
+ },
+ "gl1c6002#9": {
+  "hash": "7cdefd79e75eaf8b",
+  "es": "y cerraron todas las rutas\nal puerto espacial."
+ },
+ "gl1c6021#10": {
+  "hash": "290e6cb972b5d993",
+  "es": "¿Qué? ¿Muerto?"
+ },
+ "gl1c6021#11": {
+  "hash": "9da17ef976e6dbf3",
+  "es": "Ha habido una gran explosión\nsubterránea en el bloque de la colonia."
+ },
+ "gl1c6021#12": {
+  "hash": "63d29abcd151d120",
+  "es": "Los signos vitales que estaba\nvigilando han desaparecido."
+ },
+ "gl1c6021#13": {
+  "hash": "cab5837e78bede75",
+  "es": "Pero... ¿por qué?\n¿Qué ha pasado?"
+ },
+ "gl1c6021#14": {
+  "hash": "7123b79b00e0664b",
+  "es": "Jehuty disparó al bloque de la colonia\ny alcanzó una línea vital subterránea."
+ },
+ "gl1c6021#15": {
+  "hash": "4020c7294d890b9f",
+  "es": "En otras palabras, usted lo ha matado."
+ },
+ "gl1c6021#16": {
+  "hash": "5ac7ad2db465019a",
+  "es": "Pero no era mi intención..."
+ },
+ "gl1c6021#4": {
+  "hash": "67c920cd1f1d94b7",
+  "es": "Se llama Thunderheart,\nes uno de nuestros compañeros."
+ },
+ "gl1c6021#7": {
+  "hash": "f696ff2590293a34",
+  "es": "¿Me oyes...?"
+ },
+ "gl1c6021#8": {
+  "hash": "6fe394984b7bb33d",
+  "es": "¿Qué está pasando?"
+ },
+ "gl1c6021#9": {
+  "hash": "0e1606cba6eca789",
+  "es": "He confirmado la muerte\nde Thunderheart."
+ },
+ "gl1c6031#0": {
+  "hash": "60ded8f328afb946",
+  "es": "La cima de la montaña que tenemos delante\nes la presa, nuestro destino."
+ },
+ "gl1c6061#0": {
+  "hash": "f1ac44ca019e2283",
+  "es": "Veo un Orbital Frame volador\ncerca de la cima de la montaña."
+ },
+ "gl1c6061#1": {
+  "hash": "176000222ecf5901",
+  "es": "Parece armado con un\ncañón de proyección de partículas."
+ },
+ "gl1c6061#2": {
+  "hash": "c2d757db8a0cf859",
+  "es": "Acercarse a la presa por el aire es casi\nun suicidio: no hay dónde esconderse."
+ },
+ "gl1c6061#3": {
+  "hash": "008dd83661beeab2",
+  "es": "¿Entonces qué hago?"
+ },
+ "gl1c6061#4": {
+  "hash": "5774c96b49dd42d1",
+  "es": "En la ladera de la montaña hay un barranco\nde agua de lluvia, como un cauce."
+ },
+ "gl1c6061#5": {
+  "hash": "f9967d59c42b8434",
+  "es": "Le sugiero volar bajo por el barranco\nhasta la cima de la montaña."
+ },
+ "gl1c6061#6": {
+  "hash": "a2f3f149cae63317",
+  "es": "Volar bajo por el barranco\n...Entendido."
+ },
+ "gl1c9101#0": {
+  "hash": "9de4c6af5da9d6a0",
+  "es": "Hemos recibido\nun SOS del bloque D07."
+ },
+ "gl1c9101#1": {
+  "hash": "ed94c795934bb6c8",
+  "es": "Un escuadrón de Raptors está\natacando el pozo de la colonia."
+ },
+ "gl1c9101#2": {
+  "hash": "651c97938eccee71",
+  "es": "Si destruyen el pozo de la colonia,\nla propia colonia sufrirá graves daños."
+ },
+ "gl1c9101#3": {
+  "hash": "37643c19c348229c",
+  "es": "No."
+ },
+ "gl1c9101#5": {
+  "hash": "8c467e463b92821d",
+  "es": "Le indicaré\nel bloque D07 con un marcador."
+ },
+ "gl1g2041#0": {
+  "hash": "b895dcc7de7061e9",
+  "es": "Entramos en el\nbloque residencial S02."
+ },
+ "gl1g2041#1": {
+  "hash": "b1d99ad060cb1a36",
+  "es": "Papá...\nEstás vivo, ¿verdad?"
+ },
+ "gl1p5011#0": {
+  "hash": "e037e885107dd6da",
+  "es": "¡¿...?! ¡Uaaaaa!"
+ },
+ "gl1p6041#0": {
+  "hash": "8c0e64ca38f6d7c8",
+  "es": "¿Qué ha sido eso?"
+ },
+ "gl1r2371#0": {
+  "hash": "d0335b1bfac4db77",
+  "es": "El objetivo de la misión actual es trasladar\neste Orbital Frame a Marte"
+ },
+ "gl1r2371#1": {
+  "hash": "b07e4dc3981d4ed1",
+  "es": "para que opere allí.\nPara cumplir esa misión,"
+ },
+ "gl1r2371#10": {
+  "hash": "e0e6aed8cdb0b2d2",
+  "es": "Después, romperemos el control enemigo\ndel espacio aéreo,"
+ },
+ "gl1r2371#11": {
+  "hash": "9a38e5f26b8d28c4",
+  "es": "evitando el combate en lo posible."
+ },
+ "gl1r2371#12": {
+  "hash": "7240e2e35dc65152",
+  "es": "Luego nos dirigiremos al\notro lado de la colonia"
+ },
+ "gl1r2371#13": {
+  "hash": "7202edac1a9cbc50",
+  "es": "y accederemos al puerto espacial\npor el ascensor de transporte."
+ },
+ "gl1r2371#14": {
+  "hash": "bf8b8cc09af79179",
+  "es": "¿Tiene alguna pregunta?"
+ },
+ "gl1r2371#2": {
+  "hash": "2fe391e535475bed",
+  "es": "nuestras tareas principales son reunirnos\nprimero con el carguero civil Atlantis"
+ },
+ "gl1r2371#3": {
+  "hash": "f95bb120a81fb77e",
+  "es": "y después escapar de\nAntilia en convoy."
+ },
+ "gl1r2371#4": {
+  "hash": "d1b5ba7f46d560c5",
+  "es": "Estamos en alerta de combate, pero\ndada su falta de experiencia,"
+ },
+ "gl1r2371#5": {
+  "hash": "2f0fe49c2524759f",
+  "es": "le recomiendo evitar el combate\nen la medida de lo posible."
+ },
+ "gl1r2371#6": {
+  "hash": "c8339135aa0c6f04",
+  "es": "Tengo confirmación visual de que la colonia\nha perdido el control del espacio aéreo."
+ },
+ "gl1r2371#7": {
+  "hash": "ac8812a0a8447de6",
+  "es": "Por desgracia, necesitamos información\nmás detallada sobre la colonia."
+ },
+ "gl1r2371#8": {
+  "hash": "2bc8904ec1ef4fe0",
+  "es": "Para eso hay que volver a la zona donde\nestaba la fábrica. Una vez allí,"
+ },
+ "gl1r2371#9": {
+  "hash": "b5690d7a1d306276",
+  "es": "podré transferir la información\nnecesaria desde el servidor local."
+ },
+ "gl1r3001#0": {
+  "hash": "360fa4746b9239ce",
+  "es": "Le informaré de la\nsituación actual."
+ },
+ "gl1r3001#1": {
+  "hash": "964d989bee0c2d56",
+  "es": "El enemigo ha tomado el sistema EPS de la\ncolonia para dominar el espacio aéreo."
+ },
+ "gl1r3001#10": {
+  "hash": "8a70a2e25540dc33",
+  "es": "Jehuty no sufriría muchos daños, pero\nningún ser vivo sobreviviría."
+ },
+ "gl1r3001#11": {
+  "hash": "5393c6742fe43c63",
+  "es": "...Leo"
+ },
+ "gl1r3001#12": {
+  "hash": "e299f6cdedc83be9",
+  "es": "¿Y qué podemos hacer?"
+ },
+ "gl1r3001#13": {
+  "hash": "9be30ee089ac5910",
+  "es": "No hay más remedio que anular el campo\nde energía destruyendo el sistema EPS."
+ },
+ "gl1r3001#14": {
+  "hash": "8a190704953b0249",
+  "es": "Este bloque de la colonia tiene dos\ninstalaciones que suministran energía EPS."
+ },
+ "gl1r3001#15": {
+  "hash": "0685664dddaa9299",
+  "es": "Hay dos antenas del EPS en dos\nmontañas del centro de la colonia."
+ },
+ "gl1r3001#16": {
+  "hash": "8d6907baa6d7fa67",
+  "es": "Orientando estas dos antenas\nuna hacia la otra,"
+ },
+ "gl1r3001#17": {
+  "hash": "38f706204ecd8599",
+  "es": "el enemigo ha creado un enorme campo de\nmicroondas en el centro de la colonia."
+ },
+ "gl1r3001#18": {
+  "hash": "2df118b79a989d8c",
+  "es": "Nuestra primera tarea es destruir\nesas dos antenas del EPS."
+ },
+ "gl1r3001#19": {
+  "hash": "dc43849c7bc61332",
+  "es": "Hay otro objetivo relacionado."
+ },
+ "gl1r3001#2": {
+  "hash": "dfdbeb6d03d1e192",
+  "es": "¿EPS?"
+ },
+ "gl1r3001#20": {
+  "hash": "8d64d1c0ca611089",
+  "es": "¿Ve el pozo de la colonia que hay delante?"
+ },
+ "gl1r3001#21": {
+  "hash": "8e717b2bc8d693b3",
+  "es": "Lleva el suministro principal a las antenas\ndel EPS desde el eje de la colonia."
+ },
+ "gl1r3001#22": {
+  "hash": "4a191d44d6d75d15",
+  "es": "Dañando el bloque de transmisión del pozo,"
+ },
+ "gl1r3001#23": {
+  "hash": "f30af25e3dbfd1f2",
+  "es": "podemos debilitar el flujo de energía\ndel EPS, o incluso detenerlo."
+ },
+ "gl1r3001#24": {
+  "hash": "97a042924fff6dd9",
+  "es": "Así que el pozo y dos antenas..."
+ },
+ "gl1r3001#25": {
+  "hash": "550a4d0849d0cf9e",
+  "es": "Vale. Hagámoslo."
+ },
+ "gl1r3001#26": {
+  "hash": "8f3e122dbfc33951",
+  "es": "Por ahora no se puede acceder\na las antenas del EPS."
+ },
+ "gl1r3001#27": {
+  "hash": "119693e8a451c23b",
+  "es": "Deberíamos ir al bloque D07,\ndonde está el pozo."
+ },
+ "gl1r3001#28": {
+  "hash": "b4aaee55f5b7fb07",
+  "es": "Se lo indicaré con un marcador\nen la pantalla."
+ },
+ "gl1r3001#3": {
+  "hash": "55a43cd3e1054d09",
+  "es": "Todos los objetos voladores civiles de la\ncolonia funcionan con energía de microondas"
+ },
+ "gl1r3001#4": {
+  "hash": "639ef2cb40fea2b7",
+  "es": "del sistema EPS exterior, como exige\nla Ley de Protección Ambiental."
+ },
+ "gl1r3001#5": {
+  "hash": "f04c519d94ce1c66",
+  "es": "El enemigo usa el EPS\npara formar una barrera,"
+ },
+ "gl1r3001#6": {
+  "hash": "d3de4fb0451761c5",
+  "es": "un campo de energía de microondas\nen el cielo de la colonia."
+ },
+ "gl1r3001#7": {
+  "hash": "2212d12542d20489",
+  "es": "¿Quieres decir que es peligroso?"
+ },
+ "gl1r3001#8": {
+  "hash": "d91e533c5bd3022e",
+  "es": "Sí."
+ },
+ "gl1r3001#9": {
+  "hash": "a7903bc8de3b86a1",
+  "es": "Estar dentro del campo de energía es como\nestar dentro de un microondas."
+ },
+ "gl1r5001#0": {
+  "hash": "a80c8f8d201d538b",
+  "es": "¿Qué pasa?"
+ },
+ "gl1r5001#1": {
+  "hash": "f928edad7192a5cf",
+  "es": "Esas instalaciones, la inteligencia\nartificial de Jehuty..."
+ },
+ "gl1r5001#2": {
+  "hash": "7e34abf4eb855863",
+  "es": "Fui creada allí."
+ },
+ "gl1r5001#3": {
+  "hash": "ff313af0078f08cf",
+  "es": "Ahora no hay ningún motivo\npara ir allí,"
+ },
+ "gl1r5001#4": {
+  "hash": "36f2ac010ca93cf4",
+  "es": "pero si hiciera falta, aquí es\ndonde se encuentra."
+ },
+ "gl1r5001#5": {
+  "hash": "0355f16633957625",
+  "es": "Ya veo... ¿Así que ese es tu hogar...?"
+ },
+ "gl1r5001#6": {
+  "hash": "b2c95ac57a01fb5f",
+  "es": "Esa expresión no es adecuada.\nNo sirve de nada intentar personificarme."
+ },
+ "gl1r5001#7": {
+  "hash": "4b4881d29d7ebb8d",
+  "es": "Ja, ja... Ya veo."
+ },
+ "gl1r5101#0": {
+  "hash": "e314614b498b60e9",
+  "es": "¿Qué pasa...? ¿¡Qué!?"
+ },
+ "gl1r5101#1": {
+  "hash": "6b847fc40c2bc196",
+  "es": "¿Infectado con un virus?"
+ },
+ "gl1r5101#2": {
+  "hash": "a73746ddef9f2522",
+  "es": "¡El programa estaba\ninfectado con un virus!"
+ },
+ "gl1r5391#0": {
+  "hash": "f840fabef158bde3",
+  "es": "¿Un objetivo que controlé?\nYa veo, ¡ese...!"
+ },
+ "mt1a6a01#0": {
+  "hash": "af073680d149cefb",
+  "es": "Avance por el valle hacia\nel curso alto del río."
+ },
+ "mt2a6a21#0": {
+  "hash": "ebbebf25ae5b251b",
+  "es": "Mosca molesta,\n¡te aplastaré como a un bicho!"
+ },
+ "mt2a6a22#0": {
+  "hash": "e7e855a95a1ac3d0",
+  "es": "¿De verdad creías que\neso me afectaría?"
+ },
+ "mt2a6a23#0": {
+  "hash": "3c6c16f21b9ed826",
+  "es": "¡Prueba esto ahora!"
+ },
+ "mt2a6a24#0": {
+  "hash": "2500d07cd9246235",
+  "es": "¿Qué te parece esto?"
+ },
+ "mt2a6a25#0": {
+  "hash": "6e230e30e66155ad",
+  "es": "Vuelve con tu mamá a que\nte dé un besito."
+ },
+ "mt2a6a27#0": {
+  "hash": "f494f27358cb21d0",
+  "es": "¡Muere!"
+ },
+ "mt2a6a28#0": {
+  "hash": "60c15a235e8216a1",
+  "es": "¡Estás acabado!"
+ },
+ "mt2a6a29#0": {
+  "hash": "5183a2c635ee607a",
+  "es": "¡¿NO?!"
+ },
+ "mt2c6121#0": {
+  "hash": "de89ff7da5c4a4fa",
+  "es": "Así que este es nuestro destino.\n¿Dónde está la entrada?"
+ },
+ "mt2c6122#0": {
+  "hash": "dba0091ff01ce341",
+  "es": "Un Orbital Frame se nos\nacerca desde arriba."
+ },
+ "mt2c6161#0": {
+  "hash": "94a4e34d28a94dbb",
+  "es": "Quieres un premio, ¿eh?\n¡Toma, ahí va!"
+ },
+ "mt2c6181#0": {
+  "hash": "f990e9bc63fc3b45",
+  "es": "Me ayudarás a destruir\nla ciudad, ¿verdad?"
+ },
+ "mt2c6181#1": {
+  "hash": "0505a06f693ea7d1",
+  "es": "¿Qué te parece?\nMatar es divertido, ¿no?"
+ },
+ "mt2c6181#2": {
+  "hash": "14e1e54e442b2b2b",
+  "es": "¡Cállate!"
+ },
+ "mt2c6281#0": {
+  "hash": "2c3f9655cd6ca009",
+  "es": "Comunicación de Rock Thunderheart."
+ },
+ "mt2c6281#1": {
+  "hash": "d830cb9014e82b54",
+  "es": "¿Thunderheart...?"
+ },
+ "mt2c6281#10": {
+  "hash": "3ec6765c3cccf2e2",
+  "es": "Entra en él\npor la salida de la cascada."
+ },
+ "mt2c6281#11": {
+  "hash": "b98ca98441aeb2cc",
+  "es": "Baja por el túnel"
+ },
+ "mt2c6281#12": {
+  "hash": "d5f9e1470171f21f",
+  "es": "y llegarás a la zona de almacenes,\ndonde encontrarás un lanzador lineal."
+ },
+ "mt2c6281#13": {
+  "hash": "987d6d8a9c12c2e9",
+  "es": "Nos veremos allí."
+ },
+ "mt2c6281#16": {
+  "hash": "32c79821a19feb93",
+  "es": "Contéstame, chaval."
+ },
+ "mt2c6281#17": {
+  "hash": "28b606431607fcd7",
+  "es": "No lo sabré hasta\nque lo intente."
+ },
+ "mt2c6281#18": {
+  "hash": "3c4a8d6718ed8a80",
+  "es": "Tienes toda la razón.\nNos vemos allí."
+ },
+ "mt2c6281#19": {
+  "hash": "5d844b7d6816ebce",
+  "es": "Le dan igual\nnuestros problemas."
+ },
+ "mt2c6281#2": {
+  "hash": "d2607e1f64c93875",
+  "es": "Figura como la persona\nque debe recibir este frame."
+ },
+ "mt2c6281#3": {
+  "hash": "a0cc7ef050aded0a",
+  "es": "Ah, ese tipo."
+ },
+ "mt2c6281#4": {
+  "hash": "8b9ada78e7b8a508",
+  "es": "Bien. Estás vivo."
+ },
+ "mt2c6281#6": {
+  "hash": "2a59d9fe61311b2c",
+  "es": "¿Has llegado a la presa?"
+ },
+ "mt2c6281#7": {
+  "hash": "690c0ba3a9a6c282",
+  "es": "Ajá."
+ },
+ "mt2c6281#9": {
+  "hash": "9ae552ee527cbfb2",
+  "es": "Hay un canal subterráneo que toma\nagua del lago de la ladera."
+ },
+ "mt2g6141#0": {
+  "hash": "dc17230eea33995b",
+  "es": "¡Jo, jo! ¿Así que tú eres quien\nla ha puesto tan nerviosa?"
+ },
+ "mt2g6241#0": {
+  "hash": "9f77f43672affcad",
+  "es": "¡Tú!\nNo tendré piedad contigo."
+ },
+ "pk1a5a01#0": {
+  "hash": "9df5fe7f24165750",
+  "es": "Leo, vámonos de aquí."
+ },
+ "pk1a5a02#0": {
+  "hash": "2a11b83672bb9157",
+  "es": "Leo... ¿No vas a escapar?"
+ },
+ "pk1a5aa1#0": {
+  "hash": "4b0d255727644c5b",
+  "es": "¡Adelante, sondas!"
+ },
+ "pk1a5aa2#0": {
+  "hash": "8b6ed12e5a90dd73",
+  "es": "¡Te haré pedazos!"
+ },
+ "pk1a5aa3#0": {
+  "hash": "8dc1cd036b6cba0f",
+  "es": "¿¡Qué!?"
+ },
+ "pk1a5aa4#0": {
+  "hash": "691b45407fd6098d",
+  "es": "Ja, ja, ja. Ese ataque no\nme hace nada."
+ },
+ "pk1a5aa5#0": {
+  "hash": "3b7ca184d3b49f6e",
+  "es": "Ahora, toma esto."
+ },
+ "pk1a5aa6#0": {
+  "hash": "a05855fc549cb4fd",
+  "es": "¿¡Qué te parece esto!?"
+ },
+ "pk1a5aa7#0": {
+  "hash": "9dbbaed89c7ce011",
+  "es": "¡Tocado!"
+ },
+ "pk1a5aa8#0": {
+  "hash": "4f291398989a35a1",
+  "es": "Lo estás haciendo bien."
+ },
+ "pk1a5aa9#0": {
+  "hash": "b928107f54959a01",
+  "es": "Se acabó."
+ },
+ "pk1c5041#0": {
+  "hash": "5e4079c834502494",
+  "es": "Detecto una reacción de alta energía delante."
+ },
+ "pk1c5041#1": {
+  "hash": "74d185c17f2d471a",
+  "es": "¡Demasiado tarde!"
+ },
+ "pk1c5041#2": {
+  "hash": "6676d67a551d4ae7",
+  "es": "No afectará a nuestra\ncapacidad de combate."
+ },
+ "pk1c5041#3": {
+  "hash": "999e9e79a248e9fa",
+  "es": "Deduzco que es de tipo Raptor."
+ },
+ "pk1c5041#4": {
+  "hash": "6fe1196f3649938c",
+  "es": "Puedo darle 13 razones distintas\ny claras si lo desea..."
+ },
+ "pk1c5041#5": {
+  "hash": "bad7196721861a74",
+  "es": "ADA, ¿de qué estás hablando?"
+ },
+ "pk1c5061#0": {
+  "hash": "b5ea1b5b1d8731f4",
+  "es": "Por supuesto."
+ },
+ "pk1c5061#1": {
+  "hash": "409caa3139448add",
+  "es": "Sus actos irracionales han\nllevado a este frame a una crisis."
+ },
+ "pk1c5061#2": {
+  "hash": "a90c8b2597dd7488",
+  "es": "Han logrado aprender los principios\nde manejo de Jehuty..."
+ },
+ "pk1c5061#3": {
+  "hash": "926c70363c20a7ab",
+  "es": "¡Basta ya! ¿Qué demonios\nte está pasando?"
+ },
+ "pk1c5121#0": {
+  "hash": "755ad1a5ae031822",
+  "es": "Leo. En este estado\nno puedes ganar nunca."
+ },
+ "pk1c5121#1": {
+  "hash": "d34fba9faf8cd682",
+  "es": "Vámonos de aquí por ahora."
+ },
+ "pk1c5521#0": {
+  "hash": "8c17a2513804ef66",
+  "es": "¿Por qué haces cosas tan horribles?"
+ },
+ "pk1c5521#2": {
+  "hash": "b30cce39730aadf1",
+  "es": "Si me matas, perderé el control de\nlos Raptors. ¿Quieres probar?"
+ },
+ "pk1c5541#0": {
+  "hash": "53c602b84e0878d8",
+  "es": "¿Por qué haces\ncosas tan horribles?"
+ },
+ "pk1c5541#1": {
+  "hash": "8279ee840857b780",
+  "es": "¿Cosas horribles?"
+ },
+ "pk1c5541#2": {
+  "hash": "2626367a8308fc8e",
+  "es": "¿Te refieres a destruir la ciudad?"
+ },
+ "pk1c5541#3": {
+  "hash": "a03ad9bb6ad1f771",
+  "es": "Tú estás haciendo\nexactamente lo mismo, ¿no?"
+ },
+ "pk1c5541#4": {
+  "hash": "9bf7ec66e9c49ffa",
+  "es": "Si sigues destruyendo la ciudad,\nme harás el trabajo."
+ },
+ "pk1c5541#5": {
+  "hash": "5b3a776dc6c14407",
+  "es": "Pero si me matas,\npierdo el control de los Raptors."
+ },
+ "pk1c5541#6": {
+  "hash": "0379b0b71cb58a1e",
+  "es": "¿Quieres probar suerte?"
+ },
+ "pk1c5651#0": {
+  "hash": "1ab9362239a56383",
+  "es": "Han dejado de\natacar la colonia."
+ },
+ "pk1c5651#1": {
+  "hash": "3fbbccf3be328df6",
+  "es": "El objetivo destruido bajo nosotros debía\nde controlar los Raptors no tripulados"
+ },
+ "pk1c5651#2": {
+  "hash": "216518983eafbe27",
+  "es": "que sobrevolaban la colonia."
+ },
+ "pk1c5651#3": {
+  "hash": "ac7146e39f56f63e",
+  "es": "¿Así que hemos salvado la colonia?"
+ },
+ "pk1c5651#4": {
+  "hash": "126f756f635eff55",
+  "es": "En lo que respecta a esta zona,\ntodo se ha salvado."
+ },
+ "pk1c5651#5": {
+  "hash": "7bf34e97024cb34c",
+  "es": "¿Quieres decir que el enemigo\nsigue por aquí?"
+ },
+ "pk1c5651#6": {
+  "hash": "aae5e49287377831",
+  "es": "Naturalmente.\n"
+ },
+ "pk1c5671#0": {
+  "hash": "38f1f47f0383042a",
+  "es": "... ¿Esta vez no me dices\nque lo destruya?"
+ },
+ "pk1c5671#1": {
+  "hash": "1d7411560fc0dd3d",
+  "es": "Si lo hiciera, ¿lo haría?"
+ },
+ "pk1c5671#2": {
+  "hash": "65e2b7743a8abb60",
+  "es": "...No."
+ },
+ "pk1c5671#3": {
+  "hash": "d5683f60ec5d1baf",
+  "es": "Entiendo el principio de\nsu intento de salvar vidas humanas."
+ },
+ "pk1c5671#4": {
+  "hash": "abd64652670a1709",
+  "es": "Es ilógico, pero no\npuedo evitarlo."
+ },
+ "pk1g5051#0": {
+  "hash": "42b319079e326bb5",
+  "es": "El índice de superioridad estimado es del 50%."
+ },
+ "pk1g5051#1": {
+  "hash": "f421d77f10d9d4b1",
+  "es": "Puede deshacerse de él fácilmente."
+ },
+ "pk1g5051#2": {
+  "hash": "c4666c98e5c9d1e9",
+  "es": "¿Dices que es fácil ganar a\nesa cosa gigantesca?"
+ },
+ "pk1g5501#0": {
+  "hash": "8f9c43bc8f7c61ed",
+  "es": "Has superado la trampa.\nBien hecho."
+ },
+ "pk1g5501#1": {
+  "hash": "21d012f8a4ebc797",
+  "es": "No fue solo suerte lo que te\npermitió derrotar a Tempest."
+ },
+ "pk1g5601#0": {
+  "hash": "c6734844179a5bd0",
+  "es": "Tengo que tomarte en serio."
+ },
+ "pk1g5621#0": {
+  "hash": "fd537f7f4cf9f32c",
+  "es": "¿He sido yo?"
+ },
+ "ra1a4a21#0": {
+  "hash": "2a01a7c3997a8474",
+  "es": "Encuentre el pasaje de mantenimiento."
+ },
+ "ra1a4a41#0": {
+  "hash": "584fd34b4b449a8a",
+  "es": "Destruya el generador de emergencia del EPS."
+ },
+ "ra1c4041#0": {
+  "hash": "ad4f9da9aab111ca",
+  "es": "Los objetos de las cimas\nson antenas del EPS."
+ },
+ "ra1c4041#1": {
+  "hash": "8f073702b930183a",
+  "es": "Detecto actividad enemiga.\nVigílelos al acercarse."
+ },
+ "ra1c4061#1": {
+  "hash": "f1da90b7d175d31e",
+  "es": "Sería más eficaz atacar el generador de\nemergencia del EPS que las antenas."
+ },
+ "ra1c4061#2": {
+  "hash": "fb732d1fb6a12c4c",
+  "es": "Entre en el pasaje de mantenimiento, vaya al\ngenerador subterráneo y destrúyalo."
+ },
+ "ra1c4101#1": {
+  "hash": "9caad3568fa09773",
+  "es": "Destruya el generador de\nemergencia subterráneo del EPS."
+ },
+ "ra1c4121#0": {
+  "hash": "c0af57cc217ec59e",
+  "es": "ADA. No podemos destruirlas."
+ },
+ "ra1c4121#2": {
+  "hash": "ec75f31a465c9fa4",
+  "es": "Hay un plan alternativo\npara destruir estos objetivos."
+ },
+ "ra1c4121#3": {
+  "hash": "4c586628ab95e55d",
+  "es": "El sistema EPS tiene un generador\nde emergencia subterráneo."
+ },
+ "ra1c4121#4": {
+  "hash": "a08e42dcc79fa797",
+  "es": "Entrando por el pasaje de mantenimiento\nal pie de la montaña,"
+ },
+ "ra1c4121#5": {
+  "hash": "a6e8e731045aa504",
+  "es": "puede destruir el generador de\nemergencia subterráneo del EPS."
+ },
+ "ra1c4121#6": {
+  "hash": "28450bf920e935cd",
+  "es": "¿Y me lo dices ahora...?"
+ },
+ "ra1c4121#7": {
+  "hash": "ace4032e47904225",
+  "es": "¿Ocurre algo?"
+ },
+ "ra1c4121#8": {
+  "hash": "db79e335b95f0fa3",
+  "es": "No, nada."
+ },
+ "ra1c4151#0": {
+  "hash": "d7fc0547476604d5",
+  "es": "El generador de emergencia del EPS está\nal final de este pasaje de mantenimiento."
+ },
+ "ra1c4151#1": {
+  "hash": "04dbcd9d5dea4060",
+  "es": "Es más sensato atacarlo a él\nque a las antenas del EPS."
+ },
+ "ra1c4151#2": {
+  "hash": "59e01889f5a7ba2a",
+  "es": "Cambiaré el plan de misión."
+ },
+ "ra1c4181#0": {
+  "hash": "ece79b28a1c26862",
+  "es": "¿Es el mismo campo de energía\nque el de arriba?"
+ },
+ "ra1c4181#1": {
+  "hash": "08e4541021735354",
+  "es": "Correcto."
+ },
+ "ra1c4181#2": {
+  "hash": "5f05ae24119c1e47",
+  "es": "Entonces no podemos seguir."
+ },
+ "ra1c4181#3": {
+  "hash": "c9af8862ed886516",
+  "es": "También correcto.\nBuscaré otro camino."
+ },
+ "ra1c4221#0": {
+  "hash": "015679d9354882b1",
+  "es": "El generador de emergencia del EPS\nha sido destruido."
+ },
+ "ra1c4221#1": {
+  "hash": "3270ca0410fcb9cf",
+  "es": "El EPS ha dejado de funcionar."
+ },
+ "ra1c4521#0": {
+  "hash": "4081679ecd79a2b5",
+  "es": "Hemos obtenido un\nmódulo de control de Raptor."
+ },
+ "ra1c4521#1": {
+  "hash": "25457a2806aa4214",
+  "es": "Con él puede manejar un\nOrbital Frame no tripulado"
+ },
+ "ra1c4521#10": {
+  "hash": "5770e0b0235bd23c",
+  "es": "¿Dónde hay un Raptor\nque no esté bajo control?"
+ },
+ "ra1c4521#11": {
+  "hash": "6c9cb68ccaa55b5f",
+  "es": "No creo que haya ningún\nRaptor intacto."
+ },
+ "ra1c4521#12": {
+  "hash": "93440f539af4356d",
+  "es": "Debemos encontrar uno que apenas\nhaya sufrido daños de disparos perdidos,"
+ },
+ "ra1c4521#13": {
+  "hash": "85c2c894930299c8",
+  "es": "o que no se haya visto afectado por\nel combate con las fuerzas LEV de la Tierra."
+ },
+ "ra1c4521#14": {
+  "hash": "5766394b9d6448d5",
+  "es": "Por tanto, los Raptors que han luchado\ncontra Jehuty no sirven."
+ },
+ "ra1c4521#15": {
+  "hash": "b88a2c2056d1c966",
+  "es": "¿Quieres decir que hay que encontrar un\nRaptor intacto y totalmente operativo?"
+ },
+ "ra1c4521#16": {
+  "hash": "1839c60c644eabad",
+  "es": "Creo que vi uno en algún sitio."
+ },
+ "ra1c4521#2": {
+  "hash": "a63cc00639a8c071",
+  "es": "que no esté bajo control,\na distancia."
+ },
+ "ra1c4521#3": {
+  "hash": "b73b2564006066d1",
+  "es": "¿Entonces puedo controlar\nesos esqueletos?"
+ },
+ "ra1c4521#4": {
+  "hash": "2528d4106ae47f3f",
+  "es": "Espera un momento, ADA."
+ },
+ "ra1c4521#5": {
+  "hash": "b0ebe869d2ab3540",
+  "es": "¿A los Raptors no les afectan\nlos campos de energía?"
+ },
+ "ra1c4521#6": {
+  "hash": "e96cdd4b1e95600b",
+  "es": "Como no llevan seres vivos,\nel EPS no les afecta."
+ },
+ "ra1c4521#7": {
+  "hash": "89b02e9530570031",
+  "es": "Eso significa que... podríamos\nguiar un Raptor por el pasaje..."
+ },
+ "ra1c4521#8": {
+  "hash": "0cf5647eb76bede8",
+  "es": "Es muy posible."
+ },
+ "ra1c4521#9": {
+  "hash": "599269da0fe245aa",
+  "es": "Intentémoslo."
+ },
+ "rb1a4a61#0": {
+  "hash": "cc5d8d03c626d255",
+  "es": "Encuentre el pasaje de mantenimiento."
+ },
+ "rb1a4ac1#0": {
+  "hash": "1093fc356ed29fc0",
+  "es": "¡Sí! ¡Hemos salido!"
+ },
+ "rb1c4151#0": {
+  "hash": "7737667a2797ccb5",
+  "es": "El generador de emergencia del EPS está\nal final de este pasaje de mantenimiento."
+ },
+ "rb1c4151#1": {
+  "hash": "b94d90b575131e72",
+  "es": "Es más sensato atacarlo a él\nque a las antenas del EPS."
+ },
+ "rb1c4441#3": {
+  "hash": "e864605c6895809b",
+  "es": "Correcto. Abandonemos\nestas instalaciones por ahora."
+ },
+ "rb1c4441#4": {
+  "hash": "8f91bbe7aa27f78f",
+  "es": "Deberíamos buscar\notro camino."
+ },
+ "rb1c4461#0": {
+  "hash": "1ca4df636909de55",
+  "es": "...¿Qué vamos a hacer?"
+ },
+ "rb1c4461#1": {
+  "hash": "f8837da78b332752",
+  "es": "No encuentro una solución\nadecuada al problema."
+ },
+ "rb1c4461#2": {
+  "hash": "19962ca0f152e5a9",
+  "es": "Abandonemos esta zona\ny busquemos otro camino."
+ },
+ "rb1c4481#0": {
+  "hash": "d829016f582835e9",
+  "es": "¡No podemos hacerlo!"
+ },
+ "rb1c4481#1": {
+  "hash": "80748527a6661557",
+  "es": "Vámonos por ahora y ocupémonos\nde otros asuntos importantes."
+ },
+ "rb1c4511#0": {
+  "hash": "27215033ee3848ca",
+  "es": "En esta zona hay un enemigo\ncon un programa reforzado."
+ },
+ "rb1c4511#1": {
+  "hash": "5c3c7bee67661e70",
+  "es": "Tendrá el mismo aspecto, pero su capacidad\nde combate será muy superior."
+ },
+ "rb1c4621#0": {
+  "hash": "01f3f1cbc1489abc",
+  "es": "¿Eh? ¿Un callejón sin salida?"
+ },
+ "rb1c4621#1": {
+  "hash": "07698ed3c0e6bbb9",
+  "es": "El reactor del EPS está delante."
+ },
+ "rb1c4621#2": {
+  "hash": "2798d684d38afbd0",
+  "es": "Nuestro objetivo, el generador,\nestá aquí."
+ },
+ "rb1c4621#3": {
+  "hash": "3c4108386b8bcf40",
+  "es": "¿Y ahora qué?"
+ },
+ "rb1c4641#0": {
+  "hash": "c0fc26270728d7ac",
+  "es": "He activado el\nmódulo antisigilo."
+ },
+ "rb1c4641#1": {
+  "hash": "5f0edce944bcf7e0",
+  "es": "¿Antisigilo?"
+ },
+ "rb1c4641#2": {
+  "hash": "35691336744a5aeb",
+  "es": "Extrayendo los rasgos visuales\ny las diferencias de materia,"
+ },
+ "rb1c4641#3": {
+  "hash": "ee79bf7bd98b6c0b",
+  "es": "el módulo nos ayuda a\nvisualizar un objeto virtualmente."
+ },
+ "rb1c4641#4": {
+  "hash": "0d9dc694d9a1a373",
+  "es": "En otras palabras, veremos\nlo que no podíamos ver."
+ },
+ "rb1c4681#0": {
+  "hash": "ab763cd81356d58f",
+  "es": "¿Eh?"
+ },
+ "rb1c4681#1": {
+  "hash": "63d4db6f101b8d84",
+  "es": "Veo algo parecido\na una pequeña grieta..."
+ },
+ "rb1c4681#2": {
+  "hash": "79456fcb7e5b7205",
+  "es": "Esta vista muestra los rasgos\nde un objeto."
+ },
+ "rb1c4681#3": {
+  "hash": "0cc3dd8e3d56c521",
+  "es": "Indica que ese punto es más débil\nque la materia que lo rodea."
+ },
+ "rb1c4681#4": {
+  "hash": "f327034dbaba4431",
+  "es": "Tendrá que realizar un ataque\nmuy preciso y certero."
+ },
+ "rb1c4701#0": {
+  "hash": "97bc1be0365e154c",
+  "es": "¡Lo conseguí!\n¡Se ha abierto!"
+ },
+ "rb1c4721#0": {
+  "hash": "819fe6dbd76a8126",
+  "es": "Destrucción del generador de\nemergencia del EPS confirmada."
+ },
+ "rb1c4721#2": {
+  "hash": "37d63e0d731118d9",
+  "es": "El campo de energía de los cielos cercanos\nya debería haber desaparecido."
+ },
+ "rb1c4721#3": {
+  "hash": "dbafb9a5be7889a8",
+  "es": "Sigamos.\n"
+ },
+ "rb1c5441#0": {
+  "hash": "f310113e07551b5a",
+  "es": "Hemos obtenido el\nmódulo antisigilo."
+ },
+ "rb1c5442#0": {
+  "hash": "3194af1f5f8b4357",
+  "es": "Bien.\nAhora puedo vencerlos."
+ },
+ "rb1g4451#0": {
+  "hash": "283f00b0adc94650",
+  "es": "Detecto un enemigo con un\nprograma reforzado."
+ },
+ "rb1g5421#0": {
+  "hash": "b28b492b94d0615b",
+  "es": "Aquí está...\nEs este."
+ },
+ "sh1p7041#0": {
+  "hash": "332d8e3f2685064a",
+  "es": "Un paquete de carga electromagnético será\nexpulsado hacia el centro de la colonia."
+ },
+ "sh1p7041#1": {
+  "hash": "b2fbeaad5d649a7b",
+  "es": "Saldremos despedidos\nrodeados de contenedores."
+ },
+ "sh1p7041#2": {
+  "hash": "d896fbf5efb50dce",
+  "es": "Así que tenga cuidado."
+ },
+ "sh1r7061#0": {
+  "hash": "5d55b91d31e22a55",
+  "es": "Ruta de transporte\nconfirmada."
+ },
+ "sh1r7061#1": {
+  "hash": "81d6cf76eea47571",
+  "es": "Llegaremos a nuestro destino\nen unos 5 minutos."
+ },
+ "sh1r7061#10": {
+  "hash": "fa7f5a002bff430e",
+  "es": "En el mejor de los casos, la tasa\nde supervivencia es del 8,7%."
+ },
+ "sh1r7061#12": {
+  "hash": "114f0de2caa0a0a6",
+  "es": "Ha solicitado numerosos traslados\nde sus funciones a bordo de Jehuty."
+ },
+ "sh1r7061#13": {
+  "hash": "e91bf71b2353e00e",
+  "es": "También ha tenido\nmuchas ocasiones de hacerlo."
+ },
+ "sh1r7061#14": {
+  "hash": "9521b3899a863b68",
+  "es": "¿Puedo preguntarle por qué\nsigue aquí?"
+ },
+ "sh1r7061#15": {
+  "hash": "26ba32d568894b27",
+  "es": "¿Vuelves a sermonearme?"
+ },
+ "sh1r7061#16": {
+  "hash": "605b81132636d384",
+  "es": "No, solo pregunto\npor curiosidad."
+ },
+ "sh1r7061#17": {
+  "hash": "a6435526a00f96e6",
+  "es": "Bueno, la verdad es que no lo sé."
+ },
+ "sh1r7061#18": {
+  "hash": "c1ca787c3a98073a",
+  "es": "Basándome en la experiencia, puedo\nofrecer varias razones plausibles:"
+ },
+ "sh1r7061#19": {
+  "hash": "ed01cb42f95a7dc4",
+  "es": "1. Una sobrestimación de su\ncapacidad de combate"
+ },
+ "sh1r7061#2": {
+  "hash": "dd0e3c6f2a1f930a",
+  "es": "No hay peligro inmediato de\nchocar con ningún obstáculo."
+ },
+ "sh1r7061#20": {
+  "hash": "84fc8602401b616d",
+  "es": "basada en una subestimación\ndel potencial bélico del enemigo."
+ },
+ "sh1r7061#21": {
+  "hash": "2dc624276ebecda4",
+  "es": "2. Deseo de una recompensa proporcional\nal peligro de autodestrucción."
+ },
+ "sh1r7061#22": {
+  "hash": "e810d5d291c9ecdf",
+  "es": "3. Venganza emocional por poner en\npeligro la vida de su tripulación."
+ },
+ "sh1r7061#23": {
+  "hash": "1f7d4de5da9f689c",
+  "es": "Puede que tengas razón... pero\nde verdad que ni yo lo sé."
+ },
+ "sh1r7061#24": {
+  "hash": "899cfd490da75ee9",
+  "es": "Sea cual sea su motivo,\nno es lógico."
+ },
+ "sh1r7061#25": {
+  "hash": "56f129bc248944bd",
+  "es": "Todavía puede\nvolver atrás..."
+ },
+ "sh1r7061#26": {
+  "hash": "4c2a18df0a519d22",
+  "es": "No quiero que muera."
+ },
+ "sh1r7061#27": {
+  "hash": "4536cc2cb78face7",
+  "es": "ADA..."
+ },
+ "sh1r7061#28": {
+  "hash": "a74d731372086c47",
+  "es": "¿Puedo contarte una historia\nde cuando era pequeño?"
+ },
+ "sh1r7061#3": {
+  "hash": "1b09eaec5ec0428c",
+  "es": "¡Qué alivio!"
+ },
+ "sh1r7061#30": {
+  "hash": "83e28ab2cc020f1c",
+  "es": "He estado solo\ndesde niño."
+ },
+ "sh1r7061#31": {
+  "hash": "127f49f47428512f",
+  "es": "Mi padre y mi madre\ncasi nunca estaban en casa."
+ },
+ "sh1r7061#32": {
+  "hash": "c02c1202f0a4d2fe",
+  "es": "Casi nunca salíamos juntos a ningún sitio."
+ },
+ "sh1r7061#33": {
+  "hash": "d8af9f1b6783c0e1",
+  "es": "Cuando tenía 10 años,"
+ },
+ "sh1r7061#34": {
+  "hash": "cde0abcf058aab0d",
+  "es": "destinaron a mi padre a Júpiter y salimos\na cenar en familia, algo muy raro."
+ },
+ "sh1r7061#35": {
+  "hash": "9a0d59235d47e17e",
+  "es": "Yo estaba muy contento, pero\ndurante toda la cena,"
+ },
+ "sh1r7061#36": {
+  "hash": "a07a3a37644aec60",
+  "es": "mi padre y mi madre discutieron\nsobre quién se quedaría conmigo."
+ },
+ "sh1r7061#37": {
+  "hash": "fb8a338d6d724d77",
+  "es": "No discutían por quedarse conmigo,\n"
+ },
+ "sh1r7061#38": {
+  "hash": "830fa6d662aa9ed2",
+  "es": "los dos querían librarse de mí."
+ },
+ "sh1r7061#39": {
+  "hash": "72af921b5a2446c6",
+  "es": "Eso solo confirmó mi idea\nde que era un niño no deseado."
+ },
+ "sh1r7061#4": {
+  "hash": "240d59de26101382",
+  "es": "Espero que Celvice esté bien."
+ },
+ "sh1r7061#40": {
+  "hash": "f36bf525c0bae556",
+  "es": "Mis amigos y mis profesores, también."
+ },
+ "sh1r7061#41": {
+  "hash": "9d92fcfd61eb0097",
+  "es": "Siempre ha sido así."
+ },
+ "sh1r7061#42": {
+  "hash": "2bb37e429ecb1e90",
+  "es": "Era el niño que nadie quería."
+ },
+ "sh1r7061#43": {
+  "hash": "bf8bda2fcb951661",
+  "es": "A nadie le importará\nsi desaparezco."
+ },
+ "sh1r7061#44": {
+  "hash": "4205bff7a6c399b3",
+  "es": "Aunque muriera, no habría\nnadie que llorara mi pérdida."
+ },
+ "sh1r7061#45": {
+  "hash": "a929474a70a460de",
+  "es": "Si me quedo aquí\nes porque me necesitan."
+ },
+ "sh1r7061#46": {
+  "hash": "d2cf2e204712cf8d",
+  "es": "Celvice y tú\nestáis a mi lado y..."
+ },
+ "sh1r7061#47": {
+  "hash": "f3dc71a74e1017f5",
+  "es": "Hasta hay gente que me da órdenes\ncuando no entiendo lo que pasa."
+ },
+ "sh1r7061#48": {
+  "hash": "ef65cfe5f89c64e9",
+  "es": "Por fin hay gente\nque me necesita."
+ },
+ "sh1r7061#49": {
+  "hash": "b060b358955a837c",
+  "es": "Y por eso, les dedicaré\nmi vida."
+ },
+ "sh1r7061#5": {
+  "hash": "9a3841ebc3c681f2",
+  "es": "¿Le preocupa?"
+ },
+ "sh1r7061#50": {
+  "hash": "0ddb5027fa144ac4",
+  "es": "¿Quiere decir que sacrificaría su vida,\nsu única vida, por otra persona?"
+ },
+ "sh1r7061#51": {
+  "hash": "59a697bafc859697",
+  "es": "No lo sé,"
+ },
+ "sh1r7061#52": {
+  "hash": "31968b9fa293fc91",
+  "es": "quizá me equivoque."
+ },
+ "sh1r7061#53": {
+  "hash": "c50e075baa51773b",
+  "es": "Siento que... juntos,\npodemos lograrlo."
+ },
+ "sh1r7061#54": {
+  "hash": "520e5201c0cdab1b",
+  "es": "Casi hemos llegado\nal núcleo central."
+ },
+ "sh1r7061#55": {
+  "hash": "0b3e845880a52c16",
+  "es": "Seguro que habrá muchos\nOrbital Frames enemigos."
+ },
+ "sh1r7061#56": {
+  "hash": "b69dd65bf63af235",
+  "es": "Se espera que el combate empiece en\ncuanto lleguemos al núcleo central."
+ },
+ "sh1r7061#57": {
+  "hash": "fc829d80fefdc756",
+  "es": "Tenga mucho cuidado, por favor."
+ },
+ "sh1r7061#58": {
+  "hash": "aeddf6f6179e0dfd",
+  "es": "Sí, claro."
+ },
+ "sh1r7061#59": {
+  "hash": "e30b4357e1c2222c",
+  "es": "Yo soy..."
+ },
+ "sh1r7061#6": {
+  "hash": "e1eac4008e7a0421",
+  "es": "Bueno, sí, claro que sí."
+ },
+ "sh1r7061#61": {
+  "hash": "017e14cd99a8f8c9",
+  "es": "Yo soy una de las personas que le necesitan."
+ },
+ "sh1r7061#62": {
+  "hash": "74fd9e1a03e1c93b",
+  "es": "Soy incapaz de sentir tristeza...\npero no desperdicie su vida tan fácilmente."
+ },
+ "sh1r7061#63": {
+  "hash": "a4d540836fe520d9",
+  "es": "Lo entiendo, gracias."
+ },
+ "sh1r7061#64": {
+  "hash": "94977ad10687df69",
+  "es": "Llegaremos al núcleo central\nen unos instantes."
+ },
+ "sh1r7061#7": {
+  "hash": "413ae067d20af060",
+  "es": "¿Podemos hablar?\nSi no le importa."
+ },
+ "sh1r7061#8": {
+  "hash": "ef767c8a27ed3295",
+  "es": "No, no me importa."
+ },
+ "sh1r7061#9": {
+  "hash": "a314c72a5c4f9210",
+  "es": "He calculado la tasa prevista de supervivencia\nde la tripulación en esta misión."
+ },
+ "st1c6381#1": {
+  "hash": "a01cd5141294b83d",
+  "es": "Este frame está totalmente inmovilizado.\nNo hay escapatoria."
+ },
+ "st1c6382#0": {
+  "hash": "da5b724347811605",
+  "es": "Ha sido más fácil de lo que esperaba.\n¿Cómo te gustaría morir?"
+ },
+ "st1c6382#1": {
+  "hash": "8b80b16c00b3d769",
+  "es": "No hay escapatoria."
+ },
+ "st1c6382#10": {
+  "hash": "c7fe438601bf2723",
+  "es": "Lo que hace es una contradicción.\nDice que quiere proteger a la gente."
+ },
+ "st1c6382#11": {
+  "hash": "dc60aaf3753769cd",
+  "es": "¿Acaso su vida y la de sus pasajeros\nno merecen también protección?"
+ },
+ "st1c6382#12": {
+  "hash": "3ab60a95039d5868",
+  "es": "¡Cállate!\n¡He dicho que no!"
+ },
+ "st1c6382#13": {
+  "hash": "b02b8ce8cd4c05c4",
+  "es": "Queda poco tiempo.\nCompréndalo, por favor."
+ },
+ "st1c6382#14": {
+  "hash": "878c3b18614722b5",
+  "es": "¿Qué es exactamente\nlo que no quiere hacer?"
+ },
+ "st1c6382#15": {
+  "hash": "863a1d87c0cd706d",
+  "es": "¡Tú vas a salir conmigo!"
+ },
+ "st1c6382#16": {
+  "hash": "7d89b6683949b060",
+  "es": "....¿Qué?"
+ },
+ "st1c6382#2": {
+  "hash": "15678bb160ff732e",
+  "es": "He añadido la evacuación de emergencia\nal menú principal."
+ },
+ "st1c6382#3": {
+  "hash": "b69fe113ee8c765b",
+  "es": "Seleccione la evacuación de emergencia."
+ },
+ "st1c6382#5": {
+  "hash": "53e6d44ddd31b6a9",
+  "es": "Tras separar la cabina,\nharé estallar a Jehuty."
+ },
+ "st1c6382#7": {
+  "hash": "f8d3128f8edb567e",
+  "es": "No lo entiendo.\n¿Qué quiere decir con \"no\"?"
+ },
+ "st1c6382#8": {
+  "hash": "93129e1adece1eb9",
+  "es": "Cállate.\nDéjame pensar."
+ },
+ "st1c6382#9": {
+  "hash": "84c0b788c41981b8",
+  "es": "Tiene que haber algo\nque podamos hacer."
+ },
+ "st1c6481#0": {
+  "hash": "d2423d2f5f307c86",
+  "es": "El objetivo sigue respondiendo.\nSigue con vida."
+ },
+ "st1c6481#1": {
+  "hash": "0bb5bf0ba64393d5",
+  "es": "No quiero\nquitarle la vida..."
+ },
+ "st1c6481#2": {
+  "hash": "097a35859167d25b",
+  "es": "Lo sé."
+ },
+ "st1c6481#3": {
+  "hash": "e28f3339cf48bf9a",
+  "es": "Hay algo que debo\nrecordarle."
+ },
+ "st1c6481#4": {
+  "hash": "58f061a0e58c22fa",
+  "es": "La próxima vez debo expulsar la cabina.\nNo repita lo que hizo la última vez."
+ },
+ "st1c6481#5": {
+  "hash": "6c47136a25fb624e",
+  "es": "¿Qué?\nS... sí."
+ },
+ "st1c6481#6": {
+  "hash": "f5d84918fcddf88e",
+  "es": "Solo soy un programa,\nun programa sin vida."
+ },
+ "st1c6481#7": {
+  "hash": "c2d6ce7cd8e097a8",
+  "es": "Lo que hizo... para salvarme fue\nmuy... ilógico."
+ },
+ "st1c6481#8": {
+  "hash": "8a0183f17aec0db1",
+  "es": "Eso no es verdad..."
+ },
+ "st1c6482#0": {
+  "hash": "46caa35194634b19",
+  "es": "Detecto movimiento.\nLo pondré en el monitor."
+ },
+ "st1g6321#0": {
+  "hash": "248e2f01909ee67e",
+  "es": "¿Viola?\nAquí Nohman."
+ },
+ "st1g6321#1": {
+  "hash": "ee216577f38a141f",
+  "es": "Me he hecho con el objetivo Alpha\nmientras lo transportaban."
+ },
+ "st1g6321#10": {
+  "hash": "25ccd4c8d2f95b09",
+  "es": "Déjame luchar contra él."
+ },
+ "st1g6321#11": {
+  "hash": "22971ee7d0945a83",
+  "es": "Tranquila.\nBravo estará contigo pronto."
+ },
+ "st1g6321#12": {
+  "hash": "3108e9626eb56b69",
+  "es": "Escucha, Viola.\nDespués de esta misión,"
+ },
+ "st1g6321#13": {
+  "hash": "4c6316436b6ac8d5",
+  "es": "puedes quedarte con mi Selkis.\nTe lo daré."
+ },
+ "st1g6321#14": {
+  "hash": "051ba9aed0356ebf",
+  "es": "¿Así que prefieres tu juguete nuevo\nal frame que tanto adorabas?"
+ },
+ "st1g6321#15": {
+  "hash": "b581ff4242288242",
+  "es": "Anubis es soberbio. No te\nimaginas lo bueno que es."
+ },
+ "st1g6321#16": {
+  "hash": "c2e9fe17ffe51fc7",
+  "es": "La calidad de un Orbital Frame depende\nde lo bien que lo maneje su Frame Runner."
+ },
+ "st1g6321#17": {
+  "hash": "bdce7d6131e10d46",
+  "es": "El Frame Runner de Jehuty es..."
+ },
+ "st1g6321#2": {
+  "hash": "57aa29622e912630",
+  "es": "¿Y tú?"
+ },
+ "st1g6321#3": {
+  "hash": "ae001d723a0a3f3d",
+  "es": "Acaban de derribar a Nightraid..."
+ },
+ "st1g6321#4": {
+  "hash": "41e8b220ba12c20e",
+  "es": "Nebula...\nViola, ¿y tú?"
+ },
+ "st1g6321#5": {
+  "hash": "f0a00ad6ce3e1f46",
+  "es": "Los preparativos han terminado."
+ },
+ "st1g6321#6": {
+  "hash": "6b00e6712b01cd4d",
+  "es": "Las reparaciones automáticas\ntambién se han completado."
+ },
+ "st1g6321#7": {
+  "hash": "c8c94d60b0a6888d",
+  "es": "Sin problemas por ahora."
+ },
+ "st1g6321#8": {
+  "hash": "fb1032c6ef847d11",
+  "es": "Eso no es verdad.\nSolo se ha hecho el 50%."
+ },
+ "st1g6321#9": {
+  "hash": "952032ccc4a3f068",
+  "es": "Ya te lo dije,\npuedo hacerlo sin armas."
+ },
+ "st1g6322#0": {
+  "hash": "282d6d92cdc264de",
+  "es": "Ahí viene. Vuelvo\nal combate."
+ },
+ "st1g6322#1": {
+  "hash": "ec23fc6f5a2a50df",
+  "es": "Llegaré pronto."
+ },
+ "st1g6322#2": {
+  "hash": "092bce2f8e6fe85f",
+  "es": "Habré terminado para\ncuando llegues."
+ },
+ "st1g6322#3": {
+  "hash": "ca4539497624fe9e",
+  "es": "Déjame algo a mí.\nQuiero probar a Anubis."
+ },
+ "st1g6322#4": {
+  "hash": "a98df220d2aef081",
+  "es": "Tengo trabajo que hacer."
+ },
+ "st1g6322#5": {
+  "hash": "099013c7e8e7ab4d",
+  "es": "¡Esa presa es mía!"
+ },
+ "st1g6341#0": {
+  "hash": "27b2a400556c7114",
+  "es": "¿Será por aquí...?"
+ },
+ "st1g6341#1": {
+  "hash": "d7b347269670c930",
+  "es": "No hay nadie."
+ },
+ "st1g6342#1": {
+  "hash": "acbca6a4d97b71e6",
+  "es": "Detecto una presencia\nenemiga delante."
+ },
+ "st1g6421#1": {
+  "hash": "d6376593d966eedc",
+  "es": "Al menos es coherente."
+ },
+ "st1p6461#0": {
+  "hash": "c5d90ede64fc7fe7",
+  "es": "Uf... Uf..."
+ },
+ "st1p6461#1": {
+  "hash": "b128089fa95923f8",
+  "es": "Nunca pensé que un crío\ncomo tú estaría a mi altura."
+ },
+ "st1p6461#2": {
+  "hash": "1eb1637772e2a90f",
+  "es": "Tú te lo has buscado.\nMataste... No tenía elección..."
+ },
+ "st1p6461#3": {
+  "hash": "9cdf883f0eaf88bd",
+  "es": "¿Por qué no me matas ya?"
+ },
+ "st1p6461#4": {
+  "hash": "1588bec9fe10e4e0",
+  "es": "¡Lo haré! ¡Uaaa!"
+ },
+ "st1p6462#0": {
+  "hash": "1b63384a9e4a3134",
+  "es": "¿Por qué te has parado?\n¿Qué te pasa?"
+ },
+ "st1p6462#1": {
+  "hash": "1d20181511846d31",
+  "es": "Mátame."
+ },
+ "st1p6462#2": {
+  "hash": "6a1be1128edf5f0f",
+  "es": "No digas eso. No lo haré."
+ },
+ "st1p6462#3": {
+  "hash": "62b609e2a69a1ae3",
+  "es": "Ugh..."
+ },
+ "st1p6462#4": {
+  "hash": "ddd656ca93a5c765",
+  "es": "Más te vale recordar esto, chico."
+ },
+ "st1p6462#5": {
+  "hash": "efcc3537a7919631",
+  "es": "En combate, cada vez que dudes\nsi hacer algo o no..."
+ },
+ "st1p6462#6": {
+  "hash": "33159979008fd075",
+  "es": "...acabarás perdiendo."
+ },
+ "st1r6361#0": {
+  "hash": "b49c181d6421441f",
+  "es": "¡Eso es...!"
+ },
+ "st1r6361#1": {
+  "hash": "192b9d3453e7a133",
+  "es": "Lo estás haciendo muy bien."
+ },
+ "st1r6361#2": {
+  "hash": "a703aefdd55a23b1",
+  "es": "¡Cállate!"
+ },
+ "st1r6361#3": {
+  "hash": "cc201371f5b4d48a",
+  "es": "¿Qué sentiste cuando\nlos mataste?"
+ },
+ "st1r6361#4": {
+  "hash": "74a41b35b9b6b343",
+  "es": "Cállate... ¡Cállate!\n¡Uaaahh...!"
+ },
+ "st1r6361#5": {
+  "hash": "90bb8d0bf5b71fed",
+  "es": "Tú... tú mataste a mis amigos."
+ },
+ "st1r6361#6": {
+  "hash": "6ddc5d3aa5f93637",
+  "es": "¿Y qué si los maté?"
+ },
+ "st1r6361#8": {
+  "hash": "88b33c20df610b76",
+  "es": "¡Vamos, ven a por mí!"
+ },
+ "st1r6441#0": {
+  "hash": "b9060590680b83e9",
+  "es": "Se acabó..."
+ },
+ "st1r6491#0": {
+  "hash": "9c5dc5c419c11102",
+  "es": "Es él."
+ },
+ "st1r6501#0": {
+  "hash": "6cbdffd9cfdf7991",
+  "es": "Han recurrido\na medidas extremas."
+ },
+ "st1r6501#1": {
+  "hash": "fc0d0656fd6dbefb",
+  "es": "Van a destruirnos a nosotros\ny a toda la colonia."
+ },
+ "st1r6501#10": {
+  "hash": "3e82dee6b03ebd6e",
+  "es": "Tú ve a buscar las bombas."
+ },
+ "st1r6501#11": {
+  "hash": "1e263219b531fea8",
+  "es": "¿Yo?"
+ },
+ "st1r6501#12": {
+  "hash": "644a2f31ab5e20ec",
+  "es": "Te vi luchar contra el rojo.\nTengo que admitir que eres mejor que yo."
+ },
+ "st1r6501#13": {
+  "hash": "7a839bc52c6743cd",
+  "es": "Eres el único que\npuede salvar la colonia."
+ },
+ "st1r6501#14": {
+  "hash": "d6692a2795829c96",
+  "es": "No. No quiero hacerlo."
+ },
+ "st1r6501#15": {
+  "hash": "da1dd5f36d19d465",
+  "es": "Leo, escúchame."
+ },
+ "st1r6501#16": {
+  "hash": "d188b4adabbac78b",
+  "es": "Búscalas tú. No quiero\nmeterme más en esto."
+ },
+ "st1r6501#17": {
+  "hash": "dc4be2ed4dff4334",
+  "es": "Ya estoy harto. ¿Por qué yo?\n¿Por qué siempre yo?"
+ },
+ "st1r6501#18": {
+  "hash": "9c2ad1107de05128",
+  "es": "...Vamos."
+ },
+ "st1r6501#2": {
+  "hash": "bbe3640a5a0ba656",
+  "es": "¿A toda la colonia?"
+ },
+ "st1r6501#20": {
+  "hash": "d9917a6ffbeb75a4",
+  "es": "Vamos a buscarlas, Leo.\nEsto es algo que puedes hacer."
+ },
+ "st1r6501#22": {
+  "hash": "e692bf8e5a599fac",
+  "es": "Iré contigo."
+ },
+ "st1r6501#23": {
+  "hash": "29884adf37d57522",
+  "es": "Así que... vamos."
+ },
+ "st1r6501#24": {
+  "hash": "39bbcfe85ced0ff1",
+  "es": "No, no puedes.\nEs demasiado peligroso."
+ },
+ "st1r6501#25": {
+  "hash": "699a7a67e2ae51c1",
+  "es": "Solo tuvimos suerte\nde sobrevivir."
+ },
+ "st1r6501#26": {
+  "hash": "ee95b1aba5f45a1a",
+  "es": "La próxima vez quizá no tengamos tanta suerte,"
+ },
+ "st1r6501#27": {
+  "hash": "56fd43d4fd239529",
+  "es": "Lo sé. Y sé que\nme protegerás."
+ },
+ "st1r6501#28": {
+  "hash": "9dd9f8b0cfc2cdee",
+  "es": "¿Verdad?"
+ },
+ "st1r6501#3": {
+  "hash": "45aa3acc5ad685ea",
+  "es": "La colonia tiene una unidad de\ntransporte al puerto espacial."
+ },
+ "st1r6501#30": {
+  "hash": "1c09302b26707528",
+  "es": "Te hace falta esto."
+ },
+ "st1r6501#31": {
+  "hash": "697600ce57152eb5",
+  "es": "¿Celvice...?"
+ },
+ "st1r6501#32": {
+  "hash": "2fabd0a361a4a0a0",
+  "es": "¡¡Celvice!!"
+ },
+ "st1r6501#33": {
+  "hash": "3637925b39fd993d",
+  "es": "Y sé que\nme protegerás."
+ },
+ "st1r6501#36": {
+  "hash": "99775a4a76f77b91",
+  "es": "Hora de zanjar nuestra lucha. Ven\nal puerto espacial. Te estaré esperando."
+ },
+ "st1r6501#38": {
+  "hash": "c8ed18c15413c466",
+  "es": "¿Podrías... cuidar\nde Celvice por mí?"
+ },
+ "st1r6501#39": {
+  "hash": "b061b96a5378fba8",
+  "es": "Lo haré. Cuidaré de ella.\nTú ocúpate de lo que tienes que hacer."
+ },
+ "st1r6501#4": {
+  "hash": "0971ff0f279bab75",
+  "es": "Han colocado varios\nexplosivos allí."
+ },
+ "st1r6501#40": {
+  "hash": "f8ac8be6c6284529",
+  "es": "ADA. Hora de irse."
+ },
+ "st1r6501#41": {
+  "hash": "dde6e2c7cefc68b1",
+  "es": "Recibido.\nJehuty listo para la acción."
+ },
+ "st1r6501#5": {
+  "hash": "8d89fae15d349683",
+  "es": "Si estallan, la colonia perderá su rotación\norbital y caerá sobre Júpiter."
+ },
+ "st1r6501#7": {
+  "hash": "abb50ffba884d270",
+  "es": "Así de importante es para\nellos ese Orbital Frame."
+ },
+ "st1r6501#8": {
+  "hash": "dbfd2764ec4a5c78",
+  "es": "Así que me gustaría que trabajaras\npara nosotros una vez más."
+ },
+ "ta1a2a21#0": {
+  "hash": "eedc2bc5bac0334a",
+  "es": "¿Qué te parece esto?"
+ },
+ "ta1a2a22#0": {
+  "hash": "57c37e02416ed305",
+  "es": "¡No funciona!"
+ },
+ "ta1a2a23#0": {
+  "hash": "6f8e4dae5f91373c",
+  "es": "Ja, ja, ja. Vamos.\n¿Te rindes?"
+ },
+ "ta1a2a24#0": {
+  "hash": "f0f8532a2c25f2a9",
+  "es": "¿Cómo demonios puedes decir\nque es un modelo nuevo?"
+ },
+ "ta1a2a25#0": {
+  "hash": "16a40949bc9aa73e",
+  "es": "Lo estás haciendo bien."
+ },
+ "ta1a2a26#0": {
+  "hash": "0d5fc4a0c60d190f",
+  "es": "Te he subestimado."
+ },
+ "ta1a2a2a#0": {
+  "hash": "dcaae52f03528139",
+  "es": "Ya te tengo."
+ },
+ "ta1a2a2b#0": {
+  "hash": "332fe2f17a257d00",
+  "es": "Voy a hacerte volar en pedazos."
+ },
+ "ta1c2091#0": {
+  "hash": "c1a92e81803d1e52",
+  "es": "Detecto signos vitales.\nAmpliaré la imagen del sujeto."
+ },
+ "ta1c2121#0": {
+  "hash": "93a04ab475564cc1",
+  "es": "¡Celvice!"
+ },
+ "ta1c2121#1": {
+  "hash": "0deebf4ae73a4718",
+  "es": "¿Conoce a esta persona?"
+ },
+ "ta1c2121#2": {
+  "hash": "c1750f90077b19d6",
+  "es": "Sí..."
+ },
+ "ta1c2221#0": {
+  "hash": "467ea9f59ca90a62",
+  "es": "Confirmada la reacción ETR\ndel objetivo."
+ },
+ "ta1c2221#1": {
+  "hash": "ddbd6932ec21ae09",
+  "es": "Su generador principal\nha dejado de funcionar."
+ },
+ "ta1c2221#2": {
+  "hash": "0fa4a187e3a04c29",
+  "es": "Lo hemos conseguido..."
+ },
+ "ta1c2222#0": {
+  "hash": "34d7279ea4c6ac45",
+  "es": "Detecto signos vitales\ndentro del objetivo."
+ },
+ "ta1c2222#1": {
+  "hash": "f695788da9a34364",
+  "es": "Parece que los ocupantes\nsiguen con vida."
+ },
+ "ta1c2222#10": {
+  "hash": "0cce74e850546139",
+  "es": "¿Qué sentido tiene atacar a quienes\nno tienen intención de atacarnos?"
+ },
+ "ta1c2222#11": {
+  "hash": "5fe3e0b1fd23eafc",
+  "es": "¿Desea que le\nexponga el motivo?"
+ },
+ "ta1c2222#12": {
+  "hash": "ca9f1a045c05d4fe",
+  "es": "¡No te molestes!"
+ },
+ "ta1c2222#13": {
+  "hash": "3e0cdfe156a1d2da",
+  "es": "Debo concluir que su reacción\nes extremadamente ilógica."
+ },
+ "ta1c2222#14": {
+  "hash": "36758c01354930d1",
+  "es": "Los actos ilógicos de personas\nsin la capacidad suficiente"
+ },
+ "ta1c2222#15": {
+  "hash": "a87ae3f906434fa8",
+  "es": "dificultan mucho\ncumplir la misión."
+ },
+ "ta1c2222#16": {
+  "hash": "f636b237722e1bf5",
+  "es": "¿Quieres decir que no valgo para esto, así\nque debo callarme y obedecer órdenes?"
+ },
+ "ta1c2222#17": {
+  "hash": "c2e862b228a5d41a",
+  "es": "Es lo más\nsensato."
+ },
+ "ta1c2222#18": {
+  "hash": "bb7c5f19dbf72c5a",
+  "es": "¡Eso dices tú!"
+ },
+ "ta1c2222#2": {
+  "hash": "be18b9e370dbcc0d",
+  "es": "Libero el cursor de fijación.\nEl objetivo será destruido."
+ },
+ "ta1c2222#3": {
+  "hash": "fe0623e5d35333d3",
+  "es": "¿Destruirlo? ¿Por qué?\n¡Ya no pueden luchar!"
+ },
+ "ta1c2222#4": {
+  "hash": "ebed78710a9808ba",
+  "es": "Su pregunta no tiene lógica.\n¿Por qué no destruirlo?"
+ },
+ "ta1c2222#5": {
+  "hash": "33e7f2f024aa97a8",
+  "es": "¿Por qué debería matar cuando\nno hay motivo para ello?"
+ },
+ "ta1c2222#6": {
+  "hash": "3ce61685c00de555",
+  "es": "Calculo 17 razones claras\npara hacerlo."
+ },
+ "ta1c2222#7": {
+  "hash": "9d4316e434934915",
+  "es": "La más urgente: el objetivo podría\nhacerse con otro Orbital Frame"
+ },
+ "ta1c2222#8": {
+  "hash": "b687602d68f47e74",
+  "es": "y volver al combate\nen otro momento y lugar."
+ },
+ "ta1c2222#9": {
+  "hash": "b21cc23a9e3b86b8",
+  "es": "¡Cállate!\nMe niego a destruirlo."
+ },
+ "ta1c2231#0": {
+  "hash": "f79e5e18e8f5dffc",
+  "es": "El objetivo se acerca al límite del alcance.\nQuedan dos segundos."
+ },
+ "ta1c2231#1": {
+  "hash": "52f8daadde041728",
+  "es": "Puede que hables como un humano, pero sigues\nsiendo un ordenador sin corazón, ¿verdad?"
+ },
+ "ta1c2231#2": {
+  "hash": "6d3b7cb9431877c5",
+  "es": "Correcto.\n¿Cuál es el problema?"
+ },
+ "ta1c2231#3": {
+  "hash": "574f906f06753d62",
+  "es": "Nada, olvídalo."
+ },
+ "ta1g2061#0": {
+  "hash": "83bfe81569944d5d",
+  "es": "¡Maldito seas!"
+ },
+ "ta1g2161#0": {
+  "hash": "75cc67a3ac1dde7a",
+  "es": "Tú eres el Frame Runner de Bravo."
+ },
+ "ta1g2161#1": {
+  "hash": "b22df6ff8a450ee5",
+  "es": "Ese frame no es un juguete para críos,\n¡sal de ahí ahora mismo!"
+ },
+ "ta1g2161#2": {
+  "hash": "ec8b33c67acf4469",
+  "es": "¡No soy un crío!"
+ },
+ "ta1g2161#3": {
+  "hash": "b174e4bd342ba8eb",
+  "es": "Esa es la prueba de que\nsigues siendo un crío."
+ },
+ "ta1g2161#5": {
+  "hash": "0456b002daa4d9de",
+  "es": "Creía que con una mujer\nbastaría de sobra..."
+ },
+ "ta1g2161#6": {
+  "hash": "30b58bde3bc7b95f",
+  "es": "Muy bien. Soy tu objetivo."
+ },
+ "ta1g2181#0": {
+  "hash": "02bead640e170c53",
+  "es": "Fui suave contigo\nporque eres un crío."
+ },
+ "ta1g2181#1": {
+  "hash": "dbf53db6b38b8050",
+  "es": "¡Se acabó!"
+ },
+ "ta1r2081#0": {
+  "hash": "aae1d83a52ea5b6f",
+  "es": "Papá..."
+ },
+ "ta1r2081#1": {
+  "hash": "8f39da9a7eb40d6a",
+  "es": "No detecto actividad humana."
+ },
+ "ta1r2081#2": {
+  "hash": "8d1e191e7e929399",
+  "es": "¿Quieres decir que están todos muertos?"
+ },
+ "ta1r2081#3": {
+  "hash": "e68bd24293e30e82",
+  "es": "Es una posibilidad,\npero es más lógico"
+ },
+ "ta1r2081#4": {
+  "hash": "934b1af7487e8cf1",
+  "es": "suponer que los residentes\nfueron evacuados antes."
+ },
+ "ta1r2141#1": {
+  "hash": "731fc767dbdccc85",
+  "es": "Eres tú, ¿verdad, Celvice?\n¿Estás bien, Celvice?"
+ },
+ "ta1r2141#10": {
+  "hash": "659520aa59971ac6",
+  "es": "¿Qué pasa, estás loca?"
+ },
+ "ta1r2141#11": {
+  "hash": "2a90a435def1b884",
+  "es": "¡De todos modos no habrá nadie!"
+ },
+ "ta1r2141#12": {
+  "hash": "ab4fdfa3cb4d47b4",
+  "es": "¡Pero... no puedes saberlo seguro\nsi no vas!"
+ },
+ "ta1r2141#13": {
+  "hash": "8ff3a3ba799adbf8",
+  "es": "¡Olvídate de ellos!"
+ },
+ "ta1r2141#14": {
+  "hash": "8331257bc0135c18",
+  "es": "No podrás hacer nada\nsi tú también mueres."
+ },
+ "ta1r2141#15": {
+  "hash": "f39fe6ffe26f545a",
+  "es": "¡Pues todavía no he muerto!"
+ },
+ "ta1r2141#16": {
+  "hash": "66887fbae3256633",
+  "es": "El enemigo tiene nuestra posición y distancia.\nDetecto un segundo disparo hacia nosotros."
+ },
+ "ta1r2141#17": {
+  "hash": "aefc16c5fd646dbc",
+  "es": "Ay... ¡¿No te lo dije?!"
+ },
+ "ta1r2141#2": {
+  "hash": "5cc270674ff1569f",
+  "es": "¿Leo? ¿Eres tú, Leo?"
+ },
+ "ta1r2141#3": {
+  "hash": "fd5344cae156ee76",
+  "es": "¿Qué haces aquí?"
+ },
+ "ta1r2141#5": {
+  "hash": "47a8a952593da953",
+  "es": "¡Tienes que ir al refugio\ninmediatamente!"
+ },
+ "ta1r2141#6": {
+  "hash": "913fa979531c4735",
+  "es": "Pero puede que los niños sigan\nen la iglesia, así que..."
+ },
+ "ta1r2141#7": {
+  "hash": "9cc9db72297d8bbd",
+  "es": "¿Vas a la iglesia?\n¡Es imposible!"
+ },
+ "ta1r2141#8": {
+  "hash": "a9b886d810e7a7a7",
+  "es": "¡Intentarlo siquiera es un suicidio!"
+ },
+ "ta1r2141#9": {
+  "hash": "187a2f6e42816682",
+  "es": "Pero..."
+ },
+ "ta2c2261#0": {
+  "hash": "eff41d6eb1299a83",
+  "es": "Detecto varios Orbital Frames de\nproducción en serie detrás de nosotros."
+ },
+ "ta2c2261#1": {
+  "hash": "3ae9bc937b6f04cd",
+  "es": "Están cerca\nde la iglesia."
+ },
+ "ta2c2261#2": {
+  "hash": "37161092731981a5",
+  "es": "...¡Celvice!"
+ },
+ "ta2c2261#3": {
+  "hash": "af19fe4d0738237e",
+  "es": "Enemigo con un programa reforzado.\nTenga cuidado."
+ },
+ "ta2c2271#0": {
+  "hash": "1b91fc179f2f272f",
+  "es": "Hemos obtenido el controlador\ndel arma secundaria."
+ },
+ "ta2c2271#1": {
+  "hash": "9415adfd1e4d3ad1",
+  "es": "Podremos usarla cuando\nconsigamos munición."
+ },
+ "ta2c2271#2": {
+  "hash": "3b0dd63aeb3bb449",
+  "es": "Bueno, ahora tenemos que\nconseguir munición..."
+ },
+ "ta2c2271#3": {
+  "hash": "567b09a6283de38d",
+  "es": "Obtenga munición de los\nenemigos o de las cajas de objetos."
+ },
+ "ta2c2271#4": {
+  "hash": "c2d7bd35b786c105",
+  "es": "Para usar el arma secundaria,\npulse el botón ¡û a distancia."
+ },
+ "ta2c4511#0": {
+  "hash": "ae0790a3f3da110e",
+  "es": "En esta zona hay un enemigo\ncon un programa reforzado."
+ },
+ "ta2c4511#1": {
+  "hash": "e886c4c7f61a14c0",
+  "es": "Tendrá el mismo aspecto, pero su capacidad\nde combate será muy superior."
+ },
+ "ta2c9281#0": {
+  "hash": "64cc4578957585ee",
+  "es": "Signos vitales detectados"
+ },
+ "ta2c9281#1": {
+  "hash": "2bc646e3d0eab2ee",
+  "es": "cerca de la iglesia donde\nrecogió a su pasajera."
+ },
+ "ta2c9281#2": {
+  "hash": "ed0506c2eca43f9a",
+  "es": "Alguien debe de haber huido\nen esa dirección."
+ },
+ "ta2c9281#3": {
+  "hash": "98d416179323f8b1",
+  "es": "Leo, ¿podemos ir a salvarlos?"
+ },
+ "ta2c9281#4": {
+  "hash": "23788bb6af66a6f3",
+  "es": "Marcaré el edificio\ncon signos vitales."
+ },
+ "ta2g2321#0": {
+  "hash": "5e2933ae7b2ecdea",
+  "es": "¿Estás bien?\n¿Te has hecho daño?"
+ },
+ "ta2g2321#2": {
+  "hash": "76a80dff3929e571",
+  "es": "Así que no encontraste\na nadie ahí fuera."
+ },
+ "ta2g2321#3": {
+  "hash": "c3c4bf8f6cb5cd1c",
+  "es": "No. Lo siento."
+ },
+ "ta2g2321#4": {
+  "hash": "04bc301e2065a427",
+  "es": "¿Por qué?"
+ },
+ "ta2g2321#5": {
+  "hash": "47fa3c7b69d0459d",
+  "es": "No debí gritarte."
+ },
+ "ta2g2321#6": {
+  "hash": "fe25fb5ad3d0241c",
+  "es": "No te preocupes.\nYo también te grité."
+ },
+ "ta2g2321#7": {
+  "hash": "2efbbc9d2bf9b8c1",
+  "es": "Pero quiero que recuerdes una cosa:\ntambién tienes que cuidar tu propia vida."
+ },
+ "ta2g2321#9": {
+  "hash": "c1351029a1f72c52",
+  "es": "Lograste escapar,\n¿verdad, papá?"
+ },
+ "ta2r2281#0": {
+  "hash": "f64bd9ecfd47a32d",
+  "es": "¡Celvice!\n¡Por aquí, rápido!"
+ },
+ "ta2r2281#1": {
+  "hash": "fb59bda16654d5fe",
+  "es": "¡Vamos, date prisa!"
+ },
+ "tb1c3071#0": {
+  "hash": "9be9e5fb71ef8ab4",
+  "es": "Detecto una trampa vectorial."
+ },
+ "tb1c3071#1": {
+  "hash": "bfba8db78f908686",
+  "es": "Parece que hay un objeto\noculto en esta zona."
+ },
+ "tb1c3071#10": {
+  "hash": "cf268a0530a07262",
+  "es": "Dilo de forma más sencilla."
+ },
+ "tb1c3071#11": {
+  "hash": "ff7a84c64236c637",
+  "es": "Destruya los objetos llamados Porter de esta\nzona, y entonces ocurrirá algo."
+ },
+ "tb1c3071#12": {
+  "hash": "016383a080d8e5d1",
+  "es": "Es todo lo que quería saber."
+ },
+ "tb1c3071#13": {
+  "hash": "2739187ff186e768",
+  "es": "Hay varios Porters."
+ },
+ "tb1c3071#14": {
+  "hash": "8e88eeca65ac0a96",
+  "es": "Son pequeños y, además,\nno se pueden fijar,"
+ },
+ "tb1c3071#15": {
+  "hash": "00d112a0eceb55ee",
+  "es": "así que tenga cuidado\nal buscarlos."
+ },
+ "tb1c3071#2": {
+  "hash": "dbe7c6ae35064dce",
+  "es": "¿Trampa vectorial?"
+ },
+ "tb1c3071#3": {
+  "hash": "76758fd075bd6c51",
+  "es": "Es una de las tecnologías\nrelacionadas con el Metatron."
+ },
+ "tb1c3071#4": {
+  "hash": "73289e6082f06397",
+  "es": "El almacén de armas de Jehuty y la catapulta\nUhlenbeck son algunas de sus aplicaciones."
+ },
+ "tb1c3071#5": {
+  "hash": "8ae6c49c60e59fe7",
+  "es": "Al aplicar alta energía y rotación\na gran velocidad al Metatron,"
+ },
+ "tb1c3071#6": {
+  "hash": "89b3cb3c7e7cf8ae",
+  "es": "se observa un efecto por el que el espacio\nfalso es atraído en la dirección de su eje."
+ },
+ "tb1c3071#7": {
+  "hash": "715253a64e35f6c2",
+  "es": "Si a la vez se coloca un objeto en el punto\nde equilibrio de compresión y expansión,"
+ },
+ "tb1c3071#8": {
+  "hash": "cb76a9db28d449ca",
+  "es": "el espacio recuperará su estado normal..."
+ },
+ "tb1c3071#9": {
+  "hash": "e7e86265f12c5651",
+  "es": "Basta.\nNo te entiendo."
+ },
+ "tb1c3081#0": {
+  "hash": "128bb589dd6c21cd",
+  "es": "Esto es lo que usaremos."
+ },
+ "tb1c3081#1": {
+  "hash": "8fe42228a15afd8e",
+  "es": "Un arma primitiva de la Tierra.\nDebería funcionar."
+ },
+ "tb1c3081#2": {
+  "hash": "eac50553811aaaad",
+  "es": "Muy bien.\nVamos al pozo."
+ },
+ "tb1c4541#0": {
+  "hash": "13061be3b4962258",
+  "es": "Empezaré a controlar\nel Raptor."
+ },
+ "tb1c4541#1": {
+  "hash": "d06f2fd7311b44c0",
+  "es": "Enviaremos el Raptor a las\ninstalaciones de las antenas del EPS."
+ },
+ "tb1c4541#2": {
+  "hash": "ffd7b75dbd0b95a5",
+  "es": "¿De acuerdo? Al llegar en piloto automático,\nusted tendrá que manejarlo."
+ },
+ "tb1c4541#3": {
+  "hash": "e61151c4e8fa273b",
+  "es": "Habrá un combate."
+ },
+ "tb1c4541#4": {
+  "hash": "bda900802eaae45b",
+  "es": "¿Un combate entre Raptors iguales?"
+ },
+ "tb1c4541#5": {
+  "hash": "8b37f1a0827760a1",
+  "es": "Los Raptors no reconocen\nal enemigo por la vista."
+ },
+ "tb1c4541#6": {
+  "hash": "a0aa0d5b0bfa15ab",
+  "es": "Muy bien.\nHagámoslo."
+ },
+ "tb1c4541#7": {
+  "hash": "a882d0dd0c3d9045",
+  "es": "Por cierto, si destruyen nuestro\nRaptor teledirigido,"
+ },
+ "tb1c4541#8": {
+  "hash": "31b6141bcae3565a",
+  "es": "podría causar daños fatales a la\ninteligencia artificial de Jehuty."
+ },
+ "tc1a5a81#0": {
+  "hash": "eb8c8e20507948e0",
+  "es": "Vámonos de aquí por ahora."
+ },
+ "tc1c5371#0": {
+  "hash": "6f41ae7896e8a0ee",
+  "es": "Parece que en esta zona hay un enemigo que\nno podemos definir por sus rasgos visuales."
+ },
+ "tc1c5371#2": {
+  "hash": "4e4bec97f04d9c33",
+  "es": "El enemigo está en modo sigilo."
+ },
+ "tc1c5371#3": {
+  "hash": "d9cde904434e8ebc",
+  "es": "No podemos fijar a un enemigo\nen modo sigilo."
+ },
+ "tc1c5371#4": {
+  "hash": "14db079f0927a955",
+  "es": "Le recomiendo no acercarse a él\nhasta que encontremos una solución."
+ },
+ "vr1a8001#0": {
+  "hash": "67aff08ebbf0d235",
+  "es": "Comenzaré a explicar \"movimiento\"."
+ },
+ "vr1a8002#0": {
+  "hash": "3dfd5e7060232043",
+  "es": "Avance, retroceda y muévase a derecha e\nizquierda con el stick analógico izquierdo."
+ },
+ "vr1a8003#0": {
+  "hash": "1fc5d493a476ff91",
+  "es": "El botón ¢¤ sirve para subir\no ascender,"
+ },
+ "vr1a8003#1": {
+  "hash": "d3b01e59a8b1f050",
+  "es": "y el botón ¡ß, para descender."
+ },
+ "vr1a8004#0": {
+  "hash": "b7d862fa3dfd1a1d",
+  "es": "El método de ataque varía según\nla distancia al enemigo."
+ },
+ "vr1a8005#0": {
+  "hash": "c63c1d5f809f799b",
+  "es": "Esta es la situación de corta distancia."
+ },
+ "vr1a8006#0": {
+  "hash": "cd27ac9135aa132b",
+  "es": "Esta es la situación de larga distancia."
+ },
+ "vr1a8007#0": {
+  "hash": "770cd3bb6e167548",
+  "es": "Aquí termina la\nexplicación de \"movimiento\"."
+ },
+ "vr1a8021#0": {
+  "hash": "3cd1ebbd47484a2f",
+  "es": "Comenzaré a explicar\n\"dash\" y \"burst\"."
+ },
+ "vr1a8022#0": {
+  "hash": "10e0d76b65441acd",
+  "es": "Hará un \"dash\" si pulsa\nel botón R2 mientras se mueve."
+ },
+ "vr1a8023#0": {
+  "hash": "9ef0adc4c8f727c1",
+  "es": "Es útil para moverse rápido\ny esquivar un ataque enemigo."
+ },
+ "vr1a8024#0": {
+  "hash": "2d896a60e4fc6620",
+  "es": "Si no se está moviendo, puede iniciar\nun \"burst\" pulsando el botón R2."
+ },
+ "vr1a8025#0": {
+  "hash": "b9cbc26211b5fde3",
+  "es": "Más adelante explicaré\ncómo usar el \"burst\"."
+ },
+ "vr1a8026#0": {
+  "hash": "062dd1c826fbcf08",
+  "es": "Aquí termina la explicación\nde \"dash\" y \"burst\"."
+ },
+ "vr1a8041#0": {
+  "hash": "e0593a6ec3598683",
+  "es": "Comenzaré a explicar\n\"ataque normal\"."
+ },
+ "vr1a8042#0": {
+  "hash": "57c09ddc69f426cc",
+  "es": "Si el objetivo está lejos, pulse\nel botón ¢¢ para disparar."
+ },
+ "vr1a8043#0": {
+  "hash": "dbe60d3dcc4d2d49",
+  "es": "A corta distancia,"
+ },
+ "vr1a8043#1": {
+  "hash": "ddfd204dfa9289b0",
+  "es": "iniciará un ataque cortante\npulsando el botón ¢¢."
+ },
+ "vr1a8044#0": {
+  "hash": "0a8801a82db78ec6",
+  "es": "Aquí termina la explicación\nde \"ataque normal\"."
+ },
+ "vr1a8061#0": {
+  "hash": "b3fce29a7bb85a96",
+  "es": "Comenzaré a explicar\n\"ataque en dash\"."
+ },
+ "vr1a8062#0": {
+  "hash": "e4a28792f30d80f0",
+  "es": "Durante un dash\na larga distancia,"
+ },
+ "vr1a8062#1": {
+  "hash": "66cb5fa11a6a6c9d",
+  "es": "pulse el botón ¢¢\npara lanzar un Dash Shot."
+ },
+ "vr1a8063#0": {
+  "hash": "06d869e0afd5027f",
+  "es": "Durante un dash\na corta distancia,"
+ },
+ "vr1a8063#1": {
+  "hash": "cdf585df65e9aaf3",
+  "es": "pulse el botón ¢¢\npara iniciar un Dash Slash."
+ },
+ "vr1a8064#0": {
+  "hash": "f28dfc9f02ef0b27",
+  "es": "Aquí termina la explicación\nde \"ataque en dash\"."
+ },
+ "vr1a8081#0": {
+  "hash": "4e2e794bd1d5a8e0",
+  "es": "Comenzaré a explicar\n\"ataque en burst\"."
+ },
+ "vr1a8082#0": {
+  "hash": "96d5537500880fca",
+  "es": "Durante un burst\na larga distancia,"
+ },
+ "vr1a8082#1": {
+  "hash": "61abe1ce67f8aa95",
+  "es": "pulse el botón ¢¢\npara lanzar un Burst Shot."
+ },
+ "vr1a8083#0": {
+  "hash": "859e44f8c8ecfd1d",
+  "es": "Durante un burst\na corta distancia,"
+ },
+ "vr1a8083#1": {
+  "hash": "d72dc1d62456a1c1",
+  "es": "pulse el botón ¢¢\npara iniciar un Burst Slash."
+ },
+ "vr1a8084#0": {
+  "hash": "f8b9793e46be7243",
+  "es": "Aquí termina la explicación\nde \"ataque en burst\"."
+ },
+ "vr1a8101#0": {
+  "hash": "bba73d158d74a3bd",
+  "es": "Comenzaré a explicar \"defensa\"."
+ },
+ "vr1a8102#0": {
+  "hash": "51fcda835a1e0b9c",
+  "es": "Pulse el botón R1 para adoptar\nuna postura de defensa"
+ },
+ "vr1a8102#1": {
+  "hash": "968c2227b64b043a",
+  "es": "que le protegerá de\nlos ataques enemigos."
+ },
+ "vr1a8103#0": {
+  "hash": "7e57195f7eb77376",
+  "es": "Recuerde: no puede protegerse de un\nataque en burst ni de un lanzamiento."
+ },
+ "vr1a8104#0": {
+  "hash": "2f42e2b28b31c8d2",
+  "es": "Aquí termina la explicación\nde \"defensa\"."
+ },
+ "vr1a8121#0": {
+  "hash": "161f42dda31c2ba5",
+  "es": "Comenzaré a explicar\n\"agarrar y lanzar\"."
+ },
+ "vr1a8122#0": {
+  "hash": "7d58880e68615085",
+  "es": "Si está cerca de un enemigo,"
+ },
+ "vr1a8122#1": {
+  "hash": "ca244fd56f5da0a2",
+  "es": "puede agarrarlo\npulsando el botón ¡û."
+ },
+ "vr1a8123#0": {
+  "hash": "e529e5cd8ee6d9a1",
+  "es": "Mientras sujeta al enemigo,"
+ },
+ "vr1a8123#1": {
+  "hash": "cf37a363ddbda95d",
+  "es": "puede elegir en qué dirección lanzarlo\ncon el stick analógico izquierdo."
+ },
+ "vr1a8124#0": {
+  "hash": "f2efe4c6925e9944",
+  "es": "Al soltar el botón ¡û,\nel enemigo saldrá lanzado."
+ },
+ "vr1a8125#0": {
+  "hash": "019e422f8e6c8426",
+  "es": "Aquí termina la explicación\nde \"agarrar y lanzar\"."
+ },
+ "vr1a8141#0": {
+  "hash": "f3cdc65599ef44af",
+  "es": "Comenzaré a explicar \"fijar\"."
+ },
+ "vr1a8142#0": {
+  "hash": "cf41f80c57bacd75",
+  "es": "Si está a cierta distancia\ndel enemigo"
+ },
+ "vr1a8142#1": {
+  "hash": "ed3daebea176d8b0",
+  "es": "y pulsa el botón L2,\nfijará el objetivo."
+ },
+ "vr1a8143#0": {
+  "hash": "4a7720034a6fb2a8",
+  "es": "Con un objetivo fijado,\nse moverá alrededor de él."
+ },
+ "vr1a8144#0": {
+  "hash": "6969e26b5bbcd4ec",
+  "es": "Con un objetivo fijado, puede\nfijar otro objetivo distinto"
+ },
+ "vr1a8144#1": {
+  "hash": "ddd1dd4cf17fc1e0",
+  "es": "pulsando el botón L2.\n"
+ },
+ "vr1a8145#0": {
+  "hash": "91407a0f2c0bc813",
+  "es": "Pulse el botón L1\npara dejar de fijar."
+ },
+ "vr1a8146#0": {
+  "hash": "dbf3e67c8ceea645",
+  "es": "Aquí termina la explicación\nde \"fijar\"."
+ },
+ "vr1a8161#0": {
+  "hash": "2c8060402ef78423",
+  "es": "Comenzaré a explicar \"huida\"."
+ },
+ "vr1a8162#0": {
+  "hash": "e9569d81f3e846f9",
+  "es": "Si quiere huir del combate,\nprimero debe dejar de fijar."
+ },
+ "vr1a8163#0": {
+  "hash": "07412aafd5a2c41e",
+  "es": "Después de dejar de fijar, diríjase\nen dirección contraria al enemigo."
+ },
+ "vr1a8164#0": {
+  "hash": "714d08fe4b4a0605",
+  "es": "Cuando el contador de huida llegue a cero,\nindicará que ha huido con éxito."
+ },
+ "vr1a8165#0": {
+  "hash": "4233fd262e669b0a",
+  "es": "Aquí termina la explicación\nde \"huida\"."
+ },
+ "vr1a8171#0": {
+  "hash": "02496c775a683a9d",
+  "es": "Comenzaré a explicar\n\"control de cámara\"."
+ },
+ "vr1a8172#0": {
+  "hash": "a7b013c04b82fca8",
+  "es": "Cuando no está en combate,\nla cámara se mueve"
+ },
+ "vr1a8172#1": {
+  "hash": "0a55c0b7865d2ac2",
+  "es": "en la dirección que indique\nel stick analógico izquierdo."
+ },
+ "vr1a8173#0": {
+  "hash": "e95c06bac20cd97c",
+  "es": "Si suelta el stick analógico izquierdo,\nla cámara se orienta hacia Jehuty."
+ },
+ "vr1a8174#0": {
+  "hash": "ebdfe402334e43b0",
+  "es": "También puede cambiar la dirección de\nla cámara con el stick analógico derecho."
+ },
+ "vr1a8175#0": {
+  "hash": "ecfd28713ec66dab",
+  "es": "Al atacar, puede apuntar a un punto\nconcreto con el stick analógico derecho."
+ },
+ "vr1a8176#0": {
+  "hash": "de7d3f20b53b07f8",
+  "es": "Aquí termina la explicación\nde \"control de cámara\"."
+ },
+ "vr1a8181#0": {
+  "hash": "f720e569070c1153",
+  "es": "Aquí termina la sesión\nde entrenamiento."
+ }
+}

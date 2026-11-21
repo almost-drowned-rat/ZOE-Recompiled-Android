@@ -12,6 +12,7 @@
  */
 
 #include "ps2host/host.h"
+#include "ps2host/input_bind.h"
 #include "ps2host/iop_vm.h"
 #include "ps2host/memory.h"
 #include "ps2host/run.h"
@@ -29,10 +30,16 @@
 #include <utility>
 #include <vector>
 
+void DubSampleScene();              // dub.cpp: SUBTITLE TIMING's scene, sampled each frame (FrameEnd)
+std::string DubJapaneseLine(const std::string& text);   // dub.cpp: the Japanese line a "#J" subtitle stands for
+void DescriptionsInSpanish();       // dub.cpp: SPANISH's descriptions in the executable's tables
 void F_00450C40(lifted::Context& c);
 void F_00450F58(lifted::Context& c);
 void F_004597F0(lifted::Context& c);
 void F_00459908(lifted::Context& c);
+void F_0044C7D0(lifted::Context& c);
+void F_00414B68(lifted::Context& c);
+void F_003E6188(lifted::Context& c);
 void F_00282A20(lifted::Context& c);
 void F_00420E88(lifted::Context& c);
 void F_00420FA0(lifted::Context& c);
@@ -141,14 +148,33 @@ void CameraView(lifted::Context& c) {
 
 // 3D drawn (0x004597F0, a 3D object's draw): the picture is the wide one while it was in the last few blanks;
 // screens without it (title, menus on black, GAME OVER, movies) stand 4:3 between bars.
+// A gap in the 3D alone is no 4:3 screen (2026-11-20 issue 5: the window jumped 16:9 <-> 4:3 at every load, hitch
+// or shader wait while the cameras stayed wide): 4:3 only once the game went on stepping without 3D (its frame
+// counter 10 steps past the last 3D draw) - or, should a screen not step that counter, after 2 s without 3D.
 std::atomic<u64> g_last_3d_ns{0};
+std::atomic<u32> g_last_3d_step{0};
 void Object3d(lifted::Context& c) {
     g_last_3d_ns.store(ps2host::LastVblankNs(), std::memory_order_relaxed);
+    g_last_3d_step.store(Read32(kFrameCounter), std::memory_order_relaxed);
     F_004597F0(c);
 }
+// The maintainer's choice (2026-11-20, variant B): the chosen shape ALWAYS - play, in-engine scenes, menus, loads -
+// except while a movie runs (its pictures are 4:3, made so): 4:3 between bars from its first picture to ten blanks
+// after its last (the native decoder's, LastMoviePictureNs). The 3D sign above stays for the HUD's own placing.
 bool ShowsWide() {
+    if (ps2host::SettingOn("stretch_cutscenes", false)) return true;      // STRETCH CUTSCENES ON: never 4:3
+    const u64 movie = ps2host::LastMoviePictureNs();
+    return !movie || ps2host::LastVblankNs() - movie > 10u * 16683334u;
+}
+
+// 3D on the screen (a 3D draw within the game's last 10 steps, or 0.5 s): the HUD's pieces then keep to their edge
+// (HudSprite / HudText / windows); a screen of 2D alone (the title, menus on black) is placed about the centre as
+// one - its logo's pieces no longer pulled to the left edge in a wide shape (his variant B, 2026-11-20).
+bool Shows3d() {
     const u64 last = g_last_3d_ns.load(std::memory_order_relaxed);
-    return last && ps2host::LastVblankNs() - last <= 3u * 16683334u;  // three blanks
+    if (!last) return false;
+    if (ps2host::LastVblankNs() - last >= 30u * 16683334u) return false;
+    return Read32(kFrameCounter) - g_last_3d_step.load(std::memory_order_relaxed) < 10u;
 }
 
 // ---- HUD (M7 step 5, part 2): 0x00459908(object), a HUD sprite's draw - its packet built from the object
@@ -204,6 +230,7 @@ float WideS() { return (4.0f / 3.0f) / ps2host::WideAspect(); }
 // Where x lands for a piece anchored by its centre `centre` (the zones, as HudSprite): the map's offset b in
 // x' = S x + b.
 float ZoneOffset(float centre, float s) {
+    if (!Shows3d()) return 256.0f * (1.0f - s);     // a 2D screen: about the centre
     if (centre < 215.0f) return 0.0f;
     if (centre >= 297.0f) return 512.0f * (1.0f - s);
     return 256.0f * (1.0f - s);
@@ -226,11 +253,70 @@ bool SpriteExtent(u32 object, float* lo, float* hi) {
     return true;
 }
 
+// ---- SUBTITLE LANGUAGE JAPANESE (the maintainer 2026-11-21): the subtitle's text object is the jimaku task's
+// (STRM_PLAYJIMAKU) at its +0xA0 - the task's +0x40 its channel's block (count, bytes, 0, 0, then each cue: start,
+// end, text bytes, speaker, text), +0x74 / +0x78 the cue shown's start / end (found 2026-11-21 in a RAM dump: block
+// 0x6D2100, cue 0x3CC4..0x3D71, the text object 0x6D1E90 at 255, 383). A cue whose text is "#J" + a hash (dub.cpp,
+// with the Japanese voices) is drawn by us - its Japanese line in Noto Sans JP, centred where the game's would be -
+// and not by the game (whose letters have no Japanese).
+u32 g_japanese_subtitle_frame = 0;      // the frame our Japanese subtitle was last drawn (0: none shown)
+
+bool JapaneseSubtitle(u32 object) {
+    static const bool chosen = ps2host::Setting("language") == "ja";
+    if (!chosen || object < 0xA0u) return false;
+    const u32 task = object - 0xA0u;
+    const u32 block = Read32(task + 0x40u), start = Read32(task + 0x74u), end = Read32(task + 0x78u);
+    if (!CameraOk(block) || !CameraOk(task) || end <= start) return false;
+    const u32 count = Read32(block);
+    if (!count || count > 512u) return false;
+    u32 at = block + 16u;
+    std::string text;
+    for (u32 n = 0; n < count; ++n) {
+        const u32 bytes = Read32(at + 8u);
+        if (bytes > 4096u || !CameraOk(at)) return false;
+        if (Read32(at) == start && Read32(at + 4u) == end) {
+            for (u32 i = 0; i < bytes && i < 64u; ++i) {
+                const char ch = char(ps2host::GuestMemory().Read(at + 16u + i, 1));
+                if (!ch) break;
+                text += ch;
+            }
+            break;
+        }
+        at += 16u + bytes;
+    }
+    const std::string line = DubJapaneseLine(text);
+    if (line.empty()) return false;
+    std::vector<std::string> rows;
+    for (std::size_t from = 0;;) {
+        const std::size_t nl = line.find('\n', from);
+        rows.push_back(line.substr(from, nl == std::string::npos ? std::string::npos : nl - from));
+        if (nl == std::string::npos) break;
+        from = nl + 1;
+    }
+    constexpr float kRowStep = 16.0f, kCaps = 10.0f;            // in the 448 lines: as the game's two rows
+    std::vector<ps2host::GameText> texts;
+    const float top = 383.0f - kRowStep * float(rows.size()) * 0.5f;
+    for (std::size_t r = 0; r < rows.size(); ++r) {
+        ps2host::GameText t;
+        t.text = rows[r];
+        t.x = 0.5f;
+        t.centre = true;
+        t.y = (top + kRowStep * float(r) + 2.0f) / 448.0f;
+        t.height = kCaps / 448.0f;
+        t.colour = 0xE6E6E6u;
+        texts.push_back(t);
+    }
+    ps2host::SetGameSubtitleTexts(texts);
+    g_japanese_subtitle_frame = Read32(kFrameCounter);
+    return true;
+}
+
 // 0x0045B668(text object): a text standing alone (messages, subtitles; its sprite part at +0x20, the sprite's
 // layout 0x20 on: flags +0x22, axes +0x40 / +0x50, place +0x70). Narrowed by S, kept at its edge - between the
 // zones about its own place (centred text stays centred).
 void HudText(lifted::Context& c) {
     const u32 object = u32(c.r[4]);
+    if (JapaneseSubtitle(object)) return;           // (drawn by us)
     HudLogOther("text", object, 0x20u);
     const float s = WideS();
     if (s >= 0.999f || !CameraOk(object) || !ShowsWide() || (ps2host::GuestMemory().Read(object + 0x22u, 2) & 0x22u)) {
@@ -239,8 +325,12 @@ void HudText(lifted::Context& c) {
     }
     const float x = F32(Read32(object + 0x70u));
     float to = x;
-    if (x < 215.0f) to = s * x;
-    else if (x >= 297.0f) to = 512.0f - s * (512.0f - x);
+    // A text's place is its start, not its middle: only near an edge is it the HUD's (the pause's "-PAUSE-",
+    // starting left of the middle, went to the left edge - his session 2026-11-21); the rest about the centre.
+    if (!Shows3d()) to = 256.0f + s * (x - 256.0f);             // a 2D screen: about the centre
+    else if (x < 128.0f) to = s * x;
+    else if (x >= 384.0f) to = 512.0f - s * (512.0f - x);
+    else to = 256.0f + s * (x - 256.0f);
     Changed changed;
     changed.PutF(object + 0x70u, to);
     changed.PutF(object + 0x40u, F32(Read32(object + 0x40u)) * s);
@@ -347,7 +437,7 @@ namespace {
 // ---- Our pages. A line: a group (opens its page), an engine setting (PcSettings' index), a caption bit of the
 // configuration word, EXIT, or RESTART NEEDED's two.
 enum Page { kNoPage = -1, kTopPage, kPostPage, kDisplayPage, kRatePage, kShaderPage, kLanguagePage, kRestartPage };
-enum LineKind { kGroup, kSetting, kCaption, kExitLine, kRestartNow, kRestartLater };
+enum LineKind { kGroup, kSetting, kCaption, kExitLine, kRestartNow, kRestartLater, kButtonMapping };
 struct Line {
     LineKind kind;
     std::string label;
@@ -363,7 +453,10 @@ u32 g_sound_drawn = 0;                  // the frame SOUND's word was last drawn
 float g_sound_alpha = 1.0f, g_sound_dx = 0.0f;
 u32 g_stereo_drawn = 0;                 // and STEREO's (the red word passing over SOUND on the way in), its place
 float g_stereo_x = 259.0f;
-std::vector<std::pair<std::string, std::string>> g_restart_seen;   // start-only lines when the pages opened
+// The start-only lines as this run started (taken when the pages first opened): RESTART NEEDED comes at every
+// leave of the pages while they differ, not once per change (2026-11-20 issue 4).
+std::vector<std::pair<std::string, std::string>> g_restart_seen;
+bool g_restart_taken = false;
 
 const char* PageName(int page) {
     switch (page) {
@@ -382,7 +475,7 @@ int PageOfSetting(const ps2host::PcSetting& s) {
     if (s.page == "POST PROCESSING") return kPostPage;
     if (s.page == "FRAME RATE") return kRatePage;
     if (s.label == "DISPLAY MODE" || s.label == "RENDER RESOLUTION" || s.label == "ASPECT RATIO" ||
-        s.label == "FIELD OF VIEW")
+        s.label == "STRETCH CUTSCENES" || s.label == "FIELD OF VIEW")
         return kDisplayPage;
     if (s.label == "SHADER COMPILE" || s.label == "SHADER NOTICE") return kShaderPage;
     if (s.label == "LANGUAGE" || s.label == "DUB") return kLanguagePage;
@@ -397,10 +490,15 @@ std::vector<Line> PageLines(int page) {
         std::string label = s.label;
         if (label == "DUB") label = "VOICES";
         if (label == "LANGUAGE") label = "SUBTITLE LANGUAGE";
-        lines.push_back({kSetting, label, i, s.value, s.values.size() == 2 ? s.values : std::vector<std::string>{}});
+        // Two values side by side (as SOUND's STEREO MONAURAL); FSR PRESET's three too (the maintainer 2026-11-21:
+        // all three shown, left / right between them).
+        const bool row = s.values.size() == 2 || (s.values.size() == 3 && s.label == "FSR PRESET") ||
+                         (s.values.size() == 4 && s.label == "FSR SHARPNESS");
+        lines.push_back({kSetting, label, i, s.value, row ? s.values : std::vector<std::string>{}});
     };
     if (page == kTopPage) {
-        for (int group : {kPostPage, kDisplayPage, kRatePage, kShaderPage}) {
+        // DISPLAY first, then POST PROCESSING (the maintainer 2026-11-20).
+        for (int group : {kDisplayPage, kPostPage, kRatePage, kShaderPage}) {
             bool any = false;
             for (const auto& s : settings) any = any || PageOfSetting(s) == group;
             if (any) lines.push_back({kGroup, PageName(group), group, "", {}});
@@ -408,6 +506,9 @@ std::vector<Line> PageLines(int page) {
         for (int i = 0; i < int(settings.size()); ++i)
             if (PageOfSetting(settings[std::size_t(i)]) == kTopPage) setting(i);
         lines.push_back({kGroup, PageName(kLanguagePage), kLanguagePage, "", {}});
+        // BUTTON MAPPING (the maintainer 2026-11-21): the engine's page (device, RESET TO DEFAULT, each input) -
+        // a player's only way to it now that the F9 panel is internal.
+        lines.push_back({kButtonMapping, "BUTTON MAPPING", 0, "", {}});
     } else if (page == kLanguagePage) {
         const u32 config = Read32(kConfigWord);
         lines.push_back({kCaption, "SUBTITLES CUTSCENES", 1, (config & 2u) ? "ON" : "OFF", {"ON", "OFF"}});
@@ -424,7 +525,7 @@ std::vector<Line> PageLines(int page) {
         for (int i = 0; i < int(settings.size()); ++i)
             if (PageOfSetting(settings[std::size_t(i)]) == page) setting(i);
     }
-    lines.push_back({kExitLine, "EXIT", 0, "", {}});
+    // (No EXIT line: Cross is back on every page - the hint says so; the maintainer 2026-11-21.)
     return lines;
 }
 
@@ -439,7 +540,10 @@ std::vector<std::pair<std::string, std::string>> RestartLines() {
 }
 
 void OpenPage(int page, int row = 0) {
-    if (page == kTopPage && g_page == kNoPage) g_restart_seen = RestartLines();
+    if (!g_restart_taken) {
+        g_restart_seen = RestartLines();
+        g_restart_taken = true;
+    }
     g_page = page;
     g_page_row = row;
     g_page_wait = 10;
@@ -475,57 +579,77 @@ void PageBack() {
     OpenPage(kTopPage, row);
 }
 
-void ChangeLine(lifted::Context& c, const Line& line, int step) {
+// A subtitles caption (1 SUBTITLES CUTSCENES, 2 SUBTITLES GAMEPLAY) as the game's own setters 0x00466400 /
+// 0x00466450 set it - their whole work: the bit in the configuration word, then 1 at 0x004AA930 - written here,
+// so that SELECT's SETTINGS can set it with the game held (no guest call).
+void SetCaption(u32 bit, bool on) {
+    const u32 word = Read32(kConfigWord);
+    ps2host::GuestMemory().Write(kConfigWord, on ? (word | (1u << bit)) : (word & ~(1u << bit)), 4);
+    ps2host::GuestMemory().Write(0x004AA930u, 1u, 4);
+}
+
+void ChangeLine(const Line& line, int step) {
     if (line.kind == kSetting) {
         ps2host::StepPcSetting(line.arg, step);
         if (line.label == "SUBTITLE LANGUAGE") ps2host::GuestMemory().Write(kLanguageWord, GameLanguage(), 4);
     } else if (line.kind == kCaption) {
-        GameSetter(c, line.arg == 1 ? F_00466400 : F_00466450, !(Read32(kConfigWord) & (1u << line.arg)));
+        SetCaption(u32(line.arg), !(Read32(kConfigWord) & (1u << line.arg)));
     }
 }
 
-void DefaultLine(lifted::Context& c, const Line& line) {
+void DefaultLine(const Line& line) {
     if (line.kind == kSetting) {
         ps2host::ResetPcSetting(line.arg);
         if (line.label == "SUBTITLE LANGUAGE") ps2host::GuestMemory().Write(kLanguageWord, GameLanguage(), 4);
     } else if (line.kind == kCaption) {
-        GameSetter(c, line.arg == 1 ? F_00466400 : F_00466450, true);
+        SetCaption(u32(line.arg), true);
     }
 }
 
-// The pages' input, each frame the OPTIONS screen runs (its own cursor and press calls skipped meanwhile).
-void PageInput(lifted::Context& c) {
+// The pages' input: each frame the OPTIONS screen runs (its own cursor and press calls skipped meanwhile; `c` the
+// game's, for its menu sounds), or each window pump while SELECT's SETTINGS holds the game (no context: silent).
+// `held` the pad's directions (0x10 up ... 0x80 left), `pressed` its new presses (0x1000 triangle, 0x2000 circle,
+// 0x4000 cross).
+void PageInput(lifted::Context* c, u32 held, u32 pressed) {
     const std::vector<Line> lines = PageLines(g_page);
     const int n = int(lines.size());
+    if (n == 0) {                           // (a page with no line: Cross back alone)
+        if ((pressed & 0x7000u) == kPressBack) PageBack();
+        return;
+    }
     if (g_page_row >= n) g_page_row = n - 1;
-    const u32 held = u32(ps2host::GuestMemory().Read(kPadHeld, 2)) & 0xF0u;
-    const u32 pressed = u32(ps2host::GuestMemory().Read(kPadPressed, 2)) & 0x7000u;
+    held &= 0xF0u;
+    pressed &= 0x7000u;
+    auto sound = [&](u32 id) {
+        if (c) GameSound(*c, id);
+    };
     if (g_page_wait > 0) --g_page_wait;
     const Line& line = lines[std::size_t(g_page_row)];
     if (g_page_wait == 0 && (held == kHeldUp || held == kHeldDown)) {
         g_page_row = (g_page_row + (held == kHeldDown ? 1 : n - 1)) % n;
         g_page_wait = 10;
         g_frame_moved = true;
-        GameSound(c, 0x39);
+        sound(0x39);
     } else if (g_page_wait == 0 && (held == kHeldLeft || held == kHeldRight) &&
                (line.kind == kSetting || line.kind == kCaption)) {
-        ChangeLine(c, line, held == kHeldRight ? 1 : -1);
+        ChangeLine(line, held == kHeldRight ? 1 : -1);
         g_page_wait = 10;
-        GameSound(c, 0x39);
+        sound(0x39);
     } else if (pressed == kPressConfirm && g_page_wait == 0) {
-        GameSound(c, 0x3A);
+        sound(0x3A);
         if (line.kind == kGroup) OpenPage(line.arg);
+        else if (line.kind == kButtonMapping) ps2host::OpenPcMenuControls();
         else if (line.kind == kExitLine || line.kind == kRestartLater) PageBack();
         else if (line.kind == kRestartNow) ps2host::RequestRestart();
-        else ChangeLine(c, line, 1);
+        else ChangeLine(line, 1);
         g_page_wait = 10;
     } else if (pressed == kPressBack) {
-        GameSound(c, 0x3A);
+        sound(0x3A);
         PageBack();
         g_page_wait = 10;
     } else if (pressed == kPressDefault && (line.kind == kSetting || line.kind == kCaption)) {
-        DefaultLine(c, line);
-        GameSound(c, 0x39);
+        DefaultLine(line);
+        sound(0x39);
     }
 }
 
@@ -643,7 +767,81 @@ ps2host::GameText MaskLabel(const std::vector<std::uint8_t>& mask, u32 width, fl
 }
 
 // The texts of the OPTIONS screen this frame: RECOMP OPTIONS among the game's rows, or our page.
+bool g_select_settings = false;     // our pages opened from SELECT's SETTINGS (the game held), not the OPTIONS screen
+
+// The buttons' small signs for the hint (16 x 16 coverage): 0 circle, 1 cross, 2 triangle - drawn, not letters
+// (the font has none of them).
+std::vector<std::uint8_t> ButtonMask(int kind) {
+    std::vector<std::uint8_t> m(256, 0);
+    for (int y = 0; y < 16; ++y)
+        for (int x = 0; x < 16; ++x) {
+            const float fx = float(x) + 0.5f - 8.0f, fy = float(y) + 0.5f - 8.0f;
+            float d = 9.0f;
+            if (kind == 0) {
+                d = std::fabs(std::sqrt(fx * fx + fy * fy) - 6.0f);
+            } else if (kind == 1) {
+                d = std::min(std::fabs(fx - fy), std::fabs(fx + fy)) * 0.7071f;
+                if (std::fabs(fx) > 6.0f || std::fabs(fy) > 6.0f) d = 9.0f;
+            } else {
+                const float top = -6.0f, bottom = 5.5f, half = (fy - top) / (bottom - top) * 6.5f;
+                if (fy >= top - 1.0f && fy <= bottom + 1.0f)
+                    d = std::min(std::fabs(std::fabs(fx) - half) * 0.85f, std::fabs(fy - bottom));
+                if (std::fabs(fx) > half + 1.5f) d = 9.0f;
+            }
+            const float a = std::clamp(1.6f - d, 0.0f, 1.0f);
+            m[std::size_t(y) * 16 + std::size_t(x)] = std::uint8_t(a * 255.0f);
+        }
+    return m;
+}
+
+// The small hint at the bottom right (the maintainer 2026-11-20): "△ DEFAULT" (on the setting pages) over
+// "○ SELECT  × BACK", in the menu's grey, half the rows' height.
+void AddHints(std::vector<ps2host::GameText>* texts, bool with_default) {
+    constexpr float kSmall = kLetters * 0.75f, kSign = 7.0f;
+    constexpr u32 kHint = 0x808080u;
+    auto sign = [&](int kind, float x, float y) {
+        ps2host::GameText g;
+        g.mask = ButtonMask(kind);
+        g.mask_w = g.mask_h = 16;
+        g.x = x / 512.0f;
+        g.y = y / 448.0f;
+        g.width = kSign / 512.0f;
+        g.height = kSign * 1.07f / 448.0f;
+        g.colour = kHint;
+        texts->push_back(g);
+    };
+    auto word = [&](const std::string& s, float x, float y) {
+        texts->push_back(ps2host::GameText{s, x / 512.0f, (y + 1.0f) / 448.0f, kSmall / 448.0f, kHint, false, kStretch});
+    };
+    // "○ SELECT  × BACK", and "△ DEFAULT" under the cross, flush with it (the maintainer 2026-11-21).
+    // (Inside the OPTIONS screen's frame: left of its upright green line at x 412, between its grey line at 338 and
+    // the green one at 395 - not crossed by them; his shot 2026-11-21.)
+    sign(0, 300.0f, 352.0f);
+    word("SELECT", 310.0f, 352.0f);
+    sign(1, 356.0f, 352.0f);
+    word("BACK", 366.0f, 352.0f);
+    if (with_default) {
+        sign(2, 356.0f, 364.0f);
+        word("DEFAULT", 366.0f, 364.0f);
+    }
+}
+
+// Our words on a 2D screen shown wide (variant B): placed as HudSprite places the game's own there - x about the
+// centre by S, a mask's width by S (the letters of a text are already drawn square) - so they line up with the
+// game's rows again (his session 2026-11-20: shifted, not indented as the game's).
+void SetPlacedTexts(std::vector<ps2host::GameText> texts) {
+    const float s = WideS();
+    if (s < 0.999f && ShowsWide() && !Shows3d())
+        for (ps2host::GameText& t : texts) {
+            if (!t.mask.empty() && t.width >= 0.999f) continue;     // a ground over the whole picture stays so
+            t.x = (256.0f + s * (t.x * 512.0f - 256.0f)) / 512.0f;
+            if (!t.mask.empty()) t.width *= s;
+        }
+    ps2host::SetGameTexts(texts);
+}
+
 void OptionsTexts() {
+    if (ps2host::PcPanelOpen()) return;     // BUTTON MAPPING (ControlsLook draws it) over ours meanwhile
     auto text = [](const std::string& s, float x, float y, u32 colour) {
         return ps2host::GameText{s, x / 512.0f, (y + 2.0f) / 448.0f, kLetters / 448.0f, colour, false, kStretch};
     };
@@ -685,26 +883,58 @@ void OptionsTexts() {
             texts.push_back(MaskLabel(masks.exit, masks.exit_w, along(sound_x, -80.0f, 82.0f, masks.exit_w, 48.0f),
                                       kExitY, kWordGrey, g_sound_alpha));
         }
-        ps2host::SetGameTexts(texts);
+        SetPlacedTexts(texts);
         return;
     }
-    texts.push_back(text(g_page == kTopPage ? std::string("RECOMP OPTIONS")
+    if (g_select_settings) {                // the game held behind SELECT's SETTINGS: a dark ground under the page
+        ps2host::GameText ground;
+        ground.mask.assign(16, 225);
+        ground.mask_w = ground.mask_h = 4;
+        ground.x = 0.0f;
+        ground.y = 0.0f;
+        ground.width = 1.0f;
+        ground.height = 1.0f;
+        ground.colour = 0x000000u;
+        texts.push_back(ground);
+    }
+    const std::string head = g_select_settings ? "SETTINGS" : "RECOMP OPTIONS";
+    texts.push_back(text(g_page == kTopPage ? head
                                             : g_page == kRestartPage ? std::string(PageName(g_page))
-                                                                     : std::string("RECOMP OPTIONS - ") + PageName(g_page),
+                                                                     : head + " - " + PageName(g_page),
                          82.0f, 66.0f, kTitle));
+    AddHints(&texts, g_page != kRestartPage);
     const std::vector<Line> lines = PageLines(g_page);
     for (int i = 0; i < int(lines.size()); ++i) {
         const Line& l = lines[std::size_t(i)];
         const float y = kPageTop + kPageStep * float(i);
-        texts.push_back(text(l.label, 82.0f, y, kGrey));
+        // SELECT's SETTINGS: no game frame shows the row there - ours, as SELECT's own (a green band, the label bright).
+        const bool picked = g_select_settings && i == g_page_row;
+        if (picked) {
+            ps2host::GameText band;
+            band.mask.assign(16, 60);
+            band.mask_w = band.mask_h = 4;
+            band.x = 72.0f / 512.0f;
+            band.y = (y - 3.0f) / 448.0f;
+            band.width = 368.0f / 512.0f;
+            band.height = 16.0f / 448.0f;
+            band.colour = 0x2CC488u;
+            texts.push_back(band);
+        }
+        texts.push_back(text(l.label, 82.0f, y, picked ? 0x46F098u : kGrey));
         if (l.values.size() == 2) {
             texts.push_back(text(l.values[0], 275.0f, y, l.value == l.values[0] ? kRed : kDark));
             texts.push_back(text(l.values[1], 375.0f, y, l.value == l.values[1] ? kRed : kDark));
+        } else if (l.values.size() == 3 || l.values.size() == 4) {
+            // FSR PRESET's three, FSR SHARPNESS's four (the maintainer 2026-11-21: all side by side)
+            static const float kAt3[3] = {230.0f, 320.0f, 410.0f}, kAt4[4] = {230.0f, 290.0f, 370.0f, 430.0f};
+            const float* at = l.values.size() == 3 ? kAt3 : kAt4;
+            for (std::size_t k = 0; k < l.values.size(); ++k)
+                texts.push_back(text(l.values[k], at[k], y, l.value == l.values[k] ? kRed : kDark));
         } else if (!l.value.empty()) {
             texts.push_back(text(l.value, 275.0f, y, kRed));
         }
     }
-    ps2host::SetGameTexts(texts);
+    SetPlacedTexts(texts);
 }
 
 // A sprite of the OPTIONS screen's rows: hidden (true), or moved down by *dy (its y changed for the draw).
@@ -742,6 +972,350 @@ bool OptionsSprite(u32 object, float* dy) {
     return false;
 }
 
+// SELECT's menu (issue 3, the maintainer 2026-11-20: in the middle of the screen, as if the game's own) in the
+// look of the game's pause menu (WEAPONS ... SAVE): a dark see-through panel in a green frame with a thicker bar
+// along the top-left, the rows in the menu's letters - the chosen one bright green, the others pale grey.
+void SelectMenuLook(bool open, int row) {
+    if (!open) {
+        ps2host::SetGameTexts({});
+        return;
+    }
+    constexpr float kX0 = 166.0f, kY0 = 160.0f, kW = 180.0f, kH = 116.0f;    // the panel, in the 512 x 448 picture
+    constexpr u32 kGreen = 0x2CC488u, kPicked = 0x46F098u, kPale = 0xC8C8C8u;
+    auto box = [](float x, float y, float w, float h, u32 colour, std::uint8_t cover) {
+        ps2host::GameText g;
+        g.mask_w = 4;
+        g.mask_h = 4;
+        g.mask.assign(16, cover);
+        g.x = x / 512.0f;
+        g.y = y / 448.0f;
+        g.width = w / 512.0f;
+        g.height = h / 448.0f;
+        g.colour = colour;
+        return g;
+    };
+    auto text = [](const std::string& s, float x, float y, u32 colour) {
+        return ps2host::GameText{s, x / 512.0f, (y + 2.0f) / 448.0f, kLetters / 448.0f, colour, false, kStretch};
+    };
+    std::vector<ps2host::GameText> texts;
+    texts.push_back(box(kX0, kY0, kW, kH, 0x000000u, 176));                  // the panel
+    texts.push_back(box(kX0, kY0, kW, 1.5f, kGreen, 255));                   // the frame
+    texts.push_back(box(kX0, kY0 + kH - 1.5f, kW, 1.5f, kGreen, 255));
+    texts.push_back(box(kX0, kY0, 1.5f, kH, kGreen, 255));
+    texts.push_back(box(kX0 + kW - 1.5f, kY0, 1.5f, kH, kGreen, 255));
+    texts.push_back(box(kX0, kY0 - 3.0f, kW * 0.45f, 4.0f, kGreen, 255));    // the top-left bar
+    texts.push_back(box(kX0 + kW * 0.55f, kY0 + kH - 1.0f, kW * 0.45f, 4.0f, kGreen, 255));  // and bottom-right
+    static const char* const kRows[4] = {"RESUME", "SETTINGS", "EXIT GAME", "EXIT TO MENU"};
+    if (row >= 4) {
+        // An exit asked first (the maintainer 2026-11-21): the question, the warning, YES and NO side by side.
+        const bool yes = (row - 4) % 2 == 0;
+        texts.push_back(text(std::string(kRows[2 + (row - 4) / 2]) + "?", kX0 + 18.0f, kY0 + 16.0f, kPale));
+        texts.push_back(text("UNSAVED PROGRESS", kX0 + 18.0f, kY0 + 40.0f, kGrey));
+        texts.push_back(text("WILL BE LOST.", kX0 + 18.0f, kY0 + 56.0f, kGrey));
+        const float y = kY0 + 88.0f;
+        texts.push_back(box(kX0 + (yes ? 12.0f : 96.0f), y - 3.0f, 72.0f, 16.0f, kGreen, 60));
+        texts.push_back(text("YES", kX0 + 30.0f, y, yes ? kPicked : kPale));
+        texts.push_back(text("NO", kX0 + 118.0f, y, yes ? kPale : kPicked));
+        AddHints(&texts, false);
+        ps2host::SetGameTexts(texts);
+        return;
+    }
+    for (int r = 0; r < 4; ++r) {
+        const float y = kY0 + 16.0f + 24.0f * float(r);
+        if (r == row) texts.push_back(box(kX0 + 8.0f, y - 3.0f, kW - 16.0f, 16.0f, kGreen, 60));   // the row's band
+        texts.push_back(text(kRows[r], kX0 + 18.0f, y, r == row ? kPicked : kPale));
+    }
+    AddHints(&texts, false);
+    ps2host::SetGameTexts(texts);
+}
+
+// ---- The title's main menu with EXIT GAME (the maintainer 2026-11-21). The game's menu is a wheel of three
+// (0x00414B68, its object's +0x5C10 the row shown, +0x5C18 the row moving to, +0x5C14 their number 3, +0x5C1C the
+// move's frames): 0 NEW GAME, 1 LOAD GAME, 2 OPTIONS - the chosen one in the middle (y 333, bright, with its glow),
+// the one before above (307), the one after below (359). Ours has four - NEW GAME, LOAD GAME, OPTIONS, EXIT GAME
+// (after OPTIONS: the maintainer 2026-11-21) - drawn whole by us from the game's own word images (title.pak; EXIT +
+// GAME side by side), rolling as the game's does (6 frames a row, the neighbours dim); the game's words and glow
+// hidden meanwhile (TitleSprite). The game's cursor stands on ours (NEW / LOAD / OPTIONS), so its confirm is its own.
+enum TitleRow { kTitleNew = 0, kTitleLoad = 1, kTitleOptions = 2, kTitleExit = 3 };
+int g_title_row = kTitleNew;            // ours: the row chosen
+float g_title_pos = 0.0f;               // the wheel's place as drawn (rolls to g_title_row)
+u32 g_title_seen = 0;                   // the frame counter when the menu last ran (0x00414B68)
+bool g_title_drawn = false;             // our words on the screen
+u32 g_title_confirmed = 0;              // the frame a row was chosen (the game's own flash of it shown, not ours)
+constexpr float kTitleMid = 333.0f, kTitleStep = 26.0f;
+constexpr u32 kNewGameWord = 0x167850u, kLoadGameWord = 0x166B20u, kOptionsWord = 0x168F10u, kGameWord = 0x20970u;
+constexpr u32 kTitleBright = 0xC0C0C0u, kTitleDim = 0x6C6C6Cu;
+
+struct TitleMasks {
+    std::vector<std::uint8_t> word[4];  // NEW GAME, LOAD GAME, OPTIONS, EXIT GAME
+    u32 w[4] = {};
+};
+const TitleMasks& TitleWordMasks() {
+    static TitleMasks m;
+    static bool tried = false;
+    if (!tried) {
+        tried = true;
+        std::vector<unsigned char> pak;
+        if (ReadZoeDatFile("stage/title/title.pak", &pak)) {
+            const u32 at[3] = {kNewGameWord, kLoadGameWord, kOptionsWord}, width[3] = {80, 88, 64};
+            for (int i = 0; i < 3; ++i) {
+                m.word[i] = WordMask(pak, at[i], width[i]);
+                m.w[i] = m.word[i].empty() ? 0 : width[i];
+            }
+            const std::vector<std::uint8_t> exit = WordMask(pak, kExitWord, 32), game = WordMask(pak, kGameWord, 40);
+            if (!exit.empty() && !game.empty()) {
+                constexpr u32 kGap = 3;             // a space as the game's own two-word images have it
+                m.w[3] = 32 + kGap + 40;
+                m.word[3].assign(std::size_t(m.w[3]) * kWordRows, 0);
+                for (u32 y = 0; y < kWordRows; ++y) {
+                    for (u32 x = 0; x < 32; ++x) m.word[3][y * m.w[3] + x] = exit[y * 32 + x];
+                    for (u32 x = 0; x < 40; ++x) m.word[3][y * m.w[3] + 32 + kGap + x] = game[y * 40 + x];
+                }
+            }
+        }
+    }
+    return m;
+}
+bool TitleReady() {
+    static const bool off = std::getenv("ZOE_TITLE_GAME") != nullptr;     // (diagnosis: the game's own wheel)
+    const TitleMasks& m = TitleWordMasks();
+    return !off && m.w[0] && m.w[1] && m.w[2] && m.w[3];
+}
+
+bool TitleActive() { return g_title_seen && Read32(kFrameCounter) - g_title_seen <= 2u; }
+
+// The wheel this frame: each row at its place from the wheel's (-2..2 rows, wrapping round the four), the middle
+// bright, the next ones dim, fading out beyond them.
+void TitleTexts() {
+    std::vector<ps2host::GameText> texts;
+    const TitleMasks& m = TitleWordMasks();
+    auto mix = [](u32 a, u32 b, float t) {
+        u32 out = 0;
+        for (int s = 0; s < 24; s += 8)
+            out |= u32(float((a >> s) & 255u) + (float((b >> s) & 255u) - float((a >> s) & 255u)) * t + 0.5f) << s;
+        return out;
+    };
+    for (int i = 0; i < 4; ++i) {
+        float d = float(i) - g_title_pos;
+        while (d >= 2.0f) d -= 4.0f;
+        while (d < -2.0f) d += 4.0f;
+        const float a = std::fabs(d);
+        if (a >= 1.5f || !m.w[i]) continue;
+        const float bright = std::max(0.0f, 1.0f - a), fade = std::clamp(1.5f - a, 0.0f, 0.5f) * 2.0f;
+        texts.push_back(MaskLabel(m.word[i], m.w[i], 256.0f - float(m.w[i]) * 0.5f, kTitleMid + d * kTitleStep - 5.0f,
+                                  mix(kTitleDim, kTitleBright, bright), fade));
+    }
+    g_title_drawn = !texts.empty();
+    SetPlacedTexts(texts);
+}
+
+// The game's own wheel away while ours is drawn: its words (NEW GAME 40, LOAD GAME 44, OPTIONS 32 - half widths)
+// and their glows (56 / 60 / 48), at x 256 between the rows above and below.
+bool TitleSprite(u32 object) {
+    if (!TitleActive() || !TitleReady()) return false;
+    const float x = F32(Read32(object + 0x50u)), y = F32(Read32(object + 0x54u));
+    if (std::fabs(x - 256.0f) > 0.5f || y < kTitleMid - 1.5f * kTitleStep || y > kTitleMid + 1.5f * kTitleStep)
+        return false;
+    const u32 buffer = Read32(object + (ps2host::GuestMemory().Read(object + 0x92u, 1) ? 0x94u : 0x98u));
+    const float w = CameraOk(buffer) ? F32(Read32(buffer + 0x50u)) : 0.0f;
+    bool word = false, glow = false;
+    for (float want : {40.0f, 44.0f, 32.0f}) word = word || std::fabs(w - want) < 0.5f;
+    for (float want : {56.0f, 60.0f, 48.0f}) glow = glow || std::fabs(w - want) < 0.5f;
+    if (!word && !glow) return false;
+    const u32 now = Read32(kFrameCounter);
+    if (g_title_confirmed && now - g_title_confirmed < 600u) {
+        // A row chosen: its flash as NEW GAME's (his look 2026-11-21) - NEW GAME's screen goes after 20 frames;
+        // LOAD GAME / OPTIONS keep the glow and the word fading out for longer: everything away after those 20.
+        static u32 glow_seen = 0;
+        if (now - g_title_confirmed > 20u) return true;
+        if (glow) {
+            glow_seen = now;
+            return false;
+        }
+        return now - glow_seen > 4u;
+    }
+    return true;
+}
+
+// The wheel's input (0x00414B68's own: the pad word 0x004AA4E0, 0x2008 confirm, 0x10 up, 0x40 down), ours first.
+void TitleCursor(lifted::Context& c) {
+    const u32 obj = u32(c.r[4]);
+    // (Only the main menu's wheel of three: the difficulty's has more rows - and the disc's file as expected.)
+    if (!TitleReady() || Read32(obj + 0x5C14u) != 3u) {
+        F_00414B68(c);
+        return;
+    }
+    if (!TitleActive()) {                           // the menu (again): from the game's own row
+        g_title_row = int(Read32(obj + 0x5C18u)) % 3;
+        g_title_pos = float(g_title_row);
+        g_title_confirmed = 0;
+    }
+    if (g_title_confirmed) {                        // a row chosen: the game's own until the menu is left
+        g_title_seen = Read32(kFrameCounter);
+        F_00414B68(c);
+        return;
+    }
+    g_title_seen = Read32(kFrameCounter);
+    // The roll: a sixth of a row a frame towards the chosen one, the short way round.
+    float gap = float(g_title_row) - g_title_pos;
+    while (gap > 2.0f) gap -= 4.0f;
+    while (gap < -2.0f) gap += 4.0f;
+    const bool rolling = std::fabs(gap) > 0.001f;
+    if (rolling) {
+        g_title_pos += std::fabs(gap) <= 1.0f / 6.0f ? gap : (gap > 0.0f ? 1.0f : -1.0f) / 6.0f;
+        if (g_title_pos < 0.0f) g_title_pos += 4.0f;
+        if (g_title_pos >= 4.0f) g_title_pos -= 4.0f;
+    }
+    const u32 pad = u32(ps2host::GuestMemory().Read(kPadHeld, 2));
+    const bool up = (pad & 0x50u) == 0x10u, down = (pad & 0x50u) == 0x40u, confirm = (pad & 0x2008u) != 0;
+    static const bool log = std::getenv("ZOE_TITLE_LOG") != nullptr;      // (diagnosis: each frame's look)
+    if (log)
+        std::fprintf(stderr, "[title] frame %u pad %04X row %d pos %.2f game %u/%u\n", Read32(kFrameCounter), pad,
+                     g_title_row, g_title_pos, Read32(obj + 0x5C10u), Read32(obj + 0x5C18u));
+    c.r[2] = 0;
+    if (Read32(obj + 0x5C10u) != Read32(obj + 0x5C18u)) {
+        F_00414B68(c);                              // the game's own (hidden) roll on: its frames counted down
+        c.r[2] = 0;
+        TitleTexts();
+        return;
+    }
+    if (!rolling && (up || down)) {
+        g_title_row = (g_title_row + (down ? 1 : 3)) % 4;
+        // The game's cursor follows ours the game's way - its target and its 6 frames (0x00414B68's own move;
+        // writing the row itself made the menu leave its state); on EXIT GAME it stays where it is.
+        if (g_title_row != kTitleExit && Read32(obj + 0x5C10u) != u32(g_title_row)) {
+            Write32(obj + 0x5C18u, u32(g_title_row));
+            Write32(obj + 0x5C1Cu, 6);
+        }
+        GameSound(c, 0x39);
+    } else if (!rolling && confirm && g_title_row == kTitleExit) {
+        GameSound(c, 0x3E);
+        std::fprintf(stderr, "[title] EXIT GAME\n");
+        ps2host::QuitGame();
+    } else if (!rolling && confirm) {
+        F_00414B68(c);                              // the game's own confirm on its row (ours): its v0 stands
+        if (c.r[2]) {                               // chosen: the game's own flash of its word from here on
+            g_title_confirmed = Read32(kFrameCounter);
+            ps2host::SetGameTexts({});
+            g_title_drawn = false;
+            return;
+        }
+        TitleTexts();
+        return;
+    }
+    c.r[2] = 0;                                     // (the sound's call left its own v0: no confirm for the menu)
+    TitleTexts();
+}
+
+// Leaving the menu: our words away.
+void TitleTick() {
+    if (g_title_drawn && !TitleActive()) {
+        ps2host::SetGameTexts({});
+        g_title_drawn = false;
+    }
+}
+
+// SELECT's EXIT TO MENU (the maintainer 2026-11-20: to the main menu, not the program started again): the game's
+// own way back, GAME OVER's EXIT - 0x003E6188 makes the task (0x003E5FA0 / its frames 0x003E6008) that fades out,
+// stops the scene, the sound and the stage, and starts the game over from its boot (ADA, the logo, the title).
+// Asked from the window pump (the game held), done at the game's next frame: after 0x0044C7D0 (the main loop's
+// per-frame call, 0x00460350), with the guest's registers kept round it.
+// SELECT opens only in gameplay (the maintainer 2026-11-21): 3D on the screen with the HUD's sprites drawn in the
+// last ten blanks, no movie - not the title, its menus, movies, loads, scenes without the HUD.
+std::atomic<u64> g_last_hud_ns{0};     // a HUD sprite drawn (HudSprite)
+bool SelectAllowed() {
+    const u64 now = ps2host::LastVblankNs(), hud = g_last_hud_ns.load(std::memory_order_relaxed);
+    const u64 movie = ps2host::LastMoviePictureNs();
+    return Shows3d() && hud && now - hud <= 10u * 16683334u && (!movie || now - movie > 10u * 16683334u);
+}
+
+std::atomic<bool> g_exit_to_menu{false};
+void ExitToMenu() { g_exit_to_menu.store(true); }
+void FrameEnd(lifted::Context& c) {
+    F_0044C7D0(c);
+    DubSampleScene();                       // SUBTITLE TIMING's scene: the one read last
+    if (g_japanese_subtitle_frame && Read32(kFrameCounter) - g_japanese_subtitle_frame > 1u) {
+        ps2host::SetGameSubtitleTexts({});      // the Japanese subtitle's cue over
+        g_japanese_subtitle_frame = 0;
+    }
+    TitleTick();                            // the title's EXIT GAME words away once its menu is left
+    if (!g_exit_to_menu.exchange(false)) return;
+    u64 saved[32], saved_hi[32];
+    for (int i = 0; i < 32; ++i) saved[i] = c.r[i], saved_hi[i] = c.rh[i];
+    F_003E6188(c);
+    for (int i = 0; i < 32; ++i) c.r[i] = saved[i], c.rh[i] = saved_hi[i];
+    std::fprintf(stderr, "[select] EXIT TO MENU: the game's own exit (GAME OVER's) started\n");
+}
+
+// BUTTON MAPPING in the game's look (the maintainer 2026-11-21: a port's menus look like the game's own): the
+// engine's page (its rows, binding, capture) drawn as our pages are - the title, the rows a scrolling list of
+// twelve (each input and its source; DEVICE, RESET TO DEFAULT first), the chosen one in its green band, a source
+// bound twice in red, the hint.
+void ControlsLook(bool open, const std::vector<ps2host::ControlsLine>& lines, int row) {
+    if (!open) {
+        ps2host::SetGameTexts({});
+        return;
+    }
+    auto text = [](const std::string& s, float x, float y, u32 colour) {
+        return ps2host::GameText{s, x / 512.0f, (y + 2.0f) / 448.0f, kLetters / 448.0f, colour, false, kStretch};
+    };
+    auto box = [](float x, float y, float w, float h, u32 colour, std::uint8_t cover) {
+        ps2host::GameText g;
+        g.mask.assign(16, cover);
+        g.mask_w = g.mask_h = 4;
+        g.x = x / 512.0f;
+        g.y = y / 448.0f;
+        g.width = w / 512.0f;
+        g.height = h / 448.0f;
+        g.colour = colour;
+        return g;
+    };
+    std::vector<ps2host::GameText> texts;
+    texts.push_back(box(0.0f, 0.0f, 512.0f, 448.0f, 0x000000u, g_select_settings ? 225 : 200));   // a dark ground
+    // The list in a window of its own (as SELECT's), the OPTIONS screen's green lines - they ran through its rows,
+    // his shot 2026-11-21 - covered by it; the OPTIONS screen's other pages keep them.
+    texts.push_back(box(64.0f, 54.0f, 384.0f, 288.0f, 0x0A0D0Bu, 255));
+    texts.push_back(box(64.0f, 54.0f, 384.0f, 1.0f, 0x2CC488u, 255));
+    texts.push_back(box(64.0f, 341.0f, 384.0f, 1.0f, 0x2CC488u, 255));
+    texts.push_back(box(64.0f, 54.0f, 1.0f, 288.0f, 0x2CC488u, 255));
+    texts.push_back(box(447.0f, 54.0f, 1.0f, 288.0f, 0x2CC488u, 255));
+    texts.push_back(text(g_select_settings ? "SETTINGS - BUTTON MAPPING" : "RECOMP OPTIONS - BUTTON MAPPING", 82.0f,
+                         66.0f, kTitle));
+    constexpr int kShown = 12;
+    constexpr float kTop = 104.0f, kStep = 20.0f;
+    const int n = int(lines.size());
+    const int first = std::clamp(row - kShown / 2, 0, std::max(0, n - kShown));
+    for (int i = first; i < std::min(n, first + kShown); ++i) {
+        const ps2host::ControlsLine& l = lines[std::size_t(i)];
+        const float y = kTop + kStep * float(i - first);
+        const bool picked = i == row;
+        if (picked) texts.push_back(box(72.0f, y - 3.0f, 368.0f, 16.0f, 0x2CC488u, 60));
+        texts.push_back(text(l.label, 82.0f, y, picked ? 0x46F098u : kGrey));
+        if (!l.value.empty())
+            texts.push_back(text(l.value, 230.0f, y, l.capture ? 0x46F098u : l.doubled ? kRed : kWordGrey));
+    }
+    AddHints(&texts, false);
+    SetPlacedTexts(texts);
+}
+
+// SELECT's SETTINGS (the maintainer 2026-11-20): our pages with the game held - the engine's input each window pump
+// (PageInput without the game's sounds), drawn over a dark ground; false once they are closed (back on SELECT).
+bool SelectSettingsStep(unsigned held, unsigned pressed) {
+    if (!g_select_settings) {
+        g_select_settings = true;
+        OpenPage(kTopPage, 0);
+    } else {
+        PageInput(nullptr, held, pressed);
+    }
+    if (!PageOpen()) {
+        g_select_settings = false;
+        ps2host::SetGameTexts({});
+        return false;
+    }
+    OptionsTexts();
+    return true;
+}
+
 void OptionsFrame(lifted::Context& c) {
     const u32 obj = u32(c.r[4]);
     const u32 frame = Read32(kFrameCounter);
@@ -773,7 +1347,7 @@ void OptionsCursor(lifted::Context& c) {
     // and EXIT's (the same plain frame) at each move - the place is ours anyway (OptionsFrameDraw) -, back on EXIT's
     // when the pages close.
     if (PageOpen()) {                               // our page: its input, the game's cursor still
-        PageInput(c);
+        PageInput(&c, u32(ps2host::GuestMemory().Read(kPadHeld, 2)), u32(ps2host::GuestMemory().Read(kPadPressed, 2)));
         if (g_frame_moved) {
             Write32(state + kOptionsRow, Read32(state + kOptionsRow) == 4u ? kExitRow : 4u);
             Write32(state + kOptionsWait, 10);      // the frame moves while the move's wait runs down
@@ -978,10 +1552,12 @@ void HudSpriteDraw(lifted::Context& c);
 
 // The OPTIONS screen's rows first (hidden or moved: OptionsSprite), then the sprite as below.
 void HudSprite(lifted::Context& c) {
+    g_last_hud_ns.store(ps2host::LastVblankNs(), std::memory_order_relaxed);
     OptionsLabelTick();
     float dy = 0;
     const u32 object = u32(c.r[4]);
     if (OptionsSprite(object, &dy)) return;                 // not drawn
+    if (TitleSprite(object)) return;                        // the title's wheel: a word ours stands in for
     if (dy == 0.0f) {
         HudSpriteDraw(c);
         return;
@@ -1050,7 +1626,8 @@ void HudSpriteDraw(lifted::Context& c) {
         // its name stay together (the boss bar: TEMPEST at 24, frame 86..494, fill from 88); others by their
         // centre's zone. Never stretched: a bar across the screen ends earlier in a wider picture.
         const float left = (flags & 0x8000u) ? x - w * 0.5f : x, right = left + w, centre = left + w * 0.5f;
-        if (left < 128.0f || (right <= 384.0f && centre < 215.0f)) to = s * x;
+        if (!Shows3d()) to = 256.0f + s * (x - 256.0f);         // a 2D screen: about the centre
+        else if (left < 128.0f || (right <= 384.0f && centre < 215.0f)) to = s * x;
         else if (right > 384.0f || centre >= 297.0f) to = 512.0f - s * (512.0f - x);
         else to = 256.0f + s * (x - 256.0f);
     }
@@ -1069,7 +1646,8 @@ void HudSpriteDraw(lifted::Context& c) {
 // copies back, 0x00466E38): 1 English, 2 French, 3 German, 4 Italian, as the PAL version maps the console's
 // language into it (SLES 0x00466C98, 2026-11-13). The US program sets it to English at start, asking nothing
 // (0x00466388) - yet the US disc's voiced scenes carry all four languages' subtitles (docs/languages_research.md).
-// The "language" setting (en / fr / de / it) chooses; unset, English as before.
+// The "language" setting (en / fr / de / it) chooses; unset, English as before. Spanish (es, our own subtitles):
+// the game in English, its English subtitle channel carrying the Spanish lines (dub.cpp).
 u32 GameLanguage() {
     const std::string value = ps2host::Setting("language");
     if (value == "fr") return 2;
@@ -1082,6 +1660,7 @@ u32 GameLanguage() {
 void LanguageAtStart(lifted::Context& c) {
     ps2host::GuestMemory().Write(0x004DFCA0u, 0xFu, 4);
     ps2host::GuestMemory().Write(0x004DFCA4u, GameLanguage(), 4);
+    DescriptionsInSpanish();            // (SPANISH: the executable's descriptions, dub.cpp)
     c.r[4] = 0xFFFFFFFFFF000006ull;     // lui $a0, 0xff00; ori $a0, $a0, 6 (sign-extended)
     F_00466F18(c);
 }
@@ -1109,6 +1688,8 @@ void IopStatusPoll(lifted::Context& c) {
 }  // namespace
 
 void RegisterDub();     // dub.cpp: the Japanese voices from the player's Japanese disc (M9)
+std::string DubSceneLine();         // dub.cpp: SUBTITLE TIMING (the F9 debug panel)
+void DubSceneStep(int step);
 
 void RegisterGameOverrides() {
     RegisterDub();
@@ -1117,7 +1698,11 @@ void RegisterGameOverrides() {
     ps2host::Override(0x00466388u, LanguageAtStart, "language index from the 'language' setting (US: English fixed)");
     ps2host::Override(0x00466E38u, ConfigurationFromSave, "a loaded save's configuration, the language setting kept");
     // The PC settings' LANGUAGE line (M7, the ports' rule): the US disc's subtitle languages (docs/languages_research.md).
-    ps2host::SetLanguages({"en", "fr", "de", "it"});
+    ps2host::SetLanguages({"en", "fr", "de", "it", "es", "ja"});   // (es / ja: ours - the game in English, dub.cpp)
+    static const unsigned char kNotoSansJp[] = {
+#include "noto_sans_jp.inc"
+    };
+    ps2host::SetGameTextFallbackFont(kNotoSansJp, sizeof kNotoSansJp);
     // DUB under LANGUAGE (M9, the maintainer 2026-11-20): only with the player's Japanese disc set in the launcher
     // (its second line, "disc_ja"); dub.cpp serves its voices at the next start.
     ps2host::SetDubs({"en", "ja"}, [] { return !ps2host::Setting("disc_ja").empty(); });
@@ -1128,6 +1713,20 @@ void RegisterGameOverrides() {
     ps2host::Override(0x00450F58u, CameraView, "a camera's matrices built again when the setting changed");
     ps2host::Override(0x004597F0u, Object3d, "3D drawn: the picture is the wide one");
     ps2host::SetWidescreen(ShowsWide);
+    // SELECT: EXIT GAME / EXIT TO MENU (issue 3; ZOE leaves Select unused - his FAQ and a scripted fight with and
+    // without it, the same pictures). The internal "select" setting "stock" gives it back to the game.
+    ps2host::EnableSelectMenu(true);
+    ps2host::SetSelectMenuLook(SelectMenuLook);
+    ps2host::SetSelectSettings(SelectSettingsStep);
+    ps2host::SetControlsLook(ControlsLook);
+    ps2host::SetExitToMenu(ExitToMenu);
+    ps2host::SetSelectAllowed(SelectAllowed);
+    // The default layout (the maintainer 2026-11-21): Start and Select trade places - SELECT's menu on the Start
+    // button (and Enter), the game's pause on Select (and Backspace); BUTTON MAPPING changes it back.
+    ps2host::bind::SwapDefaults(0, 3);
+    ps2host::AddDebugLine("Subtitle timing", DubSceneLine, DubSceneStep);    // F9 (internal): the scene playing
+    ps2host::Override(0x00414B68u, TitleCursor, "the title's main menu: EXIT GAME as a fourth row of its wheel");
+    ps2host::Override(0x0044C7D0u, FrameEnd, "SELECT's EXIT TO MENU at the frame's end: GAME OVER's own exit");
     ps2host::Override(0x00459908u, HudSprite, "a HUD sprite's draw: placed for ASPECT RATIO (its edge or centre)");
     ps2host::Override(0x0045B668u, HudText, "a text object's draw (ASPECT RATIO, logged)");
     ps2host::Override(0x0045ABE0u, HudWindow, "a window container's draw (ASPECT RATIO, logged)");

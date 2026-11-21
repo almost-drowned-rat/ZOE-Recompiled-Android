@@ -1,0 +1,1032 @@
+{
+ "0x498994": {
+  "hash": "0f7d6a5985bfa08b",
+  "group": 5,
+  "es": [
+   "Nada en uso."
+  ]
+ },
+ "0x4989f8": {
+  "hash": "5146a8c7ca74e16b",
+  "group": 5,
+  "es": [
+   "Arma de energía.",
+   "Vuela en arco. Corto alcance."
+  ]
+ },
+ "0x498a5c": {
+  "hash": "14e2406a1a47eec8",
+  "group": 5,
+  "es": [
+   "Arma de energía que dispara un",
+   "láser hacia arriba. Se esparce",
+   "por la superficie."
+  ]
+ },
+ "0x498ac0": {
+  "hash": "be207fa4086ad759",
+  "group": 5,
+  "es": [
+   "Potente bola de energía.",
+   "Rebota en la superficie hacia",
+   "el objetivo."
+  ]
+ },
+ "0x498b24": {
+  "hash": "ef89c0362adfab49",
+  "group": 5,
+  "es": [
+   "Disparos de energía rápidos.",
+   "La fuerza con que pulsas el botón",
+   "cambia el alcance del disparo."
+  ]
+ },
+ "0x498b88": {
+  "hash": "adf1f68a163961df",
+  "group": 5,
+  "es": [
+   "Potente espada de energía.",
+   "Aparece al pulsar el botón y se",
+   "retira al pulsarlo de nuevo."
+  ]
+ },
+ "0x498bec": {
+  "hash": "1752d04b82c50432",
+  "group": 5,
+  "es": [
+   "Disparo de energía controlable.",
+   "Persigue al enemigo durante un",
+   "tiempo tras dispararlo."
+  ]
+ },
+ "0x498c50": {
+  "hash": "258663c62eb1003c",
+  "group": 5,
+  "es": [
+   "Potente arma de proyectiles.",
+   "Vuela recta hacia el objetivo a",
+   "gran velocidad.",
+   "Rebota en el enemigo."
+  ]
+ },
+ "0x498cb4": {
+  "hash": "d5e20baab07753af",
+  "group": 5,
+  "es": [
+   "Arma de proyectiles de largo alcance.",
+   "Dispara con precisión al objetivo.",
+   "Poca potencia de fuego."
+  ]
+ },
+ "0x498d18": {
+  "hash": "ae91cf92fe1dc737",
+  "group": 5,
+  "es": [
+   "Arma defensiva que interfiere con",
+   "el radar enemigo.",
+   "El enemigo pierde de vista",
+   "temporalmente tu Orbital Frame."
+  ]
+ },
+ "0x498d7c": {
+  "hash": "0be21aa272382a14",
+  "group": 5,
+  "es": [
+   "Arma de reparación de blindaje.",
+   "Repara el blindaje de tu Orbital",
+   "Frame mientras pulsas el botón."
+  ]
+ },
+ "0x498de0": {
+  "hash": "efe5af253b358512",
+  "group": 5,
+  "es": [
+   "Arma inutilizable por ahora.",
+   "Necesita el controlador de",
+   "dispositivo correspondiente."
+  ]
+ },
+ "0x498e44": {
+  "hash": "1a32c56181c8ec36",
+  "group": 5,
+  "es": [
+   "Controlador de dispositivo para",
+   "usar JAVELIN."
+  ]
+ },
+ "0x498ea8": {
+  "hash": "12689133bceb65cc",
+  "group": 5,
+  "es": [
+   "Controlador de dispositivo para",
+   "usar GEYSER."
+  ]
+ },
+ "0x498f0c": {
+  "hash": "093874729b04997a",
+  "group": 5,
+  "es": [
+   "Controlador de dispositivo para",
+   "usar BOUNDER."
+  ]
+ },
+ "0x498f70": {
+  "hash": "e49a4232812892e1",
+  "group": 5,
+  "es": [
+   "Controlador de dispositivo para",
+   "usar PHALANX."
+  ]
+ },
+ "0x498fd4": {
+  "hash": "38eb6f4029ac5255",
+  "group": 5,
+  "es": [
+   "Controlador de dispositivo para",
+   "usar HALBERD."
+  ]
+ },
+ "0x499038": {
+  "hash": "62831d55bce1809b",
+  "group": 5,
+  "es": [
+   "Controlador de dispositivo para",
+   "usar COMET."
+  ]
+ },
+ "0x49909c": {
+  "hash": "426d3e8a9627525f",
+  "group": 5,
+  "es": [
+   "Controlador de dispositivo para",
+   "usar GAUNTLET."
+  ]
+ },
+ "0x499100": {
+  "hash": "8613fc5d6241f460",
+  "group": 5,
+  "es": [
+   "Controlador de dispositivo para",
+   "usar SNIPER."
+  ]
+ },
+ "0x499164": {
+  "hash": "2812783c874690c3",
+  "group": 5,
+  "es": [
+   "Controlador de dispositivo para",
+   "usar DECOY."
+  ]
+ },
+ "0x4991c8": {
+  "hash": "f2ce804f484a6252",
+  "group": 5,
+  "es": [
+   "Controlador de dispositivo para",
+   "usar MUMMY."
+  ]
+ },
+ "0x49922c": {
+  "hash": "beede6993aa113ce",
+  "group": 5,
+  "es": [
+   "Módulo de modo de reconocimiento.",
+   "Abre el menú de comandos",
+   "pulsando el botón START."
+  ]
+ },
+ "0x499290": {
+  "hash": "a72a7412c38ecbcd",
+  "group": 5,
+  "es": [
+   "Módulo de modo de vuelo.",
+   "Permite elegir¡ÈAREA CHANGE¡É",
+   "en el menú de comandos."
+  ]
+ },
+ "0x4992f4": {
+  "hash": "2c0eeaffda442966",
+  "group": 5,
+  "es": [
+   "Módulo de control de Raptor.",
+   "Permite controlar un Raptor",
+   "descontrolado."
+  ]
+ },
+ "0x499358": {
+  "hash": "39cf200007d0a5ff",
+  "group": 5,
+  "es": [
+   "Módulo antisigilo.",
+   "Detecta objetos invisibles."
+  ]
+ },
+ "0x4993bc": {
+  "hash": "93fbe61b6ea9e5b1",
+  "group": 5,
+  "es": [
+   "Virus que infecta el sistema de ADA.",
+   "Tu Orbital Frame no puede repararse",
+   "hasta el programa vacuna universal."
+  ]
+ },
+ "0x499420": {
+  "hash": "05fac7b4b22355e9",
+  "group": 5,
+  "es": [
+   "Programa vacuna universal que",
+   "detecta y elimina virus que",
+   "infectan el sistema."
+  ]
+ },
+ "0x499484": {
+  "hash": "045ca72cbf47b7bc",
+  "group": 5,
+  "es": [
+   "Datos del sistema EPS.",
+   "Contiene información de las",
+   "instalaciones de suministro, etc."
+  ]
+ },
+ "0x49967c": {
+  "hash": "e671a12809f4ff21",
+  "group": 5,
+  "es": [
+   "Código de acceso necesario para",
+   "obtener javelin.drvr.",
+   "Para usar en TOWN.1."
+  ]
+ },
+ "0x4996e0": {
+  "hash": "3fcf7914d6c2eb34",
+  "group": 5,
+  "es": [
+   "Código de acceso necesario para",
+   "obtener geyser.drvr.",
+   "Para usar en CITY.1."
+  ]
+ },
+ "0x499744": {
+  "hash": "272bf704d633c6b8",
+  "group": 5,
+  "es": [
+   "Código de acceso necesario para",
+   "obtener bounder.drvr.",
+   "Para usar en MOUNTAIN.1."
+  ]
+ },
+ "0x4997a8": {
+  "hash": "ec820ab2143f97d9",
+  "group": 5,
+  "es": [
+   "Código de acceso necesario para",
+   "obtener phalanx.drvr.",
+   "Para usar en TOWN.2."
+  ]
+ },
+ "0x49980c": {
+  "hash": "c29bda20ca6c829a",
+  "group": 5,
+  "es": [
+   "Código de acceso necesario para",
+   "obtener halberd.drvr.",
+   "Para usar en EPS.1."
+  ]
+ },
+ "0x499870": {
+  "hash": "c03a3ad4c6f04286",
+  "group": 5,
+  "es": [
+   "Código de acceso necesario para",
+   "obtener comet.drvr.",
+   "Para usar en CITY.2."
+  ]
+ },
+ "0x4998d4": {
+  "hash": "0767deb8e82e2239",
+  "group": 5,
+  "es": [
+   "Código de acceso necesario para",
+   "obtener gauntlet.drvr.",
+   "Para usar en EPS.2."
+  ]
+ },
+ "0x499938": {
+  "hash": "f6d671de52a2a9ac",
+  "group": 5,
+  "es": [
+   "Uno de los códigos de acceso",
+   "necesarios para obtener decoy.drvr.",
+   "Para usar en FACTORY.2."
+  ]
+ },
+ "0x49999c": {
+  "hash": "f6d671de52a2a9ac",
+  "group": 5,
+  "es": [
+   "Uno de los códigos de acceso",
+   "necesarios para obtener decoy.drvr.",
+   "Para usar en FACTORY.2."
+  ]
+ },
+ "0x499a00": {
+  "hash": "d2e0525048a5ef91",
+  "group": 5,
+  "es": [
+   "Código de acceso necesario para",
+   "obtener mummy.drvr.",
+   "Para usar en PARK.1."
+  ]
+ },
+ "0x499a64": {
+  "hash": "19cdeb881f7f18c9",
+  "group": 5,
+  "es": [
+   "Código de acceso necesario para",
+   "obtener el módulo de modo de vuelo.",
+   "Para usar en FACTORY.1."
+  ]
+ },
+ "0x499ac8": {
+  "hash": "c2709b5388c6d9ec",
+  "group": 5,
+  "es": [
+   "Uno de los códigos de acceso",
+   "necesarios para obtener el módulo",
+   "de control de Raptor.",
+   "Para usar en EPS.1."
+  ]
+ },
+ "0x499b2c": {
+  "hash": "c2709b5388c6d9ec",
+  "group": 5,
+  "es": [
+   "Uno de los códigos de acceso",
+   "necesarios para obtener el módulo",
+   "de control de Raptor.",
+   "Para usar en EPS.1."
+  ]
+ },
+ "0x499b90": {
+  "hash": "98cd1a467e3d9712",
+  "group": 5,
+  "es": [
+   "Código de acceso necesario para",
+   "obtener el programa vacuna.",
+   "Para usar en FACTORY.2."
+  ]
+ },
+ "0x499bf4": {
+  "hash": "3440d2f4167ae406",
+  "group": 5,
+  "es": [
+   "Código de acceso necesario para",
+   "obtener información de la colonia.",
+   "Para usar en FACTORY.1."
+  ]
+ },
+ "0x499d58": {
+  "hash": "67b15bd50e9297d7",
+  "group": 4,
+  "es": [
+   "Obtén el módulo de modo de vuelo y ve",
+   "a otra zona usando¡ÈAREA CHANGE¡É",
+   "en el menú de comandos."
+  ]
+ },
+ "0x499df8": {
+  "hash": "c53f93c8710e9dec",
+  "group": 4,
+  "es": [
+   "Ve a TOWN.1."
+  ]
+ },
+ "0x499e48": {
+  "hash": "3c2af495a5c1e153",
+  "group": 4,
+  "es": [
+   "Destruye el gran Orbital Frame",
+   "en TOWN.1."
+  ]
+ },
+ "0x499e98": {
+  "hash": "d25cff39c1464fc9",
+  "group": 4,
+  "es": [
+   "Evita combates innecesarios y ve",
+   "a otra zona."
+  ]
+ },
+ "0x499ee8": {
+  "hash": "fb9e1f7d9ff3298f",
+  "group": 4,
+  "es": [
+   "Obtén del servidor local de FACTORY.1",
+   "la información de la colonia",
+   "necesaria para la misión."
+  ]
+ },
+ "0x499f38": {
+  "hash": "fb9e1f7d9ff3298f",
+  "group": 4,
+  "es": [
+   "Obtén del servidor local de FACTORY.1",
+   "la información de la colonia",
+   "necesaria para la misión."
+  ]
+ },
+ "0x499f88": {
+  "hash": "d25cff39c1464fc9",
+  "group": 4,
+  "es": [
+   "Evita combates innecesarios y ve",
+   "a otra zona."
+  ]
+ },
+ "0x499fd8": {
+  "hash": "3b813a1ecdfd2d53",
+  "group": 4,
+  "es": [
+   "Ve a CITY.1, donde está el pozo de",
+   "la colonia, y destruye el bloque",
+   "de transmisión del EPS."
+  ]
+ },
+ "0x49a028": {
+  "hash": "6f91ccac4623f1c8",
+  "group": 4,
+  "es": [
+   "Busca el arma de proyectiles de largo",
+   "alcance necesaria para destruir el",
+   "bloque de transmisión."
+  ]
+ },
+ "0x49a078": {
+  "hash": "12b36b4a1586e5d0",
+  "group": 4,
+  "es": [
+   "Destruye los Porter de TOWN.2 y",
+   "obtén el objeto oculto."
+  ]
+ },
+ "0x49a0c8": {
+  "hash": "1c6926e189d40d86",
+  "group": 4,
+  "es": [
+   "Usa el SNIPER recién obtenido y",
+   "destruye el bloque de transmisión",
+   "del EPS en CITY.1."
+  ]
+ },
+ "0x49a118": {
+  "hash": "7c2cd445b0ae47a0",
+  "group": 4,
+  "es": [
+   "Destruye las instalaciones de",
+   "suministro de EPS.1 y EPS.2."
+  ]
+ },
+ "0x49a168": {
+  "hash": "7c2cd445b0ae47a0",
+  "group": 4,
+  "es": [
+   "Destruye las instalaciones de",
+   "suministro de EPS.1 y EPS.2."
+  ]
+ },
+ "0x49a1b8": {
+  "hash": "27fbe49ae1b2e8a3",
+  "group": 4,
+  "es": [
+   "Destruye el generador de emergencia",
+   "del EPS en EPS.1 y EPS.2."
+  ]
+ },
+ "0x49a208": {
+  "hash": "03220fe6d928ae28",
+  "group": 4,
+  "es": [
+   "Primero destruye el generador de",
+   "emergencia del EPS en EPS.1."
+  ]
+ },
+ "0x49a258": {
+  "hash": "66d6d841b8d5bdd9",
+  "group": 4,
+  "es": [
+   "Destruye el generador de emergencia",
+   "del EPS en EPS.2."
+  ]
+ },
+ "0x49a2a8": {
+  "hash": "419b666a473c19b0",
+  "group": 4,
+  "es": [
+   "Obtén el módulo necesario para",
+   "atravesar el campo de energía",
+   "de EPS.2."
+  ]
+ },
+ "0x49a2f8": {
+  "hash": "0b94119e43e6bbba",
+  "group": 4,
+  "es": [
+   "Busca el Raptor descontrolado para",
+   "atravesar el campo de energía",
+   "de EPS.2."
+  ]
+ },
+ "0x49a348": {
+  "hash": "66d6d841b8d5bdd9",
+  "group": 4,
+  "es": [
+   "Destruye el generador de emergencia",
+   "del EPS en EPS.2."
+  ]
+ },
+ "0x49a398": {
+  "hash": "66d6d841b8d5bdd9",
+  "group": 4,
+  "es": [
+   "Destruye el generador de emergencia",
+   "del EPS en EPS.2."
+  ]
+ },
+ "0x49a3e8": {
+  "hash": "706644a4a6e5480f",
+  "group": 4,
+  "es": [
+   "Ve a MOUNTAIN.1 y reúnete con",
+   "el Atlantis."
+  ]
+ },
+ "0x49a438": {
+  "hash": "706644a4a6e5480f",
+  "group": 4,
+  "es": [
+   "Ve a MOUNTAIN.1 y reúnete con",
+   "el Atlantis."
+  ]
+ },
+ "0x49a488": {
+  "hash": "6cb9918d6b4c6376",
+  "group": 4,
+  "es": [
+   "Evita combatir con el gran Orbital",
+   "Frame que hay más adelante y ve",
+   "a otra zona."
+  ]
+ },
+ "0x49a4d8": {
+  "hash": "4118dc09b0dd3c0d",
+  "group": 4,
+  "es": [
+   "Busca en FACTORY.2 el programa",
+   "necesario para reparar a ADA."
+  ]
+ },
+ "0x49a528": {
+  "hash": "4118dc09b0dd3c0d",
+  "group": 4,
+  "es": [
+   "Busca en FACTORY.2 el programa",
+   "necesario para reparar a ADA."
+  ]
+ },
+ "0x49a578": {
+  "hash": "d25cff39c1464fc9",
+  "group": 4,
+  "es": [
+   "Evita combates innecesarios y ve",
+   "a otra zona."
+  ]
+ },
+ "0x49a5c8": {
+  "hash": "8f59e3b72856ba74",
+  "group": 4,
+  "es": [
+   "Busca el módulo necesario para",
+   "esquivar los ataques láser del gran",
+   "Orbital Frame de PARK.1."
+  ]
+ },
+ "0x49a618": {
+  "hash": "3cb4f26d55153bb9",
+  "group": 4,
+  "es": [
+   "Busca el módulo antisigilo",
+   "necesario para derrotar al enemigo",
+   "en modo sigilo."
+  ]
+ },
+ "0x49a668": {
+  "hash": "e1cc5003abfdc8a3",
+  "group": 4,
+  "es": [
+   "Destruye el gran Orbital Frame",
+   "en PARK.1."
+  ]
+ },
+ "0x49a6b8": {
+  "hash": "706644a4a6e5480f",
+  "group": 4,
+  "es": [
+   "Ve a MOUNTAIN.1 y reúnete con",
+   "el Atlantis."
+  ]
+ },
+ "0x49a708": {
+  "hash": "d6bdfe411f9f0df9",
+  "group": 4,
+  "es": [
+   "Vuela por el barranco de la ladera",
+   "y llega desde la presa hasta la",
+   "zona de almacenes."
+  ]
+ },
+ "0x49a758": {
+  "hash": "9ffe7ea75bf9b9fe",
+  "group": 4,
+  "es": [
+   "Destruye el gran Orbital Frame",
+   "en MOUNTAIN.1."
+  ]
+ },
+ "0x49a7a8": {
+  "hash": "6d82b97b95540403",
+  "group": 4,
+  "es": [
+   "Reúnete con el carguero civil",
+   "Atlantis."
+  ]
+ },
+ "0x49a7f8": {
+  "hash": "6d82b97b95540403",
+  "group": 4,
+  "es": [
+   "Reúnete con el carguero civil",
+   "Atlantis."
+  ]
+ },
+ "0x49a848": {
+  "hash": "6d82b97b95540403",
+  "group": 4,
+  "es": [
+   "Reúnete con el carguero civil",
+   "Atlantis."
+  ]
+ },
+ "0x49a938": {
+  "hash": "a86c45fc7d660552",
+  "group": 4,
+  "es": [
+   "Recuerda: en combate no puedes",
+   "acceder al servidor local ni",
+   "coger cajas de objetos."
+  ]
+ },
+ "0x49a9d8": {
+  "hash": "79f8b5178b87fd3f",
+  "group": 4,
+  "es": [
+   "Si luchas cerca de una ciudad,",
+   "intenta elegir una zona donde los",
+   "daños sean mínimos."
+  ]
+ },
+ "0x49aa28": {
+  "hash": "83c4e85599ad2019",
+  "group": 4,
+  "es": [
+   "Justo después de un Dash, Jehuty",
+   "es inmune al daño por un momento.",
+   "Intenta aprovecharlo."
+  ]
+ },
+ "0x49aa78": {
+  "hash": "068deb44779990d5",
+  "group": 4,
+  "es": [
+   "Si te rodean los enemigos, deja de",
+   "fijar el objetivo para escapar",
+   "del combate."
+  ]
+ },
+ "0x49aac8": {
+  "hash": "c63f122db908ec37",
+  "group": 4,
+  "es": [
+   "Intenta no usar Metatron cuando",
+   "a Jehuty aún le quede suficiente",
+   "resistencia."
+  ]
+ },
+ "0x49ab18": {
+  "hash": "80db19d2e05854d8",
+  "group": 4,
+  "es": [
+   "Asegúrate de combatir con todos los",
+   "enemigos que tengan un código de",
+   "acceso."
+  ]
+ },
+ "0x49ab68": {
+  "hash": "fdded3d74c3635e2",
+  "group": 4,
+  "es": [
+   "JAVELIN puede dañar incluso a un",
+   "enemigo en guardia."
+  ]
+ },
+ "0x49abb8": {
+  "hash": "83c8d33ad5a6886d",
+  "group": 4,
+  "es": [
+   "Si cambias de objetivo fijado",
+   "mientras agarras, puedes lanzar al",
+   "objetivo contra otros enemigos."
+  ]
+ },
+ "0x49ac08": {
+  "hash": "9260dba10f960119",
+  "group": 4,
+  "es": [
+   "Si no encuentras los objetos",
+   "necesarios en una zona, ve a un",
+   "lugar donde puedas hacerlo."
+  ]
+ },
+ "0x49ac58": {
+  "hash": "d697ff7a5feefd85",
+  "group": 4,
+  "es": [
+   "Tanto agarrar y lanzar como el ataque",
+   "Burst son eficaces contra un enemigo",
+   "en guardia."
+  ]
+ },
+ "0x49aca8": {
+  "hash": "bdcb32ae3600d079",
+  "group": 4,
+  "es": [
+   "Algunas cajas de objetos reaparecen",
+   "al cabo de un tiempo."
+  ]
+ },
+ "0x49acf8": {
+  "hash": "e91b50df713258f0",
+  "group": 4,
+  "es": [
+   "El combate a distancia es eficaz contra",
+   "enemigos rápidos; el cuerpo a cuerpo,",
+   "contra enemigos lentos."
+  ]
+ },
+ "0x49ad48": {
+  "hash": "b050f804f49c629a",
+  "group": 4,
+  "es": [
+   "Puedes destruir un Porter con",
+   "SNIPER cuando estés a larga",
+   "distancia."
+  ]
+ },
+ "0x49ad98": {
+  "hash": "1bc01293da46e799",
+  "group": 4,
+  "es": [
+   "GEYSER es eficaz al luchar en una",
+   "zona rodeada por cuatro paredes."
+  ]
+ },
+ "0x49ade8": {
+  "hash": "1bc01293da46e799",
+  "group": 4,
+  "es": [
+   "GEYSER es eficaz al luchar en una",
+   "zona rodeada por cuatro paredes."
+  ]
+ },
+ "0x49ae38": {
+  "hash": "6b7eda1f0ae9ac3e",
+  "group": 4,
+  "es": [
+   "Un HALBERD es eficaz contra un",
+   "enemigo que use un HALBERD."
+  ]
+ },
+ "0x49ae88": {
+  "hash": "6b7eda1f0ae9ac3e",
+  "group": 4,
+  "es": [
+   "Un HALBERD es eficaz contra un",
+   "enemigo que use un HALBERD."
+  ]
+ },
+ "0x49aed8": {
+  "hash": "7ff71f6c591b7496",
+  "group": 4,
+  "es": [
+   "Si no encuentras una zona en un",
+   "lugar, ve a otro sitio donde",
+   "puedas hacerlo."
+  ]
+ },
+ "0x49af28": {
+  "hash": "a5849e2422459557",
+  "group": 4,
+  "es": [
+   "Aprovecha al máximo el ataque Dash",
+   "y el ataque Burst, propios de los",
+   "Raptor."
+  ]
+ },
+ "0x49af78": {
+  "hash": "a5849e2422459557",
+  "group": 4,
+  "es": [
+   "Aprovecha al máximo el ataque Dash",
+   "y el ataque Burst, propios de los",
+   "Raptor."
+  ]
+ },
+ "0x49afc8": {
+  "hash": "72cc81888aca207b",
+  "group": 4,
+  "es": [
+   "Puedes usar Dash y Burst durante",
+   "un ataque de tajo."
+  ]
+ },
+ "0x49b018": {
+  "hash": "72cc81888aca207b",
+  "group": 4,
+  "es": [
+   "Puedes usar Dash y Burst durante",
+   "un ataque de tajo."
+  ]
+ },
+ "0x49b068": {
+  "hash": "8a0b1519532675ae",
+  "group": 4,
+  "es": [
+   "Si Jehuty tiene poca resistencia,",
+   "intenta recuperarte evitando",
+   "combates innecesarios."
+  ]
+ },
+ "0x49b0b8": {
+  "hash": "8a0b1519532675ae",
+  "group": 4,
+  "es": [
+   "Si Jehuty tiene poca resistencia,",
+   "intenta recuperarte evitando",
+   "combates innecesarios."
+  ]
+ },
+ "0x49b108": {
+  "hash": "8a0b1519532675ae",
+  "group": 4,
+  "es": [
+   "Si Jehuty tiene poca resistencia,",
+   "intenta recuperarte evitando",
+   "combates innecesarios."
+  ]
+ },
+ "0x49b158": {
+  "hash": "787646d8ae1fa224",
+  "group": 4,
+  "es": [
+   "Puedes golpear primero a un",
+   "enemigo con el ataque Burst."
+  ]
+ },
+ "0x49b1a8": {
+  "hash": "3cc3693b48bc07ff",
+  "group": 4,
+  "es": [
+   "Busquemos los programas en las",
+   "zonas cercanas."
+  ]
+ },
+ "0x49b1f8": {
+  "hash": "77d11e19e31cce52",
+  "group": 4,
+  "es": [
+   "Si te atacan agarrando y lanzando,",
+   "puedes escapar con un ataque de",
+   "tajo, Dash o Burst."
+  ]
+ },
+ "0x49b248": {
+  "hash": "487bc64a18fbc03b",
+  "group": 4,
+  "es": [
+   "No olvides conseguir munición",
+   "para DECOY."
+  ]
+ },
+ "0x49b298": {
+  "hash": "547ae191d2f58d8a",
+  "group": 4,
+  "es": [
+   "No dejes códigos de acceso sin usar",
+   "al pasar a la siguiente fase."
+  ]
+ },
+ "0x49b2e8": {
+  "hash": "aac207e1a688e60e",
+  "group": 4,
+  "es": [
+   "GEYSER y BOUNDER son eficaces al",
+   "luchar en zonas pequeñas."
+  ]
+ },
+ "0x49b338": {
+  "hash": "04b72eea2200f241",
+  "group": 4,
+  "es": [
+   "Mientras Nebula prepara otro ataque,",
+   "aprovecha para recuperar tu",
+   "estado de combate."
+  ]
+ },
+ "0x49b388": {
+  "hash": "20ace63d85989962",
+  "group": 4,
+  "es": [
+   "Cuando Neith usa el ataque Burst,",
+   "queda indefenso unos segundos.",
+   "No pierdas la ocasión de atacar."
+  ]
+ },
+ "0x49b3d8": {
+  "hash": "d781111de6793f7d",
+  "group": 4,
+  "es": [
+   "Recuerda que COMET desaparece si",
+   "Jehuty sufre cualquier daño."
+  ]
+ },
+ "0x49b428": {
+  "hash": "0f667130a6479f1e",
+  "group": 4,
+  "es": [
+   "El ataque más eficaz combina las",
+   "armas secundarias y el ataque",
+   "normal."
+  ]
+ },
+ "0x49b470": {
+  "hash": "618ecb4d2af42fb7",
+  "group": 2,
+  "es": [
+   "No puedes ir a otra zona",
+   "desde aquí."
+  ]
+ },
+ "0x49b498": {
+  "hash": "6e46294dbcbf08b2",
+  "group": 2,
+  "es": [
+   "Debes escapar de la zona de combate."
+  ]
+ },
+ "0x49b4c0": {
+  "hash": "3aea8578270fae14",
+  "group": 2,
+  "es": [
+   "No estás en condiciones de",
+   "ir a otra zona."
+  ]
+ },
+ "0x49b4e8": {
+  "hash": "1e52be5b3e391c61",
+  "group": 2,
+  "es": [
+   "Primero elige¡ÈAREA CHANGE¡É",
+   "y sal de esta zona."
+  ]
+ },
+ "0x49b510": {
+  "hash": "61966947c58735d6",
+  "group": 2,
+  "es": [
+   "No puedes guardar ahora."
+  ]
+ },
+ "0x49b538": {
+  "hash": "293f89003d5c3182",
+  "group": 2,
+  "es": [
+   "No hay códigos de acceso sin usar."
+  ]
+ },
+ "0x49b560": {
+  "hash": "ad02cc9627e64be8",
+  "group": 2,
+  "es": [
+   "No has obtenido ningún programa."
+  ]
+ }
+}

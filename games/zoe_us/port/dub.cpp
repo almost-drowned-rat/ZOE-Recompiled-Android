@@ -11,10 +11,27 @@
 
 #include "ps2host/disc.h"
 #include "ps2host/host.h"
+#include "ps2host/memory.h"
 #include "ps2host/settings.h"
+#include "ps2platform/platform.h"
+
+#ifdef _WIN32
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+#include <windows.h>
+#else
+#include <iconv.h>
+#endif
 
 #include <algorithm>
+#include <cstdlib>
+#include <cctype>
 #include <cstdio>
+#include <filesystem>
 #include <cstring>
 #include <map>
 #include <set>
@@ -195,11 +212,126 @@ Subtitles ReadSubtitles(const std::vector<u8>& d, bool (*wanted)(u32)) {
 bool UsSubtitleChannel(u32 channel) { return channel >= 7 && channel <= 10; }
 bool JaSubtitleChannel(u32 channel) { return channel == 0; }
 
-// One language's cues moved onto the Japanese voice: with as many Japanese cues, the Japanese times one for one
-// (both in time order); else the line's span stretched onto the Japanese cues' span; without Japanese cues, scaled
-// by the two files' lengths (the voice data's rate is the same on both discs).
-void Retime(std::vector<u8>& d, const Channel& channel, std::vector<Cue> ja, u32 us_size, u32 ja_size) {
-    if (channel.cues.empty()) return;
+// How a scene's English cues are put onto the Japanese voice (2026-11-20 issue 6; the "dub_subs" setting, or
+// "dub_subs_<scene>" for one scene - its file name without .pss):
+//   auto (default) - a movie (pictures: the same picture time on both discs) keeps the US times, each line then
+//     snapped to the Japanese lines it overlaps; a voice scene with as many Japanese lines takes their times one
+//     for one, else the English span stretched onto the Japanese one and snapped the same way;
+//   jp - v0.8.0's way (as many: one for one; else stretched; no Japanese lines: by the files' sizes) - the opening
+//     (fa1r1020: two Japanese-only lines first) came far too early so;
+//   us - the US times unchanged.
+enum class SubsMode { kAuto, kJp, kUs };
+
+SubsMode ModeOf(const std::string& scene) {
+    std::string v = ps2host::Setting("dub_subs_" + scene.substr(0, scene.rfind('.')));
+    if (v.empty()) v = ps2host::Setting("dub_subs", "auto");
+    return v == "jp" ? SubsMode::kJp : v == "us" ? SubsMode::kUs : SubsMode::kAuto;
+}
+
+// The English lines onto the Japanese ones (tools/m9/subs_survey.py's survey: 437 scenes, 13 left with a line
+// under 0.5 s - their Japanese voice is that much shorter): a Japanese line that a quarter or more of two or more
+// English lines falls on is shared out among them by their lengths; any other goes to the English line it overlaps
+// most, which then runs from its first Japanese line's start to its last's end; a line with none keeps its time;
+// then lines kept apart (one ends where the next starts).
+// (`reading`: each English line's own length on the US disc, before any stretch.)
+std::vector<std::pair<double, double>> Snap(std::vector<std::pair<double, double>> en, const std::vector<Cue>& ja,
+                                            const std::vector<double>& reading) {
+    const std::size_t n = en.size();
+    std::vector<std::pair<double, double>> out = en;
+    std::vector<bool> done(n, false);
+    std::vector<int> owner(ja.size(), -1);
+    auto overlap = [&](std::size_t e, std::size_t j) {
+        return std::min<double>(en[e].second, ja[j].end) - std::max<double>(en[e].first, ja[j].start);
+    };
+    for (std::size_t j = 0; j < ja.size(); ++j) {
+        std::vector<std::size_t> shared;
+        for (std::size_t e = 0; e < n; ++e)
+            if (overlap(e, j) > 0.25 * (en[e].second - en[e].first)) shared.push_back(e);
+        if (shared.size() >= 2) {
+            double total = 0.0;
+            for (std::size_t e : shared) total += en[e].second - en[e].first;
+            double at = ja[j].start;
+            // Over the line and the pause after it (up to 2 frames before the next Japanese line, a second at most):
+            // two English lines on one quicker Japanese one ran too fast (his session 2026-11-21).
+            const double next = j + 1 < ja.size() ? double(ja[j + 1].start) - 2.0 : double(ja[j].end) + 60.0;
+            const double until = std::max(double(ja[j].end), std::min(next, double(ja[j].end) + 60.0));
+            for (std::size_t e : shared) {
+                const double span = until - ja[j].start;
+                const double part = total > 0.0 ? span * (en[e].second - en[e].first) / total : span / shared.size();
+                out[e] = {at, at + part};
+                at += part;
+                done[e] = true;
+            }
+            continue;
+        }
+        double best = 0.0;
+        for (std::size_t e = 0; e < n; ++e)
+            if (overlap(e, j) > best) best = overlap(e, j), owner[j] = int(e);
+    }
+    for (std::size_t e = 0; e < n; ++e) {
+        if (done[e]) continue;
+        double s = 1e18, t = -1e18;
+        for (std::size_t j = 0; j < ja.size(); ++j)
+            if (owner[j] == int(e)) s = std::min<double>(s, ja[j].start), t = std::max<double>(t, ja[j].end);
+        if (t > s) out[e] = {s, t};
+    }
+    for (std::size_t e = 1; e < n; ++e)
+        if (out[e].first < out[e - 1].second) out[e - 1].second = std::max(out[e - 1].first + 1.0, out[e].first);
+    (void)reading;
+    return out;
+}
+
+// Read in time: a line stays as long as its English one did (its reading time), as far as the next line lets it
+// (2 frames before) - shared and snapped lines had run too fast (the mech's first scene, fa1c1081: 41 frames for a
+// line of 59; his session 2026-11-21).
+void ReadInTime(std::vector<std::pair<double, double>>* lines, const std::vector<double>& reading) {
+    std::vector<std::pair<double, double>>& out = *lines;
+    for (std::size_t e = 0; e < out.size(); ++e) {
+        const double want = out[e].first + reading[e];
+        const double room = e + 1 < out.size() ? out[e + 1].first - 2.0 : want;
+        if (out[e].second < want) out[e].second = std::max(out[e].second, std::min(want, room));
+    }
+}
+
+// One language's cues moved onto the Japanese voice (SubsMode). The English lines in time order; with as many
+// Japanese ones, theirs one for one (both in time order) - unless a movie in auto.
+void Retime(std::vector<u8>& d, const Channel& channel, std::vector<Cue> ja, u32 us_size, u32 ja_size, bool movie,
+            SubsMode mode) {
+    if (channel.cues.empty() || mode == SubsMode::kUs) return;
+    if (mode == SubsMode::kAuto) {
+        std::vector<Cue> order = channel.cues;
+        std::sort(order.begin(), order.end(), [](const Cue& a, const Cue& b) { return a.start < b.start; });
+        std::sort(ja.begin(), ja.end(), [](const Cue& a, const Cue& b) { return a.start < b.start; });
+        std::vector<std::pair<double, double>> en;
+        std::vector<double> reading;
+        for (const Cue& c : order) {
+            en.push_back({double(c.start), double(c.end)});
+            reading.push_back(double(c.end) - double(c.start));
+        }
+        if (!ja.empty()) {
+            if (!movie && ja.size() == order.size()) {
+                for (std::size_t k = 0; k < en.size(); ++k) en[k] = {double(ja[k].start), double(ja[k].end)};
+            } else {
+                if (!movie) {           // the English span onto the Japanese span, then snapped
+                    double us_first = en.front().first, us_last = 0, ja_last = 0;
+                    for (const auto& c : en) us_last = std::max(us_last, c.second);
+                    for (const Cue& c : ja) ja_last = std::max<double>(ja_last, c.end);
+                    const double scale = us_last > us_first ? (ja_last - ja.front().start) / (us_last - us_first) : 1.0;
+                    for (auto& c : en)
+                        c = {ja.front().start + (c.first - us_first) * scale, ja.front().start + (c.second - us_first) * scale};
+                }
+                en = Snap(en, ja, reading);
+            }
+            ReadInTime(&en, reading);
+        }
+        for (std::size_t k = 0; k < order.size(); ++k) {
+            u32 s = u32(std::max(0.0, en[k].first) + 0.5), e = u32(std::max(0.0, en[k].second) + 0.5);
+            if (e <= s) e = s + 1;
+            channel.Put(d, order[k].at, s);
+            channel.Put(d, order[k].at + 4, e);
+        }
+        return;
+    }
     std::vector<Cue> order = channel.cues;
     std::sort(order.begin(), order.end(), [](const Cue& a, const Cue& b) { return a.start < b.start; });
     std::sort(ja.begin(), ja.end(), [](const Cue& a, const Cue& b) { return a.start < b.start; });
@@ -229,7 +361,288 @@ void Retime(std::vector<u8>& d, const Channel& channel, std::vector<Cue> ja, u32
 
 // The US scene's subtitle units with their cues on the Japanese voice, padded to whole 16384-byte packs (the
 // stream's pack interval; a padding packet fills the gap) - empty when the scene's layout is not the known one.
-std::vector<u8> SubtitlePrefix(Archive& us_dat, const Entry& us, Archive& ja_dat, const Entry& ja) {
+// ---- Fewer Japanese lines than English (the maintainer's idea 2026-11-21): the Japanese times exactly, the English
+// lines put together onto them - consecutive lines a Japanese one each, the groups chosen where the lines' starts fit
+// best (each start's share of the scene and its length's share); a group's text its lines one under the other. The subtitle units are written anew (the texts' lengths change): the same pack - its header,
+// each language's block in its own 4096-byte unit, padding between - so the scene's mapping stays as it was.
+struct TextLine {
+    u32 start = 0, end = 0, flags = 0;
+    std::string text;
+};
+
+std::vector<TextLine> ChannelLines(const std::vector<u8>& d, const Channel& c) {
+    std::vector<TextLine> out;
+    for (const Cue& cue : c.cues) {
+        TextLine l;
+        l.start = c.Get(d, cue.at);
+        l.end = c.Get(d, cue.at + 4);
+        const u32 bytes = c.Get(d, cue.at + 8);
+        l.flags = c.Get(d, cue.at + 12);
+        for (u32 i = 0; i < bytes && cue.at + 16 + i < c.at.size(); ++i) {
+            const u8 ch = d[c.at[cue.at + 16 + i]];
+            if (!ch) break;
+            l.text += char(ch);
+        }
+        out.push_back(l);
+    }
+    std::sort(out.begin(), out.end(), [](const TextLine& a, const TextLine& b) { return a.start < b.start; });
+    return out;
+}
+
+// The English lines grouped onto the Japanese ones (n > m): group j = lines [cut[j], cut[j+1]).
+std::vector<std::size_t> GroupLines(const std::vector<TextLine>& en, std::vector<Cue> ja) {
+    std::sort(ja.begin(), ja.end(), [](const Cue& a, const Cue& b) { return a.start < b.start; });
+    const std::size_t n = en.size(), m = ja.size();
+    double en_last = 0, ja_last = 0, total_en = 0, total_ja = 0;
+    for (const TextLine& l : en) en_last = std::max<double>(en_last, l.end), total_en += double(l.end) - l.start;
+    for (const Cue& c : ja) ja_last = std::max<double>(ja_last, c.end), total_ja += double(c.end) - c.start;
+    if (total_en <= 0.0) total_en = 1.0;
+    if (total_ja <= 0.0) total_ja = 1.0;
+    auto share_en = [&](std::size_t i) {
+        return en_last > en.front().start ? (double(en[i].start) - en.front().start) / (en_last - en.front().start) : 0.0;
+    };
+    auto share_ja = [&](std::size_t j) {
+        return ja_last > ja.front().start ? (double(ja[j].start) - ja.front().start) / (ja_last - ja.front().start) : 0.0;
+    };
+    // cost[j][i]: the best for Japanese lines 0..j-1 taking English lines 0..i-1 (each at least one).
+    const double kInf = 1e18;
+    std::vector<std::vector<double>> cost(m + 1, std::vector<double>(n + 1, kInf));
+    std::vector<std::vector<std::size_t>> from(m + 1, std::vector<std::size_t>(n + 1, 0));
+    cost[0][0] = 0.0;
+    for (std::size_t j = 1; j <= m; ++j)
+        for (std::size_t i = j; i <= n - (m - j); ++i)
+            for (std::size_t k = j - 1; k < i; ++k) {       // group j-1 = English lines k..i-1
+                if (cost[j - 1][k] >= kInf) continue;
+                // where it starts, and how much of the scene it takes - twice as much (fa1c1081: "Who are you!?" on
+                // the short Japanese line, "I am ADA ..." on the long one)
+                double group = 0.0;
+                for (std::size_t x = k; x < i; ++x) group += double(en[x].end) - en[x].start;
+                const double d = share_en(k) - share_ja(j - 1);
+                const double t = group / total_en - (double(ja[j - 1].end) - ja[j - 1].start) / total_ja;
+                const double c = cost[j - 1][k] + d * d + 2.0 * t * t;
+                if (c < cost[j][i]) cost[j][i] = c, from[j][i] = k;
+            }
+    std::vector<std::size_t> cut(m + 1, 0);
+    cut[m] = n;
+    for (std::size_t j = m, i = n; j > 0; --j) {
+        cut[j - 1] = from[j][i];
+        i = cut[j - 1];
+    }
+    return cut;
+}
+
+// A subtitle pack written anew: its own header (up to the first subtitle packet), then each language's packet
+// (subs.channels' order, `lines` each) in its 4096-byte unit - a longer one takes more units; the last one ends at
+// subs.end at least. Empty: a block over a packet's 64 KiB.
+std::vector<u8> WritePack(const std::vector<u8>& prefix, const Subtitles& subs,
+                          const std::vector<std::vector<TextLine>>& lines) {
+    constexpr std::size_t kUnit = 4096;
+    std::size_t head = 0;
+    while (head + 4 <= prefix.size() && !(prefix[head] == 0 && prefix[head + 1] == 0 && prefix[head + 2] == 1 &&
+                                          prefix[head + 3] == 0xBD))
+        ++head;
+    if (head + 9 > prefix.size()) return {};
+    const std::size_t pes = std::size_t(3) + prefix[head + 8];          // the first packet's PES header
+    std::vector<u8> out(prefix.begin(), prefix.begin() + std::ptrdiff_t(head));
+    for (std::size_t k = 0; k < subs.channels.size() && k < lines.size(); ++k) {
+        std::vector<u8> block(16, 0);
+        u32 bytes = 0;
+        for (const TextLine& t : lines[k]) {
+            const u32 room = (u32(t.text.size()) + 4u) & ~3u;
+            u8 cue[16];
+            const u32 words[4] = {t.start, t.end, room, t.flags};
+            for (int w = 0; w < 4; ++w)
+                for (int b = 0; b < 4; ++b) cue[w * 4 + b] = u8(words[w] >> (8 * b));
+            block.insert(block.end(), cue, cue + 16);
+            std::vector<u8> text(room, 0);
+            std::memcpy(text.data(), t.text.data(), t.text.size());
+            block.insert(block.end(), text.begin(), text.end());
+            bytes += 16 + room;
+        }
+        SetLe32(&block[0], u32(lines[k].size()));
+        SetLe32(&block[4], bytes);
+        const std::size_t len = pes + 4 + block.size();
+        if (len > 0xFFFF) return {};
+        std::size_t unit_end = (out.size() + 6 + len + 6 + kUnit - 1) / kUnit * kUnit;
+        if (k + 1 == subs.channels.size()) unit_end = std::max(unit_end, subs.end);
+        const u8 bd[6] = {0, 0, 1, 0xBD, u8(len >> 8), u8(len)};
+        out.insert(out.end(), bd, bd + 6);
+        out.insert(out.end(), prefix.begin() + std::ptrdiff_t(head + 6), prefix.begin() + std::ptrdiff_t(head + 6 + pes));
+        const u8 sub[4] = {0xFF, 0x90, 0x00, u8(subs.channels[k].number)};
+        out.insert(out.end(), sub, sub + 4);
+        out.insert(out.end(), block.begin(), block.end());
+        const std::size_t pad = unit_end - out.size() - 6;
+        const u8 be[6] = {0, 0, 1, 0xBE, u8(pad >> 8), u8(pad)};
+        out.insert(out.end(), be, be + 6);
+        out.resize(unit_end, 0xFF);
+    }
+    return out;
+}
+
+// The subtitle pack written anew with the merged lines (empty: no language needs it, or it does not fit).
+// (`original`: the US file's own pack - the lines grouped by their own times; `prefix`: as Retime left it - a
+// language not merged keeps those.)
+std::vector<u8> MergedPrefix(const std::vector<u8>& original, const std::vector<u8>& prefix, const Subtitles& subs,
+                             const std::vector<Cue>& ja) {
+    if (ja.empty() || subs.channels.empty()) return {};
+    bool any = false;
+    std::vector<std::vector<TextLine>> lines;
+    for (const Channel& c : subs.channels) {
+        lines.push_back(ChannelLines(original, c));
+        if (lines.back().size() > ja.size()) any = true;
+        else lines.back() = ChannelLines(prefix, c);
+    }
+    if (!any) return {};
+    std::vector<Cue> jas = ja;
+    std::sort(jas.begin(), jas.end(), [](const Cue& a, const Cue& b) { return a.start < b.start; });
+    for (std::vector<TextLine>& l : lines) {
+        if (l.size() <= jas.size()) continue;                       // (as Retime left it)
+        const std::vector<std::size_t> cut = GroupLines(l, jas);
+        std::vector<TextLine> merged;
+        for (std::size_t j = 0; j < jas.size(); ++j) {
+            TextLine g;
+            g.start = jas[j].start;
+            g.end = jas[j].end;
+            g.flags = l[cut[j]].flags;
+            for (std::size_t i = cut[j]; i < cut[j + 1]; ++i) {
+                if (!g.text.empty()) g.text += '\n';
+                g.text += l[i].text;
+            }
+            merged.push_back(g);
+        }
+        l = merged;
+    }
+    std::vector<u8> out = WritePack(prefix, subs, lines);
+    return out.size() == subs.end ? out : std::vector<u8>{};
+}
+
+// ---- The subtitles translated from the Japanese (the maintainer 2026-11-21: with the Japanese voices every line
+// is the Japanese one's, in its time - translation/subtitles.json, built into translation_data.inc by
+// tools/m10/subs_translation.py): each Japanese line found by its text's FNV-1a hash, its EN / FR / DE / IT in the
+// US file's channels 7 / 8 / 9 / 10, the Japanese line's start, end and speaker.
+#include "translation_data.inc"
+
+u64 Fnv1a(const std::string& s) {
+    u64 h = 0xcbf29ce484222325ull;
+    for (char c : s) h = (h ^ u8(c)) * 0x100000001b3ull;
+    return h;
+}
+
+// SUBTITLE LANGUAGE SPANISH (the maintainer 2026-11-21: a fifth language, ours): the game runs in English, its
+// channel 7 then carries the Spanish lines.
+bool SpanishChosen() { return ps2host::Setting("language") == "es"; }
+
+// SUBTITLE LANGUAGE JAPANESE (the maintainer 2026-11-21): with the Japanese voices, the Japanese lines themselves -
+// the game's letters have no Japanese, so its channel 7 carries "#J" and the line's hash, and the text object's
+// draw (overrides.cpp JapaneseSubtitle) draws the line in Noto Sans JP instead.
+bool JapaneseChosen() { return ps2host::Setting("language") == "ja"; }
+
+std::map<u64, std::string>& JapaneseTexts() {
+    static std::map<u64, std::string> lines;     // hash -> the line in UTF-8
+    return lines;
+}
+
+// EUC-JP (the Japanese disc's subtitles) to UTF-8.
+std::string Utf8FromEucJp(const std::string& euc) {
+#ifdef _WIN32
+    const int n = MultiByteToWideChar(20932, 0, euc.data(), int(euc.size()), nullptr, 0);
+    if (n <= 0) return {};
+    std::wstring wide(std::size_t(n), L'\0');
+    MultiByteToWideChar(20932, 0, euc.data(), int(euc.size()), wide.data(), n);
+    const int m = WideCharToMultiByte(CP_UTF8, 0, wide.data(), n, nullptr, 0, nullptr, nullptr);
+    std::string out(std::size_t(m > 0 ? m : 0), '\0');
+    if (m > 0) WideCharToMultiByte(CP_UTF8, 0, wide.data(), n, out.data(), m, nullptr, nullptr);
+    return out;
+#else
+    iconv_t cd = iconv_open("UTF-8", "EUC-JP");
+    if (cd == iconv_t(-1)) return {};
+    std::string in = euc, out(euc.size() * 2 + 16, '\0');
+    char* src = in.data();
+    char* dst = out.data();
+    std::size_t left = in.size(), room = out.size();
+    iconv(cd, &src, &left, &dst, &room);
+    iconv_close(cd);
+    out.resize(out.size() - room);
+    return out;
+#endif
+}
+
+const char* SpanishFromEnglish(const std::string& english) {
+    const u64 h = Fnv1a(english);
+    const SpanishLine* end = kSpanishFromEnglish + sizeof(kSpanishFromEnglish) / sizeof(kSpanishFromEnglish[0]);
+    const SpanishLine* at = std::lower_bound(kSpanishFromEnglish, end, h,
+                                             [](const SpanishLine& l, u64 v) { return l.hash < v; });
+    return at != end && at->hash == h ? at->text : nullptr;
+}
+
+const TranslatedLine* Translated(const std::string& japanese) {
+    const u64 h = Fnv1a(japanese);
+    const TranslatedLine* end = kTranslated + sizeof(kTranslated) / sizeof(kTranslated[0]);
+    const TranslatedLine* at = std::lower_bound(kTranslated, end, h,
+                                                [](const TranslatedLine& l, u64 v) { return l.hash < v; });
+    return at != end && at->hash == h ? at : nullptr;
+}
+
+// The Japanese lines: the scene's subtitle channel with the most lines that say something (0; some scenes 5 or 1).
+std::vector<TextLine> JapaneseLines(const std::vector<u8>& j) {
+    const Subtitles subs = ReadSubtitles(j, [](u32 c) { return c <= 5u; });
+    std::vector<TextLine> best;
+    for (const Channel& c : subs.channels) {
+        std::vector<TextLine> lines;
+        for (TextLine& l : ChannelLines(j, c))
+            if (l.end > l.start && l.end < 216000u &&                  // (a sane time: under an hour)
+                l.text.find_first_not_of(" \n") != std::string::npos)
+                lines.push_back(std::move(l));
+        if (lines.size() > best.size()) best.swap(lines);
+    }
+    return best;
+}
+
+// The pack with the translations (empty: a Japanese line without one - the old way then).
+std::vector<u8> TranslatedPrefix(const std::vector<u8>& prefix, const Subtitles& us_subs, const std::vector<u8>& j) {
+    const std::vector<TextLine> ja = JapaneseLines(j);
+    if (ja.empty()) return {};
+    std::vector<std::vector<TextLine>> lines(us_subs.channels.size());
+    for (const TextLine& l : ja) {
+        const TranslatedLine* t = Translated(l.text);
+        if (!t) return {};
+        for (std::size_t k = 0; k < us_subs.channels.size(); ++k) {
+            u32 lang = us_subs.channels[k].number - 7u;                 // 7 EN, 8 FR, 9 DE, 10 IT
+            if (lang > 3u) return {};
+            if (lang == 0u && SpanishChosen()) lang = 4u;                 // (ES in channel 7)
+            if (lang == 0u && JapaneseChosen()) {                           // (the marker; the line kept)
+                char marker[24];
+                std::snprintf(marker, sizeof marker, "#J%016llx", (unsigned long long)Fnv1a(l.text));
+                JapaneseTexts()[Fnv1a(l.text)] = Utf8FromEucJp(l.text);
+                lines[k].push_back(TextLine{l.start, l.end, l.flags, marker});
+                continue;
+            }
+            // ZOE_SUB_TEST=<text> (diagnosis: the game's letters): every translated line that text
+            static const char* test = std::getenv("ZOE_SUB_TEST");
+            lines[k].push_back(TextLine{l.start, l.end, l.flags, test ? std::string(test) : std::string(t->text[lang])});
+        }
+    }
+    return WritePack(prefix, us_subs, lines);
+}
+
+// With the English voices and SPANISH: a scene's pack with channel 7 alone, its lines in Spanish at their own
+// times (an English line without a Spanish one stays English); empty: it does not fit the file's own pack.
+std::vector<u8> SpanishPrefix(const std::vector<u8>& u, const Subtitles& us_subs) {
+    const auto seven = std::find_if(us_subs.channels.begin(), us_subs.channels.end(),
+                                    [](const Channel& c) { return c.number == 7u; });
+    if (seven == us_subs.channels.end()) return {};
+    Subtitles only = us_subs;
+    only.channels.assign(1, *seven);
+    std::vector<std::vector<TextLine>> lines(1, ChannelLines(u, *seven));
+    for (TextLine& l : lines[0])
+        if (const char* es = SpanishFromEnglish(l.text)) l.text = es;
+    const std::vector<u8> prefix(u.begin(), u.begin() + std::ptrdiff_t(us_subs.end));
+    std::vector<u8> out = WritePack(prefix, only, lines);
+    return out.size() == us_subs.end ? out : std::vector<u8>{};
+}
+
+std::vector<u8> SubtitlePrefix(Archive& us_dat, const Entry& us, Archive& ja_dat, const Entry& ja, bool movie,
+                               SubsMode mode) {
     constexpr std::size_t kPack = 16384;
     std::vector<u8> u(std::min<std::size_t>(64 * kSectorSize, (us.size + kSectorSize - 1) / kSectorSize * kSectorSize));
     std::vector<u8> j(std::min<std::size_t>(32 * kSectorSize, (ja.size + kSectorSize - 1) / kSectorSize * kSectorSize));
@@ -242,7 +655,29 @@ std::vector<u8> SubtitlePrefix(Archive& us_dat, const Entry& us, Archive& ja_dat
     const std::vector<Cue> ja_cues =
         ja_subs.ok && !ja_subs.channels.empty() ? ja_subs.channels.front().cues : std::vector<Cue>{};
     std::vector<u8> prefix(u.begin(), u.begin() + us_subs.end);
-    for (const Channel& channel : us_subs.channels) Retime(prefix, channel, ja_cues, us.size, ja.size);
+    std::vector<u8> translated = mode == SubsMode::kAuto ? TranslatedPrefix(prefix, us_subs, j) : std::vector<u8>{};
+    const bool from_japanese = !translated.empty();
+    if (from_japanese) {
+        prefix.swap(translated);
+        mode = SubsMode::kUs;               // (nothing more to do below)
+    }
+    if (!from_japanese)
+        for (const Channel& channel : us_subs.channels) Retime(prefix, channel, ja_cues, us.size, ja.size, movie, mode);
+    if (mode == SubsMode::kAuto && !movie) {        // fewer Japanese lines: English ones put together on them
+        const std::vector<u8> original(u.begin(), u.begin() + std::ptrdiff_t(us_subs.end));
+        std::vector<u8> merged = MergedPrefix(original, prefix, us_subs, ja_cues);
+        if (!merged.empty()) {
+            prefix.swap(merged);
+            // ZOE_DUB_DUMP=<folder>: each merged scene's new subtitle pack, <scene>.bin (diagnosis)
+            if (const char* dump = std::getenv("ZOE_DUB_DUMP")) {
+                const std::string name = us.path.substr(us.path.rfind('/') + 1);
+                if (std::FILE* f = std::fopen((std::string(dump) + "/" + name + ".bin").c_str(), "wb")) {
+                    std::fwrite(prefix.data(), 1, prefix.size(), f);
+                    std::fclose(f);
+                }
+            }
+        }
+    }
     std::size_t padded = (prefix.size() + kPack - 1) / kPack * kPack;
     if (padded != prefix.size() && padded - prefix.size() < 6) padded += kPack;
     if (padded != prefix.size()) {
@@ -260,13 +695,127 @@ Disc& JapaneseDisc() {
     return disc;
 }
 
+// The two ZOE.DATs' tables, kept for the run (a scene's subtitles made again: SUBTITLE TIMING, below).
+Archive& UsArchive() {
+    static Archive a;
+    return a;
+}
+Archive& JaArchive() {
+    static Archive a;
+    return a;
+}
+
+// Each scene served from the Japanese disc: its name ("fa1c1081"), its entries, where it is mapped (its subtitle
+// units `lead` sectors, then the Japanese file's `count`, from `cursor`).
+struct Scene {
+    std::string name;
+    Entry us, ja;
+    bool video = false;
+    u32 cursor = 0, lead = 0, count = 0;
+};
+std::vector<Scene>& Scenes() {
+    static std::vector<Scene> scenes;
+    return scenes;
+}
+int g_scene = -1;               // the scene last read (SampleScene), -1 none yet
+
 // The movies whose pictures differ throughout (text cards in the disc's language, section 6): the Japanese one with
 // the Japanese dub.
 const std::set<std::string> kTextCardMovies = {"st1r6491.pss", "ta1r2101.pss", "ta2r2301.pss"};
 
+// SPANISH's descriptions in the stage scripts (stage/*/*.scx, the VR training's prompts): each text five times in
+// the script's string pool - IT, FR, DE, EN, JP - and referenced by the code as "a0 e0 f3" + its offset (u32). An
+// English one with a Spanish text (by its hash) is served from its Japanese one's place (never shown by the US
+// game), its references turned there; the file served so, in place.
+void ScriptsInSpanish(Disc& us, Archive& us_dat) {
+    const SpanishLine* end = kSpanishScriptTexts + sizeof(kSpanishScriptTexts) / sizeof(kSpanishScriptTexts[0]);
+    u32 texts = 0, files = 0;
+    for (const Entry& e : us_dat.files) {
+        if (e.path.size() < 4 || e.path.compare(e.path.size() - 4, 4, ".scx") != 0) continue;
+        std::vector<u8> d(std::size_t((e.size + kSectorSize - 1) / kSectorSize) * kSectorSize);
+        if (d.empty() || !us.Read(us_dat.base + e.sector, u32(d.size() / kSectorSize), d.data())) continue;
+        std::map<u32, std::vector<u32>> refs;           // a string's offset -> where the code names it
+        for (std::size_t k = 0; k + 7 <= e.size; ++k)
+            if (d[k] == 0xA0 && d[k + 1] == 0xE0 && d[k + 2] == 0xF3) {
+                const u32 at = Le32(&d[k + 3]);
+                if (at < e.size) refs[at].push_back(u32(k + 3));
+            }
+        std::vector<u32> strings;
+        for (const auto& r : refs) strings.push_back(r.first);
+        auto text = [&](u32 a) {
+            std::string t;
+            for (u32 i = a; i < e.size && d[i]; ++i) t += char(d[i]);
+            return t;
+        };
+        // Each English text with a Spanish one (n: its place among the strings; IT n-3, FR n-2, DE n-1, JP n+1),
+        // then the room their Japanese, Italian, German and French texts leave (not shown with SPANISH: the game
+        // runs in English) - a string's room up to the next named string.
+        auto room = [&](std::size_t n) {
+            return (n + 1 < strings.size() ? strings[n + 1] : strings[n] + u32(text(strings[n]).size()) + 1) - strings[n];
+        };
+        std::vector<std::pair<std::size_t, const char*>> found;
+        for (std::size_t n = 3; n + 1 < strings.size(); ++n) {
+            const u64 h = Fnv1a(text(strings[n]));
+            const SpanishLine* es = std::lower_bound(kSpanishScriptTexts, end, h,
+                                                     [](const SpanishLine& l, u64 v) { return l.hash < v; });
+            if (es == end || es->hash != h) continue;
+            const std::string jt = text(strings[n + 1]);
+            if (std::none_of(jt.begin(), jt.end(), [](char c) { return u8(c) >= 0xA1; })) continue;
+            found.push_back({n, es->text});
+        }
+        std::vector<std::pair<u32, u32>> pool;      // (offset, bytes free)
+        for (std::ptrdiff_t lang : {1, -3, -1, -2})
+            for (const auto& f : found) {
+                const std::size_t n = std::size_t(std::ptrdiff_t(f.first) + lang);
+                pool.push_back({strings[n], room(n)});
+            }
+        bool changed = false;
+        for (const auto& f : found) {
+            const std::size_t len = std::strlen(f.second);
+            auto slot = std::find_if(pool.begin(), pool.end(),
+                                     [&](const std::pair<u32, u32>& r) { return r.second >= len + 1; });
+            if (slot == pool.end()) continue;
+            std::memcpy(&d[slot->first], f.second, len + 1);
+            for (u32 k : refs[strings[f.first]]) SetLe32(&d[k], slot->first);
+            slot->first += u32(len) + 1u;
+            slot->second -= u32(len) + 1u;
+            changed = true;
+            ++texts;
+        }
+        if (!changed) continue;
+        us.MapBytes(us_dat.base + e.sector, std::move(d));
+        ++files;
+    }
+    std::fprintf(stderr, "[dub] Spanish: %u script texts in %u scripts\n", texts, files);
+}
+
+// SPANISH with the English voices: each voiced scene's own subtitle pack served with its Spanish lines, in place.
+void SpanishOnEnglishVoices() {
+    Disc& us = ps2host::GuestDisc();
+    Archive& us_dat = UsArchive();
+    if (!us_dat.Open(us)) return;
+    u32 scenes = 0;
+    for (const Entry& e : us_dat.files) {
+        if (e.path.size() < 4 || e.path.compare(e.path.size() - 4, 4, ".pss") != 0) continue;
+        std::vector<u8> u(std::min<std::size_t>(64 * kSectorSize, (e.size + kSectorSize - 1) / kSectorSize * kSectorSize));
+        if (u.empty() || !us.Read(us_dat.base + e.sector, u32(u.size() / kSectorSize), u.data())) continue;
+        const Subtitles subs = ReadSubtitles(u, UsSubtitleChannel);
+        if (!subs.end || !subs.ok || subs.end % kSectorSize) continue;
+        std::vector<u8> pack = SpanishPrefix(u, subs);
+        if (pack.empty()) continue;
+        us.MapBytes(us_dat.base + e.sector, std::move(pack));
+        ++scenes;
+    }
+    std::fprintf(stderr, "[dub] Spanish subtitles (from the English) in %u scenes\n", scenes);
+    ScriptsInSpanish(us, us_dat);
+}
+
 void DubOnDiscOpened() {
     WarmOptionsMenu();          // (the OPTIONS words from title.pak, read now and not on the screen's first frame)
-    if (ps2host::Setting("dub") != "ja") return;
+    if (ps2host::Setting("dub") != "ja") {
+        if (SpanishChosen()) SpanishOnEnglishVoices();
+        return;
+    }
     const std::string path = ps2host::Setting("disc_ja");
     if (path.empty()) {
         std::fprintf(stderr, "[dub] Japanese chosen, but no Japanese disc set (the launcher's second line): English\n");
@@ -275,11 +824,35 @@ void DubOnDiscOpened() {
     Disc& ja = JapaneseDisc();
     Disc::File elf;
     if (!ja.Open(path) || !ja.Find("\\SLPM_650.19;1", &elf)) {
-        std::fprintf(stderr, "[dub] %s is not the Japanese disc (SLPM-65019): English\n", path.c_str());
-        return;
+        // Moved (2026-11-20 issue 17): an image of it beside the game or in its "game" folder, by its content.
+        std::string found;
+        const std::filesystem::path here = ps2platform::ExeDir();
+        for (const std::filesystem::path& folder : {here, here / "game"}) {
+            std::error_code error;
+            for (const auto& entry : std::filesystem::directory_iterator(folder, error)) {
+                std::string ext = entry.path().extension().string();
+                for (char& ch : ext) ch = char(std::tolower(static_cast<unsigned char>(ch)));
+                if (ext != ".iso" && ext != ".chd" && ext != ".bin") continue;
+                Disc probe;
+                Disc::File probe_elf;
+                if (probe.Open(entry.path().string()) && probe.Find("\\SLPM_650.19;1", &probe_elf)) {
+                    found = entry.path().string();
+                    break;
+                }
+            }
+            if (!found.empty()) break;
+        }
+        if (found.empty() || !ja.Open(found) || !ja.Find("\\SLPM_650.19;1", &elf)) {
+            std::fprintf(stderr, "[dub] the Japanese disc (SLPM-65019) is not at %s, nor beside the game or in its "
+                         "\"game\" folder: English voices\n", path.c_str());
+            return;
+        }
+        std::fprintf(stderr, "[dub] the Japanese disc found at %s (was %s)\n", found.c_str(), path.c_str());
+        ps2host::SetSetting("disc_ja", found);
     }
     Disc& us = ps2host::GuestDisc();
-    Archive us_dat, ja_dat;
+    Archive& us_dat = UsArchive();
+    Archive& ja_dat = JaArchive();
     if (!us_dat.Open(us) || !ja_dat.Open(ja)) {
         std::fprintf(stderr, "[dub] ZOE.DAT's table not read: English\n");
         return;
@@ -300,7 +873,7 @@ void DubOnDiscOpened() {
         const u32 count = (j.size + kSectorSize - 1) / kSectorSize;
         if (!count) continue;
         // A movie that speaks (subtitles on the US disc) or a text card: the Japanese one; a silent movie stays.
-        std::vector<u8> prefix = SubtitlePrefix(us_dat, e, ja_dat, j);
+        std::vector<u8> prefix = SubtitlePrefix(us_dat, e, ja_dat, j, video, ModeOf(name));
         if (video && prefix.empty() && !kTextCardMovies.count(name)) continue;
         const u32 lead = u32(prefix.size() / kSectorSize);
         if (lead) {
@@ -312,10 +885,20 @@ void DubOnDiscOpened() {
         SetLe32(raw + 16, cursor - us_dat.base);
         SetLe32(raw + 20, lead * kSectorSize + j.size);
         changed.insert(e.table);
+        Scenes().push_back(Scene{name.substr(0, name.rfind('.')), e, j, video, cursor, lead, count});
         cursor += lead + count;
         (video ? movies : voices)++;
     }
+    // A margin after the last scene: the game streams a scene in whole chunks and reads past a file's end (on the
+    // disc, into what follows it); past the mapped end Disc::Read fails - the last scene mapped is the VR
+    // training's (vr1a8181), and its end was the "disc read error" after the training with the Japanese voices
+    // (2026-11-20 issue 7). 1 MiB of zeros.
+    if (voices + movies) {
+        us.MapBytes(cursor, std::vector<u8>(std::size_t(512) * kSectorSize, 0));
+        cursor += 512;
+    }
     for (u32 table : changed) us.MapBytes(us_dat.base + table, us_dat.tables[table]);
+    if (SpanishChosen()) ScriptsInSpanish(us, us_dat);
     std::fprintf(stderr, "[dub] Japanese: %u voice scenes and %u movies from %s, %u with their subtitles moved onto "
                  "the Japanese voice (%u tables rewritten, the disc now %u sectors)\n", voices, movies, path.c_str(),
                  retimed, u32(changed.size()), us.Sectors());
@@ -324,6 +907,125 @@ void DubOnDiscOpened() {
 }  // namespace
 
 void RegisterDub() { ps2host::SetDiscOpened(DubOnDiscOpened); }
+
+// SPANISH's descriptions in the executable (weapons and items, passcodes, mission goals, tips - tools/m10/
+// desc_tables.py: per entry JP, EN, FR, DE, IT groups of `group` line pointers): an entry whose English lines are as
+// expected (their hash) gets its Spanish lines - written where the Japanese, Italian, German and French ones were
+// (not shown while the game runs in English; SPANISH is chosen at the start) - and its English pointers on them.
+// Called as the program sets its language (overrides.cpp LanguageAtStart), the tables static data.
+void DescriptionsInSpanish() {
+    if (!SpanishChosen()) return;
+    constexpr u32 kEmpty = 0x004B6BF0u;             // the tables' "" string
+    auto& m = ps2host::GuestMemory();
+    auto read = [&](u32 a) {
+        std::string t;
+        for (u32 i = 0; i < 512u; ++i) {
+            const char c = char(m.Read(a + i, 1));
+            if (!c) break;
+            t += c;
+        }
+        return t;
+    };
+    auto pointer = [&](const SpanishDescription& d, int lang, u32 i) {   // lang -1 JP, 0 EN, 1 FR, 2 DE, 3 IT
+        return u32(m.Read(u32(int(d.at) + 4 * (lang * int(d.group) + int(i))), 4));
+    };
+    std::vector<std::pair<u32, u32>> pool;          // (address, bytes free)
+    std::set<u32> seen;
+    for (int lang : {-1, 3, 2, 1})
+        for (const SpanishDescription& d : kSpanishDescriptions)
+            for (u32 i = 0; i < d.group; ++i) {
+                const u32 p = pointer(d, lang, i);
+                if (p == kEmpty || p < 0x00100000u || p >= 0x02000000u || !seen.insert(p).second) continue;
+                pool.push_back({p, u32(read(p).size()) + 1u});
+            }
+    u32 done = 0, wrong = 0, full = 0;
+    for (const SpanishDescription& d : kSpanishDescriptions) {
+        std::vector<std::string> en;
+        for (u32 i = 0; i < d.group; ++i) {
+            const u32 p = pointer(d, 0, i);
+            en.push_back(p == kEmpty ? std::string() : read(p));
+        }
+        while (!en.empty() && en.back().empty()) en.pop_back();
+        std::string joined;
+        for (std::size_t i = 0; i < en.size(); ++i) joined += (i ? "\n" : "") + en[i];
+        if (Fnv1a(joined) != d.hash) {
+            ++wrong;
+            continue;
+        }
+        std::vector<std::string> es;
+        for (const char* a = d.text;;) {
+            const char* b = std::strchr(a, '\n');
+            es.push_back(b ? std::string(a, b) : std::string(a));
+            if (!b) break;
+            a = b + 1;
+        }
+        std::vector<u32> places;
+        for (const std::string& line : es) {
+            auto slot = std::find_if(pool.begin(), pool.end(),
+                                     [&](const std::pair<u32, u32>& r) { return r.second >= line.size() + 1; });
+            if (slot == pool.end()) break;
+            for (std::size_t i = 0; i < line.size(); ++i) m.Write(slot->first + u32(i), u8(line[i]), 1);
+            m.Write(slot->first + u32(line.size()), 0u, 1);
+            places.push_back(slot->first);
+            slot->first += u32(line.size()) + 1u;
+            slot->second -= u32(line.size()) + 1u;
+        }
+        if (places.size() != es.size() || es.size() > d.group) {
+            ++full;
+            continue;
+        }
+        for (u32 i = 0; i < d.group; ++i)
+            m.Write(u32(int(d.at) + 4 * int(i)), i < places.size() ? places[i] : kEmpty, 4);
+        ++done;
+    }
+    std::fprintf(stderr, "[dub] Spanish descriptions: %u of %u (%u not as expected, %u without room)\n", done,
+                 u32(sizeof(kSpanishDescriptions) / sizeof(kSpanishDescriptions[0])), wrong, full);
+}
+
+// The Japanese line a subtitle's text stands for ("#J" + its hash), UTF-8; "" when it is no such marker.
+std::string DubJapaneseLine(const std::string& text) {
+    if (text.size() < 18 || text.compare(0, 2, "#J") != 0) return {};
+    const u64 h = std::strtoull(text.c_str() + 2, nullptr, 16);
+    const auto it = JapaneseTexts().find(h);
+    return it == JapaneseTexts().end() ? std::string() : it->second;
+}
+
+// SUBTITLE TIMING (the F9 debug panel, internal; the maintainer 2026-11-21): the scene the game read last (sampled
+// each frame - FrameEnd), its way (auto / jp / us: "dub_subs_<scene>"), stepped there and served at once - its
+// subtitle units made again and mapped over the old ones (the game reads them when the scene next plays).
+void DubSampleScene() {
+    const u32 lsn = ps2host::GuestDisc().LastReadLsn();
+    const std::vector<Scene>& scenes = Scenes();
+    for (int i = 0; i < int(scenes.size()); ++i) {
+        const Scene& s = scenes[std::size_t(i)];
+        if (lsn >= s.cursor && lsn < s.cursor + s.lead + s.count) {
+            g_scene = i;
+            return;
+        }
+    }
+}
+
+std::string DubSceneLine() {
+    if (g_scene < 0) return Scenes().empty() ? "no Japanese voices" : "none played yet";
+    const Scene& s = Scenes()[std::size_t(g_scene)];
+    const SubsMode mode = ModeOf(s.name + ".pss");
+    return s.name + (s.video ? " (movie) " : " ") + (mode == SubsMode::kJp ? "JP" : mode == SubsMode::kUs ? "US" : "AUTO");
+}
+
+void DubSceneStep(int step) {
+    if (g_scene < 0) return;
+    const Scene& s = Scenes()[std::size_t(g_scene)];
+    static const char* const kModes[3] = {"auto", "jp", "us"};
+    const SubsMode now = ModeOf(s.name + ".pss");
+    int at = now == SubsMode::kJp ? 1 : now == SubsMode::kUs ? 2 : 0;
+    at = (at + (step > 0 ? 1 : 2)) % 3;
+    ps2host::SetSetting("dub_subs_" + s.name, kModes[at]);
+    std::vector<u8> prefix = SubtitlePrefix(UsArchive(), s.us, JaArchive(), s.ja, s.video, ModeOf(s.name + ".pss"));
+    if (prefix.size() / kSectorSize == s.lead && s.lead) {
+        ps2host::GuestDisc().MapBytes(s.cursor, std::move(prefix));
+        std::fprintf(stderr, "[dub] %s: subtitle timing %s (served from its next playing)\n", s.name.c_str(), kModes[at]);
+    }
+}
 
 // A file of the running disc's ZOE.DAT ("stage/title/title.pak"), whole; false when it is not there.
 bool ReadZoeDatFile(const std::string& path, std::vector<unsigned char>* out) {
