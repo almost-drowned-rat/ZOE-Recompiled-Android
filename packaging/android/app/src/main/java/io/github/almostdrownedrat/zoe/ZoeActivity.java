@@ -45,6 +45,23 @@ public class ZoeActivity extends SDLActivity {
         } catch (ErrnoException e) {
             android.util.Log.w("ZOE", "setenv: " + e);
         }
+        // measurements without a rebuild (as Orta's loader): <external files>/dev_env.txt, KEY=VALUE a line, set for
+        // the game (lines starting with # ignored) - a developer's aid; a player never has the file
+        java.io.File devEnv = new java.io.File(getExternalFilesDir(null), "dev_env.txt");
+        if (devEnv.isFile()) {
+            try (java.io.BufferedReader r = new java.io.BufferedReader(new java.io.FileReader(devEnv))) {
+                String line;
+                while ((line = r.readLine()) != null) {
+                    line = line.trim();
+                    int eq = line.indexOf('=');
+                    if (line.isEmpty() || line.startsWith("#") || eq <= 0) continue;
+                    Os.setenv(line.substring(0, eq).trim(), line.substring(eq + 1).trim(), true);
+                    android.util.Log.i("ZOE", "dev_env.txt: " + line);
+                }
+            } catch (java.io.IOException | ErrnoException e) {
+                android.util.Log.w("ZOE", "dev_env.txt: " + e);
+            }
+        }
         startRunLog();
         applyPendingSaves();            // a saves import staged before the restart: swapped in before the game runs
         prepareUserDirs();
@@ -86,7 +103,28 @@ public class ZoeActivity extends SDLActivity {
         if (hasFocus) immersive();
     }
 
+    /** The display at 60 Hz where it offers it (the game's own rate - a PS2 game paces to 60): at the Odin 2's
+     *  default 120 Hz the engine's pacing presented only every ~34 ms and the whole chain (EE, VIF1, GS) backed up
+     *  behind it - 35-40 fps with an idle GPU (2026-11-21). The same resolution, the refresh closest to 60. */
+    private void prefer60Hz() {
+        android.view.Display d = getWindowManager().getDefaultDisplay();
+        if (d == null) return;
+        android.view.Display.Mode cur = d.getMode(), best = null;
+        for (android.view.Display.Mode m : d.getSupportedModes()) {
+            if (m.getPhysicalWidth() != cur.getPhysicalWidth() || m.getPhysicalHeight() != cur.getPhysicalHeight()) continue;
+            if (best == null || Math.abs(m.getRefreshRate() - 60f) < Math.abs(best.getRefreshRate() - 60f)) best = m;
+        }
+        if (best == null || Math.abs(best.getRefreshRate() - 60f) > 1f) return;
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        if (lp.preferredDisplayModeId != best.getModeId()) {
+            lp.preferredDisplayModeId = best.getModeId();
+            getWindow().setAttributes(lp);
+            android.util.Log.i("ZOE", "display mode " + best.getModeId() + " (" + best.getRefreshRate() + " Hz)");
+        }
+    }
+
     private void immersive() {
+        prefer60Hz();
         // edge to edge, the bars' backgrounds transparent: a hidden status bar's black background could stay over
         // the picture's top (Odin 2, some starts - the FPS counter under it)
         getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
