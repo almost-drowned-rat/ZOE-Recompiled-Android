@@ -593,8 +593,9 @@ SubtitlePack ReadSubtitlePack() {
     const std::string set = ps2host::Setting("subtitle_pack");
     if (!set.empty()) places.push_back(std::filesystem::u8path(set));
     const std::filesystem::path here = ps2platform::ExeDir();
-    places.push_back(here / "ZOE-subtitles.pak");
-    places.push_back(here / "game" / "ZOE-subtitles.pak");
+    // (also without its extension: v0.8.2's launcher copied it so - by its content, the magic below)
+    for (const std::filesystem::path& folder : {here / "game", here})
+        for (const char* name : {"ZOE-subtitles.pak", "ZOE-subtitles"}) places.push_back(folder / name);
     std::vector<u8> file;
     for (const std::filesystem::path& p : places) {
         std::FILE* f = std::fopen(p.string().c_str(), "rb");
@@ -977,6 +978,8 @@ void OnEnglishVoices(bool japanese) {
     if (!japanese) ScriptsInSpanish(us, us_dat);
 }
 
+bool ServeJapanese(Disc& ja, const std::string& path);
+
 void DubOnDiscOpened() {
     WarmOptionsMenu();          // (the OPTIONS words from title.pak, read now and not on the screen's first frame)
     if (ps2host::Setting("dub") != "ja") {
@@ -989,14 +992,17 @@ void DubOnDiscOpened() {
         std::fprintf(stderr, "[dub] Japanese chosen, but no subtitle pack (ZOE-subtitles.pak): English\n");
         return;
     }
-    const std::string path = ps2host::Setting("disc_ja");
+    std::string path = ps2host::Setting("disc_ja");
+    const std::filesystem::path unpacked = ps2platform::ExeDir() / "game" / "disc_ja";
+    Disc& ja = JapaneseDisc();
+    Disc::File elf;
+    // (the launcher's unpacked Japanese disc - the image needed only to unpack it, 2026-11-21)
+    if (ja.Open(unpacked.string()) && ja.Find("\\SLPM_650.19;1", &elf)) path = unpacked.string();
     if (path.empty()) {
         std::fprintf(stderr, "[dub] Japanese chosen, but no Japanese disc set (the launcher's second line): English\n");
         return;
     }
-    Disc& ja = JapaneseDisc();
-    Disc::File elf;
-    if (!ja.Open(path) || !ja.Find("\\SLPM_650.19;1", &elf)) {
+    if (path != unpacked.string() && (!ja.Open(path) || !ja.Find("\\SLPM_650.19;1", &elf))) {
         // Moved (2026-11-20 issue 17): an image of it beside the game or in its "game" folder, by its content.
         std::string found;
         const std::filesystem::path here = ps2platform::ExeDir();
@@ -1005,7 +1011,10 @@ void DubOnDiscOpened() {
             for (const auto& entry : std::filesystem::directory_iterator(folder, error)) {
                 std::string ext = entry.path().extension().string();
                 for (char& ch : ext) ch = char(std::tolower(static_cast<unsigned char>(ch)));
-                if (ext != ".iso" && ext != ".chd" && ext != ".bin") continue;
+                std::error_code is_dir;
+                const bool folder_disc = entry.is_directory(is_dir) &&
+                                         std::filesystem::exists(entry.path() / "disc.idx", is_dir);
+                if (ext != ".iso" && ext != ".chd" && ext != ".bin" && !folder_disc) continue;
                 Disc probe;
                 Disc::File probe_elf;
                 if (probe.Open(entry.path().string()) && probe.Find("\\SLPM_650.19;1", &probe_elf)) {
@@ -1022,13 +1031,20 @@ void DubOnDiscOpened() {
         }
         std::fprintf(stderr, "[dub] the Japanese disc found at %s (was %s)\n", found.c_str(), path.c_str());
         ps2host::SetSetting("disc_ja", found);
+        path = found;
     }
+    ServeJapanese(ja, path);
+}
+
+// The Japanese voices served from `ja` (an image or the unpacked folder): each voice scene and speaking movie of its
+// ZOE.DAT mapped onto the US disc. False: its ZOE.DAT not read.
+bool ServeJapanese(Disc& ja, const std::string& path) {
     Disc& us = ps2host::GuestDisc();
     Archive& us_dat = UsArchive();
     Archive& ja_dat = JaArchive();
     if (!us_dat.Open(us) || !ja_dat.Open(ja)) {
         std::fprintf(stderr, "[dub] ZOE.DAT's table not read: English\n");
-        return;
+        return false;
     }
     std::map<std::string, const Entry*> ja_files;
     for (const Entry& e : ja_dat.files) ja_files[e.path] = &e;
@@ -1075,11 +1091,40 @@ void DubOnDiscOpened() {
     std::fprintf(stderr, "[dub] Japanese: %u voice scenes and %u movies from %s, %u with their subtitles moved onto "
                  "the Japanese voice (%u tables rewritten, the disc now %u sectors)\n", voices, movies, path.c_str(),
                  retimed, u32(changed.size()), us.Sectors());
+    return true;
+}
+
+// The launcher's step (`zoe_us.exe --unpack-extra <Japanese image> <folder> --disc <US disc>`, the maintainer
+// 2026-11-21: of the Japanese disc only what is needed): the voices served as at a start, every sector read or
+// mapped from the Japanese disc meanwhile recorded - its file system's tables, SLPM_650.19 and SYSTEM.CNF, ZOE.DAT's
+// tables, each voice scene and speaking movie - and only those unpacked.
+bool UnpackJapanese(const std::string& image, const std::string& folder) {
+    Disc& ja = JapaneseDisc();
+    Disc::File elf;
+    if (!ja.Open(image) || !ja.Find("\\SLPM_650.19;1", &elf)) {
+        std::fprintf(stderr, "[unpack] %s is no image of the Japanese disc (SLPM-65019)\n", image.c_str());
+        return false;
+    }
+    ja.Record(true);
+    // (the file system's tables, the boot file and SYSTEM.CNF read too: the folder is a disc of its own)
+    std::vector<u8> bytes;
+    ja.ReadFile("\\SLPM_650.19;1", &bytes);
+    ja.ReadFile("SYSTEM.CNF", &bytes);
+    const bool served = ServeJapanese(ja, image);
+    ja.Record(false);
+    if (!served) return false;
+    std::string progress = folder + ".progress";
+    const bool ok = ja.Unpack(folder, &ja.Recorded(), ps2host::WriteUnpackProgress, &progress);
+    std::fprintf(stderr, "[unpack] the Japanese disc: %zu ranges read, %s\n", ja.Recorded().size(), ok ? "unpacked" : "FAILED");
+    return ok;
 }
 
 }  // namespace
 
-void RegisterDub() { ps2host::SetDiscOpened(DubOnDiscOpened); }
+void RegisterDub() {
+    ps2host::SetDiscOpened(DubOnDiscOpened);
+    ps2host::SetExtraDiscUnpacker(UnpackJapanese);
+}
 
 // SPANISH's descriptions in the executable (weapons and items, passcodes, mission goals, tips - tools/m10/
 // desc_tables.py: per entry JP, EN, FR, DE, IT groups of `group` line pointers): an entry whose English lines are as

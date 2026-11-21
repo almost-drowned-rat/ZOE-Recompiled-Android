@@ -1,7 +1,7 @@
 {
   "name": "Zone of the Enders (SLUS-20148)",
   "title": "Zone of the Enders",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "iso": null,
   "executable": "SLUS_201.48",
   "overlays": [

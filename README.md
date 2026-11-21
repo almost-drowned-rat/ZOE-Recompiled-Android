@@ -52,7 +52,8 @@ and will change, and these are numbers from one machine and one scene set.
 - A disc image of **Zone of the Enders (USA, SLUS-20148)** that you made from your own disc (ISO or CHD)
 - Optional, for the **Japanese voices**: a disc image of the Japanese release (**SLPM-65019**) **and** the subtitle
   pack `ZOE-subtitles.pak` (a download of its own, see *Languages*) - the Japanese voices need both
-- About 1 GB of free space and ~10 minutes for the first start (the translation and the compile run once)
+- About 3 GB of free space (5 GB with the Japanese disc) and ~10 minutes for the first start (the translation, the
+  compile and unpacking the discs run once)
 
 ## Getting started
 
@@ -60,10 +61,14 @@ and will change, and these are numbers from one machine and one scene set.
    *Program Files*) - the game keeps its saves and settings beside it. Optional: `ZOE-subtitles.pak` from the same
    page, my own subtitle translations (see *Languages*).
 2. Start it. A small window asks for your disc image (and, if you like, the Japanese one and the subtitle pack) and
-   checks them. It also shows the folder the game is set up in, and can copy your disc image into its `game` folder.
-3. Press **Go**. The first start translates and compiles the game; after that it starts straight away.
+   the folder the game is set up in.
+3. Press **Go**. The first start translates and compiles the game and **unpacks your discs into its `game`
+   folder** - the US disc whole, of the Japanese disc only what the Japanese voices need. From then on the game
+   reads everything from there: your disc images are needed only this once (they are only read, never changed or
+   deleted).
 
-Your disc images are only read, never changed or deleted.
+**Keep the `game` folder** and you need no disc image again: on a new PC, choose that folder in the setup window's
+first line instead of an image - the Japanese disc and the subtitle pack in it are found by themselves.
 
 ## Features
 
@@ -112,7 +117,8 @@ Put a texture pack in a folder inside `textures` beside the game; TEXTURES in RE
 
 | File | What it is |
 |---|---|
-| `pc_settings.ini` | your settings and where your disc images are |
+| `game\` | your discs, unpacked (`disc`, `disc_ja`) and the subtitle pack - keep it as your backup |
+| `pc_settings.ini` | your settings |
 | `memcard\` | your memory card: the game's saves |
 | `*.log` | what the last run did - please attach it to a bug report |
 | `crash reports\` | after a crash: a zip with the log, your settings and the system's details - attach it to an issue |
