@@ -705,11 +705,11 @@
  },
  "annab124#0": {
   "hash": "d3f3beffd86b8e06",
-  "en": "That was close...",
-  "fr": "C'était moins une...",
-  "de": "Das war knapp...",
-  "it": "C'è mancato poco...",
-  "es": "Ha faltado poco..."
+  "en": "Phew, that was close...",
+  "fr": "Ouf, c'était moins une...",
+  "de": "Puh, das war knapp...",
+  "it": "Uff, c'è mancato poco...",
+  "es": "Uf, ha faltado poco..."
  },
  "annab141#0": {
   "hash": "d682517e6541283e",
@@ -2369,11 +2369,11 @@
  },
  "ca1c9161#2": {
   "hash": "03c571a4d6113f3b",
-  "en": "That was close...",
-  "fr": "Sauvés...",
-  "de": "Gerettet...",
-  "it": "Salvi...",
-  "es": "Qué alivio..."
+  "en": "Phew... that was close...",
+  "fr": "Ouf... sauvés...",
+  "de": "Puh... gerettet...",
+  "it": "Uff... salvi...",
+  "es": "Uf... qué alivio..."
  },
  "ca1c9181#0": {
   "hash": "49e54a36bf82481e",
@@ -2882,7 +2882,7 @@
  "edgr7361#7": {
   "hash": "c49fed85ee2dc4c5",
   "en": "Thank goodness...",
-  "fr": "Dieu merci...",
+  "fr": "Ouf...",
   "de": "Gott sei Dank...",
   "it": "Meno male...",
   "es": "Menos mal..."
@@ -4785,11 +4785,11 @@
  },
  "fb1c5241#10": {
   "hash": "765e8634949dd96a",
-  "en": "Thank goodness...",
-  "fr": "Sauvés...",
-  "de": "Glück gehabt...",
-  "it": "Meno male...",
-  "es": "Menos mal..."
+  "en": "Phew... thank goodness...",
+  "fr": "Ouf... sauvés...",
+  "de": "Puh... Glück gehabt...",
+  "it": "Uff... meno male...",
+  "es": "Uf... menos mal..."
  },
  "fb1c5241#11": {
   "hash": "dea03e9b4c4630bc",
@@ -5617,10 +5617,10 @@
  },
  "gl1c6002#0": {
   "hash": "7573ada1f625d07b",
-  "en": "This is Thunderheart.\nLeo, do you read me?",
-  "fr": "Ici Thunderheart.\nLeo, tu m'entends ?",
-  "de": "Hier Thunderheart.\nLeo, hörst du mich?",
-  "it": "Qui Thunderheart.\nLeo, mi senti?",
+  "en": "Ah, ahem. This is Thunderheart.\nLeo, do you read me?",
+  "fr": "Ah, hum. Ici Thunderheart.\nLeo, tu m'entends ?",
+  "de": "Äh, ähm. Hier Thunderheart.\nLeo, hörst du mich?",
+  "it": "Ah, ehm. Qui Thunderheart.\nLeo, mi senti?",
   "es": "Probando, probando. Aquí Thunderheart.\nLeo, ¿me oyes?"
  },
  "gl1c6002#1": {
@@ -6009,11 +6009,11 @@
  },
  "gl1c6021#5": {
   "hash": "3062e6083a17c36a",
-  "en": "This is Thunderheart.\nLeo, do you read me?",
-  "fr": "Ici Thunderheart.\nLeo, tu m'entends ?",
-  "de": "Hier Thunderheart.\nLeo, hörst du mich?",
-  "it": "Qui Thunderheart.\nLeo, mi senti?",
-  "es": "Aquí Thunderheart.\nLeo, ¿me oyes?"
+  "en": "Ahem. This is Thunderheart.\nLeo, do you read me?",
+  "fr": "Hum. Ici Thunderheart.\nLeo, tu m'entends ?",
+  "de": "Ähm. Hier Thunderheart.\nLeo, hörst du mich?",
+  "it": "Ehm. Qui Thunderheart.\nLeo, mi senti?",
+  "es": "Ah... Aquí Thunderheart.\nLeo, ¿me oyes?"
  },
  "gl1c6021#6": {
   "hash": "52bc2cc5fb535094",
@@ -7729,11 +7729,11 @@
  },
  "sh1r7061#1": {
   "hash": "4c629623d2cae201",
-  "en": "Finally a breather...",
-  "fr": "Enfin un peu de répit...",
-  "de": "Endlich mal durchatmen...",
-  "it": "Finalmente un attimo di respiro...",
-  "es": "Por fin un respiro..."
+  "en": "Phew... finally a breather...",
+  "fr": "Ouf... enfin un peu de répit...",
+  "de": "Puh... endlich mal durchatmen...",
+  "it": "Uff... finalmente un attimo di respiro...",
+  "es": "Uf... Por fin un respiro..."
  },
  "sh1r7061#10": {
   "hash": "76f91ec99faa4dfd",
