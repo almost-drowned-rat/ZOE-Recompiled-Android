@@ -2,6 +2,8 @@
 # libvulkan_zoe.so: the game's Vulkan library - the system driver, or the player's Turnip through libadrenotools
 # (vkshim/vulkan_zoe.c, from the Orta Recompiled Android app). libadrenotools (BSD-2): -DADRENOTOOLS_SRC=<source>;
 # its hook libraries (main_hook, hook_impl, file_redirect_hook, gsl_alloc_hook) land in nativeLibraryDir with it.
+# libzoe_app.so: the app's own JNI part (app/touchpad.c: the touch controls as a virtual SDL gamepad), linked against
+# the APK's libSDL3.so: -DSDL3_SRC=<SDL3 source> (headers: ${SDL3_SRC}/include), -DSDL3_LIB=<that libSDL3.so>.
 cmake_minimum_required(VERSION 3.22)
 project(zoe_android_native C CXX ASM)
 if(NOT ADRENOTOOLS_SRC)
@@ -15,4 +17,16 @@ target_include_directories(vulkan_zoe PRIVATE ${ADRENOTOOLS_SRC}/lib/linkernsbyp
 # --exclude-libs: linkernsbypass's function-pointer variables must not leave this library (Orta, Tab S8 2026-11-11)
 target_link_options(vulkan_zoe PRIVATE "-Wl,-z,max-page-size=16384" "-Wl,-soname,libvulkan_zoe.so"
                     "-Wl,--exclude-libs,ALL")
-add_custom_target(zoe_native ALL DEPENDS vulkan_zoe main_hook hook_impl file_redirect_hook gsl_alloc_hook)
+
+if(NOT SDL3_SRC OR NOT SDL3_LIB)
+    message(FATAL_ERROR "-DSDL3_SRC=<SDL3 source> / -DSDL3_LIB=<the APK's arm64 libSDL3.so> missing")
+endif()
+add_library(sdl3_shared SHARED IMPORTED)
+set_target_properties(sdl3_shared PROPERTIES IMPORTED_LOCATION "${SDL3_LIB}"
+                      INTERFACE_INCLUDE_DIRECTORIES "${SDL3_SRC}/include")
+add_library(zoe_app SHARED app/touchpad.c)
+target_link_libraries(zoe_app PRIVATE sdl3_shared log)
+target_compile_options(zoe_app PRIVATE -Wall -Wextra)
+target_link_options(zoe_app PRIVATE "-Wl,-z,max-page-size=16384" "-Wl,-soname,libzoe_app.so")
+
+add_custom_target(zoe_native ALL DEPENDS vulkan_zoe zoe_app main_hook hook_impl file_redirect_hook gsl_alloc_hook)
