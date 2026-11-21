@@ -60,8 +60,9 @@ and will change, and these are numbers from one machine and one scene set.
 
 1. Download `ZOE.exe` (Windows) or `ZOE-x86_64.AppImage` (Linux) from the [Releases](../../releases) page and put it
    in a folder you can write to (not *Program Files*) - the game keeps its saves and settings beside it. On Linux,
-   make it executable (`chmod +x ZOE-x86_64.AppImage`, or the file's properties). Optional: `ZOE-subtitles.pak` from
-   the same page, my own subtitle translations (see *Languages*).
+   make it executable (`chmod +x ZOE-x86_64.AppImage`, or the file's properties); if it does not start because
+   your system has no FUSE, start it as `./ZOE-x86_64.AppImage --appimage-extract-and-run`. Optional:
+   `ZOE-subtitles.pak` from the same page, my own subtitle translations (see *Languages*).
 2. Start it. A small window asks for your disc image (and, if you like, the Japanese one and the subtitle pack) and
    the folder the game is set up in.
 3. Press **Go**. The first start translates and compiles the game and **unpacks your discs into its `game`
@@ -129,6 +130,8 @@ Put a texture pack in a folder inside `textures` beside the game; TEXTURES in RE
 
 - This is an early release. If something looks or sounds wrong, please open an issue with the log - I will try to
   fix each one as fast as I can.
+- **Linux** is played and tested on CachyOS (KDE Plasma, Wayland) with an AMD Radeon 880M (Mesa RADV). Other
+  distributions and NVIDIA / Intel drivers should work the same way but are not tested yet - reports are welcome.
 
 ## Building from source
 
