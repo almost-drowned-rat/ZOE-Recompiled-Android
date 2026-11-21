@@ -1,0 +1,19 @@
+// Zone of the Enders Recompiled for Android (agent L, 2026-11-21) - after the Orta Android project's Gradle setup.
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    plugins {
+        id 'com.android.application' version '9.5.1'
+    }
+}
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = 'zoe-android'
+include ':app'

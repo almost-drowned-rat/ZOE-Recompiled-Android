@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.application'
+}
+
+// -Psdl3Src=<SDL3 source: its Java side>  -PoutDir=<build folder outside the repo>  -PprebuiltLibs=<lib folder:
+// arm64-v8a/libSDL3.so, libmain.so ...>  [-PassetsDir=...]  [-PreleaseStore=<jks> -PreleasePassFile=<pass>]
+def sdl3Src = project.findProperty('sdl3Src')
+if (sdl3Src == null) throw new GradleException('pass -Psdl3Src=<SDL3 source>')
+def outDir = project.findProperty('outDir')
+if (outDir == null) throw new GradleException('pass -PoutDir=<build folder outside the repo>')
+layout.buildDirectory = file("${outDir}/app")
+
+android {
+    namespace = 'io.github.almostdrownedrat.zoe'
+    compileSdk = 36
+    ndkVersion = '30.0.16248370'
+    defaultConfig {
+        applicationId = 'io.github.almostdrownedrat.zoe'
+        minSdk = 29
+        targetSdk = 36
+        versionCode = 1
+        versionName = '0.0.1-dev'
+        ndk { abiFilters 'arm64-v8a' }
+    }
+    sourceSets {
+        main {
+            java.srcDirs += ["${sdl3Src}/android-project/app/src/main/java"]
+            if (project.findProperty('prebuiltLibs')) jniLibs.srcDirs += [project.findProperty('prebuiltLibs')]
+            if (project.findProperty('assetsDir')) assets.srcDirs += [project.findProperty('assetsDir')]
+        }
+    }
+    def relStore = project.findProperty('releaseStore')
+    def relPass = project.findProperty('releasePassFile')
+    signingConfigs {
+        if (relStore && relPass) {
+            release {
+                storeFile = file(relStore)
+                storePassword = file(relPass).text.trim()
+                keyAlias = project.findProperty('releaseAlias') ?: 'zoe'
+                keyPassword = file(relPass).text.trim()
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled = false
+            if (relStore && relPass) signingConfig = signingConfigs.release
+        }
+    }
+    packaging {
+        jniLibs { useLegacyPackaging = true }
+    }
+    lint { abortOnError = false }
+}
