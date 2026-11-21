@@ -3,6 +3,8 @@
 package io.github.almostdrownedrat.zoe;
 
 import android.os.Bundle;
+import android.system.ErrnoException;
+import android.system.Os;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -16,6 +18,15 @@ public class ZoeActivity extends SDLActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Before SDL loads the libraries: the game's Vulkan is libvulkan_zoe.so (the system driver, or the player's
+        // Turnip in files/turnip/ through libadrenotools - vulkan_zoe.c reads XR_NATIVE_DIR / XR_HOST_ROOT)
+        try {
+            Os.setenv("XR_NATIVE_DIR", getApplicationInfo().nativeLibraryDir, true);
+            Os.setenv("XR_HOST_ROOT", getFilesDir().getAbsolutePath(), true);
+            Os.setenv("SDL_VULKAN_LIBRARY", "libvulkan_zoe.so", true);
+        } catch (ErrnoException e) {
+            android.util.Log.w("ZOE", "setenv: " + e);
+        }
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         immersive();
