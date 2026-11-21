@@ -405,7 +405,7 @@
  },
  "annc9221#0": {
   "hash": "c5f62e6721561e66",
-  "es": "Le indicaré con un marcador los\nedificios que tienen signos vitales."
+  "es": "Le indicaré con un marcador los\nedificios que tienen actividad vital."
  },
  "annc9221#1": {
   "hash": "98b3358b4b96920c",
@@ -421,7 +421,7 @@
  },
  "annc9241#0": {
   "hash": "4ed8b834946216c0",
-  "es": "Le indicaré con un marcador los\nedificios que tienen signos vitales."
+  "es": "Le indicaré con un marcador los\nedificios que tienen actividad vital."
  },
  "annc9241#1": {
   "hash": "c9784d2b531ea1c1",
@@ -557,11 +557,11 @@
  },
  "bs1a7a22#0": {
   "hash": "dd0c09138c42df45",
-  "es": "Je, je, je, je..."
+  "es": ""
  },
  "bs1a7a23#0": {
   "hash": "21f00004b3b4ffd8",
-  "es": "Ja, ja, ja..."
+  "es": ""
  },
  "bs1a7a24#0": {
   "hash": "71ffd3e09b08ad80",
@@ -593,7 +593,7 @@
  },
  "bs1a7a28#0": {
   "hash": "d4f6dd3d6b9ec21d",
-  "es": "¡Hmpf!"
+  "es": ""
  },
  "bs1a7a29#0": {
   "hash": "e8041f93cae00cc2",
@@ -757,7 +757,7 @@
  },
  "bs1c7301#0": {
   "hash": "36647ab350baa9b2",
-  "es": "¡Aaah!"
+  "es": ""
  },
  "bs1c7301#1": {
   "hash": "04fe580abfc755a5",
@@ -845,7 +845,7 @@
  },
  "bs1g7121#1": {
   "hash": "52d0bd428ab430e4",
-  "es": "Je, je, je..."
+  "es": ""
  },
  "bs1g7171#0": {
   "hash": "6175849ddda16573",
@@ -1061,7 +1061,7 @@
  },
  "bs1p7201#5": {
   "hash": "50b699739d8d8bfd",
-  "es": "......"
+  "es": ""
  },
  "ca1a3a21#0": {
   "hash": "d08bf853320926b5",
@@ -1073,7 +1073,7 @@
  },
  "ca1c3041#1": {
   "hash": "eaeb3f8ec98cb195",
-  "es": "No hay signos vitales en\neste bloque."
+  "es": "No hay actividad vital en\neste bloque."
  },
  "ca1c3041#10": {
   "hash": "74c33bbaabfb27d4",
@@ -1409,7 +1409,7 @@
  },
  "fa1c1081#0": {
   "hash": "f7d93e17ec4b1219",
-  "es": "..."
+  "es": ""
  },
  "fa1c1081#1": {
   "hash": "2da313a4a078629c",
@@ -1445,7 +1445,7 @@
  },
  "fa1c1082#0": {
   "hash": "9d17f8eed1d46151",
-  "es": "¡Uau!"
+  "es": ""
  },
  "fa1c1082#1": {
   "hash": "37431ece9f6dfc07",
@@ -1645,11 +1645,11 @@
  },
  "fa2a1a41#0": {
   "hash": "42807eacfd6fff97",
-  "es": "¡Uaaaa!"
+  "es": ""
  },
  "fa2a1a41#1": {
   "hash": "1ff386e9c0ab3503",
-  "es": "¿Qué?\n¿El piloto es un niño?"
+  "es": "¿Qué?\n¿El runner es un niño?"
  },
  "fa2a1a61#0": {
   "hash": "1e247cbc6ebf5d7c",
@@ -1673,7 +1673,7 @@
  },
  "fa2c1221#0": {
   "hash": "b38b27716a79bb55",
-  "es": "Ah... ah..."
+  "es": ""
  },
  "fa2c1221#1": {
   "hash": "a91bd6b2f431bc85",
@@ -1681,7 +1681,7 @@
  },
  "fa2c1221#2": {
   "hash": "a6f4917642435caf",
-  "es": "No detecto ningún\nsigno vital."
+  "es": "No detecto ningún signo\nde actividad vital."
  },
  "fa2c1221#3": {
   "hash": "e5af647ff29e0220",
@@ -2425,7 +2425,7 @@
  },
  "fa2r1185#0": {
   "hash": "a6276a0cd6e45fea",
-  "es": "Je, je, je..."
+  "es": ""
  },
  "fa2r1303#0": {
   "hash": "aa09bb9d9a31c409",
@@ -2797,7 +2797,7 @@
  },
  "gl1c5091#3": {
   "hash": "19f2ac96922777d8",
-  "es": "¿Eh? ... Ajá."
+  "es": "Ajá."
  },
  "gl1c5091#4": {
   "hash": "c99719ea4429d79c",
@@ -2873,7 +2873,7 @@
  },
  "gl1c5382#3": {
   "hash": "5edadbae5d434c8b",
-  "es": "Ese objetivo tiene un módulo funcional\npara detectar anomalías del sistema."
+  "es": "Ese objetivo tiene un módulo funcional\npara detectar peculiaridades del sistema."
  },
  "gl1c5382#4": {
   "hash": "76471a7cc7eab219",
@@ -3245,7 +3245,7 @@
  },
  "gl1p5011#0": {
   "hash": "e037e885107dd6da",
-  "es": "¡¿...?! ¡Uaaaaa!"
+  "es": ""
  },
  "gl1p6041#0": {
   "hash": "8c0e64ca38f6d7c8",
@@ -3309,7 +3309,7 @@
  },
  "gl1r2371#9": {
   "hash": "b5690d7a1d306276",
-  "es": "podré transferir la información\nnecesaria desde el servidor local."
+  "es": "podré trasplantar la información\nnecesaria desde el servidor local."
  },
  "gl1r3001#0": {
   "hash": "360fa4746b9239ce",
@@ -3457,7 +3457,7 @@
  },
  "gl1r5001#7": {
   "hash": "4b4881d29d7ebb8d",
-  "es": "Ja, ja... Ya veo."
+  "es": "Ya veo."
  },
  "gl1r5101#0": {
   "hash": "e314614b498b60e9",
@@ -3561,7 +3561,7 @@
  },
  "mt2c6281#16": {
   "hash": "32c79821a19feb93",
-  "es": "Contéstame, chaval."
+  "es": "Contéstame, chico."
  },
  "mt2c6281#17": {
   "hash": "28b606431607fcd7",
@@ -3601,7 +3601,7 @@
  },
  "mt2g6141#0": {
   "hash": "dc17230eea33995b",
-  "es": "¡Jo, jo! ¿Así que tú eres quien\nla ha puesto tan nerviosa?"
+  "es": "¿Así que tú eres quien\nla ha puesto tan nerviosa?"
  },
  "mt2g6241#0": {
   "hash": "9f77f43672affcad",
@@ -3629,7 +3629,7 @@
  },
  "pk1a5aa4#0": {
   "hash": "691b45407fd6098d",
-  "es": "Ja, ja, ja. Ese ataque no\nme hace nada."
+  "es": "Ese ataque no\nme hace nada."
  },
  "pk1a5aa5#0": {
   "hash": "3b7ca184d3b49f6e",
@@ -4065,7 +4065,7 @@
  },
  "rb1c4681#0": {
   "hash": "ab763cd81356d58f",
-  "es": "¿Eh?"
+  "es": ""
  },
  "rb1c4681#1": {
   "hash": "63d4db6f101b8d84",
@@ -4513,11 +4513,11 @@
  },
  "st1g6321#16": {
   "hash": "c2e9fe17ffe51fc7",
-  "es": "La calidad de un Orbital Frame depende\nde lo bien que lo maneje su Frame Runner."
+  "es": "La calidad de un Orbital Frame depende\nde lo bien que lo maneje su runner."
  },
  "st1g6321#17": {
   "hash": "bdce7d6131e10d46",
-  "es": "El Frame Runner de Jehuty es..."
+  "es": "El runner de Jehuty es..."
  },
  "st1g6321#2": {
   "hash": "57aa29622e912630",
@@ -4593,7 +4593,7 @@
  },
  "st1p6461#0": {
   "hash": "c5d90ede64fc7fe7",
-  "es": "Uf... Uf..."
+  "es": ""
  },
  "st1p6461#1": {
   "hash": "b128089fa95923f8",
@@ -4609,7 +4609,7 @@
  },
  "st1p6461#4": {
   "hash": "1588bec9fe10e4e0",
-  "es": "¡Lo haré! ¡Uaaa!"
+  "es": "¡Lo haré!"
  },
  "st1p6462#0": {
   "hash": "1b63384a9e4a3134",
@@ -4625,7 +4625,7 @@
  },
  "st1p6462#3": {
   "hash": "62b609e2a69a1ae3",
-  "es": "Ugh..."
+  "es": ""
  },
  "st1p6462#4": {
   "hash": "ddd656ca93a5c765",
@@ -4657,7 +4657,7 @@
  },
  "st1r6361#4": {
   "hash": "74a41b35b9b6b343",
-  "es": "Cállate... ¡Cállate!\n¡Uaaahh...!"
+  "es": "Cállate... ¡Cállate!"
  },
  "st1r6361#5": {
   "hash": "90bb8d0bf5b71fed",
@@ -4825,7 +4825,7 @@
  },
  "ta1a2a23#0": {
   "hash": "6f8e4dae5f91373c",
-  "es": "Ja, ja, ja. Vamos.\n¿Te rindes?"
+  "es": "Vamos.\n¿Te rindes?"
  },
  "ta1a2a24#0": {
   "hash": "f0f8532a2c25f2a9",
@@ -4849,7 +4849,7 @@
  },
  "ta1c2091#0": {
   "hash": "c1a92e81803d1e52",
-  "es": "Detecto signos vitales.\nAmpliaré la imagen del sujeto."
+  "es": "Detecto actividad vital.\nAmpliaré la imagen del sujeto."
  },
  "ta1c2121#0": {
   "hash": "93a04ab475564cc1",
@@ -4877,7 +4877,7 @@
  },
  "ta1c2222#0": {
   "hash": "34d7279ea4c6ac45",
-  "es": "Detecto signos vitales\ndentro del objetivo."
+  "es": "Detecto actividad vital\ndentro del objetivo."
  },
  "ta1c2222#1": {
   "hash": "f695788da9a34364",
@@ -4973,7 +4973,7 @@
  },
  "ta1g2161#0": {
   "hash": "75cc67a3ac1dde7a",
-  "es": "Tú eres el Frame Runner de Bravo."
+  "es": "Tú eres el runner de Bravo."
  },
  "ta1g2161#1": {
   "hash": "b22df6ff8a450ee5",
@@ -5133,7 +5133,7 @@
  },
  "ta2c9281#0": {
   "hash": "64cc4578957585ee",
-  "es": "Signos vitales detectados"
+  "es": "Actividad vital detectada"
  },
  "ta2c9281#1": {
   "hash": "2bc646e3d0eab2ee",
@@ -5149,7 +5149,7 @@
  },
  "ta2c9281#4": {
   "hash": "23788bb6af66a6f3",
-  "es": "Marcaré el edificio\ncon signos vitales."
+  "es": "Marcaré el edificio\ncon actividad vital."
  },
  "ta2g2321#0": {
   "hash": "5e2933ae7b2ecdea",
@@ -5233,7 +5233,7 @@
  },
  "tb1c3071#4": {
   "hash": "73289e6082f06397",
-  "es": "El almacén de armas de Jehuty y la catapulta\nUhlenbeck son algunas de sus aplicaciones."
+  "es": "El almacén de armas de Jehuty y la catapulta\nUrenbeck son algunas de sus aplicaciones."
  },
  "tb1c3071#5": {
   "hash": "8ae6c49c60e59fe7",

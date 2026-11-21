@@ -33,6 +33,7 @@
 #include <cstdio>
 #include <filesystem>
 #include <cstring>
+#include <deque>
 #include <map>
 #include <set>
 #include <string>
@@ -516,11 +517,172 @@ std::vector<u8> MergedPrefix(const std::vector<u8>& original, const std::vector<
     return out.size() == subs.end ? out : std::vector<u8>{};
 }
 
-// ---- The subtitles translated from the Japanese (the maintainer 2026-11-21: with the Japanese voices every line
-// is the Japanese one's, in its time - translation/subtitles.json, built into translation_data.inc by
-// tools/m10/subs_translation.py): each Japanese line found by its text's FNV-1a hash, its EN / FR / DE / IT in the
-// US file's channels 7 / 8 / 9 / 10, the Japanese line's start, end and speaker.
-#include "translation_data.inc"
+// ---- The subtitle pack: our own translations, a download of its own beside ZOE.exe (the maintainer 2026-11-21:
+// "die eigenen Übersetzungen sollen auch aus der exe, dafür ist der separate Download" - how many fetch it shows
+// the demand). tools/m10/subs_translation.py builds it from translation/*.json: the Japanese voices' lines
+// translated from the Japanese (EN / FR / DE / IT / ES in the US file's channels 7 / 8 / 9 / 10, the Japanese
+// line's start, end and speaker), Spanish and Japanese with the English voices, the Spanish descriptions and stage
+// script texts, and Noto Sans JP for the Japanese subtitles. Each line found by its source text's FNV-1a hash - no
+// disc text in it. Without the pack: the disc's four languages, the Japanese voices with them moved onto the
+// Japanese timing (v0.8.0's way); SPANISH and JAPANESE are not offered.
+struct TranslatedLine {
+    u64 hash;
+    const char* text[5];
+};
+struct SpanishLine {            // (also the Japanese ones from the English: UTF-8)
+    u64 hash;
+    const char* text;
+};
+struct SpanishDescription {
+    u32 at, group;
+    u64 hash;
+    const char* text;
+};
+
+struct SubtitlePack {
+    bool loaded = false;
+    std::string path;
+    std::deque<std::string> texts;              // (the lines' bytes; a deque keeps the pointers)
+    std::vector<TranslatedLine> translated;     // sorted by hash, as written
+    std::vector<SpanishLine> es_from_en, ja_from_en, scripts;
+    std::vector<SpanishDescription> descriptions;
+    std::vector<u8> font;
+};
+
+class PackReader {
+public:
+    PackReader(const u8* p, std::size_t n) : p_(p), n_(n) {}
+    bool Ok() const { return ok_; }
+    bool Done() const { return at_ >= n_; }
+    u32 U32() { return u32(Bytes(4, [](const u8* b) { return u64(b[0]) | u64(b[1]) << 8 | u64(b[2]) << 16 | u64(b[3]) << 24; })); }
+    u64 U64() {
+        const u64 lo = U32();
+        return lo | u64(U32()) << 32;
+    }
+    const char* Text(std::deque<std::string>& keep) {
+        const u32 len = u32(Bytes(2, [](const u8* b) { return u64(b[0]) | u64(b[1]) << 8; }));
+        if (!ok_ || at_ + len > n_) {
+            ok_ = false;
+            return "";
+        }
+        keep.emplace_back(reinterpret_cast<const char*>(p_ + at_), len);
+        at_ += len;
+        return keep.back().c_str();
+    }
+private:
+    template <class F>
+    u64 Bytes(std::size_t k, F f) {
+        if (!ok_ || at_ + k > n_) {
+            ok_ = false;
+            return 0;
+        }
+        const u64 v = f(p_ + at_);
+        at_ += k;
+        return v;
+    }
+    const u8* p_;
+    std::size_t n_, at_ = 0;
+    bool ok_ = true;
+};
+
+// The pack's place: the setting "subtitle_pack" (the launcher's line), else ZOE-subtitles.pak beside the game or
+// in its "game" folder.
+SubtitlePack ReadSubtitlePack() {
+    SubtitlePack pack;
+    std::vector<std::filesystem::path> places;
+    const std::string set = ps2host::Setting("subtitle_pack");
+    if (!set.empty()) places.push_back(std::filesystem::u8path(set));
+    const std::filesystem::path here = ps2platform::ExeDir();
+    places.push_back(here / "ZOE-subtitles.pak");
+    places.push_back(here / "game" / "ZOE-subtitles.pak");
+    std::vector<u8> file;
+    for (const std::filesystem::path& p : places) {
+        std::FILE* f = std::fopen(p.string().c_str(), "rb");
+        if (!f) continue;
+        std::fseek(f, 0, SEEK_END);
+        const long size = std::ftell(f);
+        std::fseek(f, 0, SEEK_SET);
+        file.resize(size > 0 ? std::size_t(size) : 0u);
+        const bool read = !file.empty() && std::fread(file.data(), 1, file.size(), f) == file.size();
+        std::fclose(f);
+        if (read && file.size() > 8 && std::memcmp(file.data(), "ZOESUBS\x01", 8) == 0) {
+            pack.path = p.string();
+            break;
+        }
+        std::fprintf(stderr, "[subtitles] %s is no subtitle pack\n", p.string().c_str());
+        file.clear();
+    }
+    if (pack.path.empty()) {
+        std::fprintf(stderr, "[subtitles] no subtitle pack (ZOE-subtitles.pak): the disc's subtitles only\n");
+        return pack;
+    }
+    bool ok = true;
+    // Sections: a 4-letter tag, its size (u32 LE), its bytes.
+    std::size_t at = 8;
+    while (ok && at + 8 <= file.size()) {
+        const std::string tag(reinterpret_cast<const char*>(&file[at]), 4);
+        const u32 size = u32(file[at + 4]) | u32(file[at + 5]) << 8 | u32(file[at + 6]) << 16 | u32(file[at + 7]) << 24;
+        at += 8;
+        if (at + size > file.size()) {
+            ok = false;
+            break;
+        }
+        PackReader r(&file[at], size);
+        if (tag == "JPTR") {
+            for (u32 n = r.U32(); r.Ok() && n--;) {
+                TranslatedLine l{};
+                l.hash = r.U64();
+                for (const char*& t : l.text) t = r.Text(pack.texts);
+                pack.translated.push_back(l);
+            }
+        } else if (tag == "ESEN" || tag == "JAEN" || tag == "SCXE") {
+            std::vector<SpanishLine>& to = tag == "ESEN" ? pack.es_from_en : tag == "JAEN" ? pack.ja_from_en : pack.scripts;
+            for (u32 n = r.U32(); r.Ok() && n--;) {
+                SpanishLine l{};
+                l.hash = r.U64();
+                l.text = r.Text(pack.texts);
+                to.push_back(l);
+            }
+        } else if (tag == "DESC") {
+            for (u32 n = r.U32(); r.Ok() && n--;) {
+                SpanishDescription d{};
+                d.at = r.U32();
+                d.group = r.U32();
+                d.hash = r.U64();
+                d.text = r.Text(pack.texts);
+                pack.descriptions.push_back(d);
+            }
+        } else if (tag == "FONT") {
+            pack.font.assign(file.begin() + std::ptrdiff_t(at), file.begin() + std::ptrdiff_t(at + size));
+        }
+        ok = r.Ok();
+        at += size;
+    }
+    auto sorted = [](const auto& v) {
+        return std::is_sorted(v.begin(), v.end(), [](const auto& a, const auto& b) { return a.hash < b.hash; });
+    };
+    if (!ok || !sorted(pack.translated) || !sorted(pack.es_from_en) || !sorted(pack.ja_from_en) || !sorted(pack.scripts)) {
+        std::fprintf(stderr, "[subtitles] %s is damaged: the disc's subtitles only\n", pack.path.c_str());
+        return SubtitlePack{};
+    }
+    pack.loaded = true;
+    std::fprintf(stderr, "[subtitles] %s: %zu lines from the Japanese, %zu Spanish and %zu Japanese from the English, "
+                 "%zu descriptions, %zu script texts, font %zu bytes\n", pack.path.c_str(), pack.translated.size(),
+                 pack.es_from_en.size(), pack.ja_from_en.size(), pack.descriptions.size(), pack.scripts.size(),
+                 pack.font.size());
+    return pack;
+}
+
+const SubtitlePack& Pack() {
+    static const SubtitlePack pack = ReadSubtitlePack();
+    return pack;
+}
+
+template <class T>
+const T* FindByHash(const std::vector<T>& v, u64 h) {
+    const auto at = std::lower_bound(v.begin(), v.end(), h, [](const T& l, u64 x) { return l.hash < x; });
+    return at != v.end() && at->hash == h ? &*at : nullptr;
+}
 
 u64 Fnv1a(const std::string& s) {
     u64 h = 0xcbf29ce484222325ull;
@@ -528,14 +690,15 @@ u64 Fnv1a(const std::string& s) {
     return h;
 }
 
-// SUBTITLE LANGUAGE SPANISH (the maintainer 2026-11-21: a fifth language, ours): the game runs in English, its
-// channel 7 then carries the Spanish lines.
-bool SpanishChosen() { return ps2host::Setting("language") == "es"; }
+// SUBTITLE LANGUAGE SPANISH (the maintainer 2026-11-21: a fifth language, ours; with the pack): the game runs in
+// English, its channel 7 then carries the Spanish lines.
+bool SpanishChosen() { return Pack().loaded && ps2host::Setting("language") == "es"; }
 
-// SUBTITLE LANGUAGE JAPANESE (the maintainer 2026-11-21): with the Japanese voices, the Japanese lines themselves -
-// the game's letters have no Japanese, so its channel 7 carries "#J" and the line's hash, and the text object's
-// draw (overrides.cpp JapaneseSubtitle) draws the line in Noto Sans JP instead.
-bool JapaneseChosen() { return ps2host::Setting("language") == "ja"; }
+// SUBTITLE LANGUAGE JAPANESE (the maintainer 2026-11-21; with the pack): the game's letters have no Japanese, so
+// its channel 7 carries "#J" and the line's hash, and the text object's draw (overrides.cpp JapaneseSubtitle)
+// draws the line in Noto Sans JP instead - with the Japanese voices the Japanese disc's own line, with the English
+// voices our Japanese from the English.
+bool JapaneseChosen() { return Pack().loaded && ps2host::Setting("language") == "ja"; }
 
 std::map<u64, std::string>& JapaneseTexts() {
     static std::map<u64, std::string> lines;     // hash -> the line in UTF-8
@@ -567,21 +730,7 @@ std::string Utf8FromEucJp(const std::string& euc) {
 #endif
 }
 
-const char* SpanishFromEnglish(const std::string& english) {
-    const u64 h = Fnv1a(english);
-    const SpanishLine* end = kSpanishFromEnglish + sizeof(kSpanishFromEnglish) / sizeof(kSpanishFromEnglish[0]);
-    const SpanishLine* at = std::lower_bound(kSpanishFromEnglish, end, h,
-                                             [](const SpanishLine& l, u64 v) { return l.hash < v; });
-    return at != end && at->hash == h ? at->text : nullptr;
-}
-
-const TranslatedLine* Translated(const std::string& japanese) {
-    const u64 h = Fnv1a(japanese);
-    const TranslatedLine* end = kTranslated + sizeof(kTranslated) / sizeof(kTranslated[0]);
-    const TranslatedLine* at = std::lower_bound(kTranslated, end, h,
-                                                [](const TranslatedLine& l, u64 v) { return l.hash < v; });
-    return at != end && at->hash == h ? at : nullptr;
-}
+const TranslatedLine* Translated(const std::string& japanese) { return FindByHash(Pack().translated, Fnv1a(japanese)); }
 
 // The Japanese lines: the scene's subtitle channel with the most lines that say something (0; some scenes 5 or 1).
 std::vector<TextLine> JapaneseLines(const std::vector<u8>& j) {
@@ -617,6 +766,9 @@ std::vector<u8> TranslatedPrefix(const std::vector<u8>& prefix, const Subtitles&
                 lines[k].push_back(TextLine{l.start, l.end, l.flags, marker});
                 continue;
             }
+            // An empty translation: a noise (a gasp, a laugh - the maintainer 2026-11-21: not shown, "das ist
+            // natürlicher"): no subtitle there.
+            if (!*t->text[lang]) continue;
             // ZOE_SUB_TEST=<text> (diagnosis: the game's letters): every translated line that text
             static const char* test = std::getenv("ZOE_SUB_TEST");
             lines[k].push_back(TextLine{l.start, l.end, l.flags, test ? std::string(test) : std::string(t->text[lang])});
@@ -625,17 +777,32 @@ std::vector<u8> TranslatedPrefix(const std::vector<u8>& prefix, const Subtitles&
     return WritePack(prefix, us_subs, lines);
 }
 
-// With the English voices and SPANISH: a scene's pack with channel 7 alone, its lines in Spanish at their own
-// times (an English line without a Spanish one stays English); empty: it does not fit the file's own pack.
-std::vector<u8> SpanishPrefix(const std::vector<u8>& u, const Subtitles& us_subs) {
+// With the English voices and SPANISH or JAPANESE: a scene's pack with channel 7 alone, its lines in Spanish (or as
+// "#J" markers of our Japanese) at their own times (an English line without one stays English); empty: it does not
+// fit the file's own pack.
+std::vector<u8> EnglishVoicesPrefix(const std::vector<u8>& u, const Subtitles& us_subs, bool japanese) {
     const auto seven = std::find_if(us_subs.channels.begin(), us_subs.channels.end(),
                                     [](const Channel& c) { return c.number == 7u; });
     if (seven == us_subs.channels.end()) return {};
     Subtitles only = us_subs;
     only.channels.assign(1, *seven);
     std::vector<std::vector<TextLine>> lines(1, ChannelLines(u, *seven));
-    for (TextLine& l : lines[0])
-        if (const char* es = SpanishFromEnglish(l.text)) l.text = es;
+    std::vector<TextLine> kept;
+    for (TextLine& l : lines[0]) {
+        const u64 h = Fnv1a(l.text);
+        const SpanishLine* own = FindByHash(japanese ? Pack().ja_from_en : Pack().es_from_en, h);
+        if (own && !*own->text) continue;               // a noise: no subtitle there (see TranslatedPrefix)
+        if (own && !japanese) {
+            l.text = own->text;
+        } else if (own) {
+            char marker[24];
+            std::snprintf(marker, sizeof marker, "#J%016llx", (unsigned long long)h);
+            JapaneseTexts()[h] = own->text;
+            l.text = marker;
+        }
+        kept.push_back(std::move(l));
+    }
+    lines[0].swap(kept);
     const std::vector<u8> prefix(u.begin(), u.begin() + std::ptrdiff_t(us_subs.end));
     std::vector<u8> out = WritePack(prefix, only, lines);
     return out.size() == us_subs.end ? out : std::vector<u8>{};
@@ -728,7 +895,6 @@ const std::set<std::string> kTextCardMovies = {"st1r6491.pss", "ta1r2101.pss", "
 // English one with a Spanish text (by its hash) is served from its Japanese one's place (never shown by the US
 // game), its references turned there; the file served so, in place.
 void ScriptsInSpanish(Disc& us, Archive& us_dat) {
-    const SpanishLine* end = kSpanishScriptTexts + sizeof(kSpanishScriptTexts) / sizeof(kSpanishScriptTexts[0]);
     u32 texts = 0, files = 0;
     for (const Entry& e : us_dat.files) {
         if (e.path.size() < 4 || e.path.compare(e.path.size() - 4, 4, ".scx") != 0) continue;
@@ -756,9 +922,8 @@ void ScriptsInSpanish(Disc& us, Archive& us_dat) {
         std::vector<std::pair<std::size_t, const char*>> found;
         for (std::size_t n = 3; n + 1 < strings.size(); ++n) {
             const u64 h = Fnv1a(text(strings[n]));
-            const SpanishLine* es = std::lower_bound(kSpanishScriptTexts, end, h,
-                                                     [](const SpanishLine& l, u64 v) { return l.hash < v; });
-            if (es == end || es->hash != h) continue;
+            const SpanishLine* es = FindByHash(Pack().scripts, h);
+            if (!es) continue;
             const std::string jt = text(strings[n + 1]);
             if (std::none_of(jt.begin(), jt.end(), [](char c) { return u8(c) >= 0xA1; })) continue;
             found.push_back({n, es->text});
@@ -789,8 +954,9 @@ void ScriptsInSpanish(Disc& us, Archive& us_dat) {
     std::fprintf(stderr, "[dub] Spanish: %u script texts in %u scripts\n", texts, files);
 }
 
-// SPANISH with the English voices: each voiced scene's own subtitle pack served with its Spanish lines, in place.
-void SpanishOnEnglishVoices() {
+// SPANISH or JAPANESE with the English voices: each voiced scene's own subtitle pack served with those lines, in
+// place.
+void OnEnglishVoices(bool japanese) {
     Disc& us = ps2host::GuestDisc();
     Archive& us_dat = UsArchive();
     if (!us_dat.Open(us)) return;
@@ -801,19 +967,26 @@ void SpanishOnEnglishVoices() {
         if (u.empty() || !us.Read(us_dat.base + e.sector, u32(u.size() / kSectorSize), u.data())) continue;
         const Subtitles subs = ReadSubtitles(u, UsSubtitleChannel);
         if (!subs.end || !subs.ok || subs.end % kSectorSize) continue;
-        std::vector<u8> pack = SpanishPrefix(u, subs);
+        std::vector<u8> pack = EnglishVoicesPrefix(u, subs, japanese);
         if (pack.empty()) continue;
         us.MapBytes(us_dat.base + e.sector, std::move(pack));
         ++scenes;
     }
-    std::fprintf(stderr, "[dub] Spanish subtitles (from the English) in %u scenes\n", scenes);
-    ScriptsInSpanish(us, us_dat);
+    std::fprintf(stderr, "[dub] %s subtitles (from the English) in %u scenes\n", japanese ? "Japanese" : "Spanish",
+                 scenes);
+    if (!japanese) ScriptsInSpanish(us, us_dat);
 }
 
 void DubOnDiscOpened() {
     WarmOptionsMenu();          // (the OPTIONS words from title.pak, read now and not on the screen's first frame)
     if (ps2host::Setting("dub") != "ja") {
-        if (SpanishChosen()) SpanishOnEnglishVoices();
+        if (SpanishChosen() || JapaneseChosen()) OnEnglishVoices(JapaneseChosen());
+        return;
+    }
+    // The Japanese voices need the subtitle pack too (the maintainer 2026-11-21: its downloads show the demand for
+    // the Japanese dub).
+    if (!Pack().loaded) {
+        std::fprintf(stderr, "[dub] Japanese chosen, but no subtitle pack (ZOE-subtitles.pak): English\n");
         return;
     }
     const std::string path = ps2host::Setting("disc_ja");
@@ -932,14 +1105,14 @@ void DescriptionsInSpanish() {
     std::vector<std::pair<u32, u32>> pool;          // (address, bytes free)
     std::set<u32> seen;
     for (int lang : {-1, 3, 2, 1})
-        for (const SpanishDescription& d : kSpanishDescriptions)
+        for (const SpanishDescription& d : Pack().descriptions)
             for (u32 i = 0; i < d.group; ++i) {
                 const u32 p = pointer(d, lang, i);
                 if (p == kEmpty || p < 0x00100000u || p >= 0x02000000u || !seen.insert(p).second) continue;
                 pool.push_back({p, u32(read(p).size()) + 1u});
             }
     u32 done = 0, wrong = 0, full = 0;
-    for (const SpanishDescription& d : kSpanishDescriptions) {
+    for (const SpanishDescription& d : Pack().descriptions) {
         std::vector<std::string> en;
         for (u32 i = 0; i < d.group; ++i) {
             const u32 p = pointer(d, 0, i);
@@ -979,8 +1152,12 @@ void DescriptionsInSpanish() {
         ++done;
     }
     std::fprintf(stderr, "[dub] Spanish descriptions: %u of %u (%u not as expected, %u without room)\n", done,
-                 u32(sizeof(kSpanishDescriptions) / sizeof(kSpanishDescriptions[0])), wrong, full);
+                 u32(Pack().descriptions.size()), wrong, full);
 }
+
+// The subtitle pack (for the language list and the Japanese font: overrides.cpp).
+bool DubSubtitlePack() { return Pack().loaded; }
+const std::vector<unsigned char>& DubSubtitleFont() { return Pack().font; }
 
 // The Japanese line a subtitle's text stands for ("#J" + its hash), UTF-8; "" when it is no such marker.
 std::string DubJapaneseLine(const std::string& text) {

@@ -50,15 +50,17 @@ and will change, and these are numbers from one machine and one scene set.
 
 - Windows 10 or 11, 64-bit, a processor with AVX2, a graphics card with a **Vulkan 1.3** driver
 - A disc image of **Zone of the Enders (USA, SLUS-20148)** that you made from your own disc (ISO or CHD)
-- Optional: a disc image of the Japanese release (**SLPM-65019**) for the Japanese voices
+- Optional, for the **Japanese voices**: a disc image of the Japanese release (**SLPM-65019**) **and** the subtitle
+  pack `ZOE-subtitles.pak` (a download of its own, see *Languages*) - the Japanese voices need both
 - About 1 GB of free space and ~10 minutes for the first start (the translation and the compile run once)
 
 ## Getting started
 
 1. Download `ZOE.exe` from the [Releases](../../releases) page and put it in a folder you can write to (not
-   *Program Files*) - the game keeps its saves and settings beside it.
-2. Start it. A small window asks for your disc image (and, if you like, the Japanese one) and checks them. It
-   also shows the folder the game is set up in, and can copy your disc image into its `game` folder.
+   *Program Files*) - the game keeps its saves and settings beside it. Optional: `ZOE-subtitles.pak` from the same
+   page, my own subtitle translations (see *Languages*).
+2. Start it. A small window asks for your disc image (and, if you like, the Japanese one and the subtitle pack) and
+   checks them. It also shows the folder the game is set up in, and can copy your disc image into its `game` folder.
 3. Press **Go**. The first start translates and compiles the game; after that it starts straight away.
 
 Your disc images are only read, never changed or deleted.
@@ -85,12 +87,17 @@ game's own style:
 Up / down chooses a line, left / right changes it, **Triangle** sets a line back to its default.
 
 ### Languages and the Japanese voices
-- Subtitles in **English, French, German or Italian** (all four are on the US disc already) and **Spanish** (my own
-  translation: subtitles, weapon and mission descriptions, the VR training's texts; the menus stay in English).
-- With your Japanese disc image set, **VOICES** offers the original Japanese voice cast, on the Japanese lines'
-  timing; the movies with speech come in their Japanese version. Its subtitles are my own new translation from the
-  Japanese into all five languages, so they say what the Japanese cast says - and **Japanese** subtitles too
-  (drawn with Noto Sans JP).
+- Subtitles in **English, French, German or Italian** - all four are on the US disc already.
+- With your Japanese disc image **and** the subtitle pack, **VOICES** offers the original Japanese voice cast, on the
+  Japanese lines' timing; the movies with speech come in their Japanese version. Without the pack there are no
+  Japanese voices.
+- **The subtitle pack** (`ZOE-subtitles.pak`, a download of its own; beside `ZOE.exe` or chosen in the setup window)
+  holds my own translations, and they follow the voices you choose:
+  - with the Japanese voices: a new translation from the Japanese into English, French, German, Italian and Spanish,
+    so the subtitles say what the Japanese cast says - and **Japanese** subtitles (the Japanese disc's own lines);
+  - with the English voices: **Spanish** and **Japanese**, translated from the English;
+  - Spanish weapon and mission descriptions and VR training texts (the menus stay in English); the Japanese
+    subtitles are drawn with Noto Sans JP.
 
 ### Controls
 - A controller works as a DualShock 2, **with rumble**.
@@ -118,7 +125,8 @@ Put a texture pack in a folder inside `textures` beside the game; TEXTURES in RE
 ## Building from source
 
 This repository holds the port's own code (`games/zoe_us/port`: the game's hooks, the RECOMP OPTIONS pages, the
-Japanese voices), its configuration and the subtitle translations (`games/zoe_us/translation`); the toolkit is
+Japanese voices), its configuration and the subtitle translations (`games/zoe_us/translation`, built into the pack by
+`tools/m10/subs_translation.py`); the toolkit is
 [ps2recomp-option-p](https://github.com/almost-drowned-rat/ps2recomp-option-p) (the `engine` submodule). The release
 is built with the toolkit's `tools/player_release.py`; the translation itself runs from your disc image.
 

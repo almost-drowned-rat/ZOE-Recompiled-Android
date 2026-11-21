@@ -33,6 +33,8 @@
 void DubSampleScene();              // dub.cpp: SUBTITLE TIMING's scene, sampled each frame (FrameEnd)
 std::string DubJapaneseLine(const std::string& text);   // dub.cpp: the Japanese line a "#J" subtitle stands for
 void DescriptionsInSpanish();       // dub.cpp: SPANISH's descriptions in the executable's tables
+bool DubSubtitlePack();             // dub.cpp: the subtitle pack (ZOE-subtitles.pak) is there
+const std::vector<unsigned char>& DubSubtitleFont();    // ...its Noto Sans JP
 void F_00450C40(lifted::Context& c);
 void F_00450F58(lifted::Context& c);
 void F_004597F0(lifted::Context& c);
@@ -1698,14 +1700,18 @@ void RegisterGameOverrides() {
     ps2host::Override(0x00466388u, LanguageAtStart, "language index from the 'language' setting (US: English fixed)");
     ps2host::Override(0x00466E38u, ConfigurationFromSave, "a loaded save's configuration, the language setting kept");
     // The PC settings' LANGUAGE line (M7, the ports' rule): the US disc's subtitle languages (docs/languages_research.md).
-    ps2host::SetLanguages({"en", "fr", "de", "it", "es", "ja"});   // (es / ja: ours - the game in English, dub.cpp)
-    static const unsigned char kNotoSansJp[] = {
-#include "noto_sans_jp.inc"
-    };
-    ps2host::SetGameTextFallbackFont(kNotoSansJp, sizeof kNotoSansJp);
+    // SPANISH and JAPANESE: ours, from the subtitle pack (a download of its own, dub.cpp) - its Noto Sans JP too.
+    if (DubSubtitlePack()) {
+        ps2host::SetLanguages({"en", "fr", "de", "it", "es", "ja"});   // (es / ja: the game in English, dub.cpp)
+        const std::vector<unsigned char>& font = DubSubtitleFont();
+        if (!font.empty()) ps2host::SetGameTextFallbackFont(font.data(), font.size());
+    } else {
+        ps2host::SetLanguages({"en", "fr", "de", "it"});
+    }
     // DUB under LANGUAGE (M9, the maintainer 2026-11-20): only with the player's Japanese disc set in the launcher
     // (its second line, "disc_ja"); dub.cpp serves its voices at the next start.
-    ps2host::SetDubs({"en", "ja"}, [] { return !ps2host::Setting("disc_ja").empty(); });
+    // The maintainer 2026-11-21: the Japanese voices need the subtitle pack too (its downloads show the demand).
+    ps2host::SetDubs({"en", "ja"}, [] { return !ps2host::Setting("disc_ja").empty() && DubSubtitlePack(); });
 
     // ASPECT RATIO 16:9 / 16:10 / 21:9 and FIELD OF VIEW (M7 step 5): the cameras' projection (CameraMatrix,
     // CameraView), 3D play wide and 4:3 screens between bars (ShowsWide).

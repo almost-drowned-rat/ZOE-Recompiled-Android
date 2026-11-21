@@ -34,14 +34,5 @@ ps2_add_port(zoe_us
     TRANSLATED ${CMAKE_CURRENT_LIST_DIR}/../src/lifted
     SOURCES ${CMAKE_CURRENT_LIST_DIR}/overrides.cpp ${CMAKE_CURRENT_LIST_DIR}/dub.cpp)
 
-# The Japanese subtitles' letters (SUBTITLE LANGUAGE JAPANESE, overrides.cpp): Noto Sans JP Bold (SIL Open Font
-# License 1.1, port/fonts/NotoSansJP-OFL.txt) cut to the subtitles' characters (tools/m10/font_subset.md), built in.
-set(jp_font_file ${CMAKE_CURRENT_LIST_DIR}/fonts/NotoSansJP-Bold-zoe.otf)
-set(jp_font_inc ${CMAKE_CURRENT_BINARY_DIR}/generated/noto_sans_jp.inc)
-if(NOT EXISTS ${jp_font_inc} OR ${jp_font_file} IS_NEWER_THAN ${jp_font_inc})
-    file(READ ${jp_font_file} jp_font_hex HEX)
-    string(REGEX REPLACE "([0-9a-f][0-9a-f])" "0x\\1," jp_font_bytes "${jp_font_hex}")
-    file(WRITE ${jp_font_inc} "// From port/fonts/NotoSansJP-Bold-zoe.otf (port/CMakeLists.txt): generated.\n${jp_font_bytes}\n")
-endif()
-set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${jp_font_file})
-target_include_directories(zoe_us PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated)
+# Our subtitle translations and the Japanese subtitles' Noto Sans JP are not built in: they are the subtitle pack,
+# a download of its own (tools/m10/subs_translation.py; dub.cpp reads it).
