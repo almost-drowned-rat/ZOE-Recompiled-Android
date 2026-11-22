@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/icon_256.png" alt="Zone of the Enders Recompiled" width="160">
+</p>
+
 # Zone of the Enders Recompiled
 
 A static recompilation of *Zone of the Enders* (PlayStation 2, USA, SLUS-20148) into native PC code, with a Vulkan
