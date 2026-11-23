@@ -16,17 +16,13 @@ import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 public class SetupActivity extends Activity implements VistaSetupView.Host {
     private VistaSetupView mView;
 
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
-        mView = new VistaSetupView(this, this, maybeAdreno(), keptDrivers());
+        mView = new VistaSetupView(this, this, maybeAdreno());
         setContentView(mView);
         mView.requestFocus();
         if (Build.VERSION.SDK_INT >= 33)        // the back gesture (enableOnBackInvokedCallback: no onBackPressed)
@@ -97,27 +93,6 @@ public class SetupActivity extends Activity implements VistaSetupView.Host {
         } catch (Exception ignored) { }
         String s = u.getLastPathSegment();
         return s != null ? s : u.toString();
-    }
-
-    /** The BACK menu's kept drivers (files/drivers/<n>/meta.json): their names, for the driver box. */
-    private List<String> keptDrivers() {
-        List<String> l = new ArrayList<>();
-        File[] d = ZoeActivity.driversDir(this).listFiles(f -> f.isDirectory() && f.getName().matches("[0-9]+")
-                                                              && new File(f, "meta.json").isFile());
-        if (d == null) return l;
-        java.util.Arrays.sort(d, (a, b) -> Integer.compare(Integer.parseInt(a.getName()), Integer.parseInt(b.getName())));
-        for (File k : d) {
-            String n = null;
-            try {
-                byte[] raw = java.nio.file.Files.readAllBytes(new File(k, "meta.json").toPath());
-                org.json.JSONObject j = new org.json.JSONObject(new String(raw, java.nio.charset.StandardCharsets.UTF_8));
-                n = j.optString("name", "").trim();
-                String v = j.optString("driverVersion", "").trim();
-                if (!v.isEmpty()) n = n + " " + v;
-            } catch (Exception ignored) { }
-            l.add(n == null || n.isEmpty() ? "Driver " + k.getName() : n);
-        }
-        return l;
     }
 
     /** Turnip runs only on Adreno (Qualcomm); Android 12+ names the SoC maker, older: allowed. */

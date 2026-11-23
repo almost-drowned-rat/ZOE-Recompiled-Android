@@ -5,8 +5,9 @@
 // sweeping over its filled part, glossy rounded buttons, a Vista-style question box.
 //
 // The rows are the PC launcher's (engine/launcher): the disc image, the Japanese disc (optional), the subtitle pack
-// (optional) - and, Android only, the graphics driver ("built-in Turnip (change...)", chosen automatically; the
-// same 5 kept slots as the BACK menu's Graphics driver page). Quit / Back / the frame's X during the installation
+// (optional) - and, Android only, the graphics driver: no driver ships with the app (the maintainer 2026-11-23), so
+// two choices - the system driver (the default) or a Turnip driver from the player's own .adpkg.zip (Snapdragon only;
+// kept in the same slots as the BACK menu's Graphics driver page). Quit / Back / the frame's X during the installation
 // ask first ("The installation is not finished. Quit anyway?").
 //
 // PREVIEW: this first version only pretends - the steps run on a timer, nothing is read, built or installed
@@ -88,15 +89,13 @@ final class VistaSetupView extends View {
     private Bitmap backdrop;
     private float s;                    // pixels per layout unit
 
-    VistaSetupView(Context c, Host host, boolean adreno, List<String> keptDrivers) {
+    VistaSetupView(Context c, Host host, boolean adreno) {
         super(c);
         this.host = host;
         this.adreno = adreno;
-        driver = adreno ? "built-in Turnip" : "system driver";
-        if (adreno) driverChoices.add("Built-in Turnip (recommended)");
-        driverChoices.addAll(keptDrivers);
-        driverChoices.add("Add a driver (.adpkg.zip)...");
+        driver = "system driver";
         driverChoices.add("System driver");
+        driverChoices.add("Turnip driver from a file (.adpkg.zip)...");
         setFocusable(true);
         setFocusableInTouchMode(true);
     }
@@ -197,10 +196,17 @@ final class VistaSetupView extends View {
                     String ch = driverChoices.get(id - C_ITEM);
                     modal = M_NONE;
                     focus = C_DRIVER;
-                    if (ch.startsWith("Add a driver")) { host.pickFile(PICK_DRIVER); break; }
-                    if (ch.startsWith("Built-in Turnip")) { driver = "built-in Turnip"; driverByPlayer = false; }
-                    else if (ch.equals("System driver")) { driver = "system driver"; driverByPlayer = adreno; }
-                    else { driver = ch; driverByPlayer = true; }
+                    if (ch.startsWith("Turnip driver")) {
+                        if (!adreno) {
+                            message("Turnip drivers work only on Adreno GPUs (Snapdragon). This device needs the "
+                                    + "system driver.", C_DRIVER);
+                            break;
+                        }
+                        host.pickFile(PICK_DRIVER);
+                        break;
+                    }
+                    driver = "system driver";
+                    driverByPlayer = false;
                 }
         }
         invalidate();
@@ -213,7 +219,7 @@ final class VistaSetupView extends View {
         if (!rowName[ROW_JA].isEmpty()) steps.add(new Step("Reading the Japanese disc", 2f));
         steps.add(new Step("Translating the game's code", 5f));
         steps.add(new Step("Compiling", 10f));
-        steps.add(new Step("Installing the graphics driver (" + driver + ")", 2f));
+        if (driverByPlayer) steps.add(new Step("Installing the graphics driver (" + driver + ")", 2f));
         steps.add(new Step("Unpacking the disc into the game folder", 4f));
         if (!rowName[ROW_SUBS].isEmpty()) steps.add(new Step("Copying the subtitles", 1f));
         total = 0;
@@ -397,8 +403,8 @@ final class VistaSetupView extends View {
         p.setTypeface(regular);
         p.setTextSize(10.5f * s);
         p.setColor(0xFF6D6D6D);
-        c.drawText(driverByPlayer ? "The graphics driver is chosen by you - change it any time in the BACK menu."
-                                  : "The graphics driver is chosen automatically - change it any time in the BACK menu.",
+        c.drawText(driverByPlayer ? "Turnip from your file - change it any time in the BACK menu."
+                                  : "No driver comes with the app. A Turnip driver (Snapdragon) can be chosen here or later in the BACK menu.",
                    L, ty, p);
         ty += 17 * s;
 
@@ -836,9 +842,8 @@ final class VistaSetupView extends View {
     }
 
     private boolean isCurrent(String choice) {
-        if (choice.startsWith("Built-in Turnip")) return driver.equals("built-in Turnip");
         if (choice.equals("System driver")) return driver.equals("system driver");
-        return choice.equals(driver);
+        return driverByPlayer;                      // the Turnip line: a file was chosen
     }
 
     // ---- the backdrop: a procedural "aurora" - dark teal to green with soft light bands (own art) ------------------
