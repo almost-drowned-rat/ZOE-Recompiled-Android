@@ -134,10 +134,14 @@ def main(argv=None) -> int:
                     z.write(overlays.pop(rel, os.path.join(root, f)), rel)
         z.write(os.path.join(a.payload, "lift.txt"), "lift.txt")
         z.write(os.path.join(a.payload, "release.txt"), "release.txt")
-        for name, p in objs.items():
-            z.write(p, "lib/" + name)
-        for name, rel in tree_libs.items():
-            z.write(os.path.join(a.tree, rel), "lib/" + name)
+        # (debug info stripped: it names the build machine's folders, and the device build does not need it)
+        stripped = os.path.join(a.out, "stripped")
+        os.makedirs(stripped, exist_ok=True)
+        for name, p in list(objs.items()) + [(n, os.path.join(a.tree, r)) for n, r in tree_libs.items()]:
+            dst = os.path.join(stripped, name)
+            subprocess.run([strip, "--strip-debug", "-o", dst, p], check=True)
+            z.write(dst, "lib/" + name)
+        shutil.rmtree(stripped)
         z.writestr("build.txt", build_txt)
     if overlays:
         raise SystemExit("--overlay: not in the payload: %s" % ", ".join(overlays))

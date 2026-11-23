@@ -1,163 +1,123 @@
 <p align="center">
-  <img src="assets/icon_256.png" alt="Zone of the Enders Recompiled" width="160">
+  <img src="assets/icon_256.png" alt="Zone of the Enders Recompiled for Android" width="160">
 </p>
 
-# Zone of the Enders Recompiled
+# Zone of the Enders Recompiled - Android
 
-A static recompilation of *Zone of the Enders* (PlayStation 2, USA, SLUS-20148) into native PC code, with a Vulkan
-renderer and a set of modern extras: higher resolutions, widescreen, antialiasing, a settings menu inside the game,
-and the Japanese voices with subtitles in English, French, German, Italian, Spanish or Japanese.
+The Android port of [Zone of the Enders Recompiled](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled),
+the static recompilation of *Zone of the Enders* (PlayStation 2, USA, SLUS-20148). One app: you choose your own disc
+image, the game is translated and compiled **on your device** once, and then it plays - with a gamepad, a handheld's
+own controls or touch buttons.
 
-> This project contains **no game data, no game code and no keys**. You need your own copy of the game (USA disc).
-> The download holds a translator and a compiler: on the first start it translates **your** disc's program to C++
-> and compiles it on your PC.
+> This project contains **no game data, no game code and no keys**. You need your own copy of the game (USA disc
+> image). The app never contains any of the game's code: it is built on your device from your own disc.
 
 > **AI disclosure:**  AI assistance yes (Claude Code by Anthropic).
 
----
-
-## The first port of ps2recomp-option-p
-
-This port is first and foremost the first game of **ps2recomp-option-p**, my fork of the ps2-port-engine toolkit
-([ps2recomp-option-p](https://github.com/almost-drowned-rat/ps2recomp-option-p)).
-
-**What option P does differently:** the game's program is translated to C++ and the translation is *checked* -
-run side by side with an interpreter of the PS2's processor on the game's own data, or proven equal to a form that
-was. The PS2's vector unit programs and the sound processor's modules are translated ahead of time too. The
-translation and the compile run on your own PC from your own disc image, so the download carries no game code.
-
-**Comparison** with an independently developed recompilation of the same game: Yaz-Myst's
-[ZOE-Recompiled](https://github.com/Yaz-Myst/ZOE-Recompiled) v1.1.0, its latest version, built from source. I measured
-both on 2026-11-21 (this port's v0.8.1) in one session on the same machine (laptop with an RTX 3050 Ti), each at the
-PS2's own resolution, windowed, 60 Hz; nothing else running. CPU in cores busy (means of two rounds); GPU in
-milliseconds per frame (read for the whole GPU, desktop included):
-
-| | Zone of the Enders Recompiled | ZOE-Recompiled v1.1.0 |
-|---|---|---|
-| CPU, fight (first battle) | 1.11 | 1.70 |
-| CPU, in-engine cutscene (hangar) | 1.04 | 1.63 |
-| CPU, title movie | 0.35 | 0.86 |
-| GPU, fight | 2.7 ms | 1.8 ms |
-| GPU, in-engine cutscene | 3.0 ms | 2.2 ms |
-| GPU, title movie | 0.8 ms | 0.7 ms |
-
-Both hold the game's 60 pictures a second in every scene. On a four-core machine (the Steam Deck's count) the CPU
-results come out alike: 35-59 % less for this port.
-
-**Only a benchmark, not a competition.** I measure against ZOE-Recompiled because it is the best way to see what
-option P brings - not to rank anyone's work. Its renderer is leaner on the GPU than mine; both projects are young
-and will change, and these are numbers from one machine and one scene set.
+> **Early release, tested on one device.** I have tested this port only on an AYN Odin 2 Portal (Snapdragon 8 Gen 2,
+> Adreno 740). Other devices may work, but I could not test them; reports are welcome.
 
 ---
 
-## What you need
+## Status
 
-- **Windows** 10 or 11, 64-bit - or **Linux** (x86-64, glibc 2.35 or newer: Ubuntu 22.04, Debian 12, Fedora 36,
-  SteamOS 3.5, Arch and newer) - a processor with AVX2, a graphics card with a **Vulkan 1.3** driver
-- A disc image of **Zone of the Enders (USA, SLUS-20148)** that you made from your own disc (ISO or CHD)
-- Optional, for the **Japanese voices**: a disc image of the Japanese release (**SLPM-65019**) **and** the subtitle
-  pack `ZOE-subtitles.pak` (a download of its own, see *Languages*) - the Japanese voices need both
-- About 3 GB of free space (5 GB with the Japanese disc) and ~10 minutes for the first start (the translation, the
-  compile and unpacking the discs run once)
+**v0.8.5** - the same version as the Windows / Linux port it is built from
+([v0.8.5](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled/releases/tag/v0.8.5)). Download the APK
+from [Releases](https://github.com/almost-drowned-rat/ZOE-Recompiled-Android/releases) and install it (Android 10+,
+arm64). It is signed with the project's own key - every later update installs over it.
 
-## Getting started
+| Device | Chip / GPU | Driver | Result |
+|---|---|---|---|
+| AYN Odin 2 Portal (Android 13) | Snapdragon 8 Gen 2 / Adreno 740 | purple-turnip T30 | runs; first start ~12 min; boss fight ~59 fps |
 
-1. Download `ZOE.exe` (Windows) or `ZOE-x86_64.AppImage` (Linux) from the [Releases](../../releases) page and put it
-   in a folder you can write to (not *Program Files*) - the game keeps its saves and settings beside it. On Linux,
-   make it executable (`chmod +x ZOE-x86_64.AppImage`, or the file's properties); if it does not start because
-   your system has no FUSE, start it as `./ZOE-x86_64.AppImage --appimage-extract-and-run`. Optional:
-   `ZOE-subtitles.pak` from the same page, my own subtitle translations (see *Languages*).
-2. Start it. A small window asks for your disc image (and, if you like, the Japanese one and the subtitle pack) and
-   the folder the game is set up in.
-3. Press **Go**. The first start translates and compiles the game and **unpacks your discs into its `game`
-   folder** - the US disc whole, of the Japanese disc only what the Japanese voices need. From then on the game
-   reads everything from there: your disc images are needed only this once (they are only read, never changed or
-   deleted). You can close the window while this runs: it asks first, then stops cleanly, and the next start
-   begins again from the start.
+## Requirements
 
-**Keep the `game` folder** and you need no disc image again: on a new PC, choose that folder in the setup window's
-first line instead of an image - the Japanese disc and the subtitle pack in it are found by themselves.
+- Android 10 or newer, **arm64** (64-bit ARM)
+- A GPU with a **Vulkan 1.3** driver. On Snapdragon (Adreno) a **Turnip** driver package (`.adpkg.zip`) is
+  recommended - tested with **purple-turnip T30**
+  ([`turnip_mrpurple_T30-toasted.adpkg.zip`](https://github.com/MrPurple666/purple-turnip/releases/tag/vturnip_mrpurple_T30-toasted.adpkg),
+  Mesa Turnip 26.3.0, by MrPurple666). No driver comes with the app. With the Adreno 740's own driver, FSR upscaling
+  drew the picture wrong in my tests.
+- Your own **Zone of the Enders (USA, SLUS-20148)** disc image (`.iso`)
+- Optional, for the **Japanese voices**: the Japanese disc image (**SLPM-65019**) **and** the subtitle pack
+  `ZOE-subtitles.pak` from the [PC release](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled/releases/tag/v0.8.5)
+- Free storage: about **8 GB** during the first start (each image is copied in and unpacked; the copies are deleted
+  again), about **4 GB** after it. The build uses as many processor cores as the memory allows (about 1.4 GB
+  each): less RAM only makes the first start slower.
 
-## Features
+## How it works
 
-### Native port, no emulator
-- The PS2's program is translated to C++ ahead of time and compiled for the PC - no CPU emulation at run time.
-- The PS2's vector units and the game's sound processor run as translated code too; the GS is drawn with
-  **Vulkan**, window, input and sound through **SDL3**.
+1. Install the app and start it. The setup screen opens.
+2. **Browse...** your disc image - and, if you like, the Japanese disc and the subtitle pack.
+3. **Graphics driver (change...)**: keep the *system driver*, or choose *Turnip driver from a file* and pick the
+   `.adpkg.zip`. You can change it any time later in the BACK menu.
+4. **Install.** The game's code is translated and compiled on the device, then your discs are unpacked into the app's
+   folder - **once**, about 12 minutes on a Snapdragon 8 Gen 2 (and once more after an app update). Keep the app
+   open; the screen stays on. **Quit** asks first, then stops cleanly.
+5. **Play.** Every later start goes straight into the game. After an app update the setup comes back once and
+   builds the game again from the files you chose (one tap).
 
-### RECOMP OPTIONS - in the game's own OPTIONS menu
-The OPTIONS screen shows VIBRATION, SOUND, **RECOMP OPTIONS** and EXIT. RECOMP OPTIONS opens pages drawn in the
-game's own style:
+Your disc images are only read, never changed or deleted.
 
-| Page | Lines |
+**Frame rate at first:** every new effect, scene or menu needs its shaders built once on the device. The frame rate
+drops now and then at the beginning and gets better the longer you play; the shaders are kept for the next time.
+
+## The game
+
+Everything of the [PC port](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled#features): RECOMP
+OPTIONS in the game's own OPTIONS menu (post processing, resolution, aspect ratio, field of view, performance
+overlay, texture filtering, languages), the Japanese voices with the subtitle pack, rumble. Android always runs
+full screen, so the menus have no display-mode line; texture filtering *auto* is *fast* on Android.
+
+## Controls
+
+- **Gamepads** and a handheld's own controls work out of the box, as a DualShock 2.
+- **Touch:** DualShock 2 buttons on the screen (sticks, D-pad, the four face buttons, L1 / L2 / R1 / R2, START /
+  SELECT). With the touch buttons on *Automatic* they hide while a gamepad is used.
+- **BACK** opens a menu that slides in from the left:
+  - **Back to game**
+  - **Controls** - touch buttons on / off / automatic, the connected controllers, move and resize the touch
+    buttons, button size, hide single buttons, opacity, stick sensitivity, reset the layout
+  - **Settings** - **Saves** (export / import), **Export log**, **Boot animation**, **Graphics driver** (the system
+    driver or up to 5 kept Turnip packages), **About and licences**
+
+## Your files
+
+```
+/storage/emulated/0/Android/data/io.github.almostdrownedrat.zoe/files/
+  memcard/          your saves
+  pc_settings.ini   your settings
+  game/             your discs, unpacked, and the subtitle pack
+  data/logs/        the logs (setup.log: the first start) - please attach them to a bug report
+```
+
+**Uninstalling the app deletes this folder too** - back up your saves first (BACK > Settings > Saves > Export).
+
+## Troubleshooting
+
+| What you see | What to do |
 |---|---|
-| POST PROCESSING | antialiasing (FXAA, SMAA, SSAA 2x / 4x), anisotropic filter, bloom + strength, upscaling (bilinear / FSR 1) |
-| DISPLAY | display mode (window / fullscreen / borderless), render resolution (standard sizes up to 5x), aspect ratio (4:3, 16:9, 16:10, 21:9 - the picture widened, never stretched), field of view |
-| PERFORMANCE | V-sync, FPS, frame time, game speed (each on or off; FPS / frame time / game speed shown in a corner) |
-| RENDERING | texture filtering (accurate / fast / auto - auto is fast on Android, accurate elsewhere), shader compile mode, shader notice |
-| LANGUAGE | subtitles in cutscenes / in gameplay, voices (English / Japanese), subtitle language |
-
-Up / down chooses a line, left / right changes it, **Triangle** sets a line back to its default.
-
-### Languages and the Japanese voices
-- Subtitles in **English, French, German or Italian** - all four are on the US disc already.
-- With your Japanese disc image **and** the subtitle pack, **VOICES** offers the original Japanese voice cast, on the
-  Japanese lines' timing; the movies with speech come in their Japanese version. Without the pack there are no
-  Japanese voices.
-- **The subtitle pack** (`ZOE-subtitles.pak`, a download of its own; beside `ZOE.exe` or chosen in the setup window)
-  holds my own translations, and they follow the voices you choose:
-  - with the Japanese voices: a new translation from the Japanese into English, French, German, Italian and Spanish,
-    so the subtitles say what the Japanese cast says - and **Japanese** subtitles (the Japanese disc's own lines);
-  - with the English voices: **Spanish** and **Japanese**, translated from the English;
-  - Spanish weapon and mission descriptions and VR training texts (the menus stay in English); the Japanese
-    subtitles are drawn with Noto Sans JP.
-
-### Controls
-- A controller works as a DualShock 2, **with rumble**.
-- Keyboard (by key position, the same on every layout): W A S D left stick, arrow keys D-pad, Enter / Backspace
-  Start / Select, I / J / K / L Triangle / Square / Cross / Circle, U / O L1 / R1, Z / P L2 / R2.
-- Alt+Enter switches between window and fullscreen, F1 shows or hides the performance overlay (FPS, frame time, game speed - 100 % = as fast as on the console).
-
-### Texture packs
-Put a texture pack in a folder inside `textures` beside the game; TEXTURES in RECOMP OPTIONS chooses it.
-
-## Files beside the game
-
-| File | What it is |
-|---|---|
-| `game\` (`game/` on Linux) | your discs, unpacked (`disc`, `disc_ja`) and the subtitle pack - keep it as your backup |
-| `pc_settings.ini` | your settings |
-| `memcard\` | your memory card: the game's saves |
-| `*.log` | what the last run did - please attach it to a bug report |
-| `crash reports\` | after a crash: a zip with the log, your settings and the system's details - attach it to an issue |
-
-## Known issues
-
-- This is an early release. If something looks or sounds wrong, please open an issue with the log - I will try to
-  fix each one as fast as I can.
-- **Linux** is played and tested on CachyOS (KDE Plasma, Wayland) with an AMD Radeon 880M (Mesa RADV). Other
-  distributions and NVIDIA / Intel drivers should work the same way but are not tested yet - reports are welcome.
+| "App not installed" | the app needs Android 10+ on arm64 |
+| "This is not the Zone of the Enders (USA) disc" | choose the USA image (SLUS-20148); the Japanese one goes in the second line |
+| The setup stops with "... failed" | the message names the step; `files/data/logs/setup.log` (see *Your files*) has the details - please open an issue with it |
+| Black or broken picture | try the other driver (BACK > Settings > Graphics driver), or turn FSR off |
 
 ## Building from source
 
-This repository holds the port's own code (`games/zoe_us/port`: the game's hooks, the RECOMP OPTIONS pages, the
-Japanese voices), its configuration and the subtitle translations (`games/zoe_us/translation`, built into the pack by
-`tools/m10/subs_translation.py`); the toolkit is
-[ps2recomp-option-p](https://github.com/almost-drowned-rat/ps2recomp-option-p) (the `engine` submodule). The release
-is built with the toolkit's `tools/player_release.py`; the translation itself runs from your disc image. The Linux
-AppImage is the same release, made with the toolkit's `tools/linux/release_linux.sh` (its compiler bundle:
-`tools/linux/make_toolchain_bundle.sh` - LLVM, glibc 2.35, Python - so the player's first start downloads nothing).
+- The app: `packaging/android` (Gradle; `jni/` holds the app's native parts: the Vulkan driver loader shim, the touch
+  pad, and the small launchers for the on-device Python, linker and the game's disc unpacker).
+- The first-start kit inside the APK (`assets/setup`): made by `packaging/android/make_setup_assets.py` from the PC
+  release's payload, the toolkit built for Android with the NDK (`games/zoe_us/port` with the NDK's CMake toolchain),
+  an LLVM toolchain that runs on Android, the NDK's sysroot and libc++, and python.org's CPython for Android.
+- v0.8.5's kit carries one file newer than the PC release: the toolkit's `tools/translate.py` with a fallback for
+  Python builds without `multiprocessing` (Android); it goes into the toolkit for the next release.
 
 ## Credits and licences
 
-- The toolkit, ps2recomp-option-p, is my fork of [ps2-port-engine](https://github.com/danielgomesvieira2000/ps2-port-engine).
-- Fonts and libraries: Liberation Sans (SIL Open Font License 1.1), SDL3 (zlib), stb_truetype and stb_image (MIT /
-  public domain), pl_mpeg (MIT), miniz (MIT), xxHash (BSD-2-Clause), bcdec (MIT), minimp3 (CC0), AMD FidelityFX FSR 1
-  (MIT), SMAA (MIT), libchdr (BSD-3-Clause). Their licence texts are in the toolkit's `LICENSES` folder.
-- Noto Sans JP (SIL Open Font License 1.1, `games/zoe_us/port/fonts`), a subset for the Japanese subtitles.
-- Test results of the real console: [ps2autotests](https://github.com/unknownbrackets/ps2autotests) (ISC).
-- Some addresses of the game's functions were first named by another recompilation of the same game,
-  ZOE-Recompiled; only those facts were taken, no code.
+- Everything listed in the [PC port's credits](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled#credits-and-licences).
+- On Android also: LLVM / clang / lld (Apache-2.0 with LLVM exception), the Android NDK's sysroot and libc++
+  (Apache-2.0 with LLVM exception / BSD), CPython (PSF License), libadrenotools (BSD-2-Clause). The licence texts are
+  in the APK (`assets/licenses`) and in the app (BACK > Settings > About and licences).
 
 This project is licensed under the GNU General Public License v3.0 (see `LICENSE`).
 

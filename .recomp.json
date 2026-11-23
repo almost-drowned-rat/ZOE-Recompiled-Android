@@ -4,13 +4,30 @@
   "wikidata": "Q2711870",
   "system": "PS2",
   "type": "recomp",
+  "project": "Zone of the Enders Recompiled - Android",
+  "status": "released",
+  "targets": ["Android"],
   "original": [
     { "region": "USA", "serial": "SLUS-20148" },
     { "region": "Japan", "serial": "SLPM-65019" }
   ],
-  "project": "Zone of the Enders Recompiled",
-  "status": "released",
-  "targets": ["Windows"],
   "toolchain": "ps2recomp-option-p",
-  "approach": "Static recompilation of the player's own disc on the first start, Vulkan renderer"
+  "approach": "Static recompilation of the player's own disc on the device at the first start, Vulkan renderer",
+  "maintainers": [
+    {
+      "name": "almost-drowned-rat",
+      "link": "https://github.com/almost-drowned-rat"
+    }
+  ],
+  "links": [
+    {
+      "label": "Zone of the Enders Recompiled (Windows / Linux)",
+      "url": "https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled"
+    },
+    {
+      "label": "ps2recomp-option-p toolkit",
+      "url": "https://github.com/almost-drowned-rat/ps2recomp-option-p"
+    }
+  ],
+  "notes": "Android version of Zone of the Enders Recompiled (USA disc; the Japanese disc optional for the Japanese voices). Made with AI assistance."
 }

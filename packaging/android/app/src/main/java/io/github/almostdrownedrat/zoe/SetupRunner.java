@@ -49,6 +49,9 @@ import java.util.zip.ZipInputStream;
 final class SetupRunner implements Runnable {
     private static final String TAG = "ZOE-SETUP";
     static final int WRONG_DISC = 3;
+    /** Where a failed setup's log is (the game's BACK menu does not exist yet). */
+    static final String LOG_HINT = ".\n\nThe log: Android/data/io.github.almostdrownedrat.zoe/files/data/logs/setup.log"
+            + " - a file manager that shows Android/data opens it (or adb). Please attach it to a bug report.";
 
     interface Listener {
         void step(String text, float fraction);     // the whole setup's fraction 0..1
@@ -229,7 +232,7 @@ final class SetupRunner implements Runnable {
             if (rc == WRONG_DISC)
                 throw new Failed("That image is not the Zone of the Enders (USA) disc (SLUS-20148) - or another version of "
                                  + "it. Please choose your US disc image.", true);
-            if (rc != 0) throw new Failed("Checking the disc image failed - see the log (BACK menu: Export log).");
+            if (rc != 0) throw new Failed("Checking the disc image failed" + LOG_HINT);
         }
         at += tCheck;
         phase("Translating the game's code", at / sum, tLift / sum, 0);
@@ -241,7 +244,7 @@ final class SetupRunner implements Runnable {
             final long started = t0;
             int rc = python(a, iso, work, jobs, log,
                             () -> say("Translating the game's code", (System.currentTimeMillis() - started) / 150000f * 0.95f));
-            if (rc != 0) throw new Failed("Translating the game's code failed - see the log (BACK menu: Export log).");
+            if (rc != 0) throw new Failed("Translating the game's code failed" + LOG_HINT);
         }
         at += tLift;
 
@@ -392,7 +395,7 @@ final class SetupRunner implements Runnable {
                 }
             }
         }
-        if (src.isEmpty()) throw new Failed("The translation made no source files - see the log.");
+        if (src.isEmpty()) throw new Failed("The translation made no source files" + LOG_HINT);
         // the largest first: the long ones start early, the short ones fill the gaps at the end
         src.sort((x, y) -> Long.compare(y.length(), x.length()));
         long total = 0;
@@ -431,12 +434,12 @@ final class SetupRunner implements Runnable {
             for (Future<Integer> x : fut)
                 if (x.isDone() && !x.isCancelled() && failedJob(x)) {
                     cancelCompilers();
-                    throw new Failed("Compiling failed - see the log (BACK menu: Export log).");
+                    throw new Failed("Compiling failed" + LOG_HINT);
                 }
         }
         check();
         for (Future<Integer> x : fut)
-            if (failedJob(x)) throw new Failed("Compiling failed - see the log (BACK menu: Export log).");
+            if (failedJob(x)) throw new Failed("Compiling failed" + LOG_HINT);
         appendLog(log, "compiled " + src.size() + " files with " + jobs + " jobs in "
                        + (System.currentTimeMillis() - t0) / 1000 + " s\n");
         // link: {OBJECTS} = the compiled + the prebuilt objects
@@ -452,7 +455,7 @@ final class SetupRunner implements Runnable {
         }
         game.delete();
         if (exec(cmd, work, log, null) != 0 || !game.isFile())
-            throw new Failed("Linking failed - see the log (BACK menu: Export log).");
+            throw new Failed("Linking failed" + LOG_HINT);
     }
 
     private static boolean failedJob(Future<Integer> x) {
@@ -498,7 +501,7 @@ final class SetupRunner implements Runnable {
             } catch (NumberFormatException ignored) { }
         }, "XR_GAME_LIB", game.getPath(), "PS2HOST_HOME", ext.getPath());
         prog.delete();
-        if (rc != 0) throw new Failed(text + " failed - see the log (BACK menu: Export log).");
+        if (rc != 0) throw new Failed(text + " failed" + LOG_HINT);
     }
 
     // ---- files -----------------------------------------------------------------------------------------------------
