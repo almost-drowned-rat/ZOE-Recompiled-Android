@@ -14,6 +14,24 @@ and the Japanese voices with subtitles in English, French, German, Italian, Span
 
 > **AI disclosure:**  AI assistance yes (Claude Code by Anthropic).
 
+**Features at a glance**
+
+- **Native PC code, no emulator** - the PS2's program, its vector units and its sound processor are translated to C++
+  ahead of time; the picture is drawn with **Vulkan**.
+- **Built from your own disc on your PC** - one first start of about 10 minutes; after it, the `game` folder is all
+  you need.
+- **Windows and Linux** (`ZOE.exe`, `ZOE-x86_64.AppImage`) - and **Android** as an app of its own:
+  [ZOE Recompiled for Android](https://github.com/almost-drowned-rat/ZOE-Recompiled-Android).
+- **Higher resolutions** (up to 5x), **widescreen** 16:9 / 16:10 / 21:9 (widened, never stretched), field of view.
+- **Antialiasing** (FXAA, SMAA, SSAA 2x / 4x), anisotropic filter, bloom, FSR 1 upscaling.
+- **RECOMP OPTIONS** - a settings menu inside the game's own OPTIONS menu, in the game's style.
+- **The Japanese voices** with your Japanese disc, and subtitles in **English, French, German, Italian, Spanish or
+  Japanese** (the subtitle pack).
+- **Controllers with rumble**, keyboard, a performance overlay (FPS, frame time, game speed).
+- **Texture packs**, and crash reports to attach to an issue.
+
+Details: [Features](#features).
+
 ---
 
 ## The first port of ps2recomp-option-p
