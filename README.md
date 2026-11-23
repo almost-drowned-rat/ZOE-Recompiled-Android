@@ -72,7 +72,8 @@ and will change, and these are numbers from one machine and one scene set.
 3. Press **Go**. The first start translates and compiles the game and **unpacks your discs into its `game`
    folder** - the US disc whole, of the Japanese disc only what the Japanese voices need. From then on the game
    reads everything from there: your disc images are needed only this once (they are only read, never changed or
-   deleted).
+   deleted). You can close the window while this runs: it asks first, then stops cleanly, and the next start
+   begins again from the start.
 
 **Keep the `game` folder** and you need no disc image again: on a new PC, choose that folder in the setup window's
 first line instead of an image - the Japanese disc and the subtitle pack in it are found by themselves.
@@ -92,8 +93,8 @@ game's own style:
 |---|---|
 | POST PROCESSING | antialiasing (FXAA, SMAA, SSAA 2x / 4x), anisotropic filter, bloom + strength, upscaling (bilinear / FSR 1) |
 | DISPLAY | display mode (window / fullscreen / borderless), render resolution (standard sizes up to 5x), aspect ratio (4:3, 16:9, 16:10, 21:9 - the picture widened, never stretched), field of view |
-| FRAME RATE | V-sync, frame pacing, FPS counter |
-| SHADERS | shader compile mode, shader notice |
+| PERFORMANCE | V-sync, FPS, frame time, game speed (each on or off; FPS / frame time / game speed shown in a corner) |
+| RENDERING | texture filtering (accurate / fast / auto - auto is fast on Android, accurate elsewhere), shader compile mode, shader notice |
 | LANGUAGE | subtitles in cutscenes / in gameplay, voices (English / Japanese), subtitle language |
 
 Up / down chooses a line, left / right changes it, **Triangle** sets a line back to its default.
@@ -115,7 +116,7 @@ Up / down chooses a line, left / right changes it, **Triangle** sets a line back
 - A controller works as a DualShock 2, **with rumble**.
 - Keyboard (by key position, the same on every layout): W A S D left stick, arrow keys D-pad, Enter / Backspace
   Start / Select, I / J / K / L Triangle / Square / Cross / Circle, U / O L1 / R1, Z / P L2 / R2.
-- Alt+Enter switches between window and fullscreen, F1 shows the FPS counter.
+- Alt+Enter switches between window and fullscreen, F1 shows or hides the performance overlay (FPS, frame time, game speed - 100 % = as fast as on the console).
 
 ### Texture packs
 Put a texture pack in a folder inside `textures` beside the game; TEXTURES in RECOMP OPTIONS chooses it.
