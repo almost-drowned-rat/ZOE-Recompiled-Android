@@ -74,7 +74,7 @@ final class VistaSetupView extends View {
     private final List<Step> steps = new ArrayList<>();
     private long startMs;
     private float total, fraction;
-    private String stepText = "", remain = "";
+    private String stepText = "";
     private long animStart = SystemClock.uptimeMillis();
 
     // controls (rebuilt every frame from the layout)
@@ -238,7 +238,6 @@ final class VistaSetupView extends View {
             state = DONE;
             fraction = 1;
             stepText = "Done";
-            remain = "";
             focus = C_GO;
             return;
         }
@@ -248,10 +247,10 @@ final class VistaSetupView extends View {
             if (t < acc + steps.get(i).secs) break;
             acc += steps.get(i).secs;
         }
-        stepText = steps.get(i).text + "  (step " + (i + 1) + " of " + steps.size() + ")";
+        // as the PC launcher: the step and its time so far, no estimate (the maintainer: estimates only worry)
+        int so = (int) (t - acc);
+        stepText = steps.get(i).text + " - " + (so / 60) + ":" + String.format(java.util.Locale.ROOT, "%02d", so % 60);
         fraction = t / total;
-        int left = (int) Math.ceil(total - t);
-        remain = "About " + left + (left == 1 ? " second" : " seconds") + " remaining";
     }
 
     private Ctl find(int id) {
@@ -338,8 +337,8 @@ final class VistaSetupView extends View {
     private static final float FRAME = 7, TITLE = 26, HEADER = 58, FOOTER = 48, PAD = 22, ROW = 33;
 
     private float bodyHeight() {
-        // intro (up to 3 lines) + 3 rows + driver button + note + bar + 2 status lines
-        return 14 + 3 * 16 + 10 + 3 * ROW + 6 + 30 + 20 + 12 + 18 + 8 + 16 + 16 + 14;
+        // intro (up to 3 lines) + 3 rows + driver button + note + bar + the status line
+        return 14 + 3 * 16 + 10 + 3 * ROW + 6 + 30 + 20 + 12 + 18 + 8 + 16 + 14;
     }
 
     private String intro() {
@@ -422,9 +421,7 @@ final class VistaSetupView extends View {
             String pc = Math.round(fraction * 100) + "%";
             c.drawText(pc, R - p.measureText(pc), ty, p);
         }
-        ty += 16 * s;
-        p.setColor(0xFF4C607A);
-        if (state == INSTALLING) c.drawText(remain, L, ty, p);
+
 
         // footer
         float fy = by + bh;
