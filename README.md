@@ -62,12 +62,32 @@ Your disc images are only read, never changed or deleted.
 **Frame rate at first:** every new effect, scene or menu needs its shaders built once on the device. The frame rate
 drops now and then at the beginning and gets better the longer you play; the shaders are kept for the next time.
 
-## The game
+## Features
 
-Everything of the [PC port](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled#features): RECOMP
-OPTIONS in the game's own OPTIONS menu (post processing, resolution, aspect ratio, field of view, performance
-overlay, texture filtering, languages), the Japanese voices with the subtitle pack, rumble. Android always runs
-full screen, so the menus have no display-mode line; texture filtering *auto* is *fast* on Android.
+- **The whole game, native on your device** - no emulator: the PS2's program, its vector units and its sound
+  processor are translated to C++ and compiled for arm64; the picture is drawn with **Vulkan**.
+- **Built from your own disc, on the device** - the app carries no game code; the first start (about 12 minutes on a
+  Snapdragon 8 Gen 2) translates, compiles and unpacks once, then every start goes straight into the game.
+- **One setup screen** - your USA disc image, optionally the Japanese disc and the subtitle pack, and the graphics
+  driver; **Quit** asks first, then stops cleanly.
+- **Graphics driver of your choice** - the system driver or a **Turnip** package (`.adpkg.zip`) from a file; up to 5
+  packages are kept and can be switched in the BACK menu. No driver comes with the app.
+- **Everything of the [PC port](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled#features)** -
+  RECOMP OPTIONS in the game's own OPTIONS menu:
+  - POST PROCESSING: antialiasing (FXAA, SMAA, SSAA 2x / 4x), anisotropic filter, bloom, upscaling (bilinear / FSR 1)
+  - DISPLAY: render resolution up to 5x, aspect ratio 4:3 / 16:9 / 16:10 / 21:9 (widened, never stretched), field of
+    view (Android always runs full screen, so there is no display-mode line)
+  - PERFORMANCE: V-sync, FPS, frame time, game speed
+  - RENDERING: texture filtering (*auto* is *fast* on Android), shader compile mode, shader notice
+  - LANGUAGE: subtitles, voices, subtitle language
+- **The Japanese voices** - with your Japanese disc and the subtitle pack: the original Japanese cast, with subtitles
+  in English, French, German, Italian, Spanish or Japanese.
+- **Gamepads and handheld controls** as a DualShock 2, **with rumble**.
+- **Touch buttons** - a full DualShock 2 on the screen; move, resize or hide single buttons, opacity, stick
+  sensitivity; on *Automatic* they hide while a gamepad is used.
+- **BACK menu** - controls, saves export / import, log export, boot animation, graphics driver, licences.
+- **Shaders kept** - every effect's shaders are built once on the device and kept for the next time.
+- **Always landscape**, the screen stays on during the setup.
 
 ## Controls
 
