@@ -30,12 +30,15 @@ public class ZoeActivity extends SDLActivity {
 
     /** The game the setup built on this device (M2): <files>/bin/libZOE_game.so - when it is there, SDL runs its
      *  SDL_main instead of the APK's libmain.so. (An app may load code from its own private files; it may not exec.) */
-    private File deviceGame() { return new File(getFilesDir(), "bin/libZOE_game.so"); }
+    private File deviceGame() { return SetupRunner.gameLibrary(this); }
+
+    /** A developer's APK carries the PC-built game (libmain.so); a player's never does - it builds the game first. */
+    private boolean devApk() { return new File(getApplicationInfo().nativeLibraryDir, "libmain.so").isFile(); }
 
     @Override
     protected String[] getLibraries() {
         // libzoe_app.so (the touch controls' virtual gamepad) links libSDL3.so, so it loads after it
-        if (deviceGame().isFile()) return new String[] { "SDL3", "zoe_app" };
+        if (deviceGame().isFile() || !devApk()) return new String[] { "SDL3", "zoe_app" };
         return new String[] { "SDL3", "zoe_app", "main" };
     }
 
@@ -51,6 +54,13 @@ public class ZoeActivity extends SDLActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (!devApk() && !SetupRunner.isInstalled(this)) {
+            // not built yet (or by an older APK's kit): the setup first
+            super.onCreate(savedInstanceState);
+            startActivity(new Intent(this, SetupActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
+            return;
+        }
         // Before SDL loads the libraries: the game's Vulkan is libvulkan_zoe.so (the system driver, or the player's
         // Turnip in files/turnip/ through libadrenotools - vulkan_zoe.c reads XR_NATIVE_DIR / XR_HOST_ROOT)
         try {
@@ -885,8 +895,10 @@ public class ZoeActivity extends SDLActivity {
     static File turnipDir(Context ctx) { return new File(ctx.getFilesDir(), "turnip"); }
 
     /** The kept driver folders, by number. */
-    private File[] keptDrivers() {
-        File[] d = driversDir(this).listFiles(f -> f.isDirectory() && f.getName().matches("[0-9]+")
+    private File[] keptDrivers() { return keptDrivers(this); }
+
+    static File[] keptDrivers(Context ctx) {
+        File[] d = driversDir(ctx).listFiles(f -> f.isDirectory() && f.getName().matches("[0-9]+")
                                                   && new File(f, "meta.json").isFile());
         if (d == null) return new File[0];
         java.util.Arrays.sort(d, (a, b) -> Integer.compare(Integer.parseInt(a.getName()), Integer.parseInt(b.getName())));
@@ -911,7 +923,7 @@ public class ZoeActivity extends SDLActivity {
         } catch (Exception e) { return null; }
     }
 
-    private static String keptDriverName(File dir) {
+    static String keptDriverName(File dir) {
         String n = metaName(dir);
         if (n != null) return n;
         String lib = metaLib(dir);
@@ -1011,10 +1023,19 @@ public class ZoeActivity extends SDLActivity {
 
     /** A kept driver into turnip/ (a copy: removing the kept one later never breaks the one in use), then restart. */
     private void switchToKept(String slot) {
-        File src = new File(driversDir(this), slot), dst = turnipDir(this);
+        String err = activateKept(this, slot);
+        if (!err.isEmpty()) { message("Graphics driver", err); return; }
+        restartApp();
+        System.exit(0);
+    }
+
+    /** The kept driver drivers/<slot> made the one in use (a copy in turnip/ with driver.txt); "" or a sentence.
+     *  (The game picks its driver once per process: the caller restarts it - or, the setup, starts it after.) */
+    static String activateKept(Context ctx, String slot) {
+        File src = new File(driversDir(ctx), slot), dst = turnipDir(ctx);
         String lib = metaLib(src);
-        if (lib == null || !new File(src, lib).isFile()) { message("Graphics driver", "This driver package is incomplete. Please remove it and add it again."); return; }
-        File tmp = new File(getFilesDir(), "data/tmp/turnip_new");
+        if (lib == null || !new File(src, lib).isFile()) return "This driver package is incomplete. Please remove it and add it again.";
+        File tmp = new File(ctx.getFilesDir(), "data/tmp/turnip_new");
         deleteTree(tmp);
         try {
             copyTree(src, tmp);
@@ -1023,19 +1044,17 @@ public class ZoeActivity extends SDLActivity {
             }
         } catch (IOException e) {
             deleteTree(tmp);
-            message("Graphics driver", "The driver could not be installed (storage): " + e.getMessage());
-            return;
+            return "The driver could not be installed (storage): " + e.getMessage();
         }
         deleteTree(dst);
-        if (!tmp.renameTo(dst)) { deleteTree(tmp); message("Graphics driver", "The driver could not be installed (storage)."); return; }
+        if (!tmp.renameTo(dst)) { deleteTree(tmp); return "The driver could not be installed (storage)."; }
         Log.i(TAG, "[DRIVER] chosen: " + keptDriverName(src) + " (" + lib + ", kept " + slot + ")");
-        restartApp();
-        System.exit(0);
+        return "";
     }
 
     /** Turnip drivers run only on Adreno GPUs (Qualcomm SoCs); on any other GPU the game would end at its first
      *  Vulkan call. Android 12+ names the SoC maker; older: allowed. */
-    private static boolean maybeAdreno() {
+    static boolean maybeAdreno() {
         if (Build.VERSION.SDK_INT < 31) return true;
         String m = Build.SOC_MANUFACTURER;
         if (m == null || m.isEmpty() || m.equalsIgnoreCase("unknown")) return true;
@@ -1045,17 +1064,19 @@ public class ZoeActivity extends SDLActivity {
 
     /** An adrenotools .adpkg.zip (meta.json + the driver .so) the player picked, unpacked into the lowest free
      *  drivers/<n>/. Returns "" on success (slot[0] = the folder's name), else a sentence for the player. */
-    private String importDriver(android.net.Uri uri, String[] slot) {
+    private String importDriver(android.net.Uri uri, String[] slot) { return importDriver(this, uri, slot); }
+
+    static String importDriver(Context ctx, android.net.Uri uri, String[] slot) {
         if (!maybeAdreno())
             return "Turnip drivers work only on Adreno GPUs (Snapdragon). This device has a " + Build.SOC_MANUFACTURER
                    + " " + Build.SOC_MODEL + ". Please keep the system driver.";
-        File[] kept = keptDrivers();
+        File[] kept = keptDrivers(ctx);
         if (kept.length >= MAX_DRIVERS) return MAX_DRIVERS + " drivers are kept already - please remove one first.";
-        File tmp = new File(getFilesDir(), "data/tmp/driver_new");
+        File tmp = new File(ctx.getFilesDir(), "data/tmp/driver_new");
         deleteTree(tmp);
         tmp.mkdirs();
         String lib;
-        try (InputStream in = getContentResolver().openInputStream(uri);
+        try (InputStream in = ctx.getContentResolver().openInputStream(uri);
              java.util.zip.ZipInputStream z = new java.util.zip.ZipInputStream(in)) {
             java.util.zip.ZipEntry e;
             while ((e = z.getNextEntry()) != null) {
@@ -1093,12 +1114,12 @@ public class ZoeActivity extends SDLActivity {
         }
         java.util.Set<String> used = new java.util.HashSet<>();
         for (File k : kept) used.add(k.getName());
-        File[] all = driversDir(this).listFiles();                   // also half-made folders (no meta.json)
+        File[] all = driversDir(ctx).listFiles();                   // also half-made folders (no meta.json)
         if (all != null) for (File a : all) used.add(a.getName());
         int n = 1;
         while (used.contains(String.valueOf(n))) n++;
-        File dst = new File(driversDir(this), String.valueOf(n));
-        driversDir(this).mkdirs();
+        File dst = new File(driversDir(ctx), String.valueOf(n));
+        driversDir(ctx).mkdirs();
         if (!tmp.renameTo(dst)) { deleteTree(tmp); return "The driver could not be stored (storage)."; }
         slot[0] = dst.getName();
         Log.i(TAG, "[DRIVER] kept " + name + " (" + lib + ") as drivers/" + slot[0]);

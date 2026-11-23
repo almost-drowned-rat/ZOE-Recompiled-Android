@@ -30,3 +30,24 @@ target_compile_options(zoe_app PRIVATE -Wall -Wextra)
 target_link_options(zoe_app PRIVATE "-Wl,-z,max-page-size=16384" "-Wl,-soname,libzoe_app.so")
 
 add_custom_target(zoe_native ALL DEPENDS vulkan_zoe zoe_app main_hook hook_impl file_redirect_hook gsl_alloc_hook)
+
+# The setup's programs (SetupActivity; an app may exec only from nativeLibraryDir, so they ship as lib*_exe.so):
+# libpython_exe.so (python.org's Android CPython, embedded: the translation), libld_exe.so (clang's --ld-path: execs
+# B's liblld_exe.so as "ld.lld"), libzoe_run_exe.so (the device-built game as a program: the discs' unpacking).
+# -DPYTHON_PREFIX=<python.org Android package prefix> (libpython3.15.so + include/python3.15).
+if(NOT PYTHON_PREFIX)
+    message(FATAL_ERROR "-DPYTHON_PREFIX=<python.org Android package prefix> missing")
+endif()
+add_library(zoe_python SHARED IMPORTED)
+set_target_properties(zoe_python PROPERTIES IMPORTED_LOCATION "${PYTHON_PREFIX}/lib/libpython3.15.so"
+                      INTERFACE_INCLUDE_DIRECTORIES "${PYTHON_PREFIX}/include/python3.15")
+foreach(exe python_exe ld_exe run_exe)
+    add_executable(${exe} setup/${exe}.c)
+    target_link_options(${exe} PRIVATE "-Wl,-z,max-page-size=16384")
+endforeach()
+set_target_properties(python_exe PROPERTIES OUTPUT_NAME "libpython_exe" SUFFIX ".so")
+set_target_properties(ld_exe PROPERTIES OUTPUT_NAME "libld_exe" SUFFIX ".so")
+set_target_properties(run_exe PROPERTIES OUTPUT_NAME "libzoe_run_exe" SUFFIX ".so")
+target_link_libraries(python_exe PRIVATE zoe_python)
+target_link_libraries(run_exe PRIVATE dl)
+add_dependencies(zoe_native python_exe ld_exe run_exe)

@@ -10,8 +10,7 @@
 // kept in the same slots as the BACK menu's Graphics driver page). Quit / Back / the frame's X during the installation
 // ask first ("The installation is not finished. Quit anyway?").
 //
-// PREVIEW: this first version only pretends - the steps run on a timer, nothing is read, built or installed
-// (SetupActivity: the maintainer looks at it on the Odin before the real first-start build is wired in).
+// The steps themselves: SetupRunner (SetupActivity starts it and passes its progress here).
 // SPDX-License-Identifier: GPL-3.0-or-later
 package io.github.almostdrownedrat.zoe;
 
@@ -41,6 +40,7 @@ final class VistaSetupView extends View {
         void pickFile(int row);         // ROW_DISC / ROW_JA / ROW_SUBS / PICK_DRIVER
         void quit();
         void play();
+        void install();                 // Install pressed (the disc chosen): the activity starts SetupRunner
     }
 
     static final int ROW_DISC = 0, ROW_JA = 1, ROW_SUBS = 2, PICK_DRIVER = 3;
@@ -69,11 +69,7 @@ final class VistaSetupView extends View {
     private boolean driverByPlayer;
     private final List<String> driverChoices = new ArrayList<>();
 
-    // the pretend installation
-    private static final class Step { final String text; final float secs; Step(String t, float s) { text = t; secs = s; } }
-    private final List<Step> steps = new ArrayList<>();
-    private long startMs;
-    private float total, fraction;
+    private float fraction;
     private String stepText = "";
     private long animStart = SystemClock.uptimeMillis();
 
@@ -112,6 +108,9 @@ final class VistaSetupView extends View {
         }
         invalidate();
     }
+
+    /** The Turnip line chosen (a file picked), not the system driver. */
+    boolean driverFromFile() { return driverByPlayer; }
 
     /** BACK: a box open -> its "no"; installing -> ask; else quit. */
     void back() {
@@ -179,7 +178,7 @@ final class VistaSetupView extends View {
             case C_GO:
                 if (state == DONE) { host.play(); break; }
                 if (rowName[ROW_DISC].isEmpty()) {
-                    message("Please choose your " + GAME + " disc image (.iso, .chd) with Browse...", C_BROWSE0);
+                    message("Please choose your " + GAME + " disc image (.iso) with Browse...", C_BROWSE0);
                     break;
                 }
                 startInstall();
@@ -213,44 +212,55 @@ final class VistaSetupView extends View {
     }
 
     private void startInstall() {
-        steps.clear();
-        steps.add(new Step("Reading the disc", 3f));
-        steps.add(new Step("Checking the disc image", 1.5f));
-        if (!rowName[ROW_JA].isEmpty()) steps.add(new Step("Reading the Japanese disc", 2f));
-        steps.add(new Step("Translating the game's code", 5f));
-        steps.add(new Step("Compiling", 10f));
-        if (driverByPlayer) steps.add(new Step("Installing the graphics driver (" + driver + ")", 2f));
-        steps.add(new Step("Unpacking the disc into the game folder", 4f));
-        if (!rowName[ROW_SUBS].isEmpty()) steps.add(new Step("Copying the subtitles", 1f));
-        total = 0;
-        for (Step st : steps) total += st.secs;
-        startMs = SystemClock.uptimeMillis();
-        animStart = startMs;
+        animStart = SystemClock.uptimeMillis();
         state = INSTALLING;
         fraction = 0;
+        stepName = "";
+        stepText = "";
         focus = C_QUIT;
+        host.install();
     }
 
-    private void tick() {
+    // ---- from the setup (SetupRunner, on the UI thread) ------------------------------------------------------------
+
+    private String stepName = "";
+    private long stepStart;
+
+    /** A step and the whole setup's fraction. As the PC launcher: the step and its time so far, no estimate (the
+     *  maintainer: estimates only worry). */
+    void progress(String step, float f) {
         if (state != INSTALLING) return;
-        float t = (SystemClock.uptimeMillis() - startMs) / 1000f;
-        if (t >= total) {
-            state = DONE;
-            fraction = 1;
-            stepText = "Done";
-            focus = C_GO;
-            return;
-        }
-        float acc = 0;
-        int i = 0;
-        for (; i < steps.size(); i++) {
-            if (t < acc + steps.get(i).secs) break;
-            acc += steps.get(i).secs;
-        }
-        // as the PC launcher: the step and its time so far, no estimate (the maintainer: estimates only worry)
-        int so = (int) (t - acc);
-        stepText = steps.get(i).text + " - " + (so / 60) + ":" + String.format(java.util.Locale.ROOT, "%02d", so % 60);
-        fraction = t / total;
+        if (!step.equals(stepName)) { stepName = step; stepStart = SystemClock.uptimeMillis(); }
+        fraction = Math.max(fraction, Math.min(1, f));
+        invalidate();
+    }
+
+    void finished() {
+        state = DONE;
+        fraction = 1;
+        stepName = "Done";
+        stepText = "Done";
+        modal = M_NONE;
+        focus = C_GO;
+        invalidate();
+    }
+
+    void failed(String why, boolean wrongDisc) {
+        state = FORM;
+        fraction = 0;
+        stepName = "";
+        message(why, wrongDisc ? C_BROWSE0 : C_GO);
+        invalidate();
+    }
+
+    /** A line above the rows' intro (why the setup shows again), or "". */
+    void setNote(String n) { note = n == null ? "" : n; invalidate(); }
+    private String note = "";
+
+    private void tick() {
+        if (state != INSTALLING || stepName.isEmpty()) return;
+        int so = (int) ((SystemClock.uptimeMillis() - stepStart) / 1000);
+        stepText = stepName + " - " + (so / 60) + ":" + String.format(java.util.Locale.ROOT, "%02d", so % 60);
     }
 
     private Ctl find(int id) {
@@ -346,9 +356,9 @@ final class VistaSetupView extends View {
             case INSTALLING: return "The game is being built from your disc - this happens only once. Please keep the "
                                     + "app open; the device may get warm.";
             case DONE: return GAME + " is installed. Play starts the game - from now on the app starts it directly.";
-            default: return "Choose your " + GAME + " disc image (.iso, .chd), then Install. The game is built from it "
-                            + "once, on this device (the image is only read). The Japanese disc and the subtitle pack "
-                            + "are optional.";
+            default: return (note.isEmpty() ? "" : note + " ") + "Choose your " + GAME + " (USA) disc image (.iso), "
+                            + "then Install. The game is built from it once, on this device (the image is only read). "
+                            + "The Japanese disc and the subtitle pack are optional.";
         }
     }
 
@@ -439,7 +449,6 @@ final class VistaSetupView extends View {
         p.setTypeface(regular);
         p.setTextSize(10f * s);
         p.setColor(0xFF8A8A8A);
-        c.drawText("Preview - nothing is read, built or installed.", L, fy + FOOTER * s / 2 + 4 * s, p);
     }
 
     // the Aero-like glass frame with its caption and the red close box; returns nothing, adds C_CLOSE

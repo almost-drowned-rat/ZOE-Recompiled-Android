@@ -48,7 +48,9 @@ android {
         }
     }
     packaging {
-        jniLibs { useLegacyPackaging = true }
+        jniLibs { useLegacyPackaging = true }       // extracted: the setup's programs are exec()d from there
     }
+    // the setup kit's zips stored as they are (SetupRunner reads their length for the progress bar)
+    androidResources { noCompress += ['zip'] }
     lint { abortOnError = false }
 }
