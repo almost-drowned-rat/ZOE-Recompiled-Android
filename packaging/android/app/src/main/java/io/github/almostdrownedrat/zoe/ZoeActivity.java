@@ -28,10 +28,25 @@ public class ZoeActivity extends SDLActivity {
     private static final String TAG = "ZOE";
     private static final String GAME_TITLE = "Zone of the Enders";
 
+    /** The game the setup built on this device (M2): <files>/bin/libZOE_game.so - when it is there, SDL runs its
+     *  SDL_main instead of the APK's libmain.so. (An app may load code from its own private files; it may not exec.) */
+    private File deviceGame() { return new File(getFilesDir(), "bin/libZOE_game.so"); }
+
     @Override
     protected String[] getLibraries() {
         // libzoe_app.so (the touch controls' virtual gamepad) links libSDL3.so, so it loads after it
+        if (deviceGame().isFile()) return new String[] { "SDL3", "zoe_app" };
         return new String[] { "SDL3", "zoe_app", "main" };
+    }
+
+    @Override
+    protected String getMainSharedObject() {
+        File g = deviceGame();
+        if (g.isFile()) {
+            Log.i(TAG, "game: the device-built " + g + " (" + g.length() + " bytes)");
+            return g.getAbsolutePath();
+        }
+        return super.getMainSharedObject();
     }
 
     @Override
