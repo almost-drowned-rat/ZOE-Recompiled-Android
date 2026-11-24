@@ -592,7 +592,7 @@ SubtitlePack ReadSubtitlePack() {
     std::vector<std::filesystem::path> places;
     const std::string set = ps2host::Setting("subtitle_pack");
     if (!set.empty()) places.push_back(std::filesystem::u8path(set));
-    const std::filesystem::path here = ps2platform::ExeDir();
+    const std::filesystem::path here = ps2platform::RootDir();
     // (also without its extension: v0.8.2's launcher copied it so - by its content, the magic below)
     for (const std::filesystem::path& folder : {here / "game", here})
         for (const char* name : {"ZOE-subtitles.pak", "ZOE-subtitles"}) places.push_back(folder / name);
@@ -993,7 +993,7 @@ void DubOnDiscOpened() {
         return;
     }
     std::string path = ps2host::Setting("disc_ja");
-    const std::filesystem::path unpacked = ps2platform::ExeDir() / "game" / "disc_ja";
+    const std::filesystem::path unpacked = ps2platform::RootDir() / "game" / "disc_ja";
     Disc& ja = JapaneseDisc();
     Disc::File elf;
     // (the launcher's unpacked Japanese disc - the image needed only to unpack it, 2026-11-21)
@@ -1005,7 +1005,7 @@ void DubOnDiscOpened() {
     if (path != unpacked.string() && (!ja.Open(path) || !ja.Find("\\SLPM_650.19;1", &elf))) {
         // Moved (2026-11-20 issue 17): an image of it beside the game or in its "game" folder, by its content.
         std::string found;
-        const std::filesystem::path here = ps2platform::ExeDir();
+        const std::filesystem::path here = ps2platform::RootDir();
         for (const std::filesystem::path& folder : {here, here / "game"}) {
             std::error_code error;
             for (const auto& entry : std::filesystem::directory_iterator(folder, error)) {

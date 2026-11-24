@@ -21,10 +21,16 @@ own controls or touch buttons.
 
 ## Status
 
-**v0.8.5** - the same version as the Windows / Linux port it is built from
-([v0.8.5](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled/releases/tag/v0.8.5)). Download the APK
-from [Releases](https://github.com/almost-drowned-rat/ZOE-Recompiled-Android/releases) and install it (Android 10+,
-arm64). It is signed with the project's own key - every later update installs over it.
+**v0.5.0** - an app of its own, with its own version numbers. Based on
+[Zone of the Enders Recompiled v0.8.6](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled/releases/tag/v0.8.6)
+(Windows / Linux) and the toolkit [ps2recomp-option-p](https://github.com/almost-drowned-rat/ps2recomp-option-p)
+`ad3b491`. Download the APK from [Releases](https://github.com/almost-drowned-rat/ZOE-Recompiled-Android/releases)
+and install it (Android 10+, arm64). It is signed with the project's own key - every later update installs over it.
+
+Why the numbers changed: the first APK copied the desktop version (v0.8.5). That was a mistake - Android sometimes
+needs fixes of its own, and then the numbers no longer fit. So the app now counts on its own, starting at 0.5.0 while
+the desktop port is below 1.0; every release names the desktop version it is based on. The old v0.8.5 release was
+removed. The update installs normally over it and keeps your saves.
 
 Updates install over the previous version and keep your saves. To get them automatically, add this repository to
 [Obtainium](https://github.com/ImranR98/Obtainium) (`https://github.com/almost-drowned-rat/ZOE-Recompiled-Android`).
@@ -41,9 +47,9 @@ Updates install over the previous version and keep your saves. To get them autom
   ([`turnip_mrpurple_T30-toasted.adpkg.zip`](https://github.com/MrPurple666/purple-turnip/releases/tag/vturnip_mrpurple_T30-toasted.adpkg),
   Mesa Turnip 26.3.0, by MrPurple666). No driver comes with the app. With the Adreno 740's own driver, FSR upscaling
   drew the picture wrong in my tests.
-- Your own **Zone of the Enders (USA, SLUS-20148)** disc image (`.iso`)
+- Your own **Zone of the Enders (USA, SLUS-20148)** disc image (`.iso` or `.chd`)
 - Optional, for the **Japanese voices**: the Japanese disc image (**SLPM-65019**) **and** the subtitle pack
-  `ZOE-subtitles.pak` from the [PC release](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled/releases/tag/v0.8.5)
+  `ZOE-subtitles.pak` from the [PC release](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled/releases/tag/v0.8.6)
 - Free storage: about **8 GB** during the first start (each image is copied in and unpacked; the copies are deleted
   again), about **4 GB** after it. The build uses as many processor cores as the memory allows (about 1.4 GB
   each): less RAM only makes the first start slower.
@@ -132,8 +138,6 @@ drops now and then at the beginning and gets better the longer you play; the sha
 - The first-start kit inside the APK (`assets/setup`): made by `packaging/android/make_setup_assets.py` from the PC
   release's payload, the toolkit built for Android with the NDK (`games/zoe_us/port` with the NDK's CMake toolchain),
   an LLVM toolchain that runs on Android, the NDK's sysroot and libc++, and python.org's CPython for Android.
-- v0.8.5's kit carries one file newer than the PC release: the toolkit's `tools/translate.py` with a fallback for
-  Python builds without `multiprocessing` (Android); it goes into the toolkit for the next release.
 
 ## Credits and licences
 

@@ -10,3 +10,6 @@ file into the kit.
 
 To make the v0.8.5 kit's file: `git -C engine apply` the patch on 87b590a, then pass
 `--overlay <the patched tools/translate.py>=engine/tools/translate.py`.
+
+Since 0.5.0 (ZOE v0.8.6, engine ad3b491) the kit carries no patched files: the translate.py fork fallback is in the
+toolkit itself. The patch stays here only as the record of what v0.8.5's kit carried.

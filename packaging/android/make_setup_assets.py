@@ -182,7 +182,7 @@ def main(argv=None) -> int:
             subprocess.run([strip, "--strip-unneeded", dst], check=True)
     put(os.path.join(a.tree, "_deps/sdl3-build/libSDL3.so"), "libSDL3.so")
     def native(f):                      # (the jni build: its own targets at the top, libadrenotools' hooks in out/)
-        for d in ("", "out"):
+        for d in ("", "out", "chd2iso"):     # (chd2iso: the toolkit's engine/tools/chd2iso subdirectory)
             p = os.path.join(a.native, d, f)
             if os.path.isfile(p):
                 return p
