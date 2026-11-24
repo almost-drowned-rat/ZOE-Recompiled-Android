@@ -255,6 +255,58 @@ bool SpriteExtent(u32 object, float* lo, float* hi) {
     return true;
 }
 
+// A sprite placed by its vertices (place 0,0, the corners in the vertices, 4 of them, not origin-centred) and its
+// vertex box; false for any other.
+bool VertexPlaced(u32 object, float* x0, float* x1, float* y0, float* y1) {
+    if (!CameraOk(object)) return false;
+    const u16 flags = u16(ps2host::GuestMemory().Read(object + 2u, 2));
+    if ((flags & 0x8000u) || (flags & 0x20u) || (flags & 0x02u)) return false;
+    if (F32(Read32(object + 0x50u)) != 0.0f || F32(Read32(object + 0x54u)) != 0.0f || Read32(object + 0x8Cu) != 4u)
+        return false;
+    const u32 buffer = Read32(object + (ps2host::GuestMemory().Read(object + 0x92u, 1) ? 0x94u : 0x98u));
+    if (!CameraOk(buffer)) return false;
+    *x0 = *y0 = 1e9f;
+    *x1 = *y1 = -1e9f;
+    for (u32 v = 0; v < 4; ++v) {
+        const float x = F32(Read32(buffer + v * 0x30u + 0x20u)), y = F32(Read32(buffer + v * 0x30u + 0x24u));
+        if (!(x > -4096.0f && x < 4096.0f && y > -4096.0f && y < 4096.0f)) return false;
+        *x0 = std::min(*x0, x), *x1 = std::max(*x1, x), *y0 = std::min(*y0, y), *y1 = std::max(*y1, y);
+    }
+    return true;
+}
+
+// The centre in x of the frame a vertex-placed sprite is part of (the maintainer 2026-11-24, his session at 16:9:
+// a squad box's four lines and its "Lv" digits are each their own sprite - narrowed each about its own centre the
+// lines kept their places and only got shorter, the box's corners open the wider the picture). The pieces of one
+// frame are neighbours in the HUD's object list (+0x08 next, +0x0C previous: 0x0055A640.. top, bottom, right, left,
+// the digits just before) and touch each other: the pieces within 12 links either way, gathered while they touch
+// what is gathered (2 columns / rows apart at most) - another squad's box, apart on the screen, is not taken in.
+float VertexFrameCentre(u32 object, float x0, float x1, float y0, float y1) {
+    struct Piece { float x0, x1, y0, y1; bool in; };
+    Piece pieces[25];
+    int count = 0;
+    for (u32 link : {0x08u, 0x0Cu}) {
+        u32 at = object;
+        for (int step = 0; step < 12; ++step) {
+            at = CameraOk(at) ? Read32(at + link) : 0u;
+            if (!at || at == object || !CameraOk(at)) break;
+            Piece p{};
+            if (VertexPlaced(at, &p.x0, &p.x1, &p.y0, &p.y1) && count < 24) pieces[count++] = p;
+        }
+    }
+    float lo = x0, hi = x1, top = y0, bottom = y1;
+    for (bool grew = true; grew;) {
+        grew = false;
+        for (int i = 0; i < count; ++i) {
+            Piece& p = pieces[i];
+            if (p.in || p.x0 > hi + 2.0f || p.x1 < lo - 2.0f || p.y0 > bottom + 2.0f || p.y1 < top - 2.0f) continue;
+            p.in = grew = true;
+            lo = std::min(lo, p.x0), hi = std::max(hi, p.x1), top = std::min(top, p.y0), bottom = std::max(bottom, p.y1);
+        }
+    }
+    return 0.5f * (lo + hi);
+}
+
 // ---- SUBTITLE LANGUAGE JAPANESE (the maintainer 2026-11-21): the subtitle's text object is the jimaku task's
 // (STRM_PLAYJIMAKU) at its +0xA0 - the task's +0x40 its channel's block (count, bytes, 0, 0, then each cue: start,
 // end, text bytes, speaker, text), +0x74 / +0x78 the cue shown's start / end (found 2026-11-21 in a RAM dump: block
@@ -1611,7 +1663,19 @@ void HudSpriteDraw(lifted::Context& c) {
     // place (+0x50) and its axes' x (+0x20, +0x30) changed for the packet's build alone, put back after.
     const float s = (4.0f / 3.0f) / ps2host::WideAspect();
     const u16 flags = u16(ps2host::GuestMemory().Read(object + 2u, 2));
-    if (s >= 0.999f || !CameraOk(object) || (flags & 0x02u) || !ShowsWide()) {
+    // ZOE_HUD_PLAIN=1 (a scripted look): the HUD as the game draws it, nothing placed for the wide picture.
+    // ZOE_HUD_PLAIN_FLAGS=<hex>: only the sprites with all these flags so (finding a piece).
+    static const bool plain = std::getenv("ZOE_HUD_PLAIN") != nullptr;
+    static const u16 plain_flags = std::getenv("ZOE_HUD_PLAIN_FLAGS")
+                                       ? u16(std::strtoul(std::getenv("ZOE_HUD_PLAIN_FLAGS"), nullptr, 16)) : 0;
+    static const std::string plain_objects = std::getenv("ZOE_HUD_PLAIN_OBJ") ? std::getenv("ZOE_HUD_PLAIN_OBJ") : "";
+    bool plain_object = false;                      // ZOE_HUD_PLAIN_OBJ=<hex addresses>: only these so
+    if (!plain_objects.empty()) {
+        char object_hex[16];
+        std::snprintf(object_hex, sizeof object_hex, "%08X", unsigned(object));
+        plain_object = plain_objects.find(object_hex) != std::string::npos;
+    }
+    if (plain || plain_object || (plain_flags && (flags & plain_flags) == plain_flags) || s >= 0.999f || !CameraOk(object) || (flags & 0x02u) || !ShowsWide()) {
         F_00459908(c);
         return;
     }
@@ -1620,8 +1684,63 @@ void HudSpriteDraw(lifted::Context& c) {
     float w = CameraOk(buffer) ? F32(Read32(buffer + 0x50u)) : 0.0f;
     if (!(w >= 0.0f && w <= 512.0f)) w = 0.0f;
     float to = x;
-    if (flags & 0x20u) {
+    float axis_scale = s;                           // the piece's own width S times (but a line a column wide)
+    // An in-game scene's HUD keeps its 4:3 layout about the centre (the maintainer 2026-11-24, after comparing it
+    // with a wide placing in his session: the cockpit console's mirrored halves reach past both edges - 0x005B4430
+    // at 312 to 661, 0x005B2AC0 at 200 back to -161 - and the zones tore it apart; "4:3 looks better, 4:3 is enough
+    // for the scenes"). A scene: 3D shown without the gameplay HUD's energy bar (its sprites at 40,403, drawn every
+    // gameplay frame) in the last ten frames.
+    static u32 gameplay_hud_frame = 0;
+    const u32 frame_now = Read32(kFrameCounter);
+    if (x == 40.0f && F32(Read32(object + 0x54u)) == 403.0f) gameplay_hud_frame = frame_now;
+    const bool scene = Shows3d() && frame_now - gameplay_hud_frame > 10u;
+    // A frame the 3D view places by its vertices (place 0,0, the corners in the vertices, flag 0x20 not set): the
+    // squad box ("Lv.1" around an enemy group: four lines + its digits) and its kind (ZOE #1, reopened 2026-11-24:
+    // at 16:9 the box stood ~230 px left of its squad - the zone rule took x 0 for the left edge and moved the
+    // whole box by S x). The wide camera already put it where its squad is: kept about its centre, only narrowed
+    // by S, as the target boxes in GS coordinates (session_20261124_133249_issue1_area, frame 5040: 0x006E3C40..
+    // 0x006E4750, x 382..432.6, the box 51 columns wide at any place). Every such sprite in the sessions moves
+    // with the view (0x006D3D60.. 0x006DB350: the pickups' markers and the other squads' boxes); none is a fixed
+    // HUD piece, which have their place in +0x50.
+    float lo = 0.0f, hi = 0.0f;
+    const bool placed_by_vertices = Shows3d() && x == 0.0f && F32(Read32(object + 0x54u)) == 0.0f &&
+                                    !(flags & 0x8000u) && Read32(object + 0x8Cu) == 4u &&
+                                    SpriteExtent(object, &lo, &hi) && hi > -512.0f && lo < 1024.0f &&
+                                    hi - lo < 0.9f * 512.0f;   // (also past an edge: 0x006DB350 at x 542)
+    if ((flags & 0x20u) && (std::fabs(F32(Read32(object + 0x24u))) > 0.01f ||
+                            std::fabs(F32(Read32(object + 0x30u))) > 0.01f)) {
+        // A turned piece in GS coordinates (the markers turning round the player's frame, 0x007046E0.. at 60, -60
+        // and 180 degrees): its axes' x narrowed, the game's turn of it went wrong - one of them stood as a slash
+        // at the bottom left, over the energy bar, at every wide ratio (the maintainer 2026-11-24). As the game
+        // draws it: the wide camera placed it already.
+        F_00459908(c);
+        return;
+    } else if (flags & 0x20u) {
         to = x;                                     // GS coordinates: the wide camera placed it
+    } else if (scene) {
+        if (w >= 0.9f * 512.0f) {
+            F_00459908(c);                          // the whole width (an overlay, a fade): as it is
+            return;
+        }
+        to = 256.0f + s * (x - 256.0f);             // the scene's HUD in its 4:3 layout about the centre
+    } else if (placed_by_vertices) {
+        // Its frame's centre where it was (all of a squad box's pieces about the box's centre), its width S times.
+        float x0 = lo, x1 = hi, y0 = 0.0f, y1 = 0.0f;
+        const float centre = VertexPlaced(object, &x0, &x1, &y0, &y1) ? VertexFrameCentre(object, x0, x1, y0, y1)
+                                                                      : 0.5f * (lo + hi);
+        to = x + centre * (1.0f - s);
+        if (x1 - x0 <= 2.0f) {
+            // A line a column wide (the box's sides): narrowed it went under a pixel and the raster dropped it -
+            // one side of each box gone (16:9 the right, 21:9 the left). Its place follows the box, its width stays.
+            const float own = 0.5f * (x0 + x1);
+            to = x + (1.0f - s) * (centre - own);
+            axis_scale = 1.0f;
+        }
+    } else if (x == 256.0f && w > 0.0f && w < 256.0f && Shows3d()) {
+        // A half anchored at the screen's centre (the cockpit panel: mirrored pieces at x 256, the left one's
+        // vertices at -121, the right one's at +119 - ZOE #1, reopened 2026-11-24): by the zones the right half
+        // went to the right edge's (+64 columns at 16:9, ~240 px) while the left stayed. Both about the centre.
+        to = 256.0f;
     } else if (w >= 0.9f * 512.0f || (x == 256.0f && w >= 256.0f)) {
         F_00459908(c);                              // the whole width: as it is
         return;
@@ -1637,7 +1756,7 @@ void HudSpriteDraw(lifted::Context& c) {
         else to = 256.0f + s * (x - 256.0f);
     }
     const u32 saved[3] = {Read32(object + 0x50u), Read32(object + 0x20u), Read32(object + 0x30u)};
-    const u32 wrote[3] = {Bits(to), Bits(F32(saved[1]) * s), Bits(F32(saved[2]) * s)};
+    const u32 wrote[3] = {Bits(to), Bits(F32(saved[1]) * axis_scale), Bits(F32(saved[2]) * axis_scale)};
     Write32(object + 0x50u, wrote[0]);
     Write32(object + 0x20u, wrote[1]);
     Write32(object + 0x30u, wrote[2]);

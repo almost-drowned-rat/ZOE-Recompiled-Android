@@ -1,0 +1,158 @@
+{
+  "$schema": "https://recomplauncher.com/schema/recomplauncher.json",
+  "format": 1,
+  "name": "Zone of the Enders Recompiled",
+  "repo": "almost-drowned-rat/ZoneOfTheEnders-Recompiled",
+  "inputs": [
+    {
+      "id": "game",
+      "label": "Your disc image of Zone of the Enders for the PS2, USA release (SLUS_201.48) - .chd or .iso",
+      "formats": [{ "type": "file", "extensions": ["chd", "iso"] }],
+      "check": { "iso9660": "SLUS_201.48" },
+      "dumps": [{ "name": "Zone of the Enders (USA)", "crc32": "5b57ab85", "size": 2063794176 }]
+    },
+    {
+      "id": "disc_ja",
+      "label": "Optional: your disc image of the Japanese release (SLPM_650.19), for the Japanese voices - .chd or .iso",
+      "role": "update",
+      "optional": true,
+      "formats": [{ "type": "file", "extensions": ["chd", "iso"] }],
+      "check": { "iso9660": "SLPM_650.19" },
+      "dumps": [{ "name": "Zone of the Enders: Z.O.E (Japan)", "crc32": "730cfcce", "size": 2108129280 }]
+    },
+    {
+      "id": "subtitles",
+      "label": "Optional: the subtitle pack ZOE-subtitles.pak (a download of its own on the release page)",
+      "role": "update",
+      "optional": true,
+      "formats": [{ "type": "file", "extensions": ["pak"] }]
+    }
+  ],
+  "prepare": {
+    "program": ["zoe_launcher.exe", "ZOE-x86_64.AppImage", "zoe_launcher"],
+    "args": ["--image={input:game}", "--extra={input:disc_ja}", "--file={input:subtitles}", "--go", "--no-start"],
+    "env": { "RECOMP_NO_DIALOGS": "1" },
+    "label": "Unpacking your disc, translating and compiling the game for your PC (a few minutes, only once)",
+    "keeps_copy": true,
+    "done": ["{install}/data/build/stamp.txt", "{install}/game/disc/disc.idx"]
+  },
+  "start": {
+    "program": ["zoe_launcher.exe", "ZOE-x86_64.AppImage", "zoe_launcher"]
+  },
+  "config": [
+    {
+      "id": "main",
+      "format": "ini",
+      "file": [{ "path": "{install}/pc_settings.ini" }]
+    }
+  ],
+  "folders": {
+    "saves": [{ "path": "{install}/memcard" }],
+    "logs": [{ "path": "{install}/data/logs" }]
+  },
+  "saves": ["{install}/memcard"],
+  "system": {
+    "windows": { "version": "10", "graphics": { "vulkan": "1.3" } },
+    "linux": { "glibc": "2.35", "graphics": { "vulkan": "1.3" } }
+  },
+  "settings": [
+    {
+      "id": "display_mode", "label": "Display mode",
+      "help": "Fullscreen gives the game the screen to itself, borderless lets you switch apps quickly, windowed remembers its size and place. Alt+Enter switches in the game.",
+      "choices": [
+        { "label": "Fullscreen", "set": { "fullscreen": "on", "fullscreen_mode": "fullscreen" } },
+        { "label": "Borderless", "set": { "fullscreen": "on", "fullscreen_mode": "borderless" } },
+        { "label": "Windowed", "set": { "fullscreen": "off" } }
+      ]
+    },
+    {
+      "id": "aspect", "label": "Aspect ratio",
+      "help": "The game's own wide picture: you see more of the world at the sides, nothing is stretched. 4:3 is the original.",
+      "choices": [
+        { "label": "4:3", "set": { "aspect": "4:3" } },
+        { "label": "16:9", "set": { "aspect": "16:9" } },
+        { "label": "16:10", "set": { "aspect": "16:10" } },
+        { "label": "21:9", "set": { "aspect": "21:9" } }
+      ],
+      "defaults": { "aspect": "4:3" }
+    },
+    {
+      "id": "stretch_cutscenes", "label": "Stretch cutscenes",
+      "help": "With a wide aspect ratio: movies fill the picture (stretched) instead of 4:3 between bars.",
+      "choices": [
+        { "label": "Off", "set": { "stretch_cutscenes": "off" } },
+        { "label": "On", "set": { "stretch_cutscenes": "on" } }
+      ],
+      "defaults": { "stretch_cutscenes": "off" }
+    },
+    {
+      "id": "field_of_view", "label": "Field of view",
+      "help": "How much of the world the camera takes in.",
+      "choices": [
+        { "label": "Original", "set": { "field_of_view": "0" } },
+        { "label": "+5", "set": { "field_of_view": "5" } },
+        { "label": "+10", "set": { "field_of_view": "10" } },
+        { "label": "+15", "set": { "field_of_view": "15" } },
+        { "label": "+20", "set": { "field_of_view": "20" } },
+        { "label": "+25", "set": { "field_of_view": "25" } },
+        { "label": "+30", "set": { "field_of_view": "30" } }
+      ],
+      "defaults": { "field_of_view": "0" }
+    },
+    {
+      "id": "vsync", "label": "V-sync",
+      "help": "Waits for the screen's refresh: no tearing.",
+      "choices": [
+        { "label": "On", "set": { "vsync": "on" } },
+        { "label": "Off", "set": { "vsync": "off" } }
+      ]
+    },
+    {
+      "id": "antialiasing", "label": "Antialiasing",
+      "help": "Smoother edges. SSAA draws the picture larger and costs the most.",
+      "choices": [
+        { "label": "Off", "set": { "antialiasing": "off" } },
+        { "label": "FXAA", "set": { "antialiasing": "fxaa" } },
+        { "label": "SMAA", "set": { "antialiasing": "smaa" } },
+        { "label": "SSAA 2x", "set": { "antialiasing": "ssaa2" } },
+        { "label": "SSAA 4x", "set": { "antialiasing": "ssaa4" } }
+      ],
+      "defaults": { "antialiasing": "off" }
+    },
+    {
+      "id": "anisotropic", "label": "Anisotropic filter",
+      "help": "Textures seen at a flat angle stay sharp.",
+      "choices": [
+        { "label": "Off", "set": { "anisotropic": "off" } },
+        { "label": "2x", "set": { "anisotropic": "2" } },
+        { "label": "4x", "set": { "anisotropic": "4" } },
+        { "label": "8x", "set": { "anisotropic": "8" } },
+        { "label": "16x", "set": { "anisotropic": "16" } }
+      ],
+      "defaults": { "anisotropic": "off" }
+    },
+    {
+      "id": "upscaling", "label": "Upscaling",
+      "help": "A picture drawn smaller than the window: filtered up, or AMD FSR 1 (sharper edges).",
+      "choices": [
+        { "label": "Bilinear", "set": { "upscaling": "linear" } },
+        { "label": "FSR", "set": { "upscaling": "fsr1" } }
+      ],
+      "defaults": { "upscaling": "linear" }
+    },
+    {
+      "id": "texture_filtering", "label": "Texture filtering", "advanced": true,
+      "help": "Accurate filters textures exactly as the PS2, Fast by the graphics card (quicker), Auto picks.",
+      "choices": [
+        { "label": "Auto", "set": { "texture_filtering": "auto" } },
+        { "label": "Accurate", "set": { "texture_filtering": "accurate" } },
+        { "label": "Fast", "set": { "texture_filtering": "fast" } }
+      ],
+      "defaults": { "texture_filtering": "auto" }
+    }
+  ],
+  "actions": [
+    { "id": "saves", "label": "Memory card", "help": "The game's saves.", "open": "saves" },
+    { "id": "logs", "label": "Logs", "help": "What the last runs did (useful in a bug report).", "open": "logs" }
+  ]
+}

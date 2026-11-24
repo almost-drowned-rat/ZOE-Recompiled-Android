@@ -20,7 +20,7 @@ and the Japanese voices with subtitles in English, French, German, Italian, Span
   ahead of time; the picture is drawn with **Vulkan**.
 - **Built from your own disc on your PC** - one first start of about 10 minutes; after it, the `game` folder is all
   you need.
-- **Windows and Linux** (`ZOE.exe`, `ZOE-x86_64.AppImage`) - and **Android** as an app of its own:
+- **Windows and Linux** (`zoe_launcher.exe`, `ZOE-x86_64.AppImage`) - and **Android** as an app of its own:
   [ZOE Recompiled for Android](https://github.com/almost-drowned-rat/ZOE-Recompiled-Android).
 - **Higher resolutions** (up to 5x), **widescreen** 16:9 / 16:10 / 21:9 (widened, never stretched), field of view.
 - **Antialiasing** (FXAA, SMAA, SSAA 2x / 4x), anisotropic filter, bloom, FSR 1 upscaling.
@@ -80,15 +80,16 @@ and will change, and these are numbers from one machine and one scene set.
 
 ## Getting started
 
-1. Download `ZOE.exe` (Windows) or `ZOE-x86_64.AppImage` (Linux) from the [Releases](../../releases) page and put it
-   in a folder you can write to (not *Program Files*) - the game keeps its saves and settings beside it. On Linux,
+1. Download `zoe_launcher.exe` (Windows) or `ZOE-x86_64.AppImage` (Linux) from the [Releases](../../releases) page
+   and put it in a folder you can write to (not *Program Files*) - the game keeps its saves and settings in that
+   folder. (`ZOE-windows-x86_64.zip` is the same launcher with `recomplauncher.json`, for RecompLauncher.) On Linux,
    make it executable (`chmod +x ZOE-x86_64.AppImage`, or the file's properties); if it does not start because
    your system has no FUSE, start it as `./ZOE-x86_64.AppImage --appimage-extract-and-run`. Optional:
    `ZOE-subtitles.pak` from the same page, my own subtitle translations (see *Languages*).
-2. Start it. A small window asks for your disc image (and, if you like, the Japanese one and the subtitle pack) and
-   the folder the game is set up in.
-3. Press **Go**. The first start translates and compiles the game and **unpacks your discs into its `game`
-   folder** - the US disc whole, of the Japanese disc only what the Japanese voices need. From then on the game
+2. Start it - it is the only program on top of the folder, now and later. A small window asks for your disc image
+   (and, if you like, the Japanese one and the subtitle pack) and the folder the game is set up in.
+3. Press **Go**. The first start translates and compiles the game (into the `data` folder) and **unpacks your discs
+   into its `game` folder** - the US disc whole, of the Japanese disc only what the Japanese voices need. From then on the game
    reads everything from there: your disc images are needed only this once (they are only read, never changed or
    deleted). You can close the window while this runs: it asks first, then stops cleanly, and the next start
    begins again from the start.
@@ -122,7 +123,7 @@ Up / down chooses a line, left / right changes it, **Triangle** sets a line back
 - With your Japanese disc image **and** the subtitle pack, **VOICES** offers the original Japanese voice cast, on the
   Japanese lines' timing; the movies with speech come in their Japanese version. Without the pack there are no
   Japanese voices.
-- **The subtitle pack** (`ZOE-subtitles.pak`, a download of its own; beside `ZOE.exe` or chosen in the setup window)
+- **The subtitle pack** (`ZOE-subtitles.pak`, a download of its own; chosen in the setup window, or in the game's `game` folder)
   holds my own translations, and they follow the voices you choose:
   - with the Japanese voices: a new translation from the Japanese into English, French, German, Italian and Spanish,
     so the subtitles say what the Japanese cast says - and **Japanese** subtitles (the Japanese disc's own lines);
@@ -137,17 +138,21 @@ Up / down chooses a line, left / right changes it, **Triangle** sets a line back
 - Alt+Enter switches between window and fullscreen, F1 shows or hides the performance overlay (FPS, frame time, game speed - 100 % = as fast as on the console).
 
 ### Texture packs
-Put a texture pack in a folder inside `textures` beside the game; TEXTURES in RECOMP OPTIONS chooses it.
+Put a texture pack in a folder inside `textures` in the game's folder; TEXTURES in RECOMP OPTIONS chooses it.
 
-## Files beside the game
+## Files in the game's folder
 
 | File | What it is |
 |---|---|
+| `zoe_launcher.exe` | start here (on Linux the AppImage) |
 | `game\` (`game/` on Linux) | your discs, unpacked (`disc`, `disc_ja`) and the subtitle pack - keep it as your backup |
+| `data\` | the built game and everything the launcher made; `data\logs\` holds what the last run did - please attach it to a bug report |
 | `pc_settings.ini` | your settings |
 | `memcard\` | your memory card: the game's saves |
-| `*.log` | what the last run did - please attach it to a bug report |
 | `crash reports\` | after a crash: a zip with the log, your settings and the system's details - attach it to an issue |
+
+A folder of an earlier version (`ZOE.exe`, `zoe_us.exe` on top) is updated in place: put `zoe_launcher.exe` into it
+and start it - your saves and settings stay, the old programs are removed.
 
 ## Known issues
 
