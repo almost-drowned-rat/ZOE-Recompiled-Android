@@ -26,6 +26,9 @@ own controls or touch buttons.
 from [Releases](https://github.com/almost-drowned-rat/ZOE-Recompiled-Android/releases) and install it (Android 10+,
 arm64). It is signed with the project's own key - every later update installs over it.
 
+Updates install over the previous version and keep your saves. To get them automatically, add this repository to
+[Obtainium](https://github.com/ImranR98/Obtainium) (`https://github.com/almost-drowned-rat/ZOE-Recompiled-Android`).
+
 | Device | Chip / GPU | Driver | Result |
 |---|---|---|---|
 | AYN Odin 2 Portal (Android 13) | Snapdragon 8 Gen 2 / Adreno 740 | purple-turnip T30 | runs; first start ~12 min; boss fight ~59 fps |
