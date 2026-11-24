@@ -188,7 +188,7 @@ def main(argv=None) -> int:
                 return p
         raise SystemExit("--native: no %s" % f)
     for f in ("libzoe_app.so", "libvulkan_zoe.so", "libpython_exe.so", "libld_exe.so", "libzoe_run_exe.so",
-              "libmain_hook.so", "libhook_impl.so", "libfile_redirect_hook.so", "libgsl_alloc_hook.so"):
+              "libchd2iso_exe.so", "libmain_hook.so", "libhook_impl.so", "libfile_redirect_hook.so", "libgsl_alloc_hook.so"):
         put(native(f), f)
     put(os.path.join(a.python, "lib/libpython3.15.so"), "libpython3.15.so")
     put(os.path.join(a.python, "lib/libcrypto_python.so"), "libcrypto_python.so")

@@ -51,3 +51,21 @@ set_target_properties(run_exe PROPERTIES OUTPUT_NAME "libzoe_run_exe" SUFFIX ".s
 target_link_libraries(python_exe PRIVATE zoe_python)
 target_link_libraries(run_exe PRIVATE dl)
 add_dependencies(zoe_native python_exe ld_exe run_exe)
+
+# libchd2iso_exe.so (2026-11-24): a CHD disc image as the .iso the translation's tools read (the PC launcher's
+# chd_job; the game reads a CHD itself). Linked against the engine's libchdr from the Android engine build:
+# -DLIBCHDR_BUILD=<engine build>/libchdr (libchdr-static.a, deps/...) -DLIBCHDR_INCLUDE=<engine>/host/third_party/
+# libchdr/include.
+if(NOT LIBCHDR_BUILD OR NOT LIBCHDR_INCLUDE)
+    message(FATAL_ERROR "-DLIBCHDR_BUILD=<engine build>/libchdr / -DLIBCHDR_INCLUDE=<libchdr include> missing")
+endif()
+add_executable(chd2iso_exe setup/chd2iso_exe.c)
+set_target_properties(chd2iso_exe PROPERTIES OUTPUT_NAME "libchd2iso_exe" SUFFIX ".so")
+target_include_directories(chd2iso_exe PRIVATE ${LIBCHDR_INCLUDE})
+file(GLOB CHD2ISO_LZMA "${LIBCHDR_BUILD}/deps/lzma-*/libchdr-lzma.a")
+file(GLOB CHD2ISO_MINIZ "${LIBCHDR_BUILD}/deps/miniz-*/libminiz.a")
+file(GLOB CHD2ISO_ZSTD "${LIBCHDR_BUILD}/deps/zstd-*/libzstd.a")
+target_link_libraries(chd2iso_exe PRIVATE "${LIBCHDR_BUILD}/libchdr-static.a" ${CHD2ISO_LZMA} ${CHD2ISO_MINIZ}
+                      ${CHD2ISO_ZSTD} m)
+target_link_options(chd2iso_exe PRIVATE "-Wl,-z,max-page-size=16384")
+add_dependencies(zoe_native chd2iso_exe)

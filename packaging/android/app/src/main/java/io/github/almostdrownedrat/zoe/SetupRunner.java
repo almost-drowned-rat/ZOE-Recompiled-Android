@@ -4,7 +4,10 @@
 //
 //   Preparing the tools      assets/setup/{python,tools,toolchain}.zip -> <files>/setup/ (make_setup_assets.py)
 //   Copying the disc image   the picked document -> <files>/setup/disc.iso (a child process cannot open the
-//                            picker's document by path; the copy is deleted when the disc is unpacked)
+//                            picker's document by path; the copy is deleted when the disc is unpacked). A CHD
+//                            (2026-11-24): copied as disc.chd, then read into disc.iso by libchd2iso_exe.so for the
+//                            translation's tools (the PC launcher's disc_from_chd.iso); the Japanese disc stays a
+//                            CHD - the game reads it itself
 //   Checking the disc image  lift.txt "check" (exit 3: not the game's disc)
 //   Translating              lift.txt's other lines (python = libpython_exe.so)
 //   Compiling, Linking       build.txt (clang = libclang_exe.so, lld through libld_exe.so) -> libZOE_game.so
@@ -146,10 +149,11 @@ final class SetupRunner implements Runnable {
     /** After a failure: the big files gone (the disc copies, the build), the unpacked tools kept for a retry. */
     private void leftovers() {
         if (!S.isDirectory()) return;
-        new File(S, "disc.iso").delete();
-        new File(S, "disc_ja.iso").delete();
-        new File(S, "disc.iso.part").delete();
-        new File(S, "disc_ja.iso.part").delete();
+        for (String n : new String[] { "disc.iso", "disc_ja.iso", "disc.chd", "disc_ja.chd" }) {
+            new File(S, n).delete();
+            new File(S, n + ".part").delete();
+            new File(S, n + ".progress").delete();
+        }
         new File(S, "libZOE_game.so").delete();
         File log = new File(S, "setup.log");
         // the failed compilers' messages into the setup's log (the per-file logs go with the build)
@@ -186,8 +190,10 @@ final class SetupRunner implements Runnable {
         float sum = tTools + tCopy + tCheck + tLift + tCc + tLink + tDrv + tUnpack + tJa + tSubs, at = 0;
 
         File log = new File(S, "setup.log");
-        // room: the disc image's copy, the build (~1.5 GB at its largest) and the unpacked disc
-        long need = size(choice.disc) * 2 + (1500L << 20);
+        // room: the disc image's copy, the build (~1.5 GB at its largest) and the unpacked disc; a CHD's .iso is up
+        // to ~1.5x its size on top of it (the CHD is deleted only after its .iso is read)
+        boolean chd = isChd(choice.disc);
+        long need = size(choice.disc) * (chd ? 4 : 2) + (1500L << 20);
         if (files.getUsableSpace() < need)
             throw new Failed("Not enough free storage: the setup needs about " + (need >> 30) + " GB free ("
                              + (files.getUsableSpace() >> 20) + " MB free now).");
@@ -211,10 +217,17 @@ final class SetupRunner implements Runnable {
         new File(S, "tmp").mkdirs();
         at += tTools;
 
-        // 2. the disc image
+        // 2. the disc image (a CHD: copied, then read into the .iso the tools read)
         phase("Copying the disc image", at / sum, tCopy / sum, 0);
         File iso = new File(S, "disc.iso");
-        copyUri(choice.disc, iso, f -> say("Copying the disc image", f));
+        if (chd) {
+            File c = new File(S, "disc.chd");
+            copyUri(choice.disc, c, f -> say("Copying the disc image", f * 0.5f));
+            chdToIso(c, iso, log, f -> say("Reading the disc image (CHD)", 0.5f + f * 0.5f));
+            c.delete();
+        } else {
+            copyUri(choice.disc, iso, f -> say("Copying the disc image", f));
+        }
         at += tCopy;
 
         // 3. check + 4. translate (lift.txt: name, python's arguments)
@@ -286,7 +299,7 @@ final class SetupRunner implements Runnable {
         // 9. the Japanese disc (optional): only what the port reads of it
         if (ja) {
             phase("Copying the Japanese disc", at / sum, tJa / sum, 0);
-            File isoJa = new File(S, "disc_ja.iso");
+            File isoJa = new File(S, isChd(choice.discJa) ? "disc_ja.chd" : "disc_ja.iso");   // the game reads a CHD
             copyUri(choice.discJa, isoJa, f -> say("Copying the Japanese disc", f * 0.5f));
             say("Unpacking the second disc", 0.5f);
             unpack(game, "--unpack-extra", isoJa, new File(gameDir, "disc_ja"), discDir, log, "Unpacking the second disc");
@@ -514,6 +527,41 @@ final class SetupRunner implements Runnable {
             if (c != null && c.moveToFirst() && !c.isNull(0)) return c.getLong(0);
         } catch (Exception ignored) { }
         return 0;
+    }
+
+    /** A CHD image (its header's "MComprHD"), whatever its name says. */
+    private boolean isChd(Uri u) {
+        if (u == null) return false;
+        byte[] m = new byte[8];
+        try (InputStream in = ctx.getContentResolver().openInputStream(u)) {
+            int n = 0, r;
+            while (in != null && n < 8 && (r = in.read(m, n, 8 - n)) > 0) n += r;
+            return n == 8 && new String(m, java.nio.charset.StandardCharsets.US_ASCII).equals("MComprHD");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /** A CHD's sectors as an .iso (libchd2iso_exe.so; <iso>.progress = "<done> <total>"). */
+    private void chdToIso(File chd, File iso, File log, Frac f) throws Exception {
+        File prog = new File(iso.getPath() + ".progress");
+        prog.delete();
+        List<String> cmd = new ArrayList<>();
+        cmd.add(new File(native_, "libchd2iso_exe.so").getPath());
+        cmd.add(chd.getPath());
+        cmd.add(iso.getPath());
+        int rc = exec(cmd, S, log, () -> {
+            String[] t = readText(prog).trim().split("\\s+");
+            try {
+                if (t.length >= 2 && Long.parseLong(t[1]) > 0) f.at((float) Long.parseLong(t[0]) / Long.parseLong(t[1]));
+            } catch (NumberFormatException ignored) { }
+        });
+        prog.delete();
+        if (rc != 0) {
+            iso.delete();
+            throw new Failed("The CHD disc image could not be read - please check the file, or choose the .iso"
+                             + LOG_HINT);
+        }
     }
 
     private void copyUri(Uri u, File to, Frac f) throws Exception {

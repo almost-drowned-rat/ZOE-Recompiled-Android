@@ -178,7 +178,7 @@ final class VistaSetupView extends View {
             case C_GO:
                 if (state == DONE) { host.play(); break; }
                 if (rowName[ROW_DISC].isEmpty()) {
-                    message("Please choose your " + GAME + " disc image (.iso) with Browse...", C_BROWSE0);
+                    message("Please choose your " + GAME + " disc image (.iso or .chd) with Browse...", C_BROWSE0);
                     break;
                 }
                 startInstall();
@@ -356,7 +356,7 @@ final class VistaSetupView extends View {
             case INSTALLING: return "The game is being built from your disc - this happens only once. Please keep the "
                                     + "app open; the device may get warm.";
             case DONE: return GAME + " is installed. Play starts the game - from now on the app starts it directly.";
-            default: return (note.isEmpty() ? "" : note + " ") + "Choose your " + GAME + " (USA) disc image (.iso), "
+            default: return (note.isEmpty() ? "" : note + " ") + "Choose your " + GAME + " (USA) disc image (.iso or .chd), "
                             + "then Install. The game is built from it once, on this device (the image is only read). "
                             + "The Japanese disc and the subtitle pack are optional.";
         }
