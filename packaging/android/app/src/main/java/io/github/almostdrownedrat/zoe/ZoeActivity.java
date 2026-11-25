@@ -71,6 +71,11 @@ public class ZoeActivity extends SDLActivity {
             // small draws and render passes cost the tiling more than they save - ZOE's boss fight on an Odin 2
             // 36.5 -> 55.3 PS2 frames a second, the hangar ~+10 %. dev_env.txt may set another (TU_DEBUG=).
             Os.setenv("TU_DEBUG", "sysmem", false);
+            // No fixed cores for the busy threads (the toolkit pins them by default since 3347f53): on an Odin 2 the
+            // VIF1 worker and the EE then queue behind each other - boss fight replay, 8 runs each: pinned 21-28
+            // seconds with gaps > 20 ms (longest 52-70 ms), not pinned 11-16 (longest 42-45 ms). dev_env.txt may
+            // turn it on again (PS2HOST_ANDROID_PIN=1).
+            Os.setenv("PS2HOST_ANDROID_PIN", "0", false);
         } catch (ErrnoException e) {
             android.util.Log.w("ZOE", "setenv: " + e);
         }

@@ -21,6 +21,10 @@ own controls or touch buttons.
 
 ## Status
 
+**v0.5.1** - smoother boss fights: the game's busy threads are no longer tied to fixed processor cores (on an Odin 2
+about half the stutters of v0.5.0). The game is **not** built again: v0.5.1 starts straight into the game after the
+update.
+
 **v0.5.0** - an app of its own, with its own version numbers. Based on
 [Zone of the Enders Recompiled v0.8.6](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled/releases/tag/v0.8.6)
 (Windows / Linux) and the toolkit [ps2recomp-option-p](https://github.com/almost-drowned-rat/ps2recomp-option-p)
