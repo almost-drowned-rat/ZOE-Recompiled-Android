@@ -28,7 +28,7 @@ update.
 **v0.5.0** - an app of its own, with its own version numbers. Based on
 [Zone of the Enders Recompiled v0.8.6](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled/releases/tag/v0.8.6)
 (Windows / Linux) and the toolkit [ps2recomp-option-p](https://github.com/almost-drowned-rat/ps2recomp-option-p)
-`ad3b491`. Download the APK from [Releases](https://github.com/almost-drowned-rat/ZOE-Recompiled-Android/releases)
+`ad3b491`. Download the APK from the [latest release](https://github.com/almost-drowned-rat/ZOE-Recompiled-Android/releases/latest)
 and install it (Android 10+, arm64). It is signed with the project's own key - every later update installs over it.
 
 Why the numbers changed: the first APK copied the desktop version (v0.8.5). That was a mistake - Android sometimes
