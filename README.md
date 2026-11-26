@@ -53,7 +53,7 @@ Updates install over the previous version and keep your saves. To get them autom
   drew the picture wrong in my tests.
 - Your own **Zone of the Enders (USA, SLUS-20148)** disc image (`.iso` or `.chd`)
 - Optional, for the **Japanese voices**: the Japanese disc image (**SLPM-65019**) **and** the subtitle pack
-  `ZOE-subtitles.pak` from the [PC release](https://github.com/almost-drowned-rat/ZoneOfTheEnders-Recompiled/releases/tag/v0.8.6)
+  `ZOE-subtitles.pak` from [this app's releases](https://github.com/almost-drowned-rat/ZOE-Recompiled-Android/releases)
 - Free storage: about **8 GB** during the first start (each image is copied in and unpacked; the copies are deleted
   again), about **4 GB** after it. The build uses as many processor cores as the memory allows (about 1.4 GB
   each): less RAM only makes the first start slower.
